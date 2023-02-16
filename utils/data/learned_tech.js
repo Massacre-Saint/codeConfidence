@@ -1,0 +1,1 @@
+// import { clientCredentials } from '../client';
