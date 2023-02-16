@@ -20,3 +20,31 @@ a {
 body {
   background-color: #88effd;
 }
+
+.sign_in-container {
+  border-radius: 15px;
+  margin: 2em;
+  padding: 1em;
+  background-color: #F2F1FA;
+  max-width: 90vw;
+  min-height: 90vh;
+}
+
+.form-container {
+  background-color: #F2F1FA;
+  max-width: 40vw;
+  min-height: 70vh;
+  border-radius: 15px;
+}
+@media (min-width: 1200px) {
+  .half-hero_container {
+    background-color: beige;
+    height: 100vh;
+    width: 70vw;
+    float: right;
+  }
+  .form-container {
+    margin: 5em 0 0 -20em;
+    padding: 2em;
+  }
+}
