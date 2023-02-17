@@ -1,12 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
+import { useAuth } from '../../utils/context/authContext';
+import getTech from '../../utils/data/tech';
 import Message from '../headers/Message';
-import TechImage from '../icons/TechImage';
+import TechCard from './cards/TechCard';
 
 export default function LearnedTechStart() {
+  const [tech, setTech] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+  const getTechData = () => {
+    getTech().then((data) => {
+      setLoading(false);
+      setTech(data);
+    });
+  };
+
+  useEffect(() => {
+    getTechData();
+  }, [user]);
+
+  if (loading) {
+    return (
+      <>
+        <Message />
+        <Spinner />
+      </>
+    );
+  }
+
   return (
     <>
       <Message />
-      <TechImage />
+      {tech.map((i) => (
+        <TechCard key={i.id} obj={i} />
+      ))}
     </>
   );
 }

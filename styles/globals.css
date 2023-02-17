@@ -36,6 +36,10 @@ body {
   min-height: 70vh;
   border-radius: 15px;
 }
+.tech_card {
+  background-color: grey;
+  width:fit-content;
+}
 @media (min-width: 1200px) {
   .half-hero_container {
     background-color: beige;
