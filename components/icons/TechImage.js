@@ -1,16 +1,16 @@
-// import Image from 'next/image';
+import Image from 'next/image';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function TechImage() {
-  // const src = `${obj.imageUrl}`;
+export default function TechImage({ obj }) {
   return (
     <>
-      <h2>Image</h2>
-      {/* <Image
+      <Image
+        loading="lazy"
         src={obj.imageUrl}
-        loader={() => src}
-      /> */}
+        width={140}
+        height={140}
+      />
     </>
   );
 }
