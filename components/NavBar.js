@@ -21,9 +21,6 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
-            <Link passHref href="/delete-me">
-              <Nav.Link>Delete Me</Nav.Link>
-            </Link>
             <AuthenticationButton />
           </Nav>
         </Navbar.Collapse>
