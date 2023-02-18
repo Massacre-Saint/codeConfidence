@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useAuth } from '../../utils/context/authContext';
-import getTech from '../../utils/data/tech';
+import { getTech } from '../../utils/data';
 import BeginJourney from '../buttons/BeginJourney';
 import Message from '../headers/Message';
 import TechCard from './cards/TechCard';

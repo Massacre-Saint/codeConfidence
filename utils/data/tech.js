@@ -27,4 +27,18 @@ const getTech = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export default getTech;
+const getSingleTech = (pk) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/tech/${pk}`)
+    .then((response) => response.json())
+    .then((data) => {
+      resolve({
+        id: data.id,
+        name: data.name,
+        description: data.description,
+        docUrl: data.doc_url,
+        imageUrl: data.image_url,
+      });
+    })
+    .catch((error) => reject(error));
+});
+export { getTech, getSingleTech };

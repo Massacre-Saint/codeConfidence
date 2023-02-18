@@ -6,7 +6,10 @@ import LearnedTechCard from './cards/LearnedTechCard';
 export default function LearnedTechView({ tech }) {
   const router = useRouter();
   const handleClick = (obj) => {
-    router.push(`/lTech/${obj.id}`);
+    router.push({
+      pathname: `/lTech/${obj.id}`,
+      query: { tech: obj.tech.id },
+    });
   };
   return (
     <>

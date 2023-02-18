@@ -24,6 +24,11 @@ body {
   margin: auto;
   max-width: 40vw;
 }
+.lg-block {
+  margin: auto;
+  max-width: 80vw;
+  max-height: 50vh;
+}
 .center {
   text-align: center;
 }
@@ -45,6 +50,7 @@ body {
   border-radius: 40px;
   padding: .75em;
 }
+
 .sign_in-container {
   border-radius: 15px;
   margin: 2em;
@@ -106,4 +112,21 @@ body {
     margin: 5em 0 0 -20em;
     padding: 2em;
   }
+}
+.lTech-view_all {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0;
+  grid-template-rows: repeat(2, 1fr) repeat(3, 0);
+  /* grid-column-gap: 2em;
+  grid-row-gap: 1em; */
+}
+.div1 { grid-area: 1 / 1 / 3 / 3; }
+.div2 { grid-area: 1 / 3 / 2 / 5; }
+.div3 { grid-area: 2 / 3 / 3 / 5; }
+
+.lg-container {
+  background-color: lightgrey;
+}
+.med-container {
+  background-color: beige;
 }
