@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import { useAuth } from '../../utils/context/authContext';
 import getTech from '../../utils/data/tech';
 import BeginJourney from '../buttons/BeginJourney';
@@ -7,7 +8,7 @@ import Message from '../headers/Message';
 import TechCard from './cards/TechCard';
 import LearnedTechCreate from './LearnedTechCreate';
 
-export default function LearnedTechStart() {
+export default function LearnedTechStart({ onUpdate }) {
   const [tech, setTech] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
@@ -57,7 +58,11 @@ export default function LearnedTechStart() {
 
   return (
     <div ref={ref2}>
-      <LearnedTechCreate tech={tech} />
+      <LearnedTechCreate onUpdate={onUpdate} tech={tech} />
     </div>
   );
 }
+
+LearnedTechStart.propTypes = {
+  onUpdate: PropTypes.func.isRequired,
+};
