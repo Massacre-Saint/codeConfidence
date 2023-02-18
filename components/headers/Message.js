@@ -12,8 +12,10 @@ export default function Messages() {
 
   return (
     <div>
-      <h3>&quot;{message.title}&quot;</h3>
-      <span> - {message.author}</span>
+      <span>
+        <h3 className="message">&quot;{message.title}&quot;</h3>
+        <div> - {message.author}</div>
+      </span>
     </div>
   );
 }
