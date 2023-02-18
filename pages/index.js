@@ -1,22 +1,30 @@
 import { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import { LearnedTechStart, LearnedTechView } from '../components/containers';
 import { useAuth } from '../utils/context/authContext';
-import { getLearnedTech } from '../utils/data';
+import { getLearnedTech, getTech } from '../utils/data';
 
 function Home() {
   const { user } = useAuth();
   const [learnedTech, setLearnedTech] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getLearnedTech(user).then(setLearnedTech);
+    getTech().then((array) => {
+      getLearnedTech(user, array).then(setLearnedTech);
+    });
+    setLoading(false);
   }, [user]);
 
-  if (!learnedTech.length) {
+  if (!learnedTech.length && loading) {
     return (
-      <LearnedTechStart />
+      <>
+        <LearnedTechStart />
+        <Spinner />
+      </>
     );
   }
-  return <LearnedTechView />;
+  return <LearnedTechView tech={learnedTech} />;
 }
 
 export default Home;

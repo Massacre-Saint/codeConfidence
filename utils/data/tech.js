@@ -2,13 +2,6 @@ import { clientCredentials } from '../client';
 
 const dbUrl = clientCredentials.databaseURL;
 
-// const getTech = () => new Promise((resolve, reject) => {
-//   fetch(`${dbUrl}/l_tech`)
-//     .then((response) => response.json())
-//     .then(resolve)
-//     .catch(reject);
-// });
-
 const getTech = () => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/tech`)
     .then((response) => response.json())
