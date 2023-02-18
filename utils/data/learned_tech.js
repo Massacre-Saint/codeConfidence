@@ -77,4 +77,20 @@ const createLearnedTech = (data, user) => {
     .catch((error) => console.error(error));
 };
 
-export { getLearnedTech, createLearnedTech };
+const getSingleLearnedTech = (pk, user, techObj) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/l_tech/${pk}`, {
+    headers: {
+      Authorization: user.uid,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      resolve({
+        id: data.id,
+        uid: data.uid,
+        tech: techObj,
+      })
+    })
+    .catch((error) => reject(error));
+});
+export { getLearnedTech, createLearnedTech, getSingleLearnedTech };

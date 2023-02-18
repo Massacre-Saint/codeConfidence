@@ -1,3 +1,3 @@
-export { getLearnedTech, createLearnedTech } from './learned_tech';
+export { getLearnedTech, createLearnedTech, getSingleLearnedTech } from './learned_tech';
 export { checkUser, registerUser } from './user';
-export { default as getTech } from './tech';
+export { getTech, getSingleTech } from './tech';

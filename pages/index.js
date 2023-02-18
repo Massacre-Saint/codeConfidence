@@ -13,6 +13,7 @@ function Home() {
   };
   useEffect(() => {
     loader();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
   if (!learnedTech.length) {
     return (
