@@ -5,7 +5,7 @@ import TechCard from './cards/TechCard';
 import { useAuth } from '../../utils/context/authContext';
 import { createLearnedTech } from '../../utils/data';
 
-export default function LearnedTechCreate({ tech }) {
+export default function LearnedTechCreate({ tech, onUpdate }) {
   const { user } = useAuth();
   const [techState, setTechState] = useState(tech);
   const [selectedTechId, setSelectedTechId] = useState(null);
@@ -30,7 +30,7 @@ export default function LearnedTechCreate({ tech }) {
 
   const handleSubmit = () => {
     const selectedTech = techState.filter((item) => item.isSelected);
-    createLearnedTech(selectedTech, user);
+    createLearnedTech(selectedTech, user).then(() => onUpdate());
   };
   return (
     <>
@@ -59,4 +59,5 @@ LearnedTechCreate.propTypes = {
       id: PropTypes.number,
     }),
   }))).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
