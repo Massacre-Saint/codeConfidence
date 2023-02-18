@@ -10,6 +10,7 @@ export default function TechImage({ obj }) {
         src={obj.imageUrl}
         width={140}
         height={140}
+        className="tech-image"
       />
     </>
   );

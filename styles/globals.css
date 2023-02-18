@@ -20,7 +20,31 @@ a {
 body {
   background-color: #88effd;
 }
-
+.block {
+  margin: auto;
+  max-width: 40vw;
+}
+.center {
+  text-align: center;
+}
+.top-container {
+  padding-top: 10vh;
+}
+.message {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.message + div {
+  font-size: 1.5em;
+  text-align: end;
+  margin-right: 2em;
+}
+.button {
+  margin: 2em;
+  font-size: 1em;
+  border-radius: 40px;
+  padding: .75em;
+}
 .sign_in-container {
   border-radius: 15px;
   margin: 2em;
@@ -36,10 +60,40 @@ body {
   min-height: 70vh;
   border-radius: 15px;
 }
+
+/********Tech Icons*********/
 .tech_card {
+  border-radius: 20px;
   background-color: grey;
-  width:fit-content;
+  width:12vw;
+  padding: 1em;
+  overflow: hidden;
+  z-index: 1;
 }
+.tech-image {
+  z-index: 0;
+}
+/* .tech_card:nth-child(4n+1) {
+  margin-top: -6em;
+}
+.tech_card:nth-child(2n+2) {
+  margin-top: -4em;
+} */
+.highlight {
+  border: 5px solid green;
+}
+.tech_grid-container {
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+  max-width: 90vw;
+  align-items: flex-start;
+}
+/* .tech-start_container {
+  overflow: hidden;
+} */
 @media (min-width: 1200px) {
   .half-hero_container {
     background-color: beige;
