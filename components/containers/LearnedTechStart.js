@@ -61,30 +61,7 @@ export default function LearnedTechStart() {
       </>
     );
   }
-  // return (
-  //   <>
-  //     <div className="tech-start_container">
-  //       <div className="top-container block center">
-  //         <Message />
-  //         <BeginJourney ref={ref2} handleShow={handleShow} scrollTo={scrollTo} />
-  //       </div>
-  //       <div className="tech_grid-container">
-  //         {tech.slice(0, 5).map((i) => (
-  //           <TechCard key={i.id} obj={i} />
-  //         ))}
-  //       </div>
-  //     </div>
-  //     {
-  //       show
-  //         ? (
-  //           <div ref={ref2} style={{ height: '800px' }}>
-  //             <LearnedTechCreate />
-  //           </div>
-  //         )
-  //         : ('')
-  //     }
-  //   </>
-  // );
+
   return (
     <div ref={ref2}>
       <LearnedTechCreate tech={tech} />

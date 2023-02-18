@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ChooseAll from '../headers/ChooseAll';
 import TechCard from './cards/TechCard';
+import { useAuth } from '../../utils/context/authContext';
+import { createLearnedTech } from '../../utils/data';
 
 export default function LearnedTechCreate({ tech }) {
+  const { user } = useAuth();
   const [techState, setTechState] = useState(tech);
   const [selectedTechId, setSelectedTechId] = useState(null);
 
@@ -25,6 +28,10 @@ export default function LearnedTechCreate({ tech }) {
     }
   };
 
+  const handleSubmit = () => {
+    const selectedTech = techState.filter((item) => item.isSelected);
+    createLearnedTech(selectedTech, user);
+  };
   return (
     <>
       <div className="tech-start_container">
@@ -36,12 +43,12 @@ export default function LearnedTechCreate({ tech }) {
         {techState.map((i) => (
           <TechCard key={i.id} isSelected={i.isSelected} handleClick={handleClick} obj={i} />
         ))}
-      </div>
-      {techState.some((i) => i.isSelected) && (
-        <div className="selected-tech">
-          <h1>Yay</h1>
+        {techState.some((i) => i.isSelected) && (
+        <div className="overlay">
+          <button type="submit" onClick={handleSubmit}>Submit</button>
         </div>
-      )}
+        )}
+      </div>
     </>
   );
 }
