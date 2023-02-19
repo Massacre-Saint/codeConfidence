@@ -26,6 +26,11 @@ TechCard.propTypes = {
     imageUrl: PropTypes.string,
     id: PropTypes.number,
   }).isRequired,
-  handleClick: PropTypes.func.isRequired,
-  isSelected: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func,
+  isSelected: PropTypes.bool,
+};
+
+TechCard.defaultProps = {
+  handleClick: () => {},
+  isSelected: false,
 };

@@ -89,7 +89,7 @@ const getSingleLearnedTech = (pk, user, techObj) => new Promise((resolve, reject
         id: data.id,
         uid: data.uid,
         tech: techObj,
-      })
+      });
     })
     .catch((error) => reject(error));
 });

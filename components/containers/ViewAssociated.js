@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Message } from '../headers';
 import TechImage from '../icons/TechImage';
+import CreateGoal from '../buttons/CreateGoal';
 
-export default function ViewAssociated({ obj }) {
-  console.warn(obj);
+export default function ViewAssociated({ lTech, goals, onUpdate }) {
+  const goalCount = goals.length;
   const handleClick = () => {
   };
   return (
@@ -15,22 +16,27 @@ export default function ViewAssociated({ obj }) {
       <div className="lTech-view_all lg-block">
         <div className="lg-container div1">
           <div>
-            <TechImage obj={obj.tech} />
+            <TechImage obj={lTech.tech} />
           </div>
-          <h1>{obj.tech.name}</h1>
-          <p>{obj.tech.description}</p>
-          <a href={obj.tech.docUrl} onClick={handleClick} target="_blank" rel="noreferrer">
+          <h1>{lTech.tech.name}</h1>
+          <p>{lTech.tech.description}</p>
+          <a href={lTech.tech.docUrl} onClick={handleClick} target="_blank" rel="noreferrer">
             <span> Learn more</span>
           </a>
         </div>
-        <div className="med-container div2">Goals</div>
-        <div className="med-container div3">Comments</div>
+        <div className="med-container div2">
+          <div>
+            <h2>{goalCount}</h2>
+            <CreateGoal lTech={lTech} onUpdate={onUpdate} />
+          </div>
+        </div>
+        <div className="med-container div3">Topics</div>
       </div>
     </>
   );
 }
 ViewAssociated.propTypes = {
-  obj: PropTypes.shape({
+  lTech: PropTypes.shape({
     id: PropTypes.number,
     tech: PropTypes.shape({
       imageUrl: PropTypes.string,
@@ -38,6 +44,12 @@ ViewAssociated.propTypes = {
       description: PropTypes.string,
       docUrl: PropTypes.string,
     }),
-    uid: PropTypes.string,
+    uid: PropTypes.shape({
+      id: PropTypes.number,
+    }),
   }).isRequired,
+  goals: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };

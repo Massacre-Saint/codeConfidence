@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { useAuth } from '../../utils/context/authContext';
@@ -12,7 +12,6 @@ export default function LearnedTechStart({ onUpdate }) {
   const [tech, setTech] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
-  const ref2 = useRef();
 
   const handleShow = (() => {
     setShow(true);
@@ -44,7 +43,7 @@ export default function LearnedTechStart({ onUpdate }) {
         <div className="tech-start_container">
           <div className="top-container block center">
             <Message />
-            <BeginJourney ref={ref2} handleShow={handleShow} />
+            <BeginJourney handleShow={handleShow} />
           </div>
           <div className="tech_grid-container">
             {tech.slice(0, 5).map((i) => (
@@ -57,7 +56,7 @@ export default function LearnedTechStart({ onUpdate }) {
   }
 
   return (
-    <div ref={ref2}>
+    <div>
       <LearnedTechCreate onUpdate={onUpdate} tech={tech} />
     </div>
   );
