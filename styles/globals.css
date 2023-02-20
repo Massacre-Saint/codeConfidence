@@ -20,6 +20,9 @@ a {
 body {
   background-color: #7eadb3;
 }
+.main-container {
+  margin:2%;
+}
 .block {
   margin: auto;
   max-width: 80%;
@@ -133,8 +136,7 @@ body {
 .alert {
   margin: 0;
 }
-.flex {
-  display: flex;
+.navbar_sticky {
   position: sticky;
 }
  .learned-tech_header_contianer {
@@ -142,11 +144,33 @@ body {
   flex-direction: column;
  }
  .list_container {
-  width: 50%;
-  padding: 1%;
+  padding: 3%;
   border: 3px solid black;
   border-radius: 5px;
  }
-.containers_flex {
+.block_section {
+  margin: 2em 1em 2em 1em;
+}
+.box-half {
+  width: 50%;
+}
+
+.flex {
   display: flex;
+}
+
+.two-containers {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 1em;
+}
+.full-width {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list_spacing {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 }
