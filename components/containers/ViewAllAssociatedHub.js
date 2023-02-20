@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Message } from '../headers';
 import TechImage from '../icons/TechImage';
 import CreateGoal from '../buttons/CreateGoal';
+import GoalCard from './cards/GoalCard';
 
-export default function ViewAssociated({ lTech, goals, onUpdate }) {
+export default function ViewAllAssociatedHub({ lTech, goals, onUpdate }) {
   const goalCount = goals.length;
   const handleClick = () => {
   };
@@ -26,8 +27,13 @@ export default function ViewAssociated({ lTech, goals, onUpdate }) {
         </div>
         <div className="med-container div2">
           <div>
-            <h2>{goalCount}</h2>
+            <h2>{goalCount} Goals</h2>
             <CreateGoal lTech={lTech} onUpdate={onUpdate} />
+          </div>
+          <div>
+            {goals.map((i) => (
+              <GoalCard key={i.id} goal={i} />
+            ))}
           </div>
         </div>
         <div className="med-container div3">Topics</div>
@@ -35,7 +41,7 @@ export default function ViewAssociated({ lTech, goals, onUpdate }) {
     </>
   );
 }
-ViewAssociated.propTypes = {
+ViewAllAssociatedHub.propTypes = {
   lTech: PropTypes.shape({
     id: PropTypes.number,
     tech: PropTypes.shape({

@@ -22,7 +22,7 @@ body {
 }
 .block {
   margin: auto;
-  max-width: 40vw;
+  max-width: 80%;
 }
 .lg-block {
   margin: auto;
@@ -33,10 +33,9 @@ body {
   text-align: center;
 }
 .top-container {
-  padding-top: 10vh;
+  padding-top: 5vh;
 }
 .message {
-  font-size: 2rem;
   font-weight: 500;
 }
 .message + div {
@@ -72,7 +71,7 @@ body {
   border-radius: 20px;
   background-color: grey;
   width:12vw;
-  padding: 1em;
+  padding: 1%;
   overflow: hidden;
   z-index: 1;
 }
@@ -129,4 +128,25 @@ body {
 }
 .med-container {
   background-color: beige;
+}
+
+.alert {
+  margin: 0;
+}
+.flex {
+  display: flex;
+  position: sticky;
+}
+ .learned-tech_header_contianer {
+  display: flex;
+  flex-direction: column;
+ }
+ .list_container {
+  width: 50%;
+  padding: 1%;
+  border: 3px solid black;
+  border-radius: 5px;
+ }
+.containers_flex {
+  display: flex;
 }
