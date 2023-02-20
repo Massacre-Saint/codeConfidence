@@ -3,7 +3,7 @@ import { useAuth } from './context/authContext';
 import Loading from '../components/Loading';
 import Signin from '../components/containers/Signin';
 import RegisterForm from '../components/forms/RegisterForm';
-import NavBar from '../components/NavBar';
+import { NavBar } from '../components';
 
 const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) => {
   const { user, userLoading, updateUser } = useAuth();
@@ -18,7 +18,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
     return (
       <>
         <NavBar />
-        <div>{'valid' in user ? <RegisterForm user={user.fbUser} updateUser={updateUser} /> : <Component {...pageProps} />}</div>
+        <div className="main-container">{'valid' in user ? <RegisterForm user={user.fbUser} updateUser={updateUser} /> : <Component {...pageProps} />}</div>
       </>
     );
   }

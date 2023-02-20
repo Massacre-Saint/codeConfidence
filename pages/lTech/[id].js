@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Loading, ViewAssociated } from '../../components';
+import { LearnedTechHub, Loading } from '../../components';
 import { useAuth } from '../../utils/context/authContext';
 import { getSingleLearnedTech, getSingleTech } from '../../utils/data';
 import { getGoals } from '../../utils/data/goals';
@@ -35,7 +35,7 @@ export default function LearnedTechViewAll() {
   }
   return (
     <>
-      <ViewAssociated lTech={lTech} goals={lTechGoals} onUpdate={getData} />
+      <LearnedTechHub lTech={lTech} goals={lTechGoals} onUpdate={getData} />
     </>
   );
 }

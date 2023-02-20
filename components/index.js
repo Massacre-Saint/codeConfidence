@@ -1,9 +1,12 @@
 export {
   LearnedTechCreate, LearnedTechStart,
-  LearnedTechView, ViewAssociated, Signin, LearnedTechCard, TechCard,
+  LearnedTechView, Signin, LearnedTechCard, TechCard, LearnedTechHub,
 } from './containers';
+export { LearnedTechNav, NavBar } from './navs';
 export { ChooseAll, Message } from './headers';
 export { default as TechImage } from './icons/TechImage';
 export { default as RegisterForm } from './forms/RegisterForm';
 export { default as Loading } from './Loading';
-export { default as NavBar } from './NavBar';
+export { default as CreateModal } from './modals/CreateModal';
+export { default as GoalForm } from './forms/GoalForm';
+export { Authentication, BeginJourney, CreateDropdown } from './buttons';

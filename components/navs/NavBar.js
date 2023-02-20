@@ -6,7 +6,7 @@ import {
   Container,
   Nav,
 } from 'react-bootstrap';
-import AuthenticationButton from './buttons/Authentication';
+import AuthenticationButton from '../buttons/Authentication';
 
 export default function NavBar() {
   return (
