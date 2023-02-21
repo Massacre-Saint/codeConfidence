@@ -48,4 +48,26 @@ const createGoal = (data, user) => new Promise((resolve, reject) => {
     .then((resp) => resolve(resp.json()))
     .catch(reject);
 });
-export { getGoals, createGoal };
+const updateGoal = (data, user) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/goals/${data.id}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      title: data.title,
+      learned_tech: data.learnedTech,
+    }),
+    headers: {
+      Authorization: user.uid,
+      'content-type': 'application/json',
+    },
+  })
+    .then((resp) => resolve(resp))
+    .catch(reject);
+});
+const deleteGoal = (id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/goals/${id}`, {
+    method: 'DELETE',
+  }).then(resolve).catch(reject);
+});
+export {
+  getGoals, createGoal, updateGoal, deleteGoal,
+};
