@@ -5,3 +5,4 @@ export { default as LearnedTechHub } from './LearnedTechHub';
 export { default as Signin } from './Signin';
 export { LearnedTechCard, TechCard } from './cards';
 export { default as GoalList } from './GoalList';
+export { default as TopicList } from './TopicList';
