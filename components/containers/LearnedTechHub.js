@@ -9,17 +9,17 @@ import GoalList from './GoalList';
 
 export default function LearnedTechHub({ lTech, goals, onUpdate }) {
   const [showGoal, setShowGoal] = useState(false);
-  const [show, setShowTopic] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleClose = () => {
     setShowGoal(false);
-    setShowTopic(false);
+    setShow(false);
   };
   const handleShow = (e) => {
     if (e.target.id === 'goal') {
       setShowGoal(true);
     }
-    setShowTopic(true);
+    setShow(true);
   };
 
   return (
@@ -36,7 +36,7 @@ export default function LearnedTechHub({ lTech, goals, onUpdate }) {
               <h3>Goals</h3>
             </div>
             <div className="list_container">
-              <GoalList goals={goals} />
+              <GoalList goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
             </div>
           </div>
           <div className="box-half">

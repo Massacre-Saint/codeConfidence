@@ -161,6 +161,7 @@ body {
 
 .two-containers {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   column-gap: 1em;
 }
