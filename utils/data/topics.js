@@ -62,4 +62,9 @@ const createTopic = (data, user) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getTopics, createTopic };
+const deleteTopic = (id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/topics/${id}`, {
+    method: 'DELETE',
+  }).then(resolve).catch(reject);
+});
+export { getTopics, createTopic, deleteTopic };
