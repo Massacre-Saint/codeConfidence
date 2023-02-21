@@ -6,7 +6,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { createTopic } from '../../utils/data/topics';
 
 export default function TopicForm({
-  goals, onUpdate, handleClose, lTech,
+  goals, onUpdate, handleClose, lTech, handleBlur,
 }) {
   const { user } = useAuth();
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ export default function TopicForm({
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} onBlur={handleBlur}>
       <Form.Group className="mb-3" controlId="title">
         <Form.Label>Create Topic</Form.Label>
         <Form.Control
@@ -33,6 +33,7 @@ export default function TopicForm({
           placeholder="Title"
           required
           spellCheck="true"
+          autoFocus
         />
       </Form.Group>
 
@@ -48,16 +49,20 @@ export default function TopicForm({
           spellCheck="true"
         />
       </Form.Group>
-      <Form.Select
-        aria-label="Selected Goal"
-        name="goal"
-        onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
-        value={formData.goal.id}
-        bsPrefix="form-box"
-        required
-      >
-        <option className="form-drop" value="">Choose your favorite goal</option>
-        {
+      {
+      !goals.length
+        ? ('')
+        : (
+          <Form.Select
+            aria-label="Selected Goal"
+            name="goal"
+            onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+            value={formData.goal.id}
+            bsPrefix="form-box"
+            required
+          >
+            <option className="form-drop" value="">Choose your favorite goal</option>
+            {
                 goals.map((goal) => (
                   <option
                     className="form-drop"
@@ -68,7 +73,9 @@ export default function TopicForm({
                   </option>
                 ))
               }
-      </Form.Select>
+          </Form.Select>
+        )
+      }
       <Button variant="primary" type="submit">
         Submit
       </Button>
@@ -95,6 +102,7 @@ TopicForm.propTypes = {
       id: PropTypes.number,
     }),
   }),
+  handleBlur: PropTypes.func.isRequired,
 };
 
 TopicForm.defaultProps = {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -65,7 +66,7 @@ function GoalForm({
     );
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} onBlur={handleBlur}>
       <input
         type="text"
         placeholder="Create a title"
@@ -74,8 +75,10 @@ function GoalForm({
         value={formData.title}
         required
         spellCheck="true"
+        autoFocus
       />
       <button type="submit">Submit</button>
+      <button onClick={handleBlur} type="button">Cancel</button>
     </form>
   );
 }

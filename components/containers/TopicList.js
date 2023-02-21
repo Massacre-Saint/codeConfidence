@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TopicCard from './cards/TopicCard';
 
 export default function TopicList({
-  topics, onUpdate, handleClose,
+  topics, onUpdate, handleClose, goals,
 }) {
   return (
     <div className="list_spacing">
@@ -13,6 +13,7 @@ export default function TopicList({
           obj={i}
           onUpdate={onUpdate}
           handleClose={handleClose}
+          goals={goals}
         />
       ))}
     </div>
@@ -22,6 +23,10 @@ export default function TopicList({
 TopicList.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
+  }))).isRequired,
+  goals: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
   }))).isRequired,
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
