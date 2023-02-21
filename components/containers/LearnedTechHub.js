@@ -6,8 +6,11 @@ import LearnedTechHeader from '../headers/LearnedTechHeader';
 import CreateDropdown from '../buttons/CreateDropdown';
 import CreateModal from '../modals/CreateModal';
 import GoalList from './GoalList';
+import TopicList from './TopicList';
 
-export default function LearnedTechHub({ lTech, goals, onUpdate }) {
+export default function LearnedTechHub({
+  lTech, goals, onUpdate, topics,
+}) {
   const [showGoal, setShowGoal] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -47,7 +50,7 @@ export default function LearnedTechHub({ lTech, goals, onUpdate }) {
               </div>
             </div>
             <div className="list_container">
-              Topics
+              <TopicList goals={goals} topics={topics} onUpdate={onUpdate} handleClose={handleClose} />
             </div>
           </div>
         </div>
@@ -57,6 +60,7 @@ export default function LearnedTechHub({ lTech, goals, onUpdate }) {
         showGoal={showGoal}
         show={show}
         lTech={lTech}
+        goals={goals}
         onUpdate={onUpdate}
       />
     </>
@@ -76,6 +80,9 @@ LearnedTechHub.propTypes = {
     }),
   }).isRequired,
   goals: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
+  topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
   onUpdate: PropTypes.func.isRequired,

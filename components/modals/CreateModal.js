@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
 import GoalForm from '../forms/GoalForm';
+import TopicForm from '../forms/TopicForm';
 
 export default function CreateModal({
-  handleClose, show, lTech, onUpdate, showGoal,
+  handleClose, show, lTech, onUpdate, showGoal, goals,
 }) {
   if (showGoal) {
     return (
@@ -20,7 +21,9 @@ export default function CreateModal({
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        Hello
+        <Modal.Body>
+          <TopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
+        </Modal.Body>
       </Modal>
     </>
   );
@@ -43,4 +46,7 @@ CreateModal.propTypes = {
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
   showGoal: PropTypes.bool.isRequired,
+  goals: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
 };

@@ -4,12 +4,14 @@ import { LearnedTechHub, Loading } from '../../components';
 import { useAuth } from '../../utils/context/authContext';
 import { getSingleLearnedTech, getSingleTech } from '../../utils/data';
 import { getGoals } from '../../utils/data/goals';
+import { getTopics } from '../../utils/data/topics';
 
 export default function LearnedTechViewAll() {
   const router = useRouter();
   const { user } = useAuth();
   const [lTech, setLTech] = useState({});
   const [lTechGoals, setLTechGoals] = useState([]);
+  const [lTechTopics, setLTechTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getData = useCallback(() => {
@@ -17,6 +19,7 @@ export default function LearnedTechViewAll() {
       getSingleLearnedTech(router.query.id, user, obj).then((data) => {
         setLTech(data);
         getGoals(user, data).then(setLTechGoals);
+        getTopics(user, obj.id).then(setLTechTopics);
         setIsLoading(false);
       });
     });
@@ -35,7 +38,7 @@ export default function LearnedTechViewAll() {
   }
   return (
     <>
-      <LearnedTechHub lTech={lTech} goals={lTechGoals} onUpdate={getData} />
+      <LearnedTechHub lTech={lTech} topics={lTechTopics} goals={lTechGoals} onUpdate={getData} />
     </>
   );
 }
