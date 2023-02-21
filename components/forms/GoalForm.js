@@ -7,11 +7,11 @@ import { useAuth } from '../../utils/context/authContext';
 import { createGoal, updateGoal } from '../../utils/data/goals';
 
 function GoalForm({
-  lTech, onUpdate, handleClose, obj, handleBlur,
+  lTech, onUpdate, handleClose, obj, handleCancelEdit,
 }) {
   const { user } = useAuth();
   const [formData, setFormData] = useState(() => {
-    if (lTech) {
+    if (Object.keys(lTech).length !== 0) {
       return {
         title: '',
         learnedTech: lTech.id,
@@ -30,21 +30,19 @@ function GoalForm({
         learnedTech: obj.learnedTech.id,
       });
     }
-  }, [obj]);
+  }, [obj, lTech]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (Object.keys(obj).length !== 0) {
+    if (obj.id) {
       updateGoal(formData, user).then(() => onUpdate());
-      console.warn('update');
-      handleBlur();
+      handleCancelEdit();
     } else {
       createGoal(formData, user).then(() => onUpdate());
     }
     handleClose();
   };
-
-  if (Object.keys(obj).length === 0) {
+  if (Object.keys(lTech).length !== 0) {
     return (
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="title">
@@ -66,20 +64,26 @@ function GoalForm({
     );
   }
   return (
-    <form onSubmit={handleSubmit} onBlur={handleBlur}>
-      <input
-        type="text"
-        placeholder="Create a title"
-        name="title"
-        onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
-        value={formData.title}
-        required
-        spellCheck="true"
-        autoFocus
-      />
-      <button type="submit">Submit</button>
-      <button onClick={handleBlur} type="button">Cancel</button>
-    </form>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="title">
+        <Form.Label>Create Goal</Form.Label>
+        <Form.Control
+          name="title"
+          onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+          value={formData.title}
+          type="text"
+          placeholder="Title"
+          required
+          spellCheck="true"
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+      <Button onClick={handleCancelEdit} variant="primary" type="button">
+        Cancel
+      </Button>
+    </Form>
   );
 }
 
@@ -111,11 +115,11 @@ GoalForm.propTypes = {
   }),
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func,
+  handleCancelEdit: PropTypes.func,
 };
 
 GoalForm.defaultProps = {
   lTech: {},
   obj: {},
-  handleBlur: () => {},
+  handleCancelEdit: () => {},
 };

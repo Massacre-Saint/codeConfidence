@@ -12,7 +12,7 @@ export default function CreateModal({
       <>
         <Modal show={show} onHide={handleClose}>
           <Modal.Body>
-            <GoalForm lTech={lTech} obj={{}} onUpdate={onUpdate} handleClose={handleClose} />
+            <GoalForm lTech={lTech} onUpdate={onUpdate} handleClose={handleClose} />
           </Modal.Body>
         </Modal>
       </>
