@@ -62,9 +62,35 @@ const createTopic = (data, user) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const updateTopic = (data, user) => new Promise((resolve, reject) => {
+  const requestBody = {
+    title: data.title,
+    description: data.description,
+    learned_tech: data.learnedTech,
+    completed: data.completed,
+  };
+
+  if (data.goal) {
+    requestBody.goal = data.goal.id;
+  }
+
+  fetch(`${dbUrl}/topics/${data.id}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: user.uid,
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  })
+    .then((resp) => resolve(resp))
+    .catch(reject);
+});
 const deleteTopic = (id) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/topics/${id}`, {
     method: 'DELETE',
   }).then(resolve).catch(reject);
 });
-export { getTopics, createTopic, deleteTopic };
+export {
+  getTopics, createTopic, updateTopic, deleteTopic,
+};

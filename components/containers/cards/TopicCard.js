@@ -8,14 +8,14 @@ export default function TopicCard({
   obj, onUpdate, handleClose, goals,
 }) {
   const [edit, setEdit] = useState(false);
-  const handleEdit = (e) => {
-    if (e.target.id === 'edit') {
-      setEdit(true);
-    }
+  const handleEdit = () => {
+    setEdit(true);
   };
-  const handleBlur = () => {
+
+  const handleCancelEdit = () => {
     setEdit(false);
   };
+
   const handleDelete = () => {
     deleteTopic(obj.id).then(() => onUpdate());
   };
@@ -23,7 +23,7 @@ export default function TopicCard({
     <Card className="card_spacing">
       <Card.Body>
         {edit
-          ? <TopicForm onUpdate={onUpdate} handleClose={handleClose} handleBlur={handleBlur} goals={goals} obj={obj} />
+          ? <TopicForm onUpdate={onUpdate} handleClose={handleClose} goals={goals} obj={obj} handleCancelEdit={handleCancelEdit} />
           : (
             <>
               <Card.Title>{obj.title}</Card.Title>

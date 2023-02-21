@@ -8,14 +8,13 @@ export default function GoalCard({
   obj, onUpdate, handleClose,
 }) {
   const [edit, setEdit] = useState(false);
-  const handleEdit = (e) => {
-    if (e.target.id === 'edit') {
-      setEdit(true);
-    }
+  const handleEdit = () => {
+    setEdit(true);
   };
-  const handleBlur = () => {
+  const handleCancelEdit = () => {
     setEdit(false);
   };
+
   const handleDelete = () => {
     deleteGoal(obj.id).then(() => onUpdate());
   };
@@ -24,12 +23,12 @@ export default function GoalCard({
     <Card className="card_spacing">
       <Card.Body>
         {edit
-          ? <GoalForm lTech={{}} obj={obj} onUpdate={onUpdate} handleClose={handleClose} handleBlur={handleBlur} />
+          ? <GoalForm obj={obj} onUpdate={onUpdate} handleClose={handleClose} handleCancelEdit={handleCancelEdit} />
           : (
             <>
               <Card.Title>{obj.title}</Card.Title>
               <div>
-                <button type="button" id="edit" onClick={handleEdit}>Edit</button>
+                <button type="button" id="edit" onClick={(e) => handleEdit(e)}>Edit</button>
                 <button type="button" onClick={handleDelete}>Delete</button>
               </div>
             </>
