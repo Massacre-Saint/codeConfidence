@@ -21,6 +21,15 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
+            <Link passHref href="/">
+              <Nav.Link>About</Nav.Link>
+            </Link>
+            <Link passHref href="/">
+              <Nav.Link>View</Nav.Link>
+            </Link>
+            <Link passHref href="/lTech/">
+              <Nav.Link>+</Nav.Link>
+            </Link>
             <AuthenticationButton />
           </Nav>
         </Navbar.Collapse>

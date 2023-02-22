@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import LearnedTechCard from './cards/LearnedTechCard';
+import { Message } from '../headers';
 
 export default function LearnedTechView({ tech }) {
   const router = useRouter();
@@ -13,11 +14,15 @@ export default function LearnedTechView({ tech }) {
   };
   return (
     <>
-      <h1>Learned Tech</h1>
-      <div>
-        {tech.map((i) => (
-          <LearnedTechCard handleClick={handleClick} key={i.id} obj={i} />
-        ))}
+      <div className="tech-start_container">
+        <div className="top-container block center">
+          <Message />
+        </div>
+        <div className="tech_grid-container">
+          {tech.map((i) => (
+            <LearnedTechCard handleClick={handleClick} key={i.id} obj={i} />
+          ))}
+        </div>
       </div>
     </>
   );

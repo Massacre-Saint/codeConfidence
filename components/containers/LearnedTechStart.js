@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Spinner } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Loading from '../Loading';
 import { useAuth } from '../../utils/context/authContext';
 import { getTech } from '../../utils/data';
 import BeginJourney from '../buttons/BeginJourney';
@@ -19,21 +19,28 @@ export default function LearnedTechStart({ onUpdate }) {
   const { user } = useAuth();
 
   const getTechData = () => {
+    let isMounted = true;
     getTech().then((data) => {
-      setLoading(false);
-      setTech(data);
+      if (isMounted) {
+        setLoading(false);
+        setTech(data);
+      }
     });
+    return () => {
+      isMounted = false;
+    };
   };
 
   useEffect(() => {
-    getTechData();
+    const cleanUp = getTechData();
+    return cleanUp;
   }, [user, show]);
 
   if (loading) {
     return (
       <>
         <Message />
-        <Spinner />
+        <Loading />
       </>
     );
   }

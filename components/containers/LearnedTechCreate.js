@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ChooseAll from '../headers/ChooseAll';
 import TechCard from './cards/TechCard';
 import { useAuth } from '../../utils/context/authContext';
 import { createLearnedTech } from '../../utils/data';
+import Loading from '../Loading';
 
 export default function LearnedTechCreate({ tech, onUpdate }) {
   const { user } = useAuth();
   const [techState, setTechState] = useState(tech);
   const [selectedTechId, setSelectedTechId] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleClick = (id) => {
     const updatedTech = techState.map((item) => {
@@ -32,6 +34,17 @@ export default function LearnedTechCreate({ tech, onUpdate }) {
     const selectedTech = techState.filter((item) => item.isSelected);
     createLearnedTech(selectedTech, user).then(() => onUpdate());
   };
+  useEffect(() => {
+    setLoading(false);
+  }, [tech, loading]);
+
+  if (loading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
   return (
     <>
       <div className="tech-start_container">
