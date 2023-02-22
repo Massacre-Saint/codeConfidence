@@ -17,9 +17,10 @@ export default function LearnedTechViewAll() {
   const getData = useCallback(() => {
     getSingleTech(router.query.tech).then((obj) => {
       getSingleLearnedTech(router.query.id, user, obj).then((data) => {
+        console.warn(data);
         setLTech(data);
         getGoals(user, data).then(setLTechGoals);
-        getTopics(user, obj.id).then(setLTechTopics);
+        getTopics(user, data).then(setLTechTopics);
         setIsLoading(false);
       });
     });

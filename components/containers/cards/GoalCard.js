@@ -20,7 +20,7 @@ export default function GoalCard({
   };
 
   return (
-    <Card className="card_spacing">
+    <Card className="card_spacing topic-goal_card">
       <Card.Body>
         {edit
           ? <GoalForm obj={obj} onUpdate={onUpdate} handleClose={handleClose} handleCancelEdit={handleCancelEdit} />

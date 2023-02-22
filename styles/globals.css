@@ -1,27 +1,39 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif, 'Open Sans', sans-serif;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 * {
-  box-sizing: border-box;
+  box-sizing:border-box;
 }
 
 body {
   background-color: #4e4e4e;
+  font-family: 'Open Sans';
 }
 .main-container {
-  margin:2%;
+  margin:3%;
+  border-radius: 15px;
+  background-color: #363636;
+}
+@media (min-width: 1200px) {
+  .main-container {
+    margin: 3% auto;
+    max-width: 1440px;
+    height: 100vh;
+  }
 }
 .block {
   margin: auto;
@@ -36,15 +48,18 @@ body {
   text-align: center;
 }
 .top-container {
-  padding-top: 5vh;
+  padding: 5vh;
+  max-width: 768px;
 }
 .message {
+  color: white;
   font-weight: 500;
 }
 .message + div {
+  color: white;
   font-size: 1.5em;
   text-align: end;
-  margin-right: 2em;
+  margin-right: 1em;
 }
 .button {
   margin: 2em;
@@ -71,9 +86,12 @@ body {
 
 /********Tech Icons*********/
 .tech_card {
+  border: 5px solid #787878;
   border-radius: 20px;
-  background-color: grey;
-  width:12vw;
+  background-color: #b7b7b7;
+  -webkit-box-shadow: 2px 7px 14px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 7px 14px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 7px 14px 0px rgba(0,0,0,0.75);
   padding: 1%;
   overflow: hidden;
   z-index: 1;
@@ -89,6 +107,7 @@ body {
 .tech_grid-container {
   display: flex;
   margin: auto;
+  padding-bottom: 10%;
   flex-wrap: wrap;
   gap: 2em;
   justify-content: center;
@@ -165,6 +184,9 @@ body {
   justify-content: space-between;
   column-gap: 1em;
 }
+.topic-goal_card {
+  
+}
 .full-width {
   display: flex;
   justify-content: space-between;
@@ -175,3 +197,6 @@ body {
   flex-direction: column;
   row-gap: 10px;
 }
+ .nav-link {
+  color: #F2F1FA;
+ }

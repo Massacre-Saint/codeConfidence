@@ -20,7 +20,7 @@ export default function TopicCard({
     deleteTopic(obj.id).then(() => onUpdate());
   };
   return (
-    <Card className="card_spacing">
+    <Card className="card_spacing topic-goal_card">
       <Card.Body>
         {edit
           ? <TopicForm onUpdate={onUpdate} handleClose={handleClose} goals={goals} obj={obj} handleCancelEdit={handleCancelEdit} />

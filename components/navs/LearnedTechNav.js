@@ -4,9 +4,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default function LearnedTechNav() {
   return (
-    <Nav justify variant="tabs">
+    <Nav variant="tabs" navbar="True">
       <Nav.Item>
-        <Nav.Link href="/home">Documentation</Nav.Link>
+        <Nav.Link className="nav-link" href="/home">Documentation</Nav.Link>
       </Nav.Item>
       <NavDropdown title="Goals" id="nav-dropdown">
         <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
