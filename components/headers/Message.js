@@ -7,7 +7,15 @@ export default function Messages() {
   const { user } = useAuth();
 
   useEffect(() => {
-    getMessage().then(setMessage);
+    let isMounted = true;
+    getMessage().then((array) => {
+      if (isMounted) {
+        setMessage(array);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
   }, [user]);
 
   return (
