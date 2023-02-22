@@ -23,7 +23,7 @@ export default function TopicForm({
     return {
       ...obj,
       learnedTech: obj.learnedTech.id,
-      goal: obj.goal ? obj.goal.id : '',
+      goal: obj.goal ? obj.goal.id : null,
     };
   });
   const handleSubmit = (e) => {
