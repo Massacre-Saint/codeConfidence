@@ -32,7 +32,6 @@ const getTopics = (user, object) => new Promise((resolve, reject) => {
           completed,
         };
       });
-      console.warn(transformedData);
       resolve(transformedData);
     })
     .catch(reject);

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../../utils/context/authContext';
 import { createTopic, updateTopic } from '../../utils/data/topics';
+import { getSingleGoal, updateGoal } from '../../utils/data/goals';
 
 export default function TopicForm({
   goals, onUpdate, handleClose, lTech, obj, handleCancelEdit,
@@ -11,7 +12,6 @@ export default function TopicForm({
   const { user } = useAuth();
   const [formData, setFormData] = useState(() => {
     if (Object.keys(lTech).length !== 0) {
-      console.warn(lTech);
       return {
         title: '',
         description: '',
@@ -26,13 +26,24 @@ export default function TopicForm({
       goal: obj.goal ? obj.goal.id : null,
     };
   });
+  const updateProgress = (data) => {
+    console.warn(data.goal);
+    if (data.goal !== null) {
+      getSingleGoal(data.goal).then((goal) => {
+        console.warn(goal);
+        updateGoal(goal, user).then(() => onUpdate());
+      });
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.id) {
       updateTopic(formData, user).then(() => onUpdate());
+      updateProgress(formData);
       handleCancelEdit();
     } else {
       createTopic(formData, user).then(() => onUpdate());
+      updateProgress(formData);
       handleClose();
     }
   };
@@ -99,7 +110,7 @@ export default function TopicForm({
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="title">
-        <Form.Label>Create Topic</Form.Label>
+        <Form.Label>Title</Form.Label>
         <Form.Control
           name="title"
           onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
@@ -112,7 +123,7 @@ export default function TopicForm({
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="description">
-        <Form.Label>Create Topic</Form.Label>
+        <Form.Label>Description</Form.Label>
         <Form.Control
           name="description"
           onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
@@ -123,6 +134,14 @@ export default function TopicForm({
           spellCheck="true"
         />
       </Form.Group>
+      <Form.Check
+        type="switch"
+        name="completed"
+        onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.checked }))}
+        checked={formData.completed}
+        id="completed"
+        label="Mark Completed"
+      />
       {
       !goals.length
         ? ('')

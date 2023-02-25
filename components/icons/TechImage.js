@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function TechImage({ obj }) {
   return (
-    <>
+    <div className="tech-image_container">
       <Image
         loading="lazy"
         src={obj.imageUrl}
@@ -12,7 +12,7 @@ export default function TechImage({ obj }) {
         height={140}
         className="tech-image"
       />
-    </>
+    </div>
   );
 }
 
