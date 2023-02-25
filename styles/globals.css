@@ -1,27 +1,46 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif, 'Open Sans', sans-serif;
 }
-
+h1 {
+  font-weight: 600;
+}
 a {
   color: inherit;
   text-decoration: none;
+  text-transform: uppercase;
 }
-
+a:active {
+  color: #F2F1FA;
+}
+a:visited {
+  color: white;
+}
 * {
-  box-sizing: border-box;
+  box-sizing:border-box;
 }
 
 body {
-  background-color: #7eadb3;
+  background-color: #4e4e4e;
+  font-family: 'Open Sans';
 }
 .main-container {
-  margin:2%;
+  margin:3%;
+  padding: 3%;
+  border-radius: 15px;
+  background-color: #363636;
+}
+@media (min-width: 1200px) {
+  .main-container {
+    margin: 3% auto;
+    max-width: 1440px;
+  }
 }
 .block {
   margin: auto;
@@ -36,15 +55,18 @@ body {
   text-align: center;
 }
 .top-container {
-  padding-top: 5vh;
+  padding: 5vh;
+  max-width: 768px;
 }
 .message {
+  color: white;
   font-weight: 500;
 }
 .message + div {
+  color: white;
   font-size: 1.5em;
   text-align: end;
-  margin-right: 2em;
+  margin-right: 1em;
 }
 .button {
   margin: 2em;
@@ -71,15 +93,15 @@ body {
 
 /********Tech Icons*********/
 .tech_card {
+  border: 5px solid #787878;
   border-radius: 20px;
-  background-color: grey;
-  width:12vw;
+  background-color: #b7b7b7;
+  -webkit-box-shadow: 2px 7px 14px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 7px 14px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 7px 14px 0px rgba(0,0,0,0.75);
   padding: 1%;
   overflow: hidden;
   z-index: 1;
-}
-.tech-image {
-  z-index: 0;
 }
 
 .highlight {
@@ -89,6 +111,7 @@ body {
 .tech_grid-container {
   display: flex;
   margin: auto;
+  padding-bottom: 10%;
   flex-wrap: wrap;
   gap: 2em;
   justify-content: center;
@@ -136,16 +159,61 @@ body {
 .alert {
   margin: 0;
 }
-.navbar_sticky {
-  position: sticky;
-}
- .learned-tech_header_contianer {
+.l-tech-nav {
+  /* background-color: #b7b7b7; */
   display: flex;
-  flex-direction: column;
- }
- .list_container {
+  padding: inherit;
+}
+.learned-tech_header_contianer {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 3%;
+  /* max-height: 20vh; */
+  /* font-size: 1.7vw; */
+  padding: inherit;
+  border: 3px solid #ffffff;
+  border-radius: 15px;
+  color: #F2F1FA;
+}
+@media (max-width: 646px) {
+  .l-tech-nav {
+    max-height: 15vh;
+  }
+  .learned-tech_header_contianer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5em;
+  }
+  /* .info {
+    position: relative;
+    bottom: 40%;
+  } */
+}
+@media (max-width: 432px) {
+  .learned-tech_header_contianer {
+    
+    border: none;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+}
+
+.tech-image {
+  border-radius: 15px;
+}
+.tech-image_container {
+  display: flex;
+  min-width: fit-content;
+  max-width: 30%;
+}
+
+.list_container {
   padding: 3%;
-  border: 3px solid black;
+  border: 3px solid rgb(255, 255, 255);
   border-radius: 5px;
  }
 .block_section {
@@ -175,3 +243,18 @@ body {
   flex-direction: column;
   row-gap: 10px;
 }
+ .nav-link {
+  color: #F2F1FA;
+ }
+
+ .collaped-l-tech_nav {
+  padding: 0;
+  width: fit-content;
+  background-color: none;
+  border: 2px solid white;
+ }
+
+ .create-form_btn {
+  position: relative;
+  bottom: 1.2em;
+ }

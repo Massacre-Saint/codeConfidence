@@ -1,16 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MediaQuery from 'react-responsive';
+import { BsInfoCircleFill } from 'react-icons/bs';
 
 export default function LearnedTechHeader({ obj }) {
   return (
-    <div className="learned-tech_header_contianer">
-      <div>
-        <h1>{obj.name}</h1>
-      </div>
-      <div>
-        {obj.description}
-      </div>
-    </div>
+    <>
+      <MediaQuery minWidth={647}>
+        <div className="learned-tech_header_contianer">
+          <div className="sticky">
+            <h1>{obj.name}</h1>
+          </div>
+          <div className="overflow">
+            {obj.description}
+          </div>
+        </div>
+      </MediaQuery>
+      <MediaQuery maxWidth={646}>
+        <div className="learned-tech_header_contianer">
+          <MediaQuery minWidth={440}>
+            <div>
+              <h1>{obj.name}</h1>
+            </div>
+          </MediaQuery>
+          <MediaQuery minWidth={319}>
+            <div className="info">
+              <BsInfoCircleFill />
+            </div>
+          </MediaQuery>
+        </div>
+      </MediaQuery>
+    </>
   );
 }
 

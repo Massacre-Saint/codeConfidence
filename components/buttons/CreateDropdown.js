@@ -7,12 +7,18 @@ import PropTypes from 'prop-types';
 export default function CreateDropdown({ handleShow }) {
   return (
     <>
-      <ButtonGroup>
-        <DropdownButton as={ButtonGroup} title="Create" id="bg-nested-dropdown">
-          <Dropdown.Item onClick={(e) => handleShow(e)} id="goal" eventKey="1">Create Goal</Dropdown.Item>
-          <Dropdown.Item onClick={(e) => handleShow(e)} id="topic" eventKey="2">Create Topic</Dropdown.Item>
-        </DropdownButton>
-      </ButtonGroup>
+
+      <DropdownButton
+        as={ButtonGroup}
+        variant="outline-success"
+        title="Create"
+        id="bg-nested-dropdown"
+        drop="start"
+      >
+        <Dropdown.Item onClick={(e) => handleShow(e)} id="goal" eventKey="1">Create Goal</Dropdown.Item>
+        <Dropdown.Item onClick={(e) => handleShow(e)} id="topic" eventKey="2">Create Topic</Dropdown.Item>
+      </DropdownButton>
+
     </>
   );
 }

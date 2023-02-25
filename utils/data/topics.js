@@ -71,7 +71,7 @@ const updateTopic = (data, user) => new Promise((resolve, reject) => {
   };
 
   if (data.goal) {
-    requestBody.goal = data.goal.id;
+    requestBody.goal = data.goal;
   }
 
   fetch(`${dbUrl}/topics/${data.id}`, {

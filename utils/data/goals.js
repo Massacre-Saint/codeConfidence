@@ -32,6 +32,22 @@ const getGoals = (user, object) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
+const getSingleGoal = (pk) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/goals/${pk}`)
+    .then((response) => response.json())
+    .then((data) => {
+      resolve({
+        id: data.id,
+        title: data.title,
+        progress: data.progress,
+        lastUpdated: data.last_updated,
+        learnedTech: data.learned_tech,
+        uid: data.uid,
+      });
+    })
+    .catch((error) => reject(error));
+});
+
 const createGoal = (data, user) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/goals`, {
     method: 'POST',
@@ -49,11 +65,12 @@ const createGoal = (data, user) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 const updateGoal = (data, user) => new Promise((resolve, reject) => {
+  const lTechId = data.learnedTech.id;
   fetch(`${dbUrl}/goals/${data.id}`, {
     method: 'PUT',
     body: JSON.stringify({
       title: data.title,
-      learned_tech: data.learnedTech,
+      learned_tech: lTechId,
     }),
     headers: {
       Authorization: user.uid,
@@ -69,5 +86,5 @@ const deleteGoal = (id) => new Promise((resolve, reject) => {
   }).then(resolve).catch(reject);
 });
 export {
-  getGoals, createGoal, updateGoal, deleteGoal,
+  getGoals, getSingleGoal, createGoal, updateGoal, deleteGoal,
 };

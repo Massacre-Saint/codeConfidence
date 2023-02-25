@@ -27,7 +27,7 @@ export default function LearnedTechHub({
 
   return (
     <>
-      <div className="navbar_sticky flex">
+      <div className="l-tech-nav">
         <TechImage obj={lTech.tech} />
         <LearnedTechHeader obj={lTech.tech} />
       </div>
@@ -45,7 +45,7 @@ export default function LearnedTechHub({
           <div className="box-half">
             <div className="flex full-width">
               <h3>Topics</h3>
-              <div className="float-right">
+              <div className="create-form_btn">
                 <CreateDropdown handleShow={handleShow} />
               </div>
             </div>

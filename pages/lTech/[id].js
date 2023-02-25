@@ -19,7 +19,7 @@ export default function LearnedTechViewAll() {
       getSingleLearnedTech(router.query.id, user, obj).then((data) => {
         setLTech(data);
         getGoals(user, data).then(setLTechGoals);
-        getTopics(user, obj.id).then(setLTechTopics);
+        getTopics(user, data).then(setLTechTopics);
         setIsLoading(false);
       });
     });

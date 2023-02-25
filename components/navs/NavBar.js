@@ -10,7 +10,7 @@ import AuthenticationButton from '../buttons/Authentication';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
         <Link passHref href="/">
           <Navbar.Brand>Code Confidence</Navbar.Brand>
