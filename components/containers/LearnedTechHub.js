@@ -5,14 +5,19 @@ import { LearnedTechNav } from '../navs';
 import LearnedTechHeader from '../headers/LearnedTechHeader';
 import CreateDropdown from '../buttons/CreateDropdown';
 import CreateModal from '../modals/CreateModal';
-import GoalList from './GoalList';
-import TopicList from './TopicList';
+import GoalCardPreview from './cards/GoalCardPreview';
+import ShowEditDelete from '../buttons/ShowEditDelete';
+import ShowAll from './ShowAll';
+import TopicCardPreview from './cards/TopicCardPreview';
 
 export default function LearnedTechHub({
   lTech, goals, onUpdate, topics,
 }) {
   const [showGoal, setShowGoal] = useState(false);
   const [show, setShow] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const [showingGoals, setShowingGoals] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const handleClose = () => {
     setShowGoal(false);
@@ -25,6 +30,77 @@ export default function LearnedTechHub({
     setShow(true);
   };
 
+  const handleEdit = (e) => {
+    if (e.target.id === 'edit') {
+      setEdit(true);
+    } else if (e.target.id === 'exit') {
+      setEdit(false);
+    } else {
+      setEdit(false);
+    }
+  };
+
+  const handleShowAll = (e) => {
+    if (e.target.id === 'topics') {
+      setShowingGoals(false);
+      setShowAll(true);
+    } else if (e.target.id === 'goals') {
+      setShowingGoals(true);
+      setShowAll(true);
+    } else {
+      setShowAll(false);
+    }
+  };
+  if (showAll) {
+    return (
+      <>
+        <div className="l-tech-nav">
+          <TechImage obj={lTech.tech} />
+          <LearnedTechHeader obj={lTech.tech} />
+        </div>
+        <LearnedTechNav />
+        <div className="block_section">
+          <div className="flex full-width">
+            <div className="create-form_btn">
+              {showAll ? (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    handleShowAll(e);
+                    handleEdit(e);
+                  }}
+                >
+                  Go Back
+                </button>
+              ) : ('')}
+            </div>
+            <div className="create-form_btn">
+              <CreateDropdown handleShow={handleShow} />
+              <ShowEditDelete handleEdit={handleEdit} edit={edit} />
+            </div>
+          </div>
+          <ShowAll
+            onUpdate={onUpdate}
+            topics={topics}
+            goals={goals}
+            showingGoals={showingGoals}
+            handleShowAll={handleShowAll}
+            edit={edit}
+            handleClose={handleClose}
+          />
+        </div>
+        <CreateModal
+          handleClose={handleClose}
+          showGoal={showGoal}
+          show={show}
+          lTech={lTech}
+          goals={goals}
+          onUpdate={onUpdate}
+        />
+      </>
+    );
+  }
+
   return (
     <>
       <div className="l-tech-nav">
@@ -33,27 +109,36 @@ export default function LearnedTechHub({
       </div>
       <LearnedTechNav />
       <div className="block_section">
+        <div className="flex full-width">
+          <div className="create-form_btn">
+            <CreateDropdown handleShow={handleShow} />
+          </div>
+        </div>
         <div className="flex two-containers">
           <div className="box-half">
-            <div className="flex">
-              <h3>Goals</h3>
-            </div>
-            <div className="list_container">
-              <GoalList goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
+            <div className="flex" />
+            <div className="preview_container">
+              <GoalCardPreview
+                goals={goals}
+                onUpdate={onUpdate}
+                handleClose={handleClose}
+                handleShowAll={handleShowAll}
+              />
             </div>
           </div>
           <div className="box-half">
-            <div className="flex full-width">
-              <h3>Topics</h3>
-              <div className="create-form_btn">
-                <CreateDropdown handleShow={handleShow} />
-              </div>
-            </div>
-            <div className="list_container">
-              <TopicList goals={goals} topics={topics} onUpdate={onUpdate} handleClose={handleClose} />
+            <div className="preview_container">
+              <TopicCardPreview
+                topics={topics}
+                onUpdate={onUpdate}
+                handleClose={handleClose}
+                goals={goals}
+                handleShowAll={handleShowAll}
+              />
             </div>
           </div>
         </div>
+
       </div>
       <CreateModal
         handleClose={handleClose}

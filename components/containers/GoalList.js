@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GoalCard } from './cards';
+import GoalCard from './cards/GoalCard';
 
 export default function GoalList({
-  goals, onUpdate, handleClose,
+  goals, onUpdate, handleClose, edit,
 }) {
   return (
     <div className="list_spacing">
@@ -11,8 +11,9 @@ export default function GoalList({
         <GoalCard
           key={i.id}
           obj={i}
-          onUpdate={onUpdate}
           handleClose={handleClose}
+          onUpdate={onUpdate}
+          edit={edit}
         />
       ))}
     </div>
@@ -25,4 +26,5 @@ GoalList.propTypes = {
   }))).isRequired,
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
+  edit: PropTypes.bool.isRequired,
 };

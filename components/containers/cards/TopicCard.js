@@ -1,41 +1,90 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Card from 'react-bootstrap/Card';
+import { BsSignpostSplit } from 'react-icons/bs';
+import { BiTimeFive } from 'react-icons/bi';
+import { IconContext } from 'react-icons';
 import TopicForm from '../../forms/TopicForm';
 import { deleteTopic } from '../../../utils/data/topics';
+import { getSingleGoal, updateGoal } from '../../../utils/data/goals';
+import convertTime from '../../../utils/convertTime';
+import { useAuth } from '../../../utils/context/authContext';
 
 export default function TopicCard({
-  obj, onUpdate, handleClose, goals,
+  obj, onUpdate, handleClose, goals, edit,
 }) {
-  const [edit, setEdit] = useState(false);
-  const handleEdit = () => {
-    setEdit(true);
-  };
+  const { user } = useAuth();
+  const [showForm, setshowForm] = useState(false);
 
-  const handleCancelEdit = () => {
-    setEdit(false);
+  const handleshowForm = () => {
+    setshowForm(true);
+  };
+  const handleCancelShowForm = () => {
+    setshowForm(false);
   };
 
   const handleDelete = () => {
-    deleteTopic(obj.id).then(() => onUpdate());
+    if (obj.goal != null) {
+      getSingleGoal(obj.goal.id).then((goalObj) => {
+        deleteTopic(obj.id).then(() => updateGoal(goalObj, user));
+      });
+      onUpdate();
+    } else {
+      deleteTopic(obj.id).then(() => onUpdate());
+    }
   };
+
+  if (showForm) {
+    return (
+      <div className="card_spacing topic-goal_card">
+        <TopicForm
+          onUpdate={onUpdate}
+          handleClose={handleClose}
+          goals={goals}
+          obj={obj}
+          handleCancelShowForm={handleCancelShowForm}
+        />
+      </div>
+    );
+  }
+
   return (
-    <Card className="card_spacing topic-goal_card">
-      <Card.Body>
-        {edit
-          ? <TopicForm onUpdate={onUpdate} handleClose={handleClose} goals={goals} obj={obj} handleCancelEdit={handleCancelEdit} />
-          : (
-            <>
-              <Card.Title>{obj.title}</Card.Title>
-              <Card.Body>{obj.description}</Card.Body>
-              <div>
-                <button type="button" id="edit" onClick={handleEdit}>Edit</button>
-                <button type="button" onClick={handleDelete}>Delete</button>
-              </div>
-            </>
-          )}
-      </Card.Body>
-    </Card>
+    <div className="card_spacing topic-goal_card">
+      <div className="topic-goal_body">
+        <span className="topic-goal_card_title">{obj.title}</span>
+        <span className="topic-goal_card_desc">{obj.description}</span>
+      </div>
+      <div className="topic-goal_card_footer">
+        <span>
+          <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+            <BiTimeFive />
+          </IconContext.Provider>
+          <span className="topic-goal_card_footer-text">
+            {convertTime(obj.lastUpdated)}
+          </span>
+        </span>
+        <span>
+          {(obj.goal != null)
+            ? (
+              <>
+                <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+                  <BsSignpostSplit />
+                </IconContext.Provider>
+                <span className="topic-goal_card_footer-text">
+                  {obj.goal.title}
+                </span>
+              </>
+            )
+            : ('')}
+        </span>
+      </div>
+      {edit ? (
+        <div>
+          <button type="button" id="showForm" onClick={(e) => handleshowForm(e)}>Edit</button>
+          <button type="button" onClick={handleDelete}>Delete</button>
+        </div>
+      )
+        : ('')}
+    </div>
   );
 }
 TopicCard.propTypes = {
@@ -47,6 +96,7 @@ TopicCard.propTypes = {
       id: PropTypes.string,
       title: PropTypes.string,
     }),
+    lastUpdated: PropTypes.string,
   }).isRequired,
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
@@ -54,4 +104,9 @@ TopicCard.propTypes = {
   }))).isRequired,
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
+  edit: PropTypes.bool,
+};
+
+TopicCard.defaultProps = {
+  edit: false,
 };

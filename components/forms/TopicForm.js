@@ -4,10 +4,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../../utils/context/authContext';
 import { createTopic, updateTopic } from '../../utils/data/topics';
-import { getSingleGoal, updateGoal } from '../../utils/data/goals';
 
 export default function TopicForm({
-  goals, onUpdate, handleClose, lTech, obj, handleCancelEdit,
+  goals, onUpdate, handleClose, lTech, obj, handleCancelShowForm,
 }) {
   const { user } = useAuth();
   const [formData, setFormData] = useState(() => {
@@ -26,24 +25,23 @@ export default function TopicForm({
       goal: obj.goal ? obj.goal.id : null,
     };
   });
-  const updateProgress = (data) => {
-    console.warn(data.goal);
-    if (data.goal !== null) {
-      getSingleGoal(data.goal).then((goal) => {
-        console.warn(goal);
-        updateGoal(goal, user).then(() => onUpdate());
-      });
-    }
-  };
+  // const updateProgress = (data) => {
+  //   console.warn(data);
+  //   if (data.goal !== null) {
+  //     getSingleGoal(data.goal).then((goal) => {
+  //       updateGoal(goal, user).then(() => onUpdate());
+  //     });
+  //   }
+  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.id) {
       updateTopic(formData, user).then(() => onUpdate());
-      updateProgress(formData);
-      handleCancelEdit();
+      // updateProgress(formData);
+      handleCancelShowForm();
     } else {
       createTopic(formData, user).then(() => onUpdate());
-      updateProgress(formData);
+      // updateProgress(formData);
       handleClose();
     }
   };
@@ -52,7 +50,7 @@ export default function TopicForm({
     return (
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="title">
-          <Form.Label>Create Topic</Form.Label>
+          <Form.Label>Title</Form.Label>
           <Form.Control
             name="title"
             onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
@@ -65,7 +63,7 @@ export default function TopicForm({
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="description">
-          <Form.Label>Create Topic</Form.Label>
+          <Form.Label>Description</Form.Label>
           <Form.Control
             name="description"
             onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
@@ -88,7 +86,7 @@ export default function TopicForm({
             value={formData.goal ? formData.goal : ''}
             bsPrefix="form-box"
           >
-            <option className="form-drop" value="">Assigned Goal</option>
+            <option className="form-drop" value="null">Assigned Goal</option>
             {goals.map((goal) => (
               <option
                 className="form-drop"
@@ -149,8 +147,13 @@ export default function TopicForm({
           <Form.Select
             aria-label="Selected Goal"
             name="goal"
-            onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
-            value={formData.goal}
+            // onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+            // value={formData.goal}
+            onChange={({ target }) => {
+              const value = target.value === '' ? null : target.value;
+              setFormData((prev) => ({ ...prev, [target.name]: value }));
+            }}
+            value={formData.goal || ''}
             bsPrefix="form-box"
           >
             <option className="form-drop" value="">Choose your favorite goal</option>
@@ -171,7 +174,7 @@ export default function TopicForm({
       <Button variant="primary" type="submit">
         Submit
       </Button>
-      <Button onClick={handleCancelEdit} variant="primary" type="button">
+      <Button onClick={handleCancelShowForm} variant="primary" type="button">
         Cancel
       </Button>
     </Form>
@@ -196,7 +199,7 @@ TopicForm.propTypes = {
   }),
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
-  handleCancelEdit: PropTypes.func,
+  handleCancelShowForm: PropTypes.func,
   lTech: PropTypes.shape({
     id: PropTypes.number,
     tech: PropTypes.shape({
@@ -214,5 +217,5 @@ TopicForm.propTypes = {
 TopicForm.defaultProps = {
   lTech: {},
   obj: {},
-  handleCancelEdit: () => {},
+  handleCancelShowForm: () => {},
 };
