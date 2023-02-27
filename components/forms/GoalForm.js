@@ -7,7 +7,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { createGoal, updateGoal } from '../../utils/data/goals';
 
 function GoalForm({
-  lTech, onUpdate, handleClose, obj, handleCancelEdit,
+  lTech, onUpdate, handleClose, obj, handleCancelShowForm,
 }) {
   const { user } = useAuth();
   const [formData, setFormData] = useState(() => {
@@ -27,7 +27,7 @@ function GoalForm({
     if (obj && obj.learnedTech) {
       setFormData({
         ...obj,
-        learnedTech: obj.learnedTech.id,
+        learnedTech: obj.learnedTech,
       });
     }
   }, [obj, lTech]);
@@ -36,7 +36,7 @@ function GoalForm({
     e.preventDefault();
     if (obj.id) {
       updateGoal(formData, user).then(() => onUpdate());
-      handleCancelEdit();
+      handleCancelShowForm();
     } else {
       createGoal(formData, user).then(() => onUpdate());
     }
@@ -66,7 +66,7 @@ function GoalForm({
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="title">
-        <Form.Label>Create Goal</Form.Label>
+        <Form.Label>Edit Goal</Form.Label>
         <Form.Control
           name="title"
           onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
@@ -80,7 +80,7 @@ function GoalForm({
       <Button variant="primary" type="submit">
         Submit
       </Button>
-      <Button onClick={handleCancelEdit} variant="primary" type="button">
+      <Button onClick={handleCancelShowForm} variant="primary" type="button">
         Cancel
       </Button>
     </Form>
@@ -115,11 +115,11 @@ GoalForm.propTypes = {
   }),
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
-  handleCancelEdit: PropTypes.func,
+  handleCancelShowForm: PropTypes.func,
 };
 
 GoalForm.defaultProps = {
   lTech: {},
   obj: {},
-  handleCancelEdit: () => {},
+  handleCancelShowForm: () => {},
 };
