@@ -6,6 +6,7 @@ import {
   Container,
   Nav,
 } from 'react-bootstrap';
+import Image from 'next/image';
 import AuthenticationButton from '../buttons/Authentication';
 
 export default function NavBar() {
@@ -13,19 +14,20 @@ export default function NavBar() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
         <Link passHref href="/">
-          <Navbar.Brand>Code Confidence</Navbar.Brand>
+          <Navbar.Brand>
+            <Image
+              src="/logo.v2.svg"
+              width={30}
+              height={30}
+            />
+            ode Confidence
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
-            </Link>
-            <Link passHref href="/">
-              <Nav.Link>About</Nav.Link>
-            </Link>
-            <Link passHref href="/">
-              <Nav.Link>View</Nav.Link>
             </Link>
             <Link passHref href="/lTech/">
               <Nav.Link>+</Nav.Link>
