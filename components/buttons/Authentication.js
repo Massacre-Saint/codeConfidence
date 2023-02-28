@@ -8,7 +8,7 @@ function AuthenticationButton() {
 
   if (!user) {
     return (
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>Sign In</Button>
+      <Button type="button" size="lg" bsPrefix="sign-in-btn" className="sign-in-btn" onClick={signIn}>Sign In</Button>
     );
   }
   return (

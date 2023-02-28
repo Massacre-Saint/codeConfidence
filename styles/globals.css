@@ -76,14 +76,88 @@ body {
 }
 
 .sign_in-container {
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: space-around;
   border-radius: 15px;
-  margin: 2em;
+  margin: 2em auto;
   padding: 1em;
-  background-color: #F2F1FA;
   max-width: 90vw;
   min-height: 90vh;
 }
+.sign_in-content {
+  max-width: 50vw;
+}
+.sign-in_button_container {
+max-width: 50%;
+margin: 6% auto 0;
+}
+.sign-in-btn {
+width: 100%;
+font-weight: 700;
+font-size: 1.5em;
+padding: 10px 0;
+border-radius: 10px;
+background: rgb(9,79,175);
+background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%);
+}
+.logo {
+  max-width: 100%;
+}
 
+.grid-checklist {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8%;
+  row-gap: 8%;
+}
+.checklist-content {
+  display: flex;
+  align-items: center;
+}
+.checklist-text {
+  margin-left: 4%;
+}
+@media (max-width: 1080px) {
+  .sign_in-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 15px;
+    margin: 2em auto;
+    padding: 1em;
+    max-width: 90vw;
+    min-height: 90vh;
+  }
+  .sign_in-content {
+    min-width: 80vw;
+  }
+  .grid-checklist {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+    row-gap: 8%;
+  }
+  .sign-in_button_container {
+    max-width: 50%;
+    margin: 6% auto 0;
+    }
+    .sign-in-btn {
+    width: 100%;
+    font-weight: 700;
+    font-size: 1.5em;
+    padding: 5px 0;
+    border-radius: 10px;
+    background: rgb(9,79,175);
+    background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%);
+    }
+    .logo {
+      max-width: 50%;
+    }
+}
 .form-container {
   background-color: #F2F1FA;
   max-width: 40vw;
@@ -347,4 +421,8 @@ body {
 }
 .show-all_container {
   min-width: 80%;
+}
+
+.logo {
+  margin: auto;
 }
