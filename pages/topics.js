@@ -57,7 +57,8 @@ export default function Topics() {
 
   useEffect(() => {
     loader();
-  }, [loader, user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
   if (isLoading) {
     <>
       <div className="hero-font-container">
