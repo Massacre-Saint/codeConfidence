@@ -58,7 +58,7 @@ export default function LearnedTechHub({
           <TechImage obj={lTech.tech} />
           <LearnedTechHeader obj={lTech.tech} />
         </div>
-        <LearnedTechNav />
+        <LearnedTechNav handleShowAll={handleShowAll} handleShow={handleShow} showAll={showAll} />
         <div className="block_section">
           <div className="flex full-width">
             <div className="create-form_btn">
@@ -68,6 +68,7 @@ export default function LearnedTechHub({
                   onClick={(e) => {
                     handleShowAll(e);
                     handleEdit(e);
+                    onUpdate();
                   }}
                 >
                   Go Back
@@ -75,7 +76,7 @@ export default function LearnedTechHub({
               ) : ('')}
             </div>
             <div className="create-form_btn">
-              <CreateDropdown handleShow={handleShow} />
+              {/* <CreateDropdown handleShow={handleShow} /> */}
               <ShowEditDelete handleEdit={handleEdit} edit={edit} />
             </div>
           </div>
@@ -107,7 +108,7 @@ export default function LearnedTechHub({
         <TechImage obj={lTech.tech} />
         <LearnedTechHeader obj={lTech.tech} />
       </div>
-      <LearnedTechNav />
+      <LearnedTechNav handleShowAll={handleShowAll} />
       <div className="block_section">
         <div className="flex full-width">
           <div className="create-form_btn">

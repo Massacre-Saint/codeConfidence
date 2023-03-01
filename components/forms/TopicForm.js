@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../../utils/context/authContext';
 import { createTopic, updateTopic } from '../../utils/data/topics';
+import { getSingleGoal, updateGoal } from '../../utils/data/goals';
 
 export default function TopicForm({
   goals, onUpdate, handleClose, lTech, obj, handleCancelShowForm,
@@ -25,23 +26,22 @@ export default function TopicForm({
       goal: obj.goal ? obj.goal.id : null,
     };
   });
-  // const updateProgress = (data) => {
-  //   console.warn(data);
-  //   if (data.goal !== null) {
-  //     getSingleGoal(data.goal).then((goal) => {
-  //       updateGoal(goal, user).then(() => onUpdate());
-  //     });
-  //   }
-  // };
+  const updateProgress = (data) => {
+    if (data.goal !== null) {
+      getSingleGoal(data.goal).then((goal) => {
+        updateGoal(goal, user).then(() => onUpdate());
+      });
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.id) {
       updateTopic(formData, user).then(() => onUpdate());
-      // updateProgress(formData);
+      updateProgress(formData);
       handleCancelShowForm();
     } else {
       createTopic(formData, user).then(() => onUpdate());
-      // updateProgress(formData);
+      updateProgress(formData);
       handleClose();
     }
   };

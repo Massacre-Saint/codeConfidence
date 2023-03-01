@@ -346,14 +346,10 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 }
 
 .block_section {
-  margin: 2em 1em 2em 1em;
+  margin: 1em 1em 2em 1em;
 }
 .box-half {
   width: 50%;
-}
-
-.flex {
-  display: flex;
 }
 
 .two-containers {
@@ -372,6 +368,10 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+}
+.list_spacing div:first-of-type {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
 }
  .nav-link {
   color: #F2F1FA;
@@ -475,16 +475,77 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   font-weight: 800;
 }
 
-@media (min-width: 1200px) {
-  .show-all_container {
-    max-width: 70%;
-    margin: auto;
-  }
-}
 .show-all_container {
-  min-width: 80%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.show-all_header {
+  display: flex;
+  padding: 1% 2%;
+  justify-content: space-between;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  border: 2px solid white;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.show-all_header-content {
+  display: flex;
+  column-gap: 1em;
+
 }
 
 .logo {
   margin: auto;
+}
+.view-all_container {
+  width: 70%;
+  margin: auto;
+}
+.hero-font {
+  font-size: 10vh;
+  text-transform: uppercase;
+  background-color: white;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+.line {
+  height: .5vh;
+  background: linear-gradient(90deg, #094faf 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%);
+}
+.sub-nav-space-between {
+  display: flex;
+  justify-content: space-between;
+  margin: 2% 0 2% 0;
+}
+.search-bar_container {
+  width: 50%;
+}
+
+.search-field {
+  background-color: white;
+  width: 100%;
+  border: 2px solid white;
+}
+.show-all-list-container {
+  width: 100%;
+}
+
+.toggle-button {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+.toggled {
+  background-color: aqua;
+}
+.toggle-button:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+  background-color: #8b8b8b;
+}
+.hide-radio {
+  display: none;
 }
