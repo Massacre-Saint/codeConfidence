@@ -57,7 +57,7 @@ export default function Topics() {
 
   useEffect(() => {
     loader();
-  }, [user]);
+  }, [loader, user]);
   if (isLoading) {
     <>
       <div className="hero-font-container">
