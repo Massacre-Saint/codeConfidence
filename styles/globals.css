@@ -30,16 +30,19 @@ body {
   background-color: #1f1f1f;
   font-family: 'Open Sans';
 }
+.main-navbar {
+  background-color: #1f1f1f;
+}
 .main-container {
   position: relative;
   margin:2%;
   padding: 2%;
-  border-width: 5px;
+  border-width: 2px;
   border-style: solid;
   border-image: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%) 1;
   /* -webkit-box-shadow: -1px 4px 19px 19px rgba(9,79,175,0.68);
   -moz-box-shadow: -1px 4px 19px 19px rgba(9,79,175,0.68); */
-  box-shadow: -1px 4px 19px 19px rgba(9,79,175,0.68);
+  /* box-shadow: -1px 4px 19px 19px rgba(9,79,175,0.68); */
   
 }
 @media (min-width: 1200px) {
@@ -505,16 +508,18 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   margin: auto;
 }
 .hero-font {
-  font-size: 10vh;
+  font-size: 15vh;
+  letter-spacing: 1.5rem;
   text-transform: uppercase;
-  background-color: white;
+  background: linear-gradient(90deg, #094faf 30%, rgba(136,12,157,1) 40%, rgba(235,9,28,1) 50%, rgba(243,124,56,1) 60%, rgba(252,214,5,1) 70%, rgba(9,190,36,1) 80%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
 }
 .line {
-  height: .5vh;
-  background: linear-gradient(90deg, #094faf 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%);
+  height: .2vh;
+  background-color: #8b8b8b;
+  /* background: linear-gradient(90deg, #094faf 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%); */
 }
 .sub-nav-space-between {
   display: flex;
@@ -524,11 +529,24 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 .search-bar_container {
   width: 50%;
 }
-
+.search-field:focus    {
+  border: 1px solid white;
+  background: rgb(9,79,175);
+  background: linear-gradient(90deg, #094faf 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%);
+}
 .search-field {
-  background-color: white;
   width: 100%;
-  border: 2px solid white;
+  border: 1px solid white;
+  background-color: transparent;
+}
+.search-side {
+  background-color: transparent;
+  color: white;
+}
+.search-side_button {
+  background-color: transparent;
+  color: white;
+  border: none;
 }
 .show-all-list-container {
   width: 100%;

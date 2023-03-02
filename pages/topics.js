@@ -81,7 +81,7 @@ export default function Topics() {
     <div className="view-all_container">
       <div className="hero-font-container">
         <div className="hero-font">Topics</div>
-        <div className="line" />
+        {/* <div className="line" /> */}
       </div>
       <div className="sub-nav-space-between">
         <div className="search-bar_container">
