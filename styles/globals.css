@@ -567,3 +567,21 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 .hide-radio {
   display: none;
 }
+.sort-goal-btn {
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  color: white;
+}
+.search-field-inner-nav {
+  background-color: #121212;
+  border-radius: 5px;
+  margin: 2px 0 4px 16px;
+  color: white;
+}
+.search-field-inner-reset button {
+  background-color: transparent;
+  color: white;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
