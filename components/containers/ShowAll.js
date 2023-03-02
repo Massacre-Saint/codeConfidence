@@ -10,10 +10,10 @@ export default function ShowAll({
     return (
       <div className="show-all_container">
         <div>
-          <div>
-            <p>
+          <div className="show-all_header">
+            <div>
               Goals
-            </p>
+            </div>
           </div>
           <div>
             <GoalList
@@ -32,9 +32,11 @@ export default function ShowAll({
     <>
       <div className="show-all_container">
         <div>
-          <p>
-            Topics
-          </p>
+          <div className="show-all_header">
+            <div>
+              Topics
+            </div>
+          </div>
           <div>
             <TopicList
               topics={topics}

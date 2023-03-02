@@ -6,13 +6,13 @@ export default function ShowEditDelete({ handleEdit, edit }) {
   if (edit) {
     return (
       <>
-        <Button id="exit" onClick={handleEdit} variant="danger">Exit</Button>
+        <Button id="exit" onClick={handleEdit} variant="outline-danger">Exit</Button>
       </>
     );
   }
   return (
     <>
-      <Button id="edit" onClick={handleEdit} variant="danger">Edit</Button>
+      <Button id="edit" onClick={handleEdit} variant="outline-light">Edit</Button>
     </>
   );
 }

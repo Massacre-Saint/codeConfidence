@@ -11,7 +11,7 @@ import AuthenticationButton from '../buttons/Authentication';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
+    <Navbar collapseOnSelect expand="lg" className="main-navbar" variant="dark" sticky="top">
       <Container>
         <Link passHref href="/">
           <Navbar.Brand>
@@ -28,6 +28,12 @@ export default function NavBar() {
           <Nav className="me-auto">
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
+            </Link>
+            <Link passHref href="/goals">
+              <Nav.Link>Goals</Nav.Link>
+            </Link>
+            <Link passHref href="/topics">
+              <Nav.Link>Topics</Nav.Link>
             </Link>
             <Link passHref href="/lTech/">
               <Nav.Link>+</Nav.Link>

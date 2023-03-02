@@ -32,6 +32,38 @@ const getGoals = (user, object) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
+
+const getAllGoals = (user) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/goals`, {
+    headers: {
+      Authorization: user.uid,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const transformedData = data.map((obj) => {
+        const {
+          id,
+          title,
+          progress,
+          last_updated: lastUpdated,
+          learned_tech: learnedTech,
+          uid,
+        } = obj;
+        return {
+          id,
+          title,
+          progress,
+          lastUpdated,
+          learnedTech,
+          uid,
+        };
+      });
+      resolve(transformedData);
+    })
+    .catch(reject);
+});
+
 const getSingleGoal = (pk) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/goals/${pk}`)
     .then((response) => response.json())
@@ -86,5 +118,5 @@ const deleteGoal = (id) => new Promise((resolve, reject) => {
   }).then(resolve).catch(reject);
 });
 export {
-  getGoals, getSingleGoal, createGoal, updateGoal, deleteGoal,
+  getGoals, getSingleGoal, createGoal, updateGoal, deleteGoal, getAllGoals,
 };

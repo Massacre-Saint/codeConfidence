@@ -37,6 +37,41 @@ const getTopics = (user, object) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getAllTopics = (user) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/topics`, {
+    headers: {
+      Authorization: user.uid,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const transformedData = data.map((obj) => {
+        const {
+          id,
+          title,
+          description,
+          last_updated: lastUpdated,
+          learned_tech: learnedTech,
+          uid,
+          goal,
+          completed,
+        } = obj;
+        return {
+          id,
+          title,
+          description,
+          lastUpdated,
+          learnedTech,
+          uid,
+          goal,
+          completed,
+        };
+      });
+      resolve(transformedData);
+    })
+    .catch(reject);
+});
+
 const createTopic = (data, user) => new Promise((resolve, reject) => {
   const requestBody = {
     title: data.title,
@@ -92,5 +127,5 @@ const deleteTopic = (id) => new Promise((resolve, reject) => {
   }).then(resolve).catch(reject);
 });
 export {
-  getTopics, createTopic, updateTopic, deleteTopic,
+  getTopics, createTopic, updateTopic, deleteTopic, getAllTopics,
 };

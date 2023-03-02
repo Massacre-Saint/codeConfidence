@@ -13,7 +13,7 @@ export default function CreateDropdown({ handleShow }) {
         variant="outline-success"
         title="Create"
         id="bg-nested-dropdown"
-        drop="start"
+        drop="bottom-end"
       >
         <Dropdown.Item onClick={(e) => handleShow(e)} id="goal" eventKey="1">Create Goal</Dropdown.Item>
         <Dropdown.Item onClick={(e) => handleShow(e)} id="topic" eventKey="2">Create Topic</Dropdown.Item>

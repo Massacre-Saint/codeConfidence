@@ -27,10 +27,10 @@ export default function TopicCard({
       getSingleGoal(obj.goal.id).then((goalObj) => {
         deleteTopic(obj.id).then(() => updateGoal(goalObj, user));
       });
-      onUpdate();
     } else {
-      deleteTopic(obj.id).then(() => onUpdate());
+      deleteTopic(obj.id);
     }
+    onUpdate();
   };
 
   if (showForm) {
