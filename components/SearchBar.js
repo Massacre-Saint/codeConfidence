@@ -35,17 +35,6 @@ export default function SearchBar({ lTechTopics, setFilteredTopics }) {
       />
       <InputGroup.Text id="btnGroupAddon" className="search-side"><button type="button" className="search-side_button" onClick={resetInput}>X</button></InputGroup.Text>
     </InputGroup>
-  // <div>
-  //   <form>
-  //     <input
-  //       className="search-field"
-  //       placeholder="Search"
-  //       value={searchInput}
-  //       onChange={handleChange}
-  //     />
-  //     <button type="button" onClick={resetInput}>Reset</button>
-  //   </form>
-  // </div>
   );
 }
 

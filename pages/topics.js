@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Loading } from '../components';
 import ShowEditDelete from '../components/buttons/ShowEditDelete';
+import SortDropdown from '../components/buttons/SortDropdown';
 import TopicList from '../components/containers/TopicList';
 import ToggleButtons from '../components/navs/ToggleButtons';
 import SearchBar from '../components/SearchBar';
@@ -67,11 +68,7 @@ export default function Topics() {
       </div>
       <div className="show-all_container">
         <div>
-          <div className="show-all_header">
-            <div>
-              Topics
-            </div>
-          </div>
+          <div className="show-all_header" />
           <Loading />
         </div>
       </div>
@@ -101,7 +98,7 @@ export default function Topics() {
               Sort
             </div>
             <div>
-              Goals
+              <SortDropdown lTechGoals={lTechGoals} setFilteredTopics={setFilteredTopics} lTechTopics={lTechTopics} />
             </div>
           </div>
         </div>
