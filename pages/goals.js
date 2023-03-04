@@ -83,7 +83,7 @@ export default function Goals() {
           </div>
           <div className="show-all_header-content">
             <div>
-              <SortDropdown lTechGoals={lTechGoals} setFilteredGoals={setFilteredGoals} />
+              <SortDropdown array={lTechGoals} setArray={setFilteredGoals} />
             </div>
           </div>
         </div>

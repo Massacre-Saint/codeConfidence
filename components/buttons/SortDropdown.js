@@ -1,27 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
-function SortDropdown({ lTechGoals, setFilteredGoals }) {
-  const sortItems = [
-    { name: 'Recently updated', value: 1 },
-    { name: 'Least Complete', value: 2 },
-    { name: 'Most Complete', value: 3 },
-    { name: 'A-Z', value: 4 },
-  ];
+function SortDropdown({ array, setArray }) {
+  const [sortItems, setSortItems] = useState([]);
+
+  const defineDropdownItems = () => {
+    if (array && array.length > 0 && (Object.prototype.hasOwnProperty.call(array[0], 'progress'))) {
+      setSortItems([
+        { name: 'Recently updated', value: 1 },
+        { name: 'Least Complete', value: 2 },
+        { name: 'Most Complete', value: 3 },
+        { name: 'A-Z', value: 4 },
+      ]);
+    } else {
+      setSortItems([
+        { name: 'Recently updated', value: 1 },
+        { name: 'A-Z', value: 4 },
+      ]);
+    }
+  };
+  useEffect(() => {
+    defineDropdownItems();
+  }, [array]);
   const handleSort = (pk) => {
     let results;
-    if (pk === 1) {
-      results = [...lTechGoals].sort((a, b) => a.lastUpdated - b.lastUpdated);
-    } else if (pk === 2) {
-      results = [...lTechGoals].sort((a, b) => a.progress - b.progress);
-    } else if (pk === 3) {
-      results = [...lTechGoals].sort((a, b) => b.progress - a.progress);
+    if (array.progress) {
+      if (pk === 1) {
+        results = [...array].sort((a, b) => a.lastUpdated - b.lastUpdated);
+      } else if (pk === 2) {
+        results = [...array].sort((a, b) => a.progress - b.progress);
+      } else if (pk === 3) {
+        results = [...array].sort((a, b) => b.progress - a.progress);
+      } else if (pk === 4) {
+        results = [...array].sort((a, b) => a.title.localeCompare(b.title));
+      }
+    } else if (pk === 1) {
+      results = [...array].sort((a, b) => a.lastUpdated - b.lastUpdated);
     } else if (pk === 4) {
-      results = [...lTechGoals].sort((a, b) => a.title.localeCompare(b.title));
+      results = [...array].sort((a, b) => a.title.localeCompare(b.title));
     }
-    setFilteredGoals(results);
+    setArray(results);
   };
   return (
     <>
@@ -29,7 +49,7 @@ function SortDropdown({ lTechGoals, setFilteredGoals }) {
         id="dropdown-button-dark-example2"
         variant="secondary"
         menuVariant="dark"
-        title="Goals"
+        title="Sort"
         align="end"
         bsPrefix="sort-goal-btn"
       >
@@ -48,12 +68,13 @@ function SortDropdown({ lTechGoals, setFilteredGoals }) {
 }
 
 SortDropdown.propTypes = {
-  lTechGoals: PropTypes.arrayOf((PropTypes.shape({
-    title: PropTypes.string,
-    lastUpdated: PropTypes.string,
-    progress: PropTypes.number,
+  array: PropTypes.arrayOf((PropTypes.shape({
+    obj: PropTypes.shape({
+      id: PropTypes.string,
+      progress: PropTypes.number,
+    }),
   }))).isRequired,
-  setFilteredGoals: PropTypes.func.isRequired,
+  setArray: PropTypes.func.isRequired,
 };
 
 export default SortDropdown;

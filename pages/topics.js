@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Loading } from '../components';
 import ShowEditDelete from '../components/buttons/ShowEditDelete';
+import SortDropdown from '../components/buttons/SortDropdown';
 import SortSearchDropdown from '../components/buttons/SortSearchDropdown';
 import TopicList from '../components/containers/TopicList';
 import ToggleButtons from '../components/navs/ToggleButtons';
@@ -84,7 +85,7 @@ export default function Topics() {
           </div>
           <div className="show-all_header-content">
             <div>
-              Sort
+              <SortDropdown array={lTechTopics} setArray={setFilteredTopics} />
             </div>
             <div>
               <SortSearchDropdown lTechGoals={lTechGoals} setFilteredTopics={setFilteredTopics} lTechTopics={lTechTopics} />

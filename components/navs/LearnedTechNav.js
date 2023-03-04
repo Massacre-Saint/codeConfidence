@@ -6,7 +6,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 import MediaQuery from 'react-responsive';
 
-export default function LearnedTechNav({ handleShowAll, handleShow, showAll }) {
+export default function LearnedTechNav({
+  lTech, handleShowAll, handleShow, showAll,
+}) {
   return (
     <>
       <MediaQuery maxWidth={768}>
@@ -39,7 +41,7 @@ export default function LearnedTechNav({ handleShowAll, handleShow, showAll }) {
       <MediaQuery minWidth={769}>
         <Nav variant="tabs" navbar="True">
           <Nav.Item>
-            <Nav.Link eventKey="3" className="nav-link" href="/home">Documentation</Nav.Link>
+            <Nav.Link eventKey="3" className="nav-link" target="_blank" href={lTech.tech.docUrl}>Documentation</Nav.Link>
           </Nav.Item>
           <NavDropdown title="Goals" menuVariant="dark" className="nav-item">
             <NavDropdown.Item eventKey="4" id="goals" onClick={(e) => handleShowAll(e)}>View All</NavDropdown.Item>
@@ -48,8 +50,8 @@ export default function LearnedTechNav({ handleShowAll, handleShow, showAll }) {
                 Create
               </NavDropdown.Item>
             ) : ('')}
-            <NavDropdown.Divider />
-            <NavDropdown.Item eventKey="4.3">Separated link</NavDropdown.Item>
+            {/* <NavDropdown.Divider />
+            <NavDropdown.Item eventKey="4.3">Separated link</NavDropdown.Item> */}
           </NavDropdown>
 
           <NavDropdown title="Topics" menuVariant="dark" className="nav-item">
@@ -59,8 +61,8 @@ export default function LearnedTechNav({ handleShowAll, handleShow, showAll }) {
                 Create
               </NavDropdown.Item>
             ) : ('')}
-            <NavDropdown.Divider />
-            <NavDropdown.Item eventKey="5.4">Separated link</NavDropdown.Item>
+            {/* <NavDropdown.Divider />
+            <NavDropdown.Item eventKey="5.4">Separated link</NavDropdown.Item> */}
           </NavDropdown>
 
           <Nav.Item>
@@ -75,6 +77,11 @@ export default function LearnedTechNav({ handleShowAll, handleShow, showAll }) {
 }
 
 LearnedTechNav.propTypes = {
+  lTech: PropTypes.shape({
+    tech: PropTypes.shape({
+      docUrl: PropTypes.string,
+    }),
+  }).isRequired,
   handleShowAll: PropTypes.func.isRequired,
   handleShow: PropTypes.func,
   showAll: PropTypes.bool,
