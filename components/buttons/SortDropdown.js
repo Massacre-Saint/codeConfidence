@@ -23,6 +23,7 @@ function SortDropdown({ array, setArray }) {
   };
   useEffect(() => {
     defineDropdownItems();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [array]);
   const handleSort = (pk) => {
     let results;
