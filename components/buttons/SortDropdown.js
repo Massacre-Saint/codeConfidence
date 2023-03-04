@@ -1,34 +1,28 @@
-import React, { useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import React from 'react';
 import PropTypes from 'prop-types';
+import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Form from 'react-bootstrap/Form';
-import { InputGroup } from 'react-bootstrap';
 
-export default function SortDropdown({ lTechGoals, setFilteredTopics, lTechTopics }) {
-  const [searchInput, setSearchInput] = useState('');
-  const [filteredGoals, setFilteredGoals] = useState([]);
-
-  const handleSortGoal = (goalPk) => {
-    if (goalPk) {
-      const results = lTechTopics.filter((obj) => obj.goal.id === goalPk);
-      setFilteredTopics(results);
-    } else {
-      const results = lTechTopics.filter((obj) => obj.goal === null);
-      setFilteredTopics(results);
+function SortDropdown({ lTechGoals, setFilteredGoals }) {
+  const sortItems = [
+    { name: 'Recently updated', value: 1 },
+    { name: 'Least Complete', value: 2 },
+    { name: 'Most Complete', value: 3 },
+    { name: 'A-Z', value: 4 },
+  ];
+  const handleSort = (pk) => {
+    let results;
+    if (pk === 1) {
+      results = [...lTechGoals].sort((a, b) => a.lastUpdated - b.lastUpdated);
+    } else if (pk === 2) {
+      results = [...lTechGoals].sort((a, b) => a.progress - b.progress);
+    } else if (pk === 3) {
+      results = [...lTechGoals].sort((a, b) => b.progress - a.progress);
+    } else if (pk === 4) {
+      results = [...lTechGoals].sort((a, b) => a.title.localeCompare(b.title));
     }
-  };
-  const resetInput = () => {
-    setSearchInput('');
-    setFilteredGoals([]);
-  };
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setSearchInput(value);
-    const results = lTechGoals.filter((obj) => obj.title.toLowerCase().includes(value.toLowerCase()));
     setFilteredGoals(results);
   };
-
   return (
     <>
       <DropdownButton
@@ -39,45 +33,15 @@ export default function SortDropdown({ lTechGoals, setFilteredTopics, lTechTopic
         align="end"
         bsPrefix="sort-goal-btn"
       >
-        <InputGroup>
-          <Form.Control
-            autoFocus
-            placeholder="Search Goals"
-            value={searchInput}
-            onChange={handleChange}
-            bsPrefix="search-field-inner-nav"
-          />
-          <InputGroup.Text id="btnGroupAddon" bsPrefix="search-field-inner-reset"><button type="button" onClick={resetInput}>X</button></InputGroup.Text>
-        </InputGroup>
-        {searchInput ? ('')
-          : (
-            <>
-              <Dropdown.Item onClick={() => handleSortGoal()}>
-                Unassigned Topics
-              </Dropdown.Item>
-              <Dropdown.Divider />
-            </>
-          )}
-        {filteredGoals.length > 0
-          ? (
-            filteredGoals.map((i) => (
-              <>
-                <Dropdown.Item key={i.id} onClick={() => handleSortGoal(i.id)}>
-                  {i.title}
-                </Dropdown.Item>
-                <Dropdown.Divider />
-              </>
-            ))
-          ) : (
-            lTechGoals.slice(0, 3).map((i) => (
-              <>
-                <Dropdown.Item key={i.id} onClick={() => handleSortGoal(i.id)}>
-                  {i.title}
-                </Dropdown.Item>
-                <Dropdown.Divider />
-              </>
-            ))
-          )}
+        {sortItems.map((i) => (
+          <>
+            <Dropdown.Item key={i.value} onClick={() => handleSort(i.value)}>
+              {i.name}
+            </Dropdown.Item>
+            <Dropdown.Divider />
+          </>
+        ))}
+
       </DropdownButton>
     </>
   );
@@ -85,11 +49,11 @@ export default function SortDropdown({ lTechGoals, setFilteredTopics, lTechTopic
 
 SortDropdown.propTypes = {
   lTechGoals: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string,
     title: PropTypes.string,
+    lastUpdated: PropTypes.string,
+    progress: PropTypes.number,
   }))).isRequired,
-  setFilteredTopics: PropTypes.func.isRequired,
-  lTechTopics: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string,
-  })).isRequired,
+  setFilteredGoals: PropTypes.func.isRequired,
 };
+
+export default SortDropdown;

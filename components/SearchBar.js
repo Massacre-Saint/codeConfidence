@@ -4,20 +4,22 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-export default function SearchBar({ lTechTopics, setFilteredTopics }) {
+export default function SearchBar({
+  array, setArray,
+}) {
   const [searchInput, setSearchInput] = useState('');
   // const [active, setActive]
 
   const handleChange = (e) => {
     const { value } = e.target;
     setSearchInput(value);
-    const results = lTechTopics.filter((obj) => obj.title.toLowerCase().includes(value.toLowerCase()));
-    setFilteredTopics(results);
+    const results = array.filter((obj) => obj.title.toLowerCase().includes(value.toLowerCase()));
+    setArray(results);
   };
 
   const resetInput = () => {
     setSearchInput('');
-    setFilteredTopics(lTechTopics);
+    setArray(array);
   };
 
   return (
@@ -39,8 +41,8 @@ export default function SearchBar({ lTechTopics, setFilteredTopics }) {
 }
 
 SearchBar.propTypes = {
-  lTechTopics: PropTypes.arrayOf(PropTypes.shape({
+  array: PropTypes.arrayOf((PropTypes.shape({
     title: PropTypes.string,
-  })).isRequired,
-  setFilteredTopics: PropTypes.func.isRequired,
+  }))).isRequired,
+  setArray: PropTypes.func.isRequired,
 };

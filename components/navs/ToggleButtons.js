@@ -3,17 +3,31 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import PropTypes from 'prop-types';
 
-export default function ToggleButtons({ lTechTopics, setFilteredTopics }) {
+export default function ToggleButtons({
+  lTechTopics, setFilteredTopics, lTechGoals, setFilteredGoals,
+}) {
   const radios = [
     { name: 'Open', value: '1' },
     { name: 'Completed', value: '2' },
   ];
   const handleChange = (e) => {
-    if (e.target.id === '2') {
-      const results = lTechTopics.filter((obj) => obj.completed === true);
-      setFilteredTopics(results);
-    } else {
-      setFilteredTopics(lTechTopics);
+    if (lTechTopics.length > 0) {
+      if (e.target.id === '2') {
+        const results = lTechTopics.filter((obj) => obj.completed === true);
+        setFilteredTopics(results);
+      } else {
+        const results = lTechTopics.filter((obj) => obj.completed === false);
+        setFilteredTopics(results);
+      }
+    }
+    if (lTechGoals.length > 0) {
+      if (e.target.id === '2') {
+        const results = lTechGoals.filter((obj) => obj.progress === 100);
+        setFilteredGoals(results);
+      } else {
+        const results = lTechGoals.filter((obj) => obj.progress !== 100);
+        setFilteredGoals(results);
+      }
     }
   };
   return (
@@ -27,7 +41,9 @@ export default function ToggleButtons({ lTechTopics, setFilteredTopics }) {
           className="toggle-button"
           variant="outline"
           bsPrefix="hide-radio"
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => {
+            handleChange(e);
+          }}
         >
           {radio.name}
         </ToggleButton>
@@ -39,6 +55,17 @@ export default function ToggleButtons({ lTechTopics, setFilteredTopics }) {
 ToggleButtons.propTypes = {
   lTechTopics: PropTypes.arrayOf(PropTypes.shape({
     completed: PropTypes.bool,
-  })).isRequired,
-  setFilteredTopics: PropTypes.func.isRequired,
+  })),
+  lTechGoals: PropTypes.arrayOf(PropTypes.shape({
+    progress: PropTypes.number,
+  })),
+  setFilteredTopics: PropTypes.func,
+  setFilteredGoals: PropTypes.func,
+};
+
+ToggleButtons.defaultProps = {
+  lTechTopics: [{}],
+  lTechGoals: [{}],
+  setFilteredGoals: () => {},
+  setFilteredTopics: () => {},
 };

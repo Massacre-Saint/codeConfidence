@@ -35,7 +35,7 @@ body {
 }
 .main-container {
   position: relative;
-  margin:2%;
+  margin:1%;
   padding: 2%;
   border-width: 2px;
   border-style: solid;
@@ -47,7 +47,7 @@ body {
 }
 @media (min-width: 1200px) {
   .main-container {
-    margin: 2%;
+    margin: 1%;
     max-width: 1440px;
   }
 }
