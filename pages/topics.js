@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Loading } from '../components';
 import ShowEditDelete from '../components/buttons/ShowEditDelete';
-import SortDropdown from '../components/buttons/SortDropdown';
+import SortSearchDropdown from '../components/buttons/SortSearchDropdown';
 import TopicList from '../components/containers/TopicList';
 import ToggleButtons from '../components/navs/ToggleButtons';
 import SearchBar from '../components/SearchBar';
@@ -45,17 +45,6 @@ export default function Topics() {
     setIsLoading(false);
   };
 
-  // const getData = useCallback(() => {
-  //   getTech().then((techArray) => {
-  //     getLearnedTech(user, techArray).then((lTechArray) => {
-  //       setLTech(lTechArray);
-  //       getGoals(user, lTechArray).then(setLTechGoals);
-  //       getTopics(user, lTechArray).then(setLTechTopics);
-  //       setIsLoading(false);
-  //     });
-  //   });
-  // }, [user]);
-
   useEffect(() => {
     loader();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,7 +71,7 @@ export default function Topics() {
       </div>
       <div className="sub-nav-space-between">
         <div className="search-bar_container">
-          <SearchBar lTechTopics={lTechTopics} setFilteredTopics={setFilteredTopics} />
+          <SearchBar array={lTechTopics} setArray={setFilteredTopics} />
         </div>
         <div>
           <ShowEditDelete handleEdit={handleEdit} edit={edit} />
@@ -98,7 +87,7 @@ export default function Topics() {
               Sort
             </div>
             <div>
-              <SortDropdown lTechGoals={lTechGoals} setFilteredTopics={setFilteredTopics} lTechTopics={lTechTopics} />
+              <SortSearchDropdown lTechGoals={lTechGoals} setFilteredTopics={setFilteredTopics} lTechTopics={lTechTopics} />
             </div>
           </div>
         </div>
