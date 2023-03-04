@@ -35,7 +35,8 @@ body {
 }
 .main-container {
   position: relative;
-  margin:1%;
+  margin:1% auto;
+  min-height: 80vh;
   padding: 2%;
   border-width: 2px;
   border-style: solid;
@@ -47,8 +48,9 @@ body {
 }
 @media (min-width: 1200px) {
   .main-container {
-    margin: 1%;
+    margin: 1% auto;
     max-width: 1440px;
+    min-height: 80vh;
   }
 }
 .block {
@@ -509,6 +511,15 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 }
 .hero-font {
   font-size: 15vh;
+  letter-spacing: 1.5rem;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #094faf 30%, rgba(136,12,157,1) 40%, rgba(235,9,28,1) 50%, rgba(243,124,56,1) 60%, rgba(252,214,5,1) 70%, rgba(9,190,36,1) 80%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+.hero-font-sm {
+  font-size: 8vh;
   letter-spacing: 1.5rem;
   text-transform: uppercase;
   background: linear-gradient(90deg, #094faf 30%, rgba(136,12,157,1) 40%, rgba(235,9,28,1) 50%, rgba(243,124,56,1) 60%, rgba(252,214,5,1) 70%, rgba(9,190,36,1) 80%);
