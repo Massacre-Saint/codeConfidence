@@ -35,8 +35,11 @@ export default function NavBar() {
             <Link passHref href="/topics">
               <Nav.Link>Topics</Nav.Link>
             </Link>
-            <Link passHref href="/lTech/">
+            <Link passHref href="/lTech">
               <Nav.Link>+</Nav.Link>
+            </Link>
+            <Link passHref href="/bookmarks">
+              <Nav.Link>Bookmarks</Nav.Link>
             </Link>
             <AuthenticationButton />
           </Nav>

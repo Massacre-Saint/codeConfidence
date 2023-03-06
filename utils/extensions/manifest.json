@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Code Confidence: Bookmarks",
+  "description": "Base Level Extension",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "new-logo.png"
+  },
+  "permissions": [
+    "bookmarks",
+    "downloads",
+    "storage",
+    "scripting", "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

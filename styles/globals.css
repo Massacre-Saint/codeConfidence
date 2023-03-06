@@ -596,3 +596,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+.pop-up {
+  background-color: blue;
+  width: 90px;
+}
