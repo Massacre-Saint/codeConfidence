@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { IconContext } from 'react-icons';
+import { IoMdArrowBack } from 'react-icons/io';
 import TechImage from '../icons/TechImage';
 import { LearnedTechNav } from '../navs';
 import LearnedTechHeader from '../headers/LearnedTechHeader';
@@ -55,23 +57,28 @@ export default function LearnedTechHub({
     return (
       <>
         <div className="l-tech-nav">
-          <TechImage obj={lTech.tech} />
+          <div className="tech-image-nav">
+            <TechImage obj={lTech.tech} />
+          </div>
           <LearnedTechHeader obj={lTech.tech} />
         </div>
         <LearnedTechNav lTech={lTech} handleShowAll={handleShowAll} handleShow={handleShow} showAll={showAll} />
         <div className="block_section">
-          <div className="flex full-width">
+          <div className="flex_space_between">
             <div className="create-form_btn">
               {showAll ? (
                 <button
                   type="button"
+                  className="back-btn"
                   onClick={(e) => {
                     handleShowAll(e);
                     handleEdit(e);
                     onUpdate();
                   }}
                 >
-                  Go Back
+                  <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+                    <IoMdArrowBack />
+                  </IconContext.Provider>
                 </button>
               ) : ('')}
             </div>
@@ -105,7 +112,9 @@ export default function LearnedTechHub({
   return (
     <>
       <div className="l-tech-nav">
-        <TechImage obj={lTech.tech} />
+        <div className="tech-image-nav">
+          <TechImage obj={lTech.tech} />
+        </div>
         <LearnedTechHeader obj={lTech.tech} />
       </div>
       <LearnedTechNav lTech={lTech} handleShowAll={handleShowAll} />

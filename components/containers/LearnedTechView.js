@@ -14,8 +14,8 @@ export default function LearnedTechView({ tech }) {
   };
   return (
     <>
-      <div>
-        <div className="top-container block center">
+      <div className="tech-view_container">
+        <div>
           <Message />
         </div>
         <div className="tech_flex-container">

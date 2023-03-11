@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
+import MediaQuery from 'react-responsive';
+import { Offcanvas } from 'react-bootstrap';
 import GoalForm from '../forms/GoalForm';
 import TopicForm from '../forms/TopicForm';
 
@@ -10,21 +12,31 @@ export default function CreateModal({
   if (showGoal) {
     return (
       <>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Body>
+        <MediaQuery maxWidth={769}>
+          <Offcanvas show={show} onHide={handleClose} placement="bottom">
             <GoalForm lTech={lTech} onUpdate={onUpdate} handleClose={handleClose} />
-          </Modal.Body>
-        </Modal>
+          </Offcanvas>
+        </MediaQuery>
+        <MediaQuery minWidth={770}>
+          <Modal show={show} onHide={handleClose} centered>
+            <GoalForm lTech={lTech} onUpdate={onUpdate} handleClose={handleClose} />
+          </Modal>
+        </MediaQuery>
       </>
     );
   }
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Body>
+      <MediaQuery maxWidth={769}>
+        <Offcanvas show={show} onHide={handleClose} placement="bottom">
           <TopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
-        </Modal.Body>
-      </Modal>
+        </Offcanvas>
+      </MediaQuery>
+      <MediaQuery minWidth={770}>
+        <Modal show={show} onHide={handleClose} centered>
+          <TopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
+        </Modal>
+      </MediaQuery>
     </>
   );
 }
