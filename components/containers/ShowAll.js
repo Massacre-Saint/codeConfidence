@@ -16,7 +16,7 @@ export default function ShowAll({
   useEffect(() => {
     setFilteredGoals(goals);
     setFilteredTopics(topics);
-  }, [goals]);
+  }, [goals, topics]);
 
   if (showingGoals) {
     return (
