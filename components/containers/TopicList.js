@@ -5,6 +5,13 @@ import TopicCard from './cards/TopicCard';
 export default function TopicList({
   topics, onUpdate, handleClose, goals, edit,
 }) {
+  if (topics.length === 0) {
+    return (
+      <div className="list_spacing empty-list">
+        <div>Nothing here</div>
+      </div>
+    );
+  }
   return (
     <div className="list_spacing">
       {topics.map((i) => (

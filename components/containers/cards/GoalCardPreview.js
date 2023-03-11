@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 import GoalCard from './GoalCard';
@@ -6,6 +6,7 @@ import GoalCard from './GoalCard';
 export default function GoalCardPreview({
   goals, onUpdate, handleClose, handleShowAll,
 }) {
+  const [isPreview] = useState(true);
   return (
     <div className="goal_container">
       <div>
@@ -24,6 +25,7 @@ export default function GoalCardPreview({
               obj={i}
               onUpdate={onUpdate}
               handleClose={handleClose}
+              preview={isPreview}
             />
           ))}
         </div>

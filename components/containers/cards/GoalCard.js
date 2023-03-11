@@ -6,9 +6,10 @@ import { BiTimeFive } from 'react-icons/bi';
 import GoalForm from '../../forms/GoalForm';
 import { deleteGoal } from '../../../utils/data/goals';
 import convertTime from '../../../utils/convertTime';
+import EditDelete from '../../buttons/EditDelete';
 
 export default function GoalCard({
-  obj, onUpdate, handleClose, edit,
+  obj, onUpdate, handleClose, edit, preview,
 }) {
   const [showForm, setshowForm] = useState(false);
   const handleShowForm = () => {
@@ -35,30 +36,35 @@ export default function GoalCard({
     );
   }
   return (
-    <div className="card_spacing topic-goal_card">
-      <div>
-        <span className="topic-goal_card_title">{obj.title}</span>
-      </div>
-      <div className="topic-goal_card_footer">
-        <span>
-          <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
-            <BiTimeFive />
-          </IconContext.Provider>
-          <span className="topic-goal_card_footer-text">
-            {convertTime(obj.lastUpdated)}
-          </span>
-        </span>
-      </div>
-      {obj.progress != null ? (
-        <div className="progress_container">
-          <ProgressBar bsPrefix="progress" color="green" now={obj.progress} label={`${obj.progress}%`} />
-        </div>
-      )
-        : ('')}
-      {edit ? (
+    <div className="card_spacing topic-goal_card_container">
+      <div className="topic-goal_card">
         <div>
-          <button type="button" id="showForm" onClick={handleShowForm}>Edit</button>
-          <button type="button" onClick={handleDelete}>Delete</button>
+          <span className="topic-goal_card_title">
+            {preview && obj.title.length > 20
+              ? (`${obj.title.slice(0, 20)}....`)
+              : (obj.title)}
+          </span>
+        </div>
+        <div className="topic-goal_card_footer">
+          <span>
+            <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+              <BiTimeFive />
+            </IconContext.Provider>
+            <span className="topic-goal_card_footer-text">
+              {convertTime(obj.lastUpdated)}
+            </span>
+          </span>
+        </div>
+        {obj.progress != null ? (
+          <div className="progress_container">
+            <ProgressBar bsPrefix="progress" now={obj.progress} label={`${obj.progress}%`} />
+          </div>
+        )
+          : ('')}
+      </div>
+      {edit ? (
+        <div className="edit-delete_container">
+          <EditDelete handleShowForm={handleShowForm} handleDelete={handleDelete} />
         </div>
       )
         : ('')}
@@ -79,8 +85,10 @@ GoalCard.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   edit: PropTypes.bool,
+  preview: PropTypes.bool,
 };
 
 GoalCard.defaultProps = {
   edit: false,
+  preview: false,
 };

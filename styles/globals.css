@@ -447,7 +447,19 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 }
 .modal-content {
   background-color: transparent;
+  color: white;
 }
+.info,
+.modal-content {
+  background-color: #121212;
+  color: white;
+}
+.info button {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
 .modal-form {
   box-shadow: 2px 7px 20px 0px rgba(0,0,0,0.75);
   border-radius: 15px;
@@ -466,6 +478,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 .offcanvas {
   background-color: transparent;
 }
+
 @media (min-width:500px) and (max-width: 1023px){
   .register-container {
     position: relative;
@@ -572,14 +585,11 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-between;
+    margin: 0 5%;
+    justify-content: space-around;
     align-items: center;
     font-size: 1.5em;
   }
-  /* .info {
-    position: relative;
-    bottom: 40%;
-  } */
 }
 @media (max-width: 432px) {
   .learned-tech_header_contianer {
@@ -630,7 +640,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   flex-direction: column;
   row-gap: 10px;
 }
-.list_spacing div:first-of-type {
+.list_spacing > div:first-of-type {
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
 }
@@ -680,16 +690,38 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   margin-right: 10%;
 }
 
-.topic-goal_card {
+.topic-goal_card_container {
   background-color: transparent;
   border-radius: 10px;
   border: 1px solid white;
   color: #F2F1FA;
   display: flex;
+}
+.topic-goal_card {
+  display: flex;
   flex-direction: column;
   font-size: 1.3em;
+  width: 100%;
 }
 
+/* .edit-delete_container {
+  background-color: #888;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+} */
+.edit-delte-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+.edit-delte-btn > button {
+  background-color: transparent;
+  color: white;
+  font-size: 1.3em;
+  border: none;
+}
 .topic-goal_card_title {
   font-weight: bold;
 }
@@ -718,9 +750,11 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   margin: 2% 0;
 }
 .progress {
-  height: 10px;
   max-width: 80%;
-  
+  background-color: #888;
+}
+.progress-bar {
+  background: linear-gradient(90deg, #094faf 30%, rgba(136,12,157,1) 40%, rgba(235,9,28,1) 50%, rgba(243,124,56,1) 60%, rgba(252,214,5,1) 70%, rgba(9,190,36,1) 80%);
 }
 .list_header {
   border-top-left-radius: 10px;
@@ -862,4 +896,34 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 .pop-up {
   background-color: blue;
   width: 90px;
+}
+.typwriter {
+   /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: wrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(20, end),
+    blink-caret .75s step-end infinite;
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+.empty-list {
+  border: 1px solid white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: #F2F1FA;
+  color: #888;
+  font-size: 3vw;
+  text-align: center;
+  padding: 10px 0;
 }
