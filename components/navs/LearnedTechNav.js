@@ -12,7 +12,7 @@ export default function LearnedTechNav({
   return (
     <>
       <MediaQuery maxWidth={768}>
-        <Navbar variant="dark" className="collaped-l-tech_nav">
+        <Navbar variant="dark" className="collaped-l-tech_nav sub-nav">
           <Container fluid>
             <Navbar.Toggle aria-controls="navbar-dark-example" />
             <Navbar.Collapse id="navbar-dark">
@@ -39,11 +39,11 @@ export default function LearnedTechNav({
       </MediaQuery>
 
       <MediaQuery minWidth={769}>
-        <Nav variant="tabs" navbar="True">
+        <Nav variant="tabs" navbar="True" className="sub-nav">
           <Nav.Item>
-            <Nav.Link eventKey="3" className="nav-link" target="_blank" href={lTech.tech.docUrl}>Documentation</Nav.Link>
+            <Nav.Link eventKey="3" target="_blank" href={lTech.tech.docUrl}>Documentation</Nav.Link>
           </Nav.Item>
-          <NavDropdown title="Goals" menuVariant="dark" className="nav-item">
+          <NavDropdown title="Goals" menuVariant="dark">
             <NavDropdown.Item eventKey="4" id="goals" onClick={(e) => handleShowAll(e)}>View All</NavDropdown.Item>
             {showAll ? (
               <NavDropdown.Item eventKey="4.1" onClick={(e) => handleShow(e)} id="goal">
@@ -54,7 +54,7 @@ export default function LearnedTechNav({
             <NavDropdown.Item eventKey="4.3">Separated link</NavDropdown.Item> */}
           </NavDropdown>
 
-          <NavDropdown title="Topics" menuVariant="dark" className="nav-item">
+          <NavDropdown title="Topics" menuVariant="dark">
             <NavDropdown.Item eventKey="5.1" id="topics" onClick={(e) => handleShowAll(e)}>View All</NavDropdown.Item>
             {showAll ? (
               <NavDropdown.Item eventKey="4.1" onClick={(e) => handleShow(e)} id="topic">

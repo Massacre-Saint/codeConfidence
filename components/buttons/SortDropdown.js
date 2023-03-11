@@ -27,9 +27,9 @@ function SortDropdown({ array, setArray }) {
   }, [array]);
   const handleSort = (pk) => {
     let results;
-    if (array.progress) {
+    if (array.some((item) => item.progress !== undefined)) {
       if (pk === 1) {
-        results = [...array].sort((a, b) => a.lastUpdated - b.lastUpdated);
+        results = [...array].sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime());
       } else if (pk === 2) {
         results = [...array].sort((a, b) => a.progress - b.progress);
       } else if (pk === 3) {
@@ -38,9 +38,11 @@ function SortDropdown({ array, setArray }) {
         results = [...array].sort((a, b) => a.title.localeCompare(b.title));
       }
     } else if (pk === 1) {
-      results = [...array].sort((a, b) => a.lastUpdated - b.lastUpdated);
+      results = [...array].sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime());
+      console.warn(results, pk);
     } else if (pk === 4) {
       results = [...array].sort((a, b) => a.title.localeCompare(b.title));
+      console.warn(results, pk);
     }
     setArray(results);
   };
@@ -73,6 +75,7 @@ SortDropdown.propTypes = {
     obj: PropTypes.shape({
       id: PropTypes.string,
       progress: PropTypes.number,
+      completed: PropTypes.bool,
     }),
   }))).isRequired,
   setArray: PropTypes.func.isRequired,

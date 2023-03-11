@@ -50,8 +50,8 @@ export default function Goals() {
   }, [user]);
   if (isLoading) {
     <>
-      <div className="hero-font-container">
-        <div className="hero-font">Topics</div>
+      <div className="top-container block center">
+        <div className="hero-font">Goals</div>
         <div className="line" />
       </div>
       <div className="show-all_container">
@@ -64,7 +64,7 @@ export default function Goals() {
   }
   return (
     <div className="view-all_container">
-      <div className="hero-font-container">
+      <div className="top-container block center">
         <div className="hero-font">Goals</div>
         {/* <div className="line" /> */}
       </div>

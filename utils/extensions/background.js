@@ -24,3 +24,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
   return true;
 });
+
+// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//   console.log('Received message:', message);
+//   if (message.type === 'getRootDirectory') {
+//     const rootDirectory = chrome.runtime.getURL('/');
+//     console.log('Sending response:', { rootDirectory });
+//     sendResponse({ rootDirectory });
+//   }
+//   return true;
+// });

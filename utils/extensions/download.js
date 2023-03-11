@@ -20,9 +20,11 @@ const handleBookmarkData = () => {
                 .then(() => {
                   chrome.bookmarks.search({ title: 'Code Confidence Resources' })
                     .then((codeResourceNode) => {
+                      console.warn(JSON.stringify(codeResourceNode));
                       chrome.bookmarks.getSubTree(codeResourceNode[0].id)
                         .then((obj) => {
-                          const data = JSON.stringify({ codeResourceNode, ...obj });
+                          console.warn('obj', JSON.stringify(obj));
+                          const data = JSON.stringify(obj);
                           downloadData(data);
                         });
                     });

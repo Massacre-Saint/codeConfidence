@@ -5,7 +5,7 @@ export default function BeginJourney({ handleShow }) {
   return (
     <>
       <button
-        className="button"
+        className="cta-button"
         type="button"
         onClick={() => {
           handleShow();

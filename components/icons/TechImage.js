@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 
 export default function TechImage({ obj }) {
   return (
-    <div className="tech-image_container">
+    <div>
       <Image
         loading="lazy"
         src={obj.imageUrl}
-        width={140}
-        height={140}
         className="tech-image"
+        layout="responsive"
+        height={75}
+        width={75}
       />
     </div>
   );

@@ -68,3 +68,28 @@ const downloadData = (data) => {
     }
   });
 };
+
+
+// aut download to root
+const downloadData = (tab, data) => {
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    args: [data],
+    function: (data) => {
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.setAttribute('download', 'file.json');
+      a.setAttribute('href', url);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    },
+  });
+};
+
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  const currentTab = tabs[0];
+  const data = { foo: 'bar' };
+  downloadData(currentTab, data);
+});

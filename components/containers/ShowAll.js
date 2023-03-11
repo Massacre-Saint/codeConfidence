@@ -1,27 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import GoalList from './GoalList';
 import TopicList from './TopicList';
+import SearchBar from '../SearchBar';
+import ToggleButtons from '../navs/ToggleButtons';
+import SortDropdown from '../buttons/SortDropdown';
+import SortSearchDropdown from '../buttons/SortSearchDropdown';
 
 export default function ShowAll({
   showingGoals, goals, topics, onUpdate, handleClose, edit,
 }) {
+  const [filteredGoals, setFilteredGoals] = useState([]);
+  const [filteredTopics, setFilteredTopics] = useState([]);
+
+  useEffect(() => {
+    setFilteredGoals(goals);
+    setFilteredTopics(topics);
+  }, [goals]);
+
   if (showingGoals) {
     return (
-      <div className="show-all_container">
-        <div>
+      <div className="view-all_container">
+        <div className="sub-nav-space-between">
+          <div className="search-bar_container">
+            <SearchBar array={goals} setArray={setFilteredGoals} />
+          </div>
+        </div>
+        <div className="show-all_container">
           <div className="show-all_header">
-            <div>
-              Goals
+            <div className="show-all_header-content">
+              <ToggleButtons lTechGoals={goals} setFilteredGoals={setFilteredGoals} />
+            </div>
+            <div className="show-all_header-content">
+              <div>
+                <SortDropdown array={goals} setArray={setFilteredGoals} />
+              </div>
             </div>
           </div>
-          <div>
+          <div className="show-all-list-container">
             <GoalList
-              goals={goals}
+              goals={filteredGoals}
               onUpdate={onUpdate}
               handleClose={handleClose}
               edit={edit}
-
             />
           </div>
         </div>
@@ -30,16 +51,29 @@ export default function ShowAll({
   }
   return (
     <>
-      <div className="show-all_container">
-        <div>
+      <div className="view-all_container">
+        <div className="sub-nav-space-between">
+          <div className="search-bar_container">
+            <SearchBar array={topics} setArray={setFilteredTopics} />
+          </div>
+        </div>
+        <div className="show-all_container">
           <div className="show-all_header">
-            <div>
-              Topics
+            <div className="show-all_header-content">
+              <ToggleButtons lTechTopics={topics} setFilteredTopics={setFilteredTopics} />
+            </div>
+            <div className="show-all_header-content">
+              <div>
+                <SortDropdown array={topics} setArray={setFilteredTopics} />
+              </div>
+              <div>
+                <SortSearchDropdown lTechGoals={goals} setFilteredTopics={setFilteredTopics} lTechTopics={topics} />
+              </div>
             </div>
           </div>
-          <div>
+          <div className="show-all-list-container">
             <TopicList
-              topics={topics}
+              topics={filteredTopics}
               goals={goals}
               onUpdate={onUpdate}
               handleClose={handleClose}

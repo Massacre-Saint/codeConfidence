@@ -21,7 +21,7 @@ export default function Messages() {
   return (
     <div>
       <span>
-        <h3 className="message">&quot;{message.title}&quot;</h3>
+        <h3 className="quote_indent">&quot;{message.title}&quot;</h3>
         <div> - {message.author}</div>
       </span>
     </div>
