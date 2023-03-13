@@ -20,7 +20,6 @@ const handleBookmarkData = () => {
                 .then(() => {
                   chrome.bookmarks.search({ title: 'Code Confidence Resources' })
                     .then((codeResourceNode) => {
-                      console.warn(JSON.stringify(codeResourceNode));
                       chrome.bookmarks.getSubTree(codeResourceNode[0].id)
                         .then((obj) => {
                           console.warn('obj', JSON.stringify(obj));
@@ -34,17 +33,14 @@ const handleBookmarkData = () => {
     });
 };
 
-const createBookmarkFolder = () => {
-  chrome.bookmarks.create({
-    parentId: '1',
-    index: 0,
-    title: 'Code Confidence Resources',
-  });
-};
+// const createBookmarkFolder = () => {
+//   chrome.bookmarks.create({
+//     parentId: '1',
+//     index: 0,
+//     title: 'Code Confidence Resources',
+//   });
+// };
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('create').addEventListener('click', () => {
-    createBookmarkFolder();
-  });
   document.getElementById('export').addEventListener('click', () => {
     handleBookmarkData();
   });

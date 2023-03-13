@@ -2,33 +2,6 @@ import { clientCredentials } from '../client';
 
 const dbUrl = clientCredentials.databaseURL;
 
-// const getLearnedTech = (user, techList) => new Promise((resolve, reject) => {
-//   fetch(`${dbUrl}/l_tech`, {
-//     headers: {
-//       Authorization: user.uid,
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const transformedData = data.map((obj) => {
-//         const {
-//           id,
-//           last_updated: lastUpdated,
-//           tech,
-//           uid,
-//         } = obj;
-
-//         return {
-//           id,
-//           lastUpdated,
-//           tech,
-//           uid,
-//         };
-//       });
-//       resolve(transformedData);
-//     })
-//     .catch(reject);
-// });
 const getLearnedTech = (user, techList) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/l_tech`, {
     headers: {

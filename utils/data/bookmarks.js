@@ -2,7 +2,7 @@ import { clientCredentials } from '../client';
 
 const dbUrl = clientCredentials.databaseURL;
 
-const getBookmarks = (user) => new Promise((resolve, reject) => {
+const importBookmarks = () => new Promise((resolve, reject) => {
   fetch('bookmarks/cc_bookmark_data.json')
     .then((response) => response.json())
     .then((data) => {
@@ -14,7 +14,6 @@ const getBookmarks = (user) => new Promise((resolve, reject) => {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          Authorization: user.uid,
         },
       })
         .then((response) => resolve(response.json()))
@@ -23,4 +22,34 @@ const getBookmarks = (user) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export default getBookmarks;
+const getBookmarks = () => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/bookmarks`)
+    .then((response) => response.json())
+    .then((data) => {
+      const transformedData = data.map((obj) => {
+        const {
+          id,
+          index,
+          parent_id: parentId,
+          title,
+          url,
+        } = obj;
+        return {
+          id,
+          index,
+          parentId,
+          title,
+          url,
+        };
+      });
+      resolve(transformedData);
+    })
+    .catch(reject);
+});
+
+export const deleteBookmark = (id) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/bookmarks/${id}`, {
+    method: 'DELETE',
+  }).then(resolve).catch(reject);
+});
+export { importBookmarks, getBookmarks };
