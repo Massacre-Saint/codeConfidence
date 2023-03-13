@@ -47,19 +47,19 @@ export default function LearnedTechCreate({ tech, onUpdate }) {
   }
   return (
     <>
-      <div className="tech-start_container">
+      <div>
         <div className="top-container block center">
           <ChooseAll />
         </div>
       </div>
-      <div className="tech_grid-container">
+      <div className="tech_flex-container">
         {techState.map((i) => (
           <TechCard key={i.id} isSelected={i.isSelected} handleClick={handleClick} obj={i} />
         ))}
+      </div>
+      <div className="overlay-button">
         {techState.some((i) => i.isSelected) && (
-        <div className="overlay">
           <button type="submit" onClick={handleSubmit}>Submit</button>
-        </div>
         )}
       </div>
     </>

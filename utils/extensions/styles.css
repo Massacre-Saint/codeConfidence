@@ -1,0 +1,15 @@
+.main {
+  background-color: #121212;
+  margin: 2em 5em;
+  color: white;
+  width: fit-content;
+}
+.main_content {
+  width: 100%;
+}
+.export {
+  width: 100%;
+  margin: auto;
+  background: rgb(9,79,175);
+background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%);
+}

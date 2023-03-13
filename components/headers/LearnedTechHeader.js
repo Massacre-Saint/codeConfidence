@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MediaQuery from 'react-responsive';
-import { BsInfoCircleFill } from 'react-icons/bs';
+import InfoModal from '../modals/InfoModal';
 
 export default function LearnedTechHeader({ obj }) {
   return (
@@ -25,7 +25,7 @@ export default function LearnedTechHeader({ obj }) {
           </MediaQuery>
           <MediaQuery minWidth={319}>
             <div className="info">
-              <BsInfoCircleFill />
+              <InfoModal obj={obj} />
             </div>
           </MediaQuery>
         </div>

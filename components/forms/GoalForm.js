@@ -44,7 +44,7 @@ function GoalForm({
   };
   if (Object.keys(lTech).length !== 0) {
     return (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="modal-form">
         <Form.Group className="mb-3" controlId="title">
           <Form.Label>Create Goal</Form.Label>
           <Form.Control

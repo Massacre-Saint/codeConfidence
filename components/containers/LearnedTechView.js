@@ -14,11 +14,11 @@ export default function LearnedTechView({ tech }) {
   };
   return (
     <>
-      <div className="tech-start_container">
-        <div className="top-container block center">
+      <div className="tech-view_container">
+        <div>
           <Message />
         </div>
-        <div className="tech_grid-container">
+        <div className="tech_flex-container">
           {tech.map((i) => (
             <LearnedTechCard handleClick={handleClick} key={i.id} obj={i} />
           ))}

@@ -8,14 +8,15 @@ import { deleteTopic } from '../../../utils/data/topics';
 import { getSingleGoal, updateGoal } from '../../../utils/data/goals';
 import convertTime from '../../../utils/convertTime';
 import { useAuth } from '../../../utils/context/authContext';
+import EditDelete from '../../buttons/EditDelete';
 
 export default function TopicCard({
-  obj, onUpdate, handleClose, goals, edit,
+  obj, onUpdate, handleClose, goals, edit, preview,
 }) {
   const { user } = useAuth();
   const [showForm, setshowForm] = useState(false);
 
-  const handleshowForm = () => {
+  const handleShowForm = () => {
     setshowForm(true);
   };
   const handleCancelShowForm = () => {
@@ -48,42 +49,51 @@ export default function TopicCard({
   }
 
   return (
-    <div className="card_spacing topic-goal_card">
-      <div className="topic-goal_body">
-        <span className="topic-goal_card_title">{obj.title}</span>
-        <span className="topic-goal_card_desc">{obj.description}</span>
-      </div>
-      <div className="topic-goal_card_footer">
-        <span>
-          <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
-            <BiTimeFive />
-          </IconContext.Provider>
-          <span className="topic-goal_card_footer-text">
-            {convertTime(obj.lastUpdated)}
+    <div className="card_spacing topic-goal_card_container">
+      <div className="topic-goal_card">
+        <div className="topic-goal_body">
+          <span className="topic-goal_card_title">
+            {preview && obj.title.length > 20
+              ? (`${obj.title.slice(0, 20)}....`)
+              : (obj.title)}
           </span>
-        </span>
-        <span>
-          {(obj.goal != null)
-            ? (
-              <>
-                <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
-                  <BsSignpostSplit />
-                </IconContext.Provider>
-                <span className="topic-goal_card_footer-text">
-                  {obj.goal.title}
-                </span>
-              </>
-            )
-            : ('')}
-        </span>
-      </div>
-      {edit ? (
-        <div>
-          <button type="button" id="showForm" onClick={(e) => handleshowForm(e)}>Edit</button>
-          <button type="button" onClick={handleDelete}>Delete</button>
+          <span className="topic-goal_card_desc">
+            {preview && obj.description.length > 50
+              ? (`${obj.description.slice(0, 50)}....`)
+              : (obj.description)}
+          </span>
         </div>
-      )
-        : ('')}
+        <div className="topic-goal_card_footer">
+          <span>
+            <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+              <BiTimeFive />
+            </IconContext.Provider>
+            <span className="topic-goal_card_footer-text">
+              {convertTime(obj.lastUpdated)}
+            </span>
+          </span>
+          <span>
+            {(obj.goal != null)
+              ? (
+                <>
+                  <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+                    <BsSignpostSplit />
+                  </IconContext.Provider>
+                  <span className="topic-goal_card_footer-text">
+                    {obj.goal.title}
+                  </span>
+                </>
+              )
+              : ('')}
+          </span>
+        </div>
+        {edit ? (
+          <div className="edit-delete_container">
+            <EditDelete handleShowForm={handleShowForm} handleDelete={handleDelete} />
+          </div>
+        )
+          : ('')}
+      </div>
     </div>
   );
 }
@@ -105,8 +115,10 @@ TopicCard.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   edit: PropTypes.bool,
+  preview: PropTypes.bool,
 };
 
 TopicCard.defaultProps = {
   edit: false,
+  preview: false,
 };

@@ -14,7 +14,7 @@ export default function NavBar() {
     <Navbar collapseOnSelect expand="lg" className="main-navbar" variant="dark" sticky="top">
       <Container>
         <Link passHref href="/">
-          <Navbar.Brand>
+          <Navbar.Brand className="nav-image">
             <Image
               src="/logo.v2.svg"
               width={30}
@@ -35,9 +35,12 @@ export default function NavBar() {
             <Link passHref href="/topics">
               <Nav.Link>Topics</Nav.Link>
             </Link>
-            <Link passHref href="/lTech/">
-              <Nav.Link>+</Nav.Link>
+            <Link passHref href="/lTech">
+              <Nav.Link>Learn More</Nav.Link>
             </Link>
+            {/* <Link passHref href="/bookmarks">
+              <Nav.Link>Bookmarks</Nav.Link>
+            </Link> */}
             <AuthenticationButton />
           </Nav>
         </Navbar.Collapse>

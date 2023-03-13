@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import MediaQuery from 'react-responsive';
 import Loading from '../Loading';
 import { useAuth } from '../../utils/context/authContext';
 import { getTech } from '../../utils/data';
@@ -47,25 +48,44 @@ export default function LearnedTechStart({ onUpdate }) {
   if (!show) {
     return (
       <>
-        <div className="tech-start_container">
-          <div className="top-container block center">
-            <Message />
-            <BeginJourney handleShow={handleShow} />
+        <MediaQuery minWidth={768}>
+          <div className="tech-start_container">
+            <div>
+              <Message />
+              <BeginJourney handleShow={handleShow} />
+            </div>
+            <div>
+              <div className="tech_grid-container">
+                {tech.map((i) => (
+                  <TechCard key={i.id} obj={i} />
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="tech_grid-container">
-            {tech.slice(0, 5).map((i) => (
-              <TechCard key={i.id} obj={i} />
-            ))}
+        </MediaQuery>
+        <MediaQuery maxWidth={767}>
+          <div className="tech-start_container">
+            <div>
+              <Message />
+              <BeginJourney handleShow={handleShow} />
+            </div>
+            <div>
+              <div className="tech_grid-container_scaled">
+                {tech.map((i) => (
+                  <TechCard key={i.id} obj={i} />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
+        </MediaQuery>
       </>
     );
   }
 
   return (
-    <div>
+    <>
       <LearnedTechCreate onUpdate={onUpdate} tech={tech} />
-    </div>
+    </>
   );
 }
 

@@ -48,8 +48,8 @@ export default function TopicForm({
 
   if (Object.keys(lTech).length !== 0) {
     return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="title">
+      <Form onSubmit={handleSubmit} className="modal-form">
+        <Form.Group controlId="title">
           <Form.Label>Title</Form.Label>
           <Form.Control
             name="title"
@@ -62,7 +62,7 @@ export default function TopicForm({
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="description">
+        <Form.Group controlId="description">
           <Form.Label>Description</Form.Label>
           <Form.Control
             name="description"
@@ -106,7 +106,7 @@ export default function TopicForm({
     );
   }
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="modal-form">
       <Form.Group className="mb-3" controlId="title">
         <Form.Label>Title</Form.Label>
         <Form.Control
