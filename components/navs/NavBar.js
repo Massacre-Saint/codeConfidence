@@ -38,9 +38,9 @@ export default function NavBar() {
             <Link passHref href="/lTech">
               <Nav.Link>Learn More</Nav.Link>
             </Link>
-            {/* <Link passHref href="/bookmarks">
+            <Link passHref href="/bookmarks">
               <Nav.Link>Bookmarks</Nav.Link>
-            </Link> */}
+            </Link>
             <AuthenticationButton />
           </Nav>
         </Navbar.Collapse>

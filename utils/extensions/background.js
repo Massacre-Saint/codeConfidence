@@ -1,11 +1,50 @@
 /*  Requests */
-
-const deleteBookmark = (id) => new Promise((resolve, reject) => {
-  console.warn(id);
-  fetch(`http://127.0.0.1:8000/bookmarks/${id}`, {
-    method: 'DELETE',
-  }).then(resolve).catch(reject);
+const getBookmarks = () => new Promise((resolve, reject) => {
+  fetch('http://127.0.0.1:8000/bookmarks')
+    .then((response) => response.json())
+    .then((data) => {
+      const transformedData = data.map((obj) => {
+        const {
+          id,
+          index,
+          parent_id: parentId,
+          title,
+          url,
+        } = obj;
+        return {
+          id,
+          index,
+          parentId,
+          title,
+          url,
+        };
+      });
+      resolve(transformedData);
+    })
+    .catch(reject);
 });
+const updateBookmark = (id, data) => new Promise((resolve, reject) => {
+  const requestBody = {
+    index: data.index,
+    parent_id: data.parentId,
+    title: data.title,
+    url: data.url,
+  };
+
+  if (data.url) {
+    requestBody.url = data.url;
+  }
+  fetch(`http://127.0.0.1:8000/bookmarks/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(requestBody),
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
+    .then((resp) => resolve(resp))
+    .catch(reject);
+});
+
 const createBookmarks = (data) => new Promise((resolve, reject) => {
   fetch('http://127.0.0.1:8000/bookmarks', {
     method: 'POST',
@@ -19,6 +58,11 @@ const createBookmarks = (data) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteBookmark = (id) => new Promise((resolve, reject) => {
+  fetch(`http://127.0.0.1:8000/bookmarks/${id}`, {
+    method: 'DELETE',
+  }).then(resolve).catch(reject);
+});
 /* Listeners */
 
 const globalData = {};
@@ -42,19 +86,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
   return true;
 });
-
+const parentEvaluation = (bookmark) => {
+  if (bookmark.title === 'Code Confidence Resources') {
+    return true;
+  } return false;
+};
 chrome.bookmarks.onRemoved.addListener((id) => {
   const pk = parseInt(id, 10);
   deleteBookmark(pk);
 });
 
 chrome.bookmarks.onCreated.addListener((id, bookmark) => {
-  chrome.bookmarks.get(bookmark.parentId)
-    .then((parent) => {
-      if (parent[0].title === 'Code Confidence Resources') {
-        createBookmarks(bookmark);
-      }
-    });
+  const isParentBookmark = parentEvaluation(bookmark);
+  if (!isParentBookmark) {
+    createBookmarks(bookmark);
+  }
 });
 
 chrome.bookmarks.onMoved.addListener((id, moveInfo) => {
@@ -68,7 +114,23 @@ chrome.bookmarks.onMoved.addListener((id, moveInfo) => {
         });
       });
     } else if (nodes.length === 1 && (moveInfo.oldParentId === ccBookmarksId)) {
-      deleteBookmark(id);
+      getBookmarks().then((array) => {
+        const matches = array.filter((item) => parseInt(moveInfo.parentId, 10) === item.id);
+        if (matches.length) {
+          chrome.bookmarks.get(id, (bookmark) => {
+            const pk = parseInt(id, 10);
+            updateBookmark(pk, bookmark[0]);
+          });
+        } else deleteBookmark(id);
+      });
     }
+  });
+});
+
+chrome.bookmarks.onChanged.addListener((id) => {
+  const pk = parseInt(id, 10);
+  chrome.bookmarks.get(id, (bookmark) => {
+    console.warn(bookmark);
+    updateBookmark(pk, bookmark[0]);
   });
 });
