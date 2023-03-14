@@ -43,6 +43,7 @@ const getBookmarks = () => new Promise((resolve, reject) => {
         };
       });
       resolve(transformedData);
+      console.warn(transformedData);
     })
     .catch(reject);
 });
