@@ -927,3 +927,10 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   text-align: center;
   padding: 10px 0;
 }
+.bookmark-page {
+  color: #f1f1f1;
+}
+
+.list {
+  list-style: none;
+}

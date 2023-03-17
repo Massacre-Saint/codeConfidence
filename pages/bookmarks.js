@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Loading } from '../components';
+import BookmarksList from '../components/containers/BookmarksList';
 import { useAuth } from '../utils/context/authContext';
 import { getBookmarks } from '../utils/data/bookmarks';
 
@@ -35,7 +36,7 @@ function Bookmarks() {
         )
         : (
           <div className="bookmark-page">
-            <h1>Thank you</h1>
+            <BookmarksList bookmarks={bookmarks} />
           </div>
         )}
     </>

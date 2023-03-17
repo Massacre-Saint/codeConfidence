@@ -7,6 +7,7 @@ import {
   Nav,
 } from 'react-bootstrap';
 import Image from 'next/image';
+import { MdOutlineCollectionsBookmark } from 'react-icons/md';
 import AuthenticationButton from '../buttons/Authentication';
 
 export default function NavBar() {
@@ -39,7 +40,9 @@ export default function NavBar() {
               <Nav.Link>Learn More</Nav.Link>
             </Link>
             <Link passHref href="/bookmarks">
-              <Nav.Link>Bookmarks</Nav.Link>
+              <Nav.Link>
+                <MdOutlineCollectionsBookmark />
+              </Nav.Link>
             </Link>
             <AuthenticationButton />
           </Nav>
