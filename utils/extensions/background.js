@@ -1,6 +1,6 @@
 /*  Requests */
 const getBookmarks = () => new Promise((resolve, reject) => {
-  fetch('http://127.0.0.1:8000/bookmarks')
+  fetch('https://code-confidence.herokuapp.com/bookmarks')
     .then((response) => response.json())
     .then((data) => {
       const transformedData = data.map((obj) => {
@@ -34,7 +34,7 @@ const updateBookmark = (id, data) => new Promise((resolve, reject) => {
   if (data.url) {
     requestBody.url = data.url;
   }
-  fetch(`http://127.0.0.1:8000/bookmarks/${id}`, {
+  fetch(`https://code-confidence.herokuapp.com/bookmarks/${id}`, {
     method: 'PUT',
     body: JSON.stringify(requestBody),
     headers: {
@@ -46,7 +46,7 @@ const updateBookmark = (id, data) => new Promise((resolve, reject) => {
 });
 
 const createBookmarks = (data) => new Promise((resolve, reject) => {
-  fetch('http://127.0.0.1:8000/bookmarks', {
+  fetch('https://code-confidence.herokuapp.com/bookmarks', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -59,7 +59,7 @@ const createBookmarks = (data) => new Promise((resolve, reject) => {
 });
 
 const deleteBookmark = (id) => new Promise((resolve, reject) => {
-  fetch(`http://127.0.0.1:8000/bookmarks/${id}`, {
+  fetch(`https://code-confidence.herokuapp.com/bookmarks/${id}`, {
     method: 'DELETE',
   }).then(resolve).catch(reject);
 });
