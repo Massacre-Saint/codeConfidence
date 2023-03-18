@@ -16,7 +16,6 @@ export default function NavBar({ user }) {
   const [userCreated, setUserCreated] = useState(false);
   useEffect(() => {
     checkUser(user.uid).then((response) => {
-      console.warn(response);
       if (response.valid !== false) {
         setUserCreated(true);
       }

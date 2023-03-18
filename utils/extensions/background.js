@@ -1,5 +1,5 @@
 /*  Requests */
-const dbUrl = 'http://127.0.0.1:8000';
+const dbUrl = 'https://code-confidence-server.herokuapp.com';
 const getBookmarks = () => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/bookmarks`)
     .then((response) => response.json())
