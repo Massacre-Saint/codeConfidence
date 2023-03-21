@@ -1,44 +1,203 @@
-# React/Next.js Django Auth Template
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-## Topics
-- [Get Started](#getting-started)
-- [Starting the Project](#starting-the-project)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
-
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
-
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
-
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
-
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://user-images.githubusercontent.com/29741570/177615077-9b6a75bc-0260-4d29-bb88-bd95a3140687.png">
+<a name="readme-top"></a>
+<br />
+<div align="center">
+  <a href="https://github.com/Massacre-Saint/Code-Confidence">
+    <img src="https://github.com/Massacre-Saint/Code-Confidence/blob/main/public/logo.v2.svg" alt="Logo" width="300" height="300">
+  </a>
 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<h1 align="center">Full-Stack Capstone: Code-Confidence</h3>
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
+Code Confidence is a project I designed for my final capstone at Nashville Software School. This app was inspired by my learning journey of becoming a full-stack software engineer at NSS and the issues I came across. The intended purpose of this app is to help keep the scope of what you're learning limited to what you know versus what you don't know. To achieve this, the user can add technologies they know and keep track of the goals and respective topics they set for themselves
+</div>
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
+## Code Confidence Server Side
+Looking for Server Side?
+ <br />
+    <a href="https://github.com/Massacre-Saint/Code-Confidence"><strong>Explore the docs »</strong></a>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+## Appendix
+<ul>
+  <a href=""><li>Walkthrough Overview</li></a>
+  <a href="#features"><li>Features</li></a>
+  <a href="#deployement"><li>Deployement</li></a>
+  <a href="#running-locally"><li>Running Locally</li></a>
+  <a href="#testing"><li>Testing</li></a>
+  <a href="#roadmap"><li>Roadmap</li></a>
+  <a href="#planning"><li>Planning</li></a>
+  <a href="#feedback"><li>Feedback</li></a>
+  <a href="#acknowledgements"><li>Acknowldegements</li></a>
+  <a href="#tech-stack-and-resources"><li>Tech Stack and Resources</li></a>
+</ul>
+
+## Walkthrough
+[Loom Video]()
+## Features
+
+- Login in with Google
+- Easy creation using Google Firebase.
+- Stay motivated with postive affirmations.
+- Responsive designed centered for Desktop.
+- Select All feature allows for easy creation.
+- Search, filter, and toggle topics and goals.
+- CRUD on Goals and Topics.
+- Create Goals and Topics for the technology you're learning
+- Track the progress of you learning goals.
+- Explore programming languages, frameworks, and libraries
+- Create and assign your browser bookmarks through the app(comming soon).
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+
+## Deployement
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+## Running Locally
+
+### How to run frontend locally and setup Firebase authentication
+
+1. Set up a [Firebase](https://firebase.google.com/) project - Here's how: [Firebase Setup & Authentication](https://www.loom.com/share/163ffe1539bb482196efa713ed6231e9)
+
+2. Clone Code Confidence Client to your local machine
+``` bash
+https://github.com/Massacre-Saint/Code-Confidence.git
+```
+
+3. Move into directory
+``` bash
+cd Code-Confidence
+```
+
+4. Once in Code Confidence's code, create a .env file at the root of the project. Place the following properties into the file:
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=""
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=""
+NEXT_PUBLIC_DATABASE_URL="http://localhost:8000"
+```
+
+5. The last portion of the Firebase walkthrough from step 1 highlights where to find the values to put in the empty strings in the code snippet of step 4. From Firebase, copy the values and paste them into the empty strings of the respective keys located in the .env file.
+
+6. While in the root directory and from your command line, run
+``` bash
+npm install or npm i
+```
+7. Now from your command line, run
+``` bash
+npm run prepare
+```
+8. To start Code Confidence, run
+``` bash
+npm run dev
+```
+
+9. Click http://localhost:3000 in the terminal to open the browser
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+## Testing
+
+### Testing Messages
+Endpoint in Postman:
+```bash
+  http://127.0.0.1:8000/messages
+```
+This response should be a random message from db.
+```bash
+  http://127.0.0.1:8000/tech
+```
+Should get back 200 with list of tech
+If any issues occur please reach out here!
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+## Roadmap
+
+### Bookmarks
+Coming very soon and currently in progress and testing.
+#### Features
+- Synching with Chrome Bookmarks
+- Allows users to add their browser bookmarks to topics,tech, goals.
+- Able to update the assigned bookmark and keep track of the resource.
+- Comes with extension to handle bookmarks associated with the app.
+
+### Admin Support and Help
+#### Features
+ - Will allow users to message admin for features, bug, and tech to be added.
+
+### Projects and Portfolio
+#### Features
+- Users will be able to create and link projects they want to showcase.
+- Mimics a portfolio page.
+- Assignes the topics, goals, and tech that helped to acheive the project.
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+## Planning
+
+### ERD:
+![ERD][erd]
+[Link here](https://lucid.app/lucidchart/8dc92dcc-6a11-42b1-ad2a-d5403e564605/edit?view_items=LJsu1U~DpU8p&invitationId=inv_7e7ea7ca-a54d-4030-bf69-1dd50f681db4)
+### FlowChart:
+![Flowchart Screen Shot][product-screenshot]
+[Link here](https://lucid.app/lucidchart/9d7671f6-236c-4616-afe9-29d15c51381b/edit?viewport_loc=-300%2C-47%2C9599%2C3799%2C7ezayB~FQlW7&invitationId=inv_9e7879f3-abbc-4fdd-a8bf-b48fd0c5823a)
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+## Feedback
+
+If you have any feedback, please reach out to us at fake@fake.com
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+## Acknowledgements
+
+- [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+- [Awesome README](https://github.com/matiassingers/awesome-readme)
+- [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Responsive](https://www.npmjs.com/package/react-responsive)
+- [Midjourney](https://docs.midjourney.com/)
+- [@rustyzone](https://github.com/rustyzone/bookmarks-api)
+- [cohort E-19](https://e-19-nss.netlify.app/)
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+## Tech Stack
+
+**Client:** React, JS, React Bootstrap, Chrome Bookmarks API, Chrome Extensions, Next.js
+
+**Server:** Django, Python
+
+<p align="right"><a href="#readme-top">Back to Top</a></p>
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/Massacre-Saint/Dialing-In.v2.svg?style=for-the-badge
+[contributors-url]: https://github.com/Massacre-Saint/Dialing-In.v2/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Massacre-Saint/Dialing-In.v2.svg?style=for-the-badge
+[forks-url]: https://github.com/Massacre-Saint/Dialing-In.v2/network/members
+[stars-shield]: https://img.shields.io/github/stars/Massacre-Saint/Dialing-In.v2.svg?style=for-the-badge
+[stars-url]: https://github.com/Massacre-Saint/Dialing-In.v2/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Massacre-Saint/Dialing-In.v2.svg?style=for-the-badge
+[issues-url]: https://github.com/Massacre-Saint/Dialing-In.v2/issues
+[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
+[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/massacresaint
+[product-screenshot]: /public/flowchart.png
+[erd]: /public/erd.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
