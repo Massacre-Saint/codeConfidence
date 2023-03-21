@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import GoalCard from './cards/GoalCard';
 
 export default function GoalList({
-  goals, onUpdate, handleClose, edit,
+  goals, onUpdate, handleClose, edit, resources, topics,
 }) {
   if (goals.length === 0) {
     return (
@@ -21,6 +21,8 @@ export default function GoalList({
           handleClose={handleClose}
           onUpdate={onUpdate}
           edit={edit}
+          topics={topics}
+          resources={resources}
         />
       ))}
     </div>
@@ -34,4 +36,24 @@ GoalList.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   edit: PropTypes.bool.isRequired,
+  resources: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.number,
+    bookmark: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+    objectId: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+    tech: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }))),
+  topics: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))),
+};
+
+GoalList.defaultProps = {
+  topics: [],
+  resources: [],
 };

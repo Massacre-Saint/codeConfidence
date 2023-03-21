@@ -7,6 +7,7 @@ import SearchBar from '../components/SearchBar';
 import { useAuth } from '../utils/context/authContext';
 import { getLearnedTech, getTech } from '../utils/data';
 import { getAllGoals } from '../utils/data/goals';
+import { getResources } from '../utils/data/resources';
 import { getAllTopics } from '../utils/data/topics';
 
 export default function Goals() {
@@ -16,6 +17,7 @@ export default function Goals() {
   const [, setLTechTopics] = useState([]);
   const [filteredGoals, setFilteredGoals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [resources, setResources] = useState([]);
   const [edit, setEdit] = useState(false);
   const [, setShow] = useState(false);
 
@@ -36,11 +38,15 @@ export default function Goals() {
     const techData = await getTech();
     const learnedTech = await getLearnedTech(user, techData);
     setLTech(learnedTech);
-    const goalData = await getAllGoals(user, learnedTech);
-    setLTechGoals(goalData);
-    const topicData = await getAllTopics(user, learnedTech);
-    setLTechTopics(topicData);
-    setFilteredGoals(goalData);
+    Promise.all([getAllGoals(user), getAllTopics(user)])
+      .then(([goals, topics]) => {
+        const allTopics = topics;
+        const allGoals = goals;
+        setLTechGoals(goals);
+        setLTechTopics(topics);
+        const topicsAndGoals = allGoals.concat(allTopics);
+        getResources(topicsAndGoals).then(setResources);
+      });
     setIsLoading(false);
   };
 
@@ -93,6 +99,7 @@ export default function Goals() {
             onUpdate={loader}
             handleClose={handleClose}
             edit={edit}
+            resources={resources}
           />
         </div>
       </div>

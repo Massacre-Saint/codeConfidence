@@ -64,7 +64,7 @@ function GoalForm({
     );
   }
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="edit-form">
       <Form.Group className="mb-3" controlId="title">
         <Form.Label>Edit Goal</Form.Label>
         <Form.Control
@@ -80,7 +80,7 @@ function GoalForm({
       <Button variant="primary" type="submit">
         Submit
       </Button>
-      <Button onClick={handleCancelShowForm} variant="primary" type="button">
+      <Button onClick={handleCancelShowForm} variant="outline-danger" type="button">
         Cancel
       </Button>
     </Form>

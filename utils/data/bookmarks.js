@@ -6,8 +6,6 @@ const importBookmarks = () => new Promise((resolve, reject) => {
   fetch('bookmarks/cc_bookmark_data.json')
     .then((response) => response.json())
     .then((data) => {
-      console.warn(data);
-
       fetch(`${dbUrl}/bookmarks`, {
         method: 'POST',
         body: JSON.stringify(data[0]),
@@ -43,7 +41,6 @@ const getBookmarks = () => new Promise((resolve, reject) => {
         };
       });
       resolve(transformedData);
-      console.warn(transformedData);
     })
     .catch(reject);
 });
