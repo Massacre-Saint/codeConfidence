@@ -39,10 +39,8 @@ function SortDropdown({ array, setArray }) {
       }
     } else if (pk === 1) {
       results = [...array].sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime());
-      console.warn(results, pk);
     } else if (pk === 4) {
       results = [...array].sort((a, b) => a.title.localeCompare(b.title));
-      console.warn(results, pk);
     }
     setArray(results);
   };

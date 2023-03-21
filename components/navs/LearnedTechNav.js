@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import PropTypes from 'prop-types';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 import MediaQuery from 'react-responsive';
+import BookmarkSidebar from '../containers/overlays/BookmarkSidebar';
 
 export default function LearnedTechNav({
-  lTech, handleShowAll, handleShow, showAll,
+  lTech, handleShowAll, handleShow, showAll, goals, topics, bookmarks, resources, onUpdate,
 }) {
+  const [show, setShow] = useState(false);
+  const handleShowSidebar = () => setShow(true);
+  const handleClose = () => setShow(false);
   return (
     <>
       <MediaQuery maxWidth={768}>
@@ -28,7 +32,7 @@ export default function LearnedTechNav({
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3" id="topics" onClick={(e) => handleShowAll(e)}>Topics</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
+                  <NavDropdown.Item href="#action/3.4" onClick={handleShowSidebar}>
                     Bookmarks
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -36,12 +40,22 @@ export default function LearnedTechNav({
             </Navbar.Collapse>
           </Container>
         </Navbar>
+        <BookmarkSidebar
+          show={show}
+          handleClose={handleClose}
+          lTech={lTech}
+          goals={goals}
+          topics={topics}
+          bookmarks={bookmarks}
+          resources={resources}
+          onUpdate={onUpdate}
+        />
       </MediaQuery>
 
       <MediaQuery minWidth={769}>
         <Nav variant="tabs" navbar="True" className="sub-nav">
           <Nav.Item>
-            <Nav.Link eventKey="3" target="_blank" href={lTech.tech.docUrl}>Documentation</Nav.Link>
+            <Nav.Link eventKey="3" active={false} target="_blank" href={lTech.tech.docUrl}>Documentation</Nav.Link>
           </Nav.Item>
           <NavDropdown title="Goals" menuVariant="dark">
             <NavDropdown.Item eventKey="4" id="goals" onClick={(e) => handleShowAll(e)}>View All</NavDropdown.Item>
@@ -50,8 +64,6 @@ export default function LearnedTechNav({
                 Create
               </NavDropdown.Item>
             ) : ('')}
-            {/* <NavDropdown.Divider />
-            <NavDropdown.Item eventKey="4.3">Separated link</NavDropdown.Item> */}
           </NavDropdown>
 
           <NavDropdown title="Topics" menuVariant="dark">
@@ -61,16 +73,24 @@ export default function LearnedTechNav({
                 Create
               </NavDropdown.Item>
             ) : ('')}
-            {/* <NavDropdown.Divider />
-            <NavDropdown.Item eventKey="5.4">Separated link</NavDropdown.Item> */}
           </NavDropdown>
 
           <Nav.Item>
-            <Nav.Link eventKey="disabled" disabled>
+            <Nav.Link onClick={handleShowSidebar}>
               BookMarks
             </Nav.Link>
           </Nav.Item>
         </Nav>
+        <BookmarkSidebar
+          show={show}
+          handleClose={handleClose}
+          lTech={lTech}
+          goals={goals}
+          topics={topics}
+          bookmarks={bookmarks}
+          resources={resources}
+          onUpdate={onUpdate}
+        />
       </MediaQuery>
     </>
   );
@@ -85,6 +105,32 @@ LearnedTechNav.propTypes = {
   handleShowAll: PropTypes.func.isRequired,
   handleShow: PropTypes.func,
   showAll: PropTypes.bool,
+  goals: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
+  topics: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
+  bookmarks: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.number,
+    index: PropTypes.number,
+    parentId: PropTypes.number,
+    title: PropTypes.string,
+    url: PropTypes.string,
+  }))).isRequired,
+  resources: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.number,
+    bookmark: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+    objectId: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+    tech: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }))).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 LearnedTechNav.defaultProps = {
   handleShow: () => {},

@@ -8,7 +8,6 @@ import {
 } from 'react-bootstrap';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
-import { MdOutlineCollectionsBookmark } from 'react-icons/md';
 import AuthenticationButton from '../buttons/Authentication';
 import { checkUser } from '../../utils/data';
 
@@ -16,7 +15,6 @@ export default function NavBar({ user }) {
   const [userCreated, setUserCreated] = useState(false);
   useEffect(() => {
     checkUser(user.uid).then((response) => {
-      console.warn(response);
       if (response.valid !== false) {
         setUserCreated(true);
       }
@@ -48,13 +46,13 @@ export default function NavBar({ user }) {
               <Link passHref href="/topics">
                 <Nav.Link>Topics</Nav.Link>
               </Link>
-              <Link passHref href="/lTech">
-                <Nav.Link>Learn More</Nav.Link>
-              </Link>
               <Link passHref href="/bookmarks">
                 <Nav.Link>
-                  <MdOutlineCollectionsBookmark />
+                  Bookmarks
                 </Nav.Link>
+              </Link>
+              <Link passHref href="/lTech">
+                <Nav.Link>Learn More</Nav.Link>
               </Link>
               <AuthenticationButton />
             </Nav>

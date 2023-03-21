@@ -131,7 +131,6 @@ chrome.bookmarks.onMoved.addListener((id, moveInfo) => {
 chrome.bookmarks.onChanged.addListener((id) => {
   const pk = parseInt(id, 10);
   chrome.bookmarks.get(id, (bookmark) => {
-    console.warn(bookmark);
     updateBookmark(pk, bookmark[0]);
   });
 });

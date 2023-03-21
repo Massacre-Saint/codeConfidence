@@ -80,7 +80,7 @@ export default function TopicForm({
         : (
           <Form.Select
             aria-label="Selected Goal"
-            size="sm"
+            size="lg"
             name="goal"
             onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
             value={formData.goal ? formData.goal : ''}
@@ -106,7 +106,7 @@ export default function TopicForm({
     );
   }
   return (
-    <Form onSubmit={handleSubmit} className="modal-form">
+    <Form onSubmit={handleSubmit} className="edit-form">
       <Form.Group className="mb-3" controlId="title">
         <Form.Label>Title</Form.Label>
         <Form.Control
@@ -147,8 +147,6 @@ export default function TopicForm({
           <Form.Select
             aria-label="Selected Goal"
             name="goal"
-            // onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
-            // value={formData.goal}
             onChange={({ target }) => {
               const value = target.value === '' ? null : target.value;
               setFormData((prev) => ({ ...prev, [target.name]: value }));
@@ -156,7 +154,7 @@ export default function TopicForm({
             value={formData.goal || ''}
             bsPrefix="form-box"
           >
-            <option className="form-drop" value="">Choose your favorite goal</option>
+            <option className="form-drop" value="">Choose Goal</option>
             {
                 goals.map((goal) => (
                   <option
@@ -174,7 +172,7 @@ export default function TopicForm({
       <Button variant="primary" type="submit">
         Submit
       </Button>
-      <Button onClick={handleCancelShowForm} variant="primary" type="button">
+      <Button onClick={handleCancelShowForm} variant="outline-danger" type="button">
         Cancel
       </Button>
     </Form>

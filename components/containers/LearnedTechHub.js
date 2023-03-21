@@ -13,14 +13,13 @@ import ShowAll from './ShowAll';
 import TopicCardPreview from './cards/TopicCardPreview';
 
 export default function LearnedTechHub({
-  lTech, goals, onUpdate, topics,
+  lTech, topics, goals, bookmarks, onUpdate, resources,
 }) {
   const [showGoal, setShowGoal] = useState(false);
   const [show, setShow] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [showingGoals, setShowingGoals] = useState(false);
   const [edit, setEdit] = useState(false);
-
   const handleClose = () => {
     setShowGoal(false);
     setShow(false);
@@ -51,7 +50,7 @@ export default function LearnedTechHub({
       setShowAll(true);
     } else {
       setShowAll(false);
-    }
+    } setEdit(false);
   };
   if (showAll) {
     return (
@@ -62,7 +61,17 @@ export default function LearnedTechHub({
           </div>
           <LearnedTechHeader obj={lTech.tech} />
         </div>
-        <LearnedTechNav lTech={lTech} handleShowAll={handleShowAll} handleShow={handleShow} showAll={showAll} />
+        <LearnedTechNav
+          lTech={lTech}
+          handleShowAll={handleShowAll}
+          handleShow={handleShow}
+          showAll={showAll}
+          goals={goals}
+          topics={topics}
+          bookmarks={bookmarks}
+          resources={resources}
+          onUpdate={onUpdate}
+        />
         <div className="block_section">
           <div className="flex_space_between">
             <div className="create-form_btn">
@@ -83,7 +92,6 @@ export default function LearnedTechHub({
               ) : ('')}
             </div>
             <div className="create-form_btn">
-              {/* <CreateDropdown handleShow={handleShow} /> */}
               <ShowEditDelete handleEdit={handleEdit} edit={edit} />
             </div>
           </div>
@@ -95,6 +103,7 @@ export default function LearnedTechHub({
             handleShowAll={handleShowAll}
             edit={edit}
             handleClose={handleClose}
+            resources={resources}
           />
         </div>
         <CreateModal
@@ -117,7 +126,15 @@ export default function LearnedTechHub({
         </div>
         <LearnedTechHeader obj={lTech.tech} />
       </div>
-      <LearnedTechNav lTech={lTech} handleShowAll={handleShowAll} />
+      <LearnedTechNav
+        lTech={lTech}
+        handleShowAll={handleShowAll}
+        goals={goals}
+        topics={topics}
+        bookmarks={bookmarks}
+        resources={resources}
+        onUpdate={onUpdate}
+      />
       <div className="block_section">
         <div className="flex full-width">
           <div className="create-form_btn">
@@ -133,6 +150,7 @@ export default function LearnedTechHub({
                 onUpdate={onUpdate}
                 handleClose={handleClose}
                 handleShowAll={handleShowAll}
+                resources={resources}
               />
             </div>
           </div>
@@ -179,6 +197,25 @@ LearnedTechHub.propTypes = {
   }))).isRequired,
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
+  }))).isRequired,
+  bookmarks: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.number,
+    index: PropTypes.number,
+    parentId: PropTypes.number,
+    title: PropTypes.string,
+    url: PropTypes.string,
+  }))).isRequired,
+  resources: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.number,
+    bookmark: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+    objectId: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+    tech: PropTypes.shape({
+      id: PropTypes.number,
+    }),
   }))).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
