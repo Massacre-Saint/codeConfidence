@@ -34,7 +34,7 @@ Looking for Server Side?
   <a href="#planning"><li>Planning</li></a>
   <a href="#feedback"><li>Feedback</li></a>
   <a href="#acknowledgements"><li>Acknowldegements</li></a>
-  <a href="#tech-stack-and-resources"><li>Tech Stack and Resources</li></a>
+  <a href="#tech-stack"><li>Tech Stack and Resources</li></a>
 </ul>
 
 ## Walkthrough
