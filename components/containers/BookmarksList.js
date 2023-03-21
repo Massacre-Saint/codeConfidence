@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FcFolder } from 'react-icons/fc';
 import Bookmark from './cards/Bookmark';
 
-function BookmarksList({ bookmarks }) {
+function BookmarksList({
+  bookmarks, resources, toggledFilter, handleShowForm,
+}) {
   // Find the root node
   const rootNode = bookmarks.find((node) => node.parentId === 1);
   const shortenedString = (string) => {
-    if (string.length > 25) {
-      const shorten = string.slice(0, 30);
-      return `${shorten}...`;
+    if (string.length > 40) {
+      const shorten = string.slice(0, 40);
+      return `${shorten}`;
     }
     return string;
   };
@@ -20,20 +23,30 @@ function BookmarksList({ bookmarks }) {
     }
     return {
       ...node,
-      children: children.map(buildTree),
+      children: children.map((child) => buildTree(child)),
     };
   };
 
   const tree = buildTree(rootNode);
 
   return (
-    <div className="list">
-      <ul>{shortenedString(rootNode.title)}</ul>
-      <ul>
-        {tree.children.map((child) => (
-          <Bookmark key={child.id} node={child} />
-        ))}
-      </ul>
+    <div className="bookmark-list_container">
+      <span>
+        <FcFolder />
+        {shortenedString(rootNode.title)}
+      </span>
+      {tree.children.map((child) => (
+        <span key={child.id}>
+          <Bookmark
+            key={child.id}
+            node={child}
+            bookmarks={bookmarks}
+            resources={resources}
+            toggledFilter={toggledFilter}
+            handleShowForm={handleShowForm}
+          />
+        </span>
+      ))}
     </div>
   );
 }
@@ -48,4 +61,18 @@ BookmarksList.propTypes = {
     title: PropTypes.string,
     url: PropTypes.string,
   }))).isRequired,
+  resources: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.number,
+    bookmark: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+    objectId: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+    tech: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }))).isRequired,
+  toggledFilter: PropTypes.bool.isRequired,
+  handleShowForm: PropTypes.func.isRequired,
 };

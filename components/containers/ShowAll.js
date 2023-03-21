@@ -8,7 +8,7 @@ import SortDropdown from '../buttons/SortDropdown';
 import SortSearchDropdown from '../buttons/SortSearchDropdown';
 
 export default function ShowAll({
-  showingGoals, goals, topics, onUpdate, handleClose, edit,
+  showingGoals, goals, topics, onUpdate, handleClose, edit, resources,
 }) {
   const [filteredGoals, setFilteredGoals] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
@@ -43,6 +43,8 @@ export default function ShowAll({
               onUpdate={onUpdate}
               handleClose={handleClose}
               edit={edit}
+              topics={topics}
+              resources={resources}
             />
           </div>
         </div>
@@ -78,6 +80,7 @@ export default function ShowAll({
               onUpdate={onUpdate}
               handleClose={handleClose}
               edit={edit}
+              resources={resources}
             />
           </div>
         </div>
@@ -97,4 +100,16 @@ ShowAll.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   edit: PropTypes.bool.isRequired,
+  resources: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.number,
+    bookmark: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+    objectId: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+    tech: PropTypes.shape({
+      id: PropTypes.number,
+    }),
+  }))).isRequired,
 };

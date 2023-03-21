@@ -11,8 +11,8 @@ function Home() {
   const loader = () => {
     getTech().then((array) => {
       getLearnedTech(user, array).then(setLearnedTech);
-      setIsLoading(false);
     });
+    setIsLoading(false);
   };
   useEffect(() => {
     loader();
@@ -25,7 +25,7 @@ function Home() {
       </>
     );
   }
-  if (!learnedTech.length) {
+  if (!learnedTech && !learnedTech.length) {
     return (
       <>
         <LearnedTechStart onUpdate={loader} />

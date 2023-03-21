@@ -7,12 +7,12 @@ export default function ToggleButtons({
   lTechTopics, setFilteredTopics, lTechGoals, setFilteredGoals,
 }) {
   const radios = [
-    { name: 'Open', value: '1' },
-    { name: 'Completed', value: '2' },
+    { name: 'Open', value: '3' },
+    { name: 'Completed', value: '4' },
   ];
   const handleChange = (e) => {
     if (lTechTopics.length > 0) {
-      if (e.target.id === '2') {
+      if (e.target.id === '4') {
         const results = lTechTopics.filter((obj) => obj.completed === true);
         setFilteredTopics(results);
       } else {
@@ -21,7 +21,7 @@ export default function ToggleButtons({
       }
     }
     if (lTechGoals.length > 0) {
-      if (e.target.id === '2') {
+      if (e.target.id === '4') {
         const results = lTechGoals.filter((obj) => obj.progress === 100);
         setFilteredGoals(results);
       } else {

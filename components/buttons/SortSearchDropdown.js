@@ -39,6 +39,7 @@ export default function SortSearchDropdown({ lTechGoals, setFilteredTopics, lTec
         title="Goals"
         align="end"
         bsPrefix="sort-goal-btn"
+        size="300"
       >
         <InputGroup>
           <Form.Control

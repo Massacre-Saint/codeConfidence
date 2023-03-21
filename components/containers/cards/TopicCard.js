@@ -9,6 +9,7 @@ import { getSingleGoal, updateGoal } from '../../../utils/data/goals';
 import convertTime from '../../../utils/convertTime';
 import { useAuth } from '../../../utils/context/authContext';
 import EditDelete from '../../buttons/EditDelete';
+import TechImage from '../../icons/TechImage';
 
 export default function TopicCard({
   obj, onUpdate, handleClose, goals, edit, preview,
@@ -50,6 +51,9 @@ export default function TopicCard({
 
   return (
     <div className="card_spacing topic-goal_card_container">
+      <div className="topic-goal-image">
+        <TechImage obj={obj.learnedTech.tech} />
+      </div>
       <div className="topic-goal_card">
         <div className="topic-goal_body">
           <span className="topic-goal_card_title">
@@ -87,13 +91,13 @@ export default function TopicCard({
               : ('')}
           </span>
         </div>
-        {edit ? (
-          <div className="edit-delete_container">
-            <EditDelete handleShowForm={handleShowForm} handleDelete={handleDelete} />
-          </div>
-        )
-          : ('')}
       </div>
+      {edit ? (
+        <div className="edit-delete_container">
+          <EditDelete handleShowForm={handleShowForm} handleDelete={handleDelete} />
+        </div>
+      )
+        : ('')}
     </div>
   );
 }
@@ -105,6 +109,11 @@ TopicCard.propTypes = {
     goal: PropTypes.shape({
       id: PropTypes.string,
       title: PropTypes.string,
+    }),
+    learnedTech: PropTypes.shape({
+      tech: PropTypes.shape({
+        image_url: PropTypes.string,
+      }),
     }),
     lastUpdated: PropTypes.string,
   }).isRequired,

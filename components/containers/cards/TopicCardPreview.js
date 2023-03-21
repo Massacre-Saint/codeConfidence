@@ -11,7 +11,13 @@ export default function TopicCardPreview({
     <div className="goal_container">
       <div>
         <span className="header">
-          <p>{topics.length} Topics</p>
+          <span>{topics.length}</span>
+          &nbsp;
+          <span>
+            {topics.length > 1 || topics.length === 0
+              ? ('Topics')
+              : ('Topic')}
+          </span>
         </span>
       </div>
       <div>
@@ -19,16 +25,29 @@ export default function TopicCardPreview({
           <p>Most Recent:</p>
         </span>
         <div className="card_short-width">
-          {topics.slice(0, 1).map((i) => (
-            <TopicCard
-              key={i.id}
-              obj={i}
-              onUpdate={onUpdate}
-              handleClose={handleClose}
-              goals={goals}
-              preview={isPreview}
-            />
-          ))}
+          {topics.length === 0
+            ? (
+              <>
+                <div className="card_spacing topic-goal_card_container">
+                  <h3>No topics found.</h3>
+                </div>
+              </>
+            )
+            : (
+              <>
+                {topics.slice(0, 1).map((i) => (
+                  <TopicCard
+                    key={i.id}
+                    obj={i}
+                    onUpdate={onUpdate}
+                    handleClose={handleClose}
+                    goals={goals}
+                    preview={isPreview}
+                  />
+                ))}
+              </>
+
+            )}
         </div>
       </div>
       <div className="header">

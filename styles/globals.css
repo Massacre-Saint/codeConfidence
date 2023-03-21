@@ -459,7 +459,24 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   border: none;
   color: white;
 }
-
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 7px 20px 0px rgba(0,0,0,0.75);
+  border-radius: 15px;
+  background-color: #1f1f1f;
+  color: white;
+  padding: 1em;
+}
+.edit-form > button {
+  margin: 5px auto;
+  width: 80%;
+}
+.edit-form > button:nth-of-type(1) {
+  margin-top: 20px;
+  background: rgb(9,79,175);
+  background: linear-gradient(90deg, rgba(9,79,175,1) 20%, rgba(136,12,157,1) 40%, rgba(235,9,28,1) 60%, rgba(243,124,56,1) 80%, rgba(252,214,5,1) 90%, rgba(9,190,36,1) 100%);
+}
 .modal-form {
   box-shadow: 2px 7px 20px 0px rgba(0,0,0,0.75);
   border-radius: 15px;
@@ -530,6 +547,12 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   padding: 2em;
   z-index: 1;
   box-shadow: 2px 7px 20px 0px rgba(0,0,0,0.75);
+}
+.form-box {
+  width: 60%;
+  padding: 0.375rem 0.75rem;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 .lTech-view_all {
   display: grid;
@@ -671,7 +694,12 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   -moz-box-shadow: 2px 7px 14px 0px rgba(0,0,0,0.75);
   box-shadow: 2px 7px 14px 0px rgba(0,0,0,0.75);
 }
-
+.topic-goal-image {
+  display: flex;
+  margin-right: .5rem;
+  flex-direction: column;
+  justify-content: center;
+}
 .goal_container .header {
   text-transform: uppercase;
   font-size: 1.2em;
@@ -743,7 +771,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   margin: 0 1.5% 0 .5%;
 }
 .card_spacing {
-  padding: .5em 2rem;
+  padding: .5em 1rem;
 }
 
 .progress_container {
@@ -863,6 +891,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 .toggle-button {
   color: #ffffff;
   border-color: #ffffff;
+  border-radius: 10px;
 }
 .toggled {
   background-color: aqua;
@@ -881,11 +910,15 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   text-transform: uppercase;
   color: white;
 }
+.dropdown-menu {
+  width: 200px;
+}
 .search-field-inner-nav {
   background-color: #121212;
   border-radius: 5px;
-  margin: 2px 0 4px 16px;
+  margin-left: 12px;
   color: white;
+  width: 80%;
 }
 .search-field-inner-reset button {
   background-color: transparent;
@@ -933,4 +966,62 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 
 .list {
   list-style: none;
+  font-size: .95em;
+  line-height: 1.5rem;
+}
+
+.bookmark-offcanvas {
+  background-color: black;
+  color: white;
+  min-width: 40vw;
+}
+
+.bookmark-list_container {
+  border: 1px solid white;
+  border-radius: 10px;
+}
+.accordion_container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 5% 0 30%;
+}
+.accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.accordion,
+.accordion-item,
+.accordion-header,
+.accordion-button,
+.accordion-body {
+  color: white;
+  background-color: transparent;
+  border-radius: none;
+}
+
+.accordion {
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.accordion-button:not(.collapsed),
+.accordion-button:not(.collapsed)::after {
+  color: white;
+  background-color:rgb(70, 70, 70);
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+
+}
+
+.topic-goal-accordion_btn {
+  background-color: transparent;
+  border: 1px rgb(255, 0, 0) solid;
+  border-radius: 5px;
+  color: rgb(255, 0, 0);
+  padding:2px 3px;
+  text-align: center;
+  letter-spacing: 1px;
 }
