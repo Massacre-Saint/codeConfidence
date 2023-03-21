@@ -38,6 +38,7 @@ function Bookmarks() {
       <Loading />
     </>;
   }
+
   return (
     <div className="view-all_container bookmark-page">
       <div className="top-container block center">
@@ -51,10 +52,12 @@ function Bookmarks() {
       </div>
       <div className="show-all_container">
         <div className="show-all-list-container">
-          {bookmarksLoaded ? (
+          {bookmarksLoaded && bookmarks[0] ? (
             <BookmarksList bookmarks={bookmarks} resources={filteredResources} />
           ) : (
-            <h1>Oops, you can&apos;t use this feature yet! Download Extension here.</h1>
+            <div>
+              <h2>Oops, you can&apos;t use this feature yet! Download intructions provided in documentation.</h2>
+            </div>
           )}
         </div>
       </div>

@@ -11,21 +11,19 @@ function Home() {
   const loader = () => {
     getTech().then((array) => {
       getLearnedTech(user, array).then(setLearnedTech);
+      setIsLoading(false);
     });
-    setIsLoading(false);
   };
   useEffect(() => {
     loader();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
   if (isLoading) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
+    return <Loading />;
   }
-  if (!learnedTech && !learnedTech.length) {
+
+  if (!learnedTech[0]) {
     return (
       <>
         <LearnedTechStart onUpdate={loader} />
