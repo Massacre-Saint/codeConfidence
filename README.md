@@ -17,10 +17,10 @@
 Code Confidence is a project I designed for my final capstone at Nashville Software School. This app was inspired by my learning journey of becoming a full-stack software engineer at NSS and the issues I came across. The intended purpose of this app is to help keep the scope of what you're learning limited to what you know versus what you don't know. To achieve this, the user can add technologies they know and keep track of the goals and respective topics they set for themselves
 </div>
 
-## Code Confidence Server Side
+## Code Confidence Client Side
 Looking for Server Side?
  <br />
-    <a href="https://github.com/Massacre-Saint/Code-Confidence"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Massacre-Saint/Code-Confidence-Server"><strong>Explore the docs »</strong></a>
 
 
 ## Appendix
@@ -57,6 +57,7 @@ Looking for Server Side?
 
 
 ## Deployement
+![index](https://user-images.githubusercontent.com/79988192/226748628-fa854bd8-9f2c-4cbe-be53-9c7c2fe64952.png)
 
 <p align="right"><a href="#readme-top">Back to Top</a></p>
 
@@ -195,6 +196,7 @@ If you have any feedback, please reach out to us at fake@fake.com
 [linkedin-url]: https://linkedin.com/in/massacresaint
 [product-screenshot]: /public/flowchart.png
 [erd]: /public/erd.png
+[index]: https://code-confidence.netlify.app/
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
