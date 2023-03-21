@@ -58,7 +58,7 @@ Looking for Server Side?
 
 ## Deployement
 ![index](https://user-images.githubusercontent.com/79988192/226748628-fa854bd8-9f2c-4cbe-be53-9c7c2fe64952.png)
-<h3 align="center">Netlify Deployed Site</h3>
+<h3 align="center"><a href="https://code-confidence.netlify.app/">Netlify Deployed Site</a></h3>
 
 <p align="right"><a href="#readme-top">Back to Top</a></p>
 
@@ -183,14 +183,14 @@ If you have any feedback, please reach out to us at fake@fake.com
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Massacre-Saint/Dialing-In.v2.svg?style=for-the-badge
-[contributors-url]: https://github.com/Massacre-Saint/Dialing-In.v2/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Massacre-Saint/Dialing-In.v2.svg?style=for-the-badge
-[forks-url]: https://github.com/Massacre-Saint/Dialing-In.v2/network/members
-[stars-shield]: https://img.shields.io/github/stars/Massacre-Saint/Dialing-In.v2.svg?style=for-the-badge
-[stars-url]: https://github.com/Massacre-Saint/Dialing-In.v2/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Massacre-Saint/Dialing-In.v2.svg?style=for-the-badge
-[issues-url]: https://github.com/Massacre-Saint/Dialing-In.v2/issues
+[contributors-shield]: https://img.shields.io/github/contributors/Massacre-Saint/Code-Confidence.svg?style=for-the-badge
+[contributors-url]: https://github.com/Massacre-Saint/Code-Confidence/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Massacre-Saint/Code-Confidence.svg?style=for-the-badge
+[forks-url]: https://github.com/Massacre-Saint/Code-Confidence/network/members
+[stars-shield]: https://img.shields.io/github/stars/Massacre-Saint/Code-Confidence.svg?style=for-the-badge
+[stars-url]: https://github.com/Massacre-Saint/Code-Confidence/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Massacre-Saint/Code-Confidence.svg?style=for-the-badge
+[issues-url]: https://github.com/Massacre-Saint/Code-Confidence/issues
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
