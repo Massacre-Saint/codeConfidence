@@ -576,7 +576,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   margin: 0;
 }
 .l-tech-nav {
-  /* background-color: #b7b7b7; */
   display: flex;
   padding: inherit;
   align-items: center;
@@ -704,7 +703,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   text-transform: uppercase;
   font-size: 1.2em;
   margin-top: 1em;
-
 }
 .goal_container button {
   background-color: transparent;
@@ -731,13 +729,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   font-size: 1.3em;
   width: 100%;
 }
-
-/* .edit-delete_container {
-  background-color: #888;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-} */
 .edit-delte-btn {
   display: flex;
   flex-direction: column;
@@ -797,12 +788,10 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   margin: 0;
   font-weight: 800;
 }
-
 .show-all_container {
   max-width: 100%;
   margin: auto;
 }
-
 .show-all_header {
   display: flex;
   padding: 1% 2%;
@@ -817,7 +806,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 .show-all_header-content {
   display: flex;
   column-gap: 1em;
-
 }
 
 .logo {
@@ -828,7 +816,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
     width: 70%;
     margin: auto;
   }
-
 }
 .hero-font {
   font-size: 6vw;
@@ -930,26 +917,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   background-color: blue;
   width: 90px;
 }
-.typwriter {
-   /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid orange; /* The typwriter cursor */
-  white-space: wrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation: 
-    typing 3.5s steps(20, end),
-    blink-caret .75s step-end infinite;
-}
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
 
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
-}
 .empty-list {
   border: 1px solid white;
   border-bottom-left-radius: 10px;
@@ -1013,7 +981,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 
 .accordion-button:focus {
   box-shadow: none;
-
 }
 
 .topic-goal-accordion_btn {
