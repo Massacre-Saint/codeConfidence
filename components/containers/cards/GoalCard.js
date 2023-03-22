@@ -50,7 +50,8 @@ export default function GoalCard({
     setshowForm(false);
   };
   const handleDelete = () => {
-    if (resource) {
+    console.warn(resource);
+    if (Object.values(resource) > 0) {
       updateResource(resource).then(() => {
         deleteGoal(obj.id).then(() => onUpdate());
       });
