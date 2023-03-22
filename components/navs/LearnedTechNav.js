@@ -32,9 +32,13 @@ export default function LearnedTechNav({
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3" id="topics" onClick={(e) => handleShowAll(e)}>Topics</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4" onClick={handleShowSidebar}>
-                    Bookmarks
-                  </NavDropdown.Item>
+                  {bookmarks.length > 0
+                    ? (
+                      <NavDropdown.Item href="#action/3.4" onClick={handleShowSidebar}>
+                        Bookmarks
+                      </NavDropdown.Item>
+                    )
+                    : ('')}
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
@@ -74,12 +78,15 @@ export default function LearnedTechNav({
               </NavDropdown.Item>
             ) : ('')}
           </NavDropdown>
-
-          <Nav.Item>
-            <Nav.Link onClick={handleShowSidebar}>
-              BookMarks
-            </Nav.Link>
-          </Nav.Item>
+          {bookmarks.length > 0
+            ? (
+              <Nav.Item>
+                <Nav.Link onClick={handleShowSidebar}>
+                  BookMarks
+                </Nav.Link>
+              </Nav.Item>
+            )
+            : ('')}
         </Nav>
         <BookmarkSidebar
           show={show}
