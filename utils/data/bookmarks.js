@@ -45,9 +45,46 @@ const getBookmarks = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const createBookmarks = (data) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/bookmarks`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => resolve(response.json()))
+    .catch(reject);
+});
+
+const updateBookmark = (id, data) => new Promise((resolve, reject) => {
+  const requestBody = {
+    index: data.index,
+    parent_id: data.parentId,
+    title: data.title,
+    url: data.url,
+  };
+
+  if (data.url) {
+    requestBody.url = data.url;
+  }
+  fetch(`${dbUrl}/bookmarks/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(requestBody),
+    headers: {
+      'content-type': 'application/json',
+    },
+  })
+    .then((resp) => resolve(resp))
+    .catch(reject);
+});
+
 export const deleteBookmark = (id) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/bookmarks/${id}`, {
     method: 'DELETE',
   }).then(resolve).catch(reject);
 });
-export { importBookmarks, getBookmarks };
+export {
+  importBookmarks, getBookmarks, createBookmarks, updateBookmark,
+};

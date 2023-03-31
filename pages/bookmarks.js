@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Loading } from '../components';
 import BookmarksList from '../components/containers/BookmarksList';
 import { useAuth } from '../utils/context/authContext';
 import { getBookmarks } from '../utils/data/bookmarks';
@@ -7,18 +6,19 @@ import { getAllGoals } from '../utils/data/goals';
 import { getResources } from '../utils/data/resources';
 import { getAllTopics } from '../utils/data/topics';
 
+export const fetchAndSetBookmarksForState = async (setBookmarks, setBookmarksLoaded) => {
+  const bookmarkData = await getBookmarks();
+  setBookmarks(bookmarkData);
+  setBookmarksLoaded(true);
+  console.warn('i ran');
+};
 function Bookmarks() {
   const [bookmarks, setBoomarks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [bookmarksLoaded, setBookmarksLoaded] = useState(false);
   const [resources, setResources] = useState([]);
   const [filteredResources, setFilteredResources] = useState([]);
   const { user } = useAuth();
-  const loader = async () => {
-    const bookmarkData = await getBookmarks();
-    setBoomarks(bookmarkData);
-    setIsLoading(false);
-    setBookmarksLoaded(true);
+  const fetchAndSetResourcesForUserGoalsAndTopicsState = () => {
     Promise.all([getAllGoals(user), getAllTopics(user)])
       .then(([goals, topics]) => {
         const allTopics = topics;
@@ -27,17 +27,13 @@ function Bookmarks() {
         getResources(topicsAndGoals).then(setResources);
       });
   };
+
   useEffect(() => {
-    loader();
+    fetchAndSetBookmarksForState(setBoomarks, setBookmarksLoaded);
+    fetchAndSetResourcesForUserGoalsAndTopicsState();
     setFilteredResources(resources);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
-
-  if (isLoading) {
-    <>
-      <Loading />
-    </>;
-  }
 
   return (
     <div className="view-all_container bookmark-page">

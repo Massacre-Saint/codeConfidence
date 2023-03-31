@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import PropTypes from 'prop-types';
@@ -12,7 +12,16 @@ export default function LearnedTechNav({
 }) {
   const [show, setShow] = useState(false);
   const handleShowSidebar = () => setShow(true);
+  const [showBookmarkNav, setShowBookmarkNav] = useState(false);
   const handleClose = () => setShow(false);
+
+  useEffect(() => {
+    if (bookmarks.length !== 0) {
+      setShowBookmarkNav(true);
+    } else {
+      setShowBookmarkNav(false);
+    }
+  }, []);
   return (
     <>
       <MediaQuery maxWidth={768}>
@@ -32,9 +41,14 @@ export default function LearnedTechNav({
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3" id="topics" onClick={(e) => handleShowAll(e)}>Topics</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4" onClick={handleShowSidebar}>
-                    Bookmarks
-                  </NavDropdown.Item>
+                  {!showBookmarkNav
+                    ? ('')
+                    : (
+                      <NavDropdown.Item href="#action/3.4" onClick={handleShowSidebar}>
+                        Bookmarks
+                      </NavDropdown.Item>
+
+                    )}
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
@@ -74,12 +88,15 @@ export default function LearnedTechNav({
               </NavDropdown.Item>
             ) : ('')}
           </NavDropdown>
-
-          <Nav.Item>
-            <Nav.Link onClick={handleShowSidebar}>
-              BookMarks
-            </Nav.Link>
-          </Nav.Item>
+          {!showBookmarkNav
+            ? ('')
+            : (
+              <Nav.Item>
+                <Nav.Link onClick={handleShowSidebar}>
+                  BookMarks
+                </Nav.Link>
+              </Nav.Item>
+            )}
         </Nav>
         <BookmarkSidebar
           show={show}

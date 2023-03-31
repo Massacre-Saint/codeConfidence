@@ -33,6 +33,7 @@ export default function LearnedTechViewAll() {
         getGoals(user, data).then(setLTechGoals);
         getTopics(user, data).then(setLTechTopics);
         getBookmarks().then(setBookmarks);
+        console.warn(bookmarks);
         setIsLoading(false);
       });
     });
@@ -40,6 +41,7 @@ export default function LearnedTechViewAll() {
 
   useEffect(() => {
     getData();
+    console.warn(bookmarks);
   }, [getData]);
 
   if (isLoading) {
