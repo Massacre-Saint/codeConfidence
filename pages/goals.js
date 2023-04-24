@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { GoalList, Loading } from '../components';
+import { GoalList } from '../components';
 import ShowEditDelete from '../components/buttons/ShowEditDelete';
-import SortDropdown from '../components/buttons/SortDropdown';
-import ToggleButtons from '../components/navs/ToggleButtons';
+import FilterModal from '../components/modals/FilterModal';
 import SearchBar from '../components/SearchBar';
 import { useAuth } from '../utils/context/authContext';
 import { getLearnedTech, getTech } from '../utils/data';
@@ -16,7 +15,6 @@ export default function Goals() {
   const [lTechGoals, setLTechGoals] = useState([]);
   const [, setLTechTopics] = useState([]);
   const [filteredGoals, setFilteredGoals] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [resources, setResources] = useState([]);
   const [edit, setEdit] = useState(false);
   const [, setShow] = useState(false);
@@ -43,53 +41,39 @@ export default function Goals() {
         const allTopics = topics;
         const allGoals = goals;
         setLTechGoals(goals);
+        setFilteredGoals(goals);
         setLTechTopics(topics);
         const topicsAndGoals = allGoals.concat(allTopics);
         getResources(topicsAndGoals).then(setResources);
       });
-    setIsLoading(false);
   };
 
   useEffect(() => {
     loader();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
-  if (isLoading) {
-    <>
-      <div className="top-container block center">
-        <div className="hero-font">Goals</div>
-        <div className="line" />
-      </div>
-      <div className="show-all_container">
-        <div>
-          <div className="show-all_header" />
-          <Loading />
-        </div>
-      </div>
-    </>;
-  }
+
   return (
     <div className="view-all_container">
       <div className="top-container block center">
         <div className="hero-font">Goals</div>
-        {/* <div className="line" /> */}
       </div>
       <div className="sub-nav-space-between">
-        <div className="search-bar_container">
-          <SearchBar array={lTechGoals} setArray={setFilteredGoals} />
-        </div>
         <div>
           <ShowEditDelete handleEdit={handleEdit} edit={edit} />
         </div>
       </div>
       <div className="show-all_container">
         <div className="show-all_header">
-          <div className="show-all_header-content">
-            <ToggleButtons lTechGoals={lTechGoals} setFilteredGoals={setFilteredGoals} />
+          <div className="search-bar_container">
+            <SearchBar array={lTechGoals} setArray={setFilteredGoals} />
           </div>
           <div className="show-all_header-content">
             <div>
-              <SortDropdown array={lTechGoals} setArray={setFilteredGoals} />
+              <FilterModal
+                goals={lTechGoals}
+                setFilteredGoals={setFilteredGoals}
+              />
             </div>
           </div>
         </div>

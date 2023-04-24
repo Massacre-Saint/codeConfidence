@@ -13,12 +13,13 @@ import ShowAll from './ShowAll';
 import TopicCardPreview from './cards/TopicCardPreview';
 
 export default function LearnedTechHub({
-  lTech, topics, goals, bookmarks, onUpdate, resources,
+  lTech, topics, goals, onUpdate, resources,
 }) {
   const [showGoal, setShowGoal] = useState(false);
   const [show, setShow] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [showingGoals, setShowingGoals] = useState(false);
+  const [showingBookmarks, setShowingBookmarks] = useState(false);
   const [edit, setEdit] = useState(false);
   const handleClose = () => {
     setShowGoal(false);
@@ -44,10 +45,16 @@ export default function LearnedTechHub({
   const handleShowAll = (e) => {
     if (e.target.id === 'topics') {
       setShowingGoals(false);
+      setShowingBookmarks(false);
       setShowAll(true);
     } else if (e.target.id === 'goals') {
       setShowingGoals(true);
+      setShowingBookmarks(false);
       setShowAll(true);
+    } else if (e.target.id === 'bookmarks') {
+      setShowingBookmarks(true);
+      setShowAll(true);
+      setShowingGoals(false);
     } else {
       setShowAll(false);
     } setEdit(false);
@@ -64,13 +71,6 @@ export default function LearnedTechHub({
         <LearnedTechNav
           lTech={lTech}
           handleShowAll={handleShowAll}
-          handleShow={handleShow}
-          showAll={showAll}
-          goals={goals}
-          topics={topics}
-          bookmarks={bookmarks}
-          resources={resources}
-          onUpdate={onUpdate}
         />
         <div className="block_section">
           <div className="flex_space_between">
@@ -85,26 +85,33 @@ export default function LearnedTechHub({
                     onUpdate();
                   }}
                 >
-                  <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+                  <IconContext.Provider
+                    value={{
+                      size: '1.5em',
+                      color: 'white',
+                    }}
+                  >
                     <IoMdArrowBack />
                   </IconContext.Provider>
                 </button>
               ) : ('')}
             </div>
+            <ShowAll
+              onUpdate={onUpdate}
+              topics={topics}
+              goals={goals}
+              showingGoals={showingGoals}
+              showingBookmarks={showingBookmarks}
+              handleShowAll={handleShowAll}
+              edit={edit}
+              handleClose={handleClose}
+              resources={resources}
+              lTech={lTech}
+            />
             <div className="create-form_btn">
               <ShowEditDelete handleEdit={handleEdit} edit={edit} />
             </div>
           </div>
-          <ShowAll
-            onUpdate={onUpdate}
-            topics={topics}
-            goals={goals}
-            showingGoals={showingGoals}
-            handleShowAll={handleShowAll}
-            edit={edit}
-            handleClose={handleClose}
-            resources={resources}
-          />
         </div>
         <CreateModal
           handleClose={handleClose}
@@ -129,11 +136,6 @@ export default function LearnedTechHub({
       <LearnedTechNav
         lTech={lTech}
         handleShowAll={handleShowAll}
-        goals={goals}
-        topics={topics}
-        bookmarks={bookmarks}
-        resources={resources}
-        onUpdate={onUpdate}
       />
       <div className="block_section">
         <div className="flex full-width">
@@ -198,13 +200,13 @@ LearnedTechHub.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
-  bookmarks: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.number,
-    index: PropTypes.number,
-    parentId: PropTypes.number,
-    title: PropTypes.string,
-    url: PropTypes.string,
-  }))).isRequired,
+  // bookmarks: PropTypes.arrayOf((PropTypes.shape({
+  //   id: PropTypes.number,
+  //   index: PropTypes.number,
+  //   parentId: PropTypes.number,
+  //   title: PropTypes.string,
+  //   url: PropTypes.string,
+  // }))).isRequired,
   resources: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.number,
     bookmark: PropTypes.shape({

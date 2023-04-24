@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { BsSignpostSplit } from 'react-icons/bs';
+import { BsSignpostSplit, BsCheckCircleFill, BsCheckCircle } from 'react-icons/bs';
 import { BiTimeFive } from 'react-icons/bi';
 import { IconContext } from 'react-icons';
 import TopicForm from '../../forms/TopicForm';
@@ -90,6 +90,29 @@ export default function TopicCard({
               )
               : ('')}
           </span>
+          <span>
+            {(obj.completed
+              ? (
+                <>
+                  <IconContext.Provider value={{ size: '1.5em', color: 'green' }}>
+                    <BsCheckCircleFill />
+                  </IconContext.Provider>
+                  <span className="topic-goal_card_footer-text">
+                    Completed
+                  </span>
+                </>
+              )
+              : (
+                <>
+                  <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+                    <BsCheckCircle />
+                  </IconContext.Provider>
+                  <span className="topic-goal_card_footer-text">
+                    Not Complete
+                  </span>
+                </>
+              ))}
+          </span>
         </div>
       </div>
       {edit ? (
@@ -106,6 +129,7 @@ TopicCard.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
+    completed: PropTypes.bool,
     goal: PropTypes.shape({
       id: PropTypes.string,
       title: PropTypes.string,

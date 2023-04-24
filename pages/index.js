@@ -9,8 +9,9 @@ function Home() {
   const [learnedTech, setLearnedTech] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const loader = () => {
-    getTech().then((array) => {
-      getLearnedTech(user, array).then(setLearnedTech);
+    getTech().then(async (array) => {
+      const userTech = await getLearnedTech(user, array);
+      setLearnedTech(userTech);
       setIsLoading(false);
     });
   };
@@ -23,14 +24,15 @@ function Home() {
     return <Loading />;
   }
 
-  if (!learnedTech[0]) {
+  if (learnedTech.length === 0) {
     return (
       <>
         <LearnedTechStart onUpdate={loader} />
       </>
     );
   }
-  return <LearnedTechView tech={learnedTech} />;
+  return (
+    <LearnedTechView tech={learnedTech} />
+  );
 }
-
 export default Home;

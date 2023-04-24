@@ -8,8 +8,10 @@ import {
 } from 'react-bootstrap';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
+import MediaQuery from 'react-responsive';
 import AuthenticationButton from '../buttons/Authentication';
 import { checkUser } from '../../utils/data';
+import NavBarMobile from './mobile/NavBarMobile';
 
 export default function NavBar({ user }) {
   const [userCreated, setUserCreated] = useState(false);
@@ -22,43 +24,50 @@ export default function NavBar({ user }) {
   });
   if (userCreated) {
     return (
-      <Navbar collapseOnSelect expand="lg" className="main-navbar" variant="dark" sticky="top">
-        <Container>
-          <Link passHref href="/">
-            <Navbar.Brand className="nav-image">
-              <Image
-                src="/logo.v2.svg"
-                width={30}
-                height={30}
-              />
-              ode Confidence
-            </Navbar.Brand>
-          </Link>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
+      <>
+        <MediaQuery maxWidth={426}>
+          <NavBarMobile userCreated={userCreated} />
+        </MediaQuery>
+        <MediaQuery minWidth={426}>
+          <Navbar collapseOnSelect expand="lg" className="main-navbar" variant="dark" sticky="top">
+            <Container>
               <Link passHref href="/">
-                <Nav.Link>Home</Nav.Link>
+                <Navbar.Brand className="nav-image">
+                  <Image
+                    src="/logo.v2.svg"
+                    width={30}
+                    height={30}
+                  />
+                  ode Confidence
+                </Navbar.Brand>
               </Link>
-              <Link passHref href="/goals">
-                <Nav.Link>Goals</Nav.Link>
-              </Link>
-              <Link passHref href="/topics">
-                <Nav.Link>Topics</Nav.Link>
-              </Link>
-              <Link passHref href="/bookmarks">
-                <Nav.Link>
-                  Bookmarks
-                </Nav.Link>
-              </Link>
-              <Link passHref href="/lTech">
-                <Nav.Link>Learn More</Nav.Link>
-              </Link>
-              <AuthenticationButton />
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="me-auto">
+                  <Link passHref href="/">
+                    <Nav.Link>Home</Nav.Link>
+                  </Link>
+                  <Link passHref href="/goals">
+                    <Nav.Link>Goals</Nav.Link>
+                  </Link>
+                  <Link passHref href="/topics">
+                    <Nav.Link>Topics</Nav.Link>
+                  </Link>
+                  <Link passHref href="/bookmarks">
+                    <Nav.Link>
+                      Bookmarks
+                    </Nav.Link>
+                  </Link>
+                  <Link passHref href="/lTech">
+                    <Nav.Link>Learn More</Nav.Link>
+                  </Link>
+                  <AuthenticationButton />
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        </MediaQuery>
+      </>
     );
   }
   return (

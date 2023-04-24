@@ -1,50 +1,54 @@
 import React from 'react';
-import { ButtonGroup, ToggleButton } from 'react-bootstrap';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import PropTypes from 'prop-types';
 
-function ResourcesByTech({
-  resources, setFilteredResources, lTech, setToggledFilter, setShowForm,
+function SortResourcesAndBookmarksDropdown({
+  resources, setFilteredResources, lTech, setToggledFilter,
 }) {
   const radios = [
-    { name: 'All', value: '1' },
-    { name: `${lTech.tech.name}`, value: '2' },
+    { name: 'All Bookmarks', value: '1' },
+    { name: `${lTech.tech.name} Resources`, value: '2' },
   ];
   const handleChange = (e) => {
     if (e.target.id === '1') {
       setFilteredResources(resources);
       setToggledFilter(false);
     } else {
-      const results = resources.filter((obj) => obj.tech.tech.id === lTech.tech.id);
+      const results = resources.filter((obj) => obj.learnedTech.tech.id === lTech.tech.id);
       setFilteredResources(results);
       setToggledFilter(true);
     }
-    setShowForm(false);
   };
   return (
-    <ButtonGroup>
+    <DropdownButton
+      id="dropdown-button-dark-example2"
+      menuVariant="dark"
+      size="sm"
+      drop="down-centered"
+      title="Sort"
+      bsPrefix="
+        border-none
+        background-none
+        fnt-primary"
+    >
       {radios.map((radio) => (
-        <ToggleButton
+        <Dropdown.Item
           key={radio.value}
           id={radio.value}
-          type="radio"
-          name="radio"
           className="toggle-button"
           variant="outline"
-          bsPrefix="hide-radio"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        >
-          {radio.name}
-        </ToggleButton>
+          onClick={(e) => handleChange(e)}
+        >{radio.name}
+        </Dropdown.Item>
       ))}
-    </ButtonGroup>
+    </DropdownButton>
   );
 }
 
-export default ResourcesByTech;
+export default SortResourcesAndBookmarksDropdown;
 
-ResourcesByTech.propTypes = {
+SortResourcesAndBookmarksDropdown.propTypes = {
   resources: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.number,
     bookmark: PropTypes.shape({
@@ -53,7 +57,7 @@ ResourcesByTech.propTypes = {
     objectId: PropTypes.shape({
       id: PropTypes.string,
     }),
-    tech: PropTypes.shape({
+    learnedTech: PropTypes.shape({
       id: PropTypes.number,
     }),
   }))).isRequired,
@@ -65,5 +69,4 @@ ResourcesByTech.propTypes = {
   }).isRequired,
   setFilteredResources: PropTypes.func.isRequired,
   setToggledFilter: PropTypes.func.isRequired,
-  setShowForm: PropTypes.func.isRequired,
 };

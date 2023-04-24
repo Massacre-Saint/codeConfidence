@@ -80,11 +80,11 @@ const updateBookmark = (id, data) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export const deleteBookmark = (id) => new Promise((resolve, reject) => {
+const deleteBookmark = (id) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/bookmarks/${id}`, {
     method: 'DELETE',
   }).then(resolve).catch(reject);
 });
 export {
-  importBookmarks, getBookmarks, createBookmarks, updateBookmark,
+  importBookmarks, getBookmarks, createBookmarks, updateBookmark, deleteBookmark,
 };

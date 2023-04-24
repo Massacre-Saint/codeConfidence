@@ -36,6 +36,99 @@ const getTopics = (user, object) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
+const getFilteredTopicsByTech = (user, querySet, lTech) => new Promise((resolve, reject) => {
+  let queryString = '';
+  const uuid = querySet.filter((i) => i.length > 20);
+  if (uuid.length > 0) {
+    if (querySet.length > 1) {
+      queryString += `goalId=${uuid}&`;
+    } else {
+      queryString += `goalId=${uuid}`;
+    }
+  }
+  const genericFilters = querySet.filter((i) => i.length < 20);
+  queryString += `${genericFilters.join('&')}`;
+
+  fetch(`${dbUrl}/topics/filter?l_tech=${lTech}&${queryString}`, {
+    headers: {
+      Authorization: user.uid,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const transformedData = data.map((obj) => {
+        const {
+          id,
+          title,
+          description,
+          last_updated: lastUpdated,
+          learned_tech: learnedTech,
+          uid,
+          goal,
+          completed,
+        } = obj;
+        return {
+          id,
+          title,
+          description,
+          lastUpdated,
+          learnedTech,
+          uid,
+          goal,
+          completed,
+        };
+      });
+      resolve(transformedData);
+    })
+    .catch(reject);
+});
+
+const getAllFilteredTopics = (user, querySet) => new Promise((resolve, reject) => {
+  let queryString = '';
+  const uuid = querySet.filter((i) => i.length > 20);
+  if (uuid.length > 0) {
+    if (querySet.length > 1) {
+      queryString += `goalId=${uuid}&`;
+    } else {
+      queryString += `goalId=${uuid}`;
+    }
+  }
+  const genericFilters = querySet.filter((i) => i.length < 20);
+  queryString += `${genericFilters.join('&')}`;
+
+  fetch(`${dbUrl}/topics/all_filter?${queryString}`, {
+    headers: {
+      Authorization: user.uid,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const transformedData = data.map((obj) => {
+        const {
+          id,
+          title,
+          description,
+          last_updated: lastUpdated,
+          learned_tech: learnedTech,
+          uid,
+          goal,
+          completed,
+        } = obj;
+        return {
+          id,
+          title,
+          description,
+          lastUpdated,
+          learnedTech,
+          uid,
+          goal,
+          completed,
+        };
+      });
+      resolve(transformedData);
+    })
+    .catch(reject);
+});
 
 const getAllTopics = (user) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/topics`, {
@@ -127,5 +220,5 @@ const deleteTopic = (id) => new Promise((resolve, reject) => {
   }).then(resolve).catch(reject);
 });
 export {
-  getTopics, createTopic, updateTopic, deleteTopic, getAllTopics,
+  getTopics, createTopic, updateTopic, deleteTopic, getAllTopics, getFilteredTopicsByTech, getAllFilteredTopics,
 };
