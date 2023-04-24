@@ -105,25 +105,23 @@ chrome.bookmarks.onCreated.addListener((id, bookmark) => {
 });
 
 chrome.bookmarks.onMoved.addListener((id, moveInfo) => {
-  chrome.bookmarks.search({ title: 'Code Confidence Resources' }, (nodes) => {
-    const ccBookmarksId = nodes[0].id;
-    if (nodes.length === 1 && (moveInfo.parentId === ccBookmarksId)) {
-      chrome.bookmarks.get(id).then((parent) => createBookmarks(parent[0]));
-      chrome.bookmarks.getChildren(id, (children) => {
-        children.forEach((child) => {
-          createBookmarks(child);
-        });
+  getBookmarks().then((bookmarkArray) => {
+    const bookmarks = bookmarkArray;
+    const existingBookmarkNode = bookmarks.some((bookmark) => bookmark.id === parseInt(id, 10));
+    const updatingExistingNode = bookmarks.some((bookmark) => parseInt(moveInfo.parentId, 10) === bookmark.id);
+    if (!existingBookmarkNode) {
+      chrome.bookmarks.getSubTree(id, (tree) => {
+        createBookmarks(tree[0]);
       });
-    } else if (nodes.length === 1 && (moveInfo.oldParentId === ccBookmarksId)) {
-      getBookmarks().then((array) => {
-        const matches = array.filter((item) => parseInt(moveInfo.parentId, 10) === item.id);
-        if (matches.length) {
-          chrome.bookmarks.get(id, (bookmark) => {
-            const pk = parseInt(id, 10);
-            updateBookmark(pk, bookmark[0]);
-          });
-        } else deleteBookmark(id);
+      // create
+    } else if (existingBookmarkNode && updatingExistingNode) {
+      // update
+      chrome.bookmarks.get(id, (bookmark) => {
+        const pk = parseInt(id, 10);
+        updateBookmark(pk, bookmark[0]);
       });
+    } else {
+      deleteBookmark(id);
     }
   });
 });

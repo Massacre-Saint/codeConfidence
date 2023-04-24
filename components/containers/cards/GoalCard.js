@@ -9,12 +9,12 @@ import GoalForm from '../../forms/GoalForm';
 import { deleteGoal } from '../../../utils/data/goals';
 import convertTime from '../../../utils/convertTime';
 import EditDelete from '../../buttons/EditDelete';
-import { updateResource } from '../../../utils/data/resources';
+import { deleteResource } from '../../../utils/data/resources';
 import TechImage from '../../icons/TechImage';
 import TopAccordian from '../../accordians/TopicAccordian';
 
 export default function GoalCard({
-  obj, onUpdate, handleClose, edit, preview, topics, resources,
+  obj, onUpdate, handleClose, edit, preview, topics, resources, setAssignedTopicOrGoal, assignedTopicOrGoal, assigningBookmark,
 }) {
   const [showForm, setshowForm] = useState(false);
   const [resource, setResource] = useState({});
@@ -24,11 +24,9 @@ export default function GoalCard({
   const handleShowTopics = () => setShow(true);
   useEffect(() => {
     if (resources && resources.length > 0) {
-      const techResource = resources.find((i) => i.tech.id === obj.learnedTech.id);
-      if (techResource) {
-        const goalResource = resources.filter((i) => i.objectId !== null && i.objectId === obj.id);
-        setResource(goalResource);
-      }
+      // const techResource = resources.find((i) => i.learnedTech.id === obj.learnedTech.id);
+      const goalResource = resources.find((i) => i.objectId.id === obj.id);
+      setResource(goalResource);
     }
     if (topics.length > 0) {
       const results = topics.filter((i) => i.goal !== null && i.goal.id === obj.id);
@@ -36,29 +34,40 @@ export default function GoalCard({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topics, resources, obj.id]);
-  const handleKeyDown = () => {
+  const handleClick = (assignedGoal) => {
+    if (assigningBookmark) {
+      setAssignedTopicOrGoal(assignedGoal);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.target.id === 'card') {
+      handleClick(obj);
+    }
     if (show) {
       handleCloseTopics();
     } else {
       handleShowTopics(true);
     }
   };
+
   const handleShowForm = () => {
     setshowForm(true);
   };
+
   const handleCancelShowForm = () => {
     setshowForm(false);
   };
+
   const handleDelete = () => {
-    console.warn(resource);
-    if (Object.values(resource) > 0) {
-      updateResource(resource).then(() => {
-        deleteGoal(obj.id).then(() => onUpdate());
-      });
+    if (Object.values(resource).length > 0) {
+      deleteResource(resource);
+      deleteGoal(obj.id).then(() => onUpdate());
     } else {
       deleteGoal(obj.id).then(() => onUpdate());
     }
   };
+
   if (showForm) {
     return (
       <div className="card_spacing topic-goal_card">
@@ -72,7 +81,14 @@ export default function GoalCard({
     );
   }
   return (
-    <>
+    <div
+      role="button"
+      tabIndex="0"
+      id="card"
+      onKeyDown={(e) => handleKeyDown(e, obj)}
+      onClick={() => handleClick(obj)}
+      className={assignedTopicOrGoal.id === obj.id ? 'highlight' : ''}
+    >
       <div className="card_spacing topic-goal_card_container">
         <div className="topic-goal-image">
           <TechImage obj={obj.learnedTech.tech} />
@@ -151,7 +167,7 @@ export default function GoalCard({
       <div className="accordion_container">
         <TopAccordian show={show} topics={goalTopics} />
       </div>
-    </>
+    </div>
   );
 }
 
@@ -187,10 +203,18 @@ GoalCard.propTypes = {
       id: PropTypes.number,
     }),
   }))).isRequired,
+  setAssignedTopicOrGoal: PropTypes.func,
+  assignedTopicOrGoal: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+  assigningBookmark: PropTypes.bool,
 };
 
 GoalCard.defaultProps = {
   edit: false,
   preview: false,
   topics: [],
+  setAssignedTopicOrGoal: () => {},
+  assignedTopicOrGoal: {},
+  assigningBookmark: false,
 };

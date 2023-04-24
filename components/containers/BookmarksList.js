@@ -10,7 +10,7 @@ function BookmarksList({
   const rootNode = bookmarks.find((node) => node.parentId === 1);
   const shortenedString = (string) => {
     if (string.length > 40) {
-      const shorten = string.slice(0, 40);
+      const shorten = string.slice(0, 16);
       return `${shorten}`;
     }
     return string;
@@ -19,7 +19,6 @@ function BookmarksList({
   const buildTree = (node) => {
     const children = bookmarks.filter((child) => child.parentId === node.id);
     if (children.length === 0) {
-      console.warn(node);
       return node;
     }
     return {

@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import PropTypes from 'prop-types';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 import MediaQuery from 'react-responsive';
-import BookmarkSidebar from '../containers/overlays/BookmarkSidebar';
 
 export default function LearnedTechNav({
-  lTech, handleShowAll, handleShow, showAll, goals, topics, bookmarks, resources, onUpdate,
+  lTech, handleShowAll,
 }) {
-  const [show, setShow] = useState(false);
-  const handleShowSidebar = () => setShow(true);
-  const handleClose = () => setShow(false);
   return (
     <>
       <MediaQuery maxWidth={768}>
@@ -26,13 +22,13 @@ export default function LearnedTechNav({
                   title="Choose"
                   menuVariant="dark"
                 >
-                  <NavDropdown.Item href="#action/3.1">Docs</NavDropdown.Item>
+                  <NavDropdown.Item target="_blank" href={lTech.tech.docUrl}>Docs</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2" id="goals" onClick={(e) => handleShowAll(e)}>
                     Goals
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3" id="topics" onClick={(e) => handleShowAll(e)}>Topics</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4" onClick={handleShowSidebar}>
+                  <NavDropdown.Item href="#action/3.4" id="bookmarks" onClick={(e) => handleShowAll(e)}>
                     Bookmarks
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -40,16 +36,6 @@ export default function LearnedTechNav({
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <BookmarkSidebar
-          show={show}
-          handleClose={handleClose}
-          lTech={lTech}
-          goals={goals}
-          topics={topics}
-          bookmarks={bookmarks}
-          resources={resources}
-          onUpdate={onUpdate}
-        />
       </MediaQuery>
 
       <MediaQuery minWidth={769}>
@@ -57,40 +43,24 @@ export default function LearnedTechNav({
           <Nav.Item>
             <Nav.Link eventKey="3" active={false} target="_blank" href={lTech.tech.docUrl}>Documentation</Nav.Link>
           </Nav.Item>
-          <NavDropdown title="Goals" menuVariant="dark">
-            <NavDropdown.Item eventKey="4" id="goals" onClick={(e) => handleShowAll(e)}>View All</NavDropdown.Item>
-            {showAll ? (
-              <NavDropdown.Item eventKey="4.1" onClick={(e) => handleShow(e)} id="goal">
-                Create
-              </NavDropdown.Item>
-            ) : ('')}
-          </NavDropdown>
-
-          <NavDropdown title="Topics" menuVariant="dark">
-            <NavDropdown.Item eventKey="5.1" id="topics" onClick={(e) => handleShowAll(e)}>View All</NavDropdown.Item>
-            {showAll ? (
-              <NavDropdown.Item eventKey="4.1" onClick={(e) => handleShow(e)} id="topic">
-                Create
-              </NavDropdown.Item>
-            ) : ('')}
-          </NavDropdown>
 
           <Nav.Item>
-            <Nav.Link onClick={handleShowSidebar}>
+            <Nav.Link eventKey="4" id="goals" onClick={(e) => handleShowAll(e)}>
+              Goals
+            </Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link eventKey="5" id="topics" onClick={(e) => handleShowAll(e)}>
+              Topics
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="6" id="bookmarks" onClick={(e) => handleShowAll(e)}>
               BookMarks
             </Nav.Link>
           </Nav.Item>
         </Nav>
-        <BookmarkSidebar
-          show={show}
-          handleClose={handleClose}
-          lTech={lTech}
-          goals={goals}
-          topics={topics}
-          bookmarks={bookmarks}
-          resources={resources}
-          onUpdate={onUpdate}
-        />
       </MediaQuery>
     </>
   );
@@ -103,36 +73,7 @@ LearnedTechNav.propTypes = {
     }),
   }).isRequired,
   handleShowAll: PropTypes.func.isRequired,
-  handleShow: PropTypes.func,
-  showAll: PropTypes.bool,
-  goals: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string,
-  }))).isRequired,
-  topics: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string,
-  }))).isRequired,
-  bookmarks: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.number,
-    index: PropTypes.number,
-    parentId: PropTypes.number,
-    title: PropTypes.string,
-    url: PropTypes.string,
-  }))).isRequired,
-  resources: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.number,
-    bookmark: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-    objectId: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-    tech: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-  }))).isRequired,
-  onUpdate: PropTypes.func.isRequired,
 };
 LearnedTechNav.defaultProps = {
-  handleShow: () => {},
-  showAll: false,
+
 };

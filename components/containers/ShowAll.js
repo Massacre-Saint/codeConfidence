@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import GoalList from './GoalList';
 import TopicList from './TopicList';
 import SearchBar from '../SearchBar';
-import ToggleButtons from '../navs/ToggleButtons';
-import SortDropdown from '../buttons/SortDropdown';
-import SortSearchDropdown from '../buttons/SortSearchDropdown';
+import Bookmarks from './Bookmarks';
+import FilterModal from '../modals/FilterModal';
 
 export default function ShowAll({
-  showingGoals, goals, topics, onUpdate, handleClose, edit, resources,
+  showingGoals, goals, topics, onUpdate, handleClose, edit, resources, showingBookmarks, lTech,
 }) {
   const [filteredGoals, setFilteredGoals] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
@@ -21,19 +20,20 @@ export default function ShowAll({
   if (showingGoals) {
     return (
       <div className="view-all_container">
-        <div className="sub-nav-space-between">
-          <div className="search-bar_container">
-            <SearchBar array={goals} setArray={setFilteredGoals} />
-          </div>
-        </div>
+        <div className="sub-nav-space-between" />
         <div className="show-all_container">
           <div className="show-all_header">
-            <div className="show-all_header-content">
-              <ToggleButtons lTechGoals={goals} setFilteredGoals={setFilteredGoals} />
+            <div className="search-bar_container">
+              <SearchBar array={goals} setArray={setFilteredGoals} />
             </div>
             <div className="show-all_header-content">
               <div>
-                <SortDropdown array={goals} setArray={setFilteredGoals} />
+                <FilterModal
+                  goals={goals}
+                  topics={topics}
+                  setFilteredGoals={setFilteredGoals}
+                  setFilteredTopics={setFilteredTopics}
+                />
               </div>
             </div>
           </div>
@@ -50,27 +50,36 @@ export default function ShowAll({
         </div>
       </div>
     );
+  } if (showingBookmarks) {
+    return (
+      <Bookmarks
+        lTech={lTech}
+        goals={goals}
+        topics={topics}
+        resources={resources}
+        onUpdate={onUpdate}
+      />
+    );
   }
   return (
     <>
       <div className="view-all_container">
-        <div className="sub-nav-space-between">
-          <div className="search-bar_container">
-            <SearchBar array={topics} setArray={setFilteredTopics} />
-          </div>
-        </div>
+        <div className="sub-nav-space-between" />
         <div className="show-all_container">
           <div className="show-all_header">
-            <div className="show-all_header-content">
-              <ToggleButtons lTechTopics={topics} setFilteredTopics={setFilteredTopics} />
+            <div className="search-bar_container">
+              <SearchBar array={topics} setArray={setFilteredTopics} />
             </div>
             <div className="show-all_header-content">
               <div>
-                <SortDropdown array={topics} setArray={setFilteredTopics} />
+                <FilterModal
+                  goals={goals}
+                  topics={topics}
+                  setFilteredGoals={setFilteredGoals}
+                  setFilteredTopics={setFilteredTopics}
+                />
               </div>
-              <div>
-                <SortSearchDropdown lTechGoals={goals} setFilteredTopics={setFilteredTopics} lTechTopics={topics} />
-              </div>
+
             </div>
           </div>
           <div className="show-all-list-container">
@@ -91,6 +100,7 @@ export default function ShowAll({
 
 ShowAll.propTypes = {
   showingGoals: PropTypes.bool.isRequired,
+  showingBookmarks: PropTypes.bool.isRequired,
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
@@ -112,4 +122,10 @@ ShowAll.propTypes = {
       id: PropTypes.number,
     }),
   }))).isRequired,
+  lTech: PropTypes.shape({
+    tech: PropTypes.shape({
+      docUrl: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
 };
