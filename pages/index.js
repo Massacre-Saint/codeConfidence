@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { LearnedTechStart, LearnedTechView } from '../components/containers';
 import { useAuth } from '../utils/context/authContext';
 import { getLearnedTech, getTech } from '../utils/data';
-import { Loading } from '../components';
+import { Loading, Message } from '../components';
 
 function Home() {
   const { user } = useAuth();
@@ -32,7 +32,13 @@ function Home() {
     );
   }
   return (
-    <LearnedTechView tech={learnedTech} />
+    <div className="home">
+      <div className="quick-bar-container" />
+      <div className="message-container">
+        <Message />
+      </div>
+      <LearnedTechView tech={learnedTech} />
+    </div>
   );
 }
 export default Home;

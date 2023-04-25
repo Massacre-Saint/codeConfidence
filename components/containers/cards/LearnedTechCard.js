@@ -25,7 +25,7 @@ export default function LearnedTechCard({ handleClick, obj }) {
   };
   return (
     <div
-      className="tech_card outline"
+      className="tech_card"
       role="button"
       tabIndex="0"
       onKeyDown={handleKeyDown}

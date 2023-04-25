@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import LearnedTechCard from './cards/LearnedTechCard';
-import { Message } from '../headers';
 
 export default function LearnedTechView({ tech }) {
   const router = useRouter();
@@ -15,8 +14,13 @@ export default function LearnedTechView({ tech }) {
   return (
     <>
       <div className="tech-view_container">
-        <div>
-          <Message />
+        <div className="flex-row space-between_shift-down">
+          <span className="sub-heading">
+            Your Skillset
+          </span>
+          {/* <span className="sub-heading-sm">
+            Expand
+          </span> */}
         </div>
         <div className="tech_flex-container">
           {tech.map((i) => (
