@@ -27,6 +27,22 @@ export default function LearnedTechView({ tech }) {
             <LearnedTechCard handleClick={handleClick} key={i.id} obj={i} />
           ))}
         </div>
+        <div className="flex-row space-between_shift-down">
+          <span className="sub-heading padding">
+            Goals
+          </span>
+          <span className="sub-heading-sm padding">
+            Expand
+          </span>
+        </div>
+        <div className="flex-row space-between_shift-down">
+          <span className="sub-heading padding">
+            Topics
+          </span>
+          <span className="sub-heading-sm padding">
+            Expand
+          </span>
+        </div>
       </div>
     </>
   );
