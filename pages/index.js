@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { LearnedTechStart, LearnedTechView } from '../components/containers';
 import { useAuth } from '../utils/context/authContext';
 import { getLearnedTech, getTech } from '../utils/data';
-import { Loading } from '../components';
+import { Loading, Message } from '../components';
+import RecentsSidebar from '../components/containers/RecentsSidebar';
 
 function Home() {
   const { user } = useAuth();
@@ -32,7 +33,15 @@ function Home() {
     );
   }
   return (
-    <LearnedTechView tech={learnedTech} />
+    <div className="home">
+      <div className="recent-sidebar-container">
+        <RecentsSidebar />
+      </div>
+      <div className="message-container">
+        <Message />
+      </div>
+      <LearnedTechView tech={learnedTech} />
+    </div>
   );
 }
 export default Home;
