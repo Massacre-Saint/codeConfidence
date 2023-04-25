@@ -33,11 +33,14 @@ body::-webkit-scrollbar {
 }
 ul {
   padding-left: 10px;
-  background-color: blue;
 }
 .flex-col {
   display: flex;
   flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
 }
 body::-webkit-scrollbar-track {
   background: rgb(9,79,175);
@@ -995,8 +998,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 
 .list {
   list-style: none;
-  font-size: .95em;
-  line-height: 1.5rem;
 }
 
 .bookmark-offcanvas {
@@ -1007,7 +1008,8 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 
 .bookmark-list_container {
   padding: 1%;
-  background-color: grey;
+  border-radius: 15px;
+  background-color: var(--background-accent);
   margin-top: 2%;
 }
 .accordion_container {
@@ -1067,4 +1069,16 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 .dropdown-toggle::before {
   border: none;
   content: none;
+}
+
+.dropdown-inline {
+  display: inline;
+}
+.indent-line {
+  margin: 10px 0px 10px 18px;
+  width: 2px;
+  background-color: var(--background-main);
+}
+.fit-content {
+  width: fit-content;
 }

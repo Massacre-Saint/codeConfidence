@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FcFolder } from 'react-icons/fc';
 import Bookmark from './cards/Bookmark';
 
 function BookmarksList({
@@ -8,13 +7,7 @@ function BookmarksList({
 }) {
   // Find the root node
   const rootNode = bookmarks.find((node) => node.parentId === 1);
-  const shortenedString = (string) => {
-    if (string.length > 40) {
-      const shorten = string.slice(0, 16);
-      return `${shorten}`;
-    }
-    return string;
-  };
+
   // Traverse the tree recursively to build the tree structure
   const buildTree = (node) => {
     const children = bookmarks.filter((child) => child.parentId === node.id);
@@ -32,10 +25,6 @@ function BookmarksList({
   }, [bookmarks]);
   return (
     <div className="bookmark-list_container">
-      <span>
-        <FcFolder />
-        {shortenedString(rootNode.title)}
-      </span>
       {tree.children
         ? (
           <>
