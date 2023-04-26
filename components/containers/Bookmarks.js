@@ -49,9 +49,9 @@ export default function Bookmarks({
   }, [resources]);
   return (
     <>
-      <div className="view-all_container">
+      <div>
         <div className="sub-nav-space-between" />
-        <div className="show-all_container">
+        <div>
           <div className="show-all_header">
             <div className="search-bar_container">
               <SearchBar />

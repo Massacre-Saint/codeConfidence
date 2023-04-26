@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { IoMdArrowBack } from 'react-icons/io';
-import TechImage from '../icons/TechImage';
 import { LearnedTechNav } from '../navs';
-import LearnedTechHeader from '../headers/LearnedTechHeader';
 import CreateDropdown from '../buttons/CreateDropdown';
 import CreateModal from '../modals/CreateModal';
 import GoalCardPreview from './cards/GoalCardPreview';
@@ -19,7 +17,7 @@ export default function LearnedTechHub({
   const [show, setShow] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [showingGoals, setShowingGoals] = useState(false);
-  const [showingBookmarks, setShowingBookmarks] = useState(false);
+  const [showingBookmarks] = useState(false);
   const [edit, setEdit] = useState(false);
   const handleClose = () => {
     setShowGoal(false);
@@ -45,29 +43,17 @@ export default function LearnedTechHub({
   const handleShowAll = (e) => {
     if (e.target.id === 'topics') {
       setShowingGoals(false);
-      setShowingBookmarks(false);
       setShowAll(true);
     } else if (e.target.id === 'goals') {
       setShowingGoals(true);
-      setShowingBookmarks(false);
       setShowAll(true);
-    } else if (e.target.id === 'bookmarks') {
-      setShowingBookmarks(true);
-      setShowAll(true);
-      setShowingGoals(false);
     } else {
       setShowAll(false);
     } setEdit(false);
   };
   if (showAll) {
     return (
-      <>
-        <div className="l-tech-nav">
-          <div className="tech-image-nav">
-            <TechImage obj={lTech.tech} />
-          </div>
-          <LearnedTechHeader obj={lTech.tech} />
-        </div>
+      <div className="tech-view_container">
         <LearnedTechNav
           lTech={lTech}
           handleShowAll={handleShowAll}
@@ -121,18 +107,12 @@ export default function LearnedTechHub({
           goals={goals}
           onUpdate={onUpdate}
         />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <div className="l-tech-nav">
-        <div className="tech-image-nav">
-          <TechImage obj={lTech.tech} />
-        </div>
-        <LearnedTechHeader obj={lTech.tech} />
-      </div>
+    <div className="tech-view_container">
       <LearnedTechNav
         lTech={lTech}
         handleShowAll={handleShowAll}
@@ -178,7 +158,7 @@ export default function LearnedTechHub({
         goals={goals}
         onUpdate={onUpdate}
       />
-    </>
+    </div>
   );
 }
 LearnedTechHub.propTypes = {

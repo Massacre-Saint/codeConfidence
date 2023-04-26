@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import GoalList from './GoalList';
 import TopicList from './TopicList';
 import SearchBar from '../SearchBar';
-import Bookmarks from './Bookmarks';
 import FilterModal from '../modals/FilterModal';
 
 export default function ShowAll({
-  showingGoals, goals, topics, onUpdate, handleClose, edit, resources, showingBookmarks, lTech,
+  showingGoals, goals, topics, onUpdate, handleClose, edit, resources,
 }) {
   const [filteredGoals, setFilteredGoals] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
@@ -50,16 +49,6 @@ export default function ShowAll({
         </div>
       </div>
     );
-  } if (showingBookmarks) {
-    return (
-      <Bookmarks
-        lTech={lTech}
-        goals={goals}
-        topics={topics}
-        resources={resources}
-        onUpdate={onUpdate}
-      />
-    );
   }
   return (
     <>
@@ -100,7 +89,6 @@ export default function ShowAll({
 
 ShowAll.propTypes = {
   showingGoals: PropTypes.bool.isRequired,
-  showingBookmarks: PropTypes.bool.isRequired,
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
