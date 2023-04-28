@@ -50,10 +50,9 @@ export default function Bookmarks({
   return (
     <>
       <div>
-        <div className="sub-nav-space-between" />
         <div>
-          <div className="show-all_header">
-            <div className="search-bar_container">
+          <div className="search-bar-filter-container">
+            <div>
               <SearchBar />
             </div>
             <div className="show-all_header-content">

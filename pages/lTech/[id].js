@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { LearnedTechHub, Loading, TechImage } from '../../components';
 import Bookmarks from '../../components/containers/Bookmarks';
 import LearnedTechHeader from '../../components/headers/LearnedTechHeader';
+import NavBlock from '../../components/navs/NavBlock';
 import { useAuth } from '../../utils/context/authContext';
 import { getSingleLearnedTech, getSingleTech } from '../../utils/data';
 import { getAllGoals, getGoals } from '../../utils/data/goals';
@@ -50,6 +51,9 @@ export default function LearnedTechViewAll() {
   return (
     <>
       <div className="home">
+        <div className="grid-nav-container">
+          <NavBlock />
+        </div>
         <div className="recent-sidebar-container">
           <Bookmarks
             lTech={lTech}

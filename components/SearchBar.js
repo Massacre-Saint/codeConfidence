@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 
 export default function SearchBar({
   array, setArray,
 }) {
   const [searchInput, setSearchInput] = useState('');
-  // const [active, setActive]
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const inputRef = useRef(null);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -21,22 +20,43 @@ export default function SearchBar({
     setSearchInput('');
     setArray(array);
   };
-
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        if (searchInput.length > 0) {
+          setShowSearchBar(true);
+        } else setShowSearchBar(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, [inputRef, searchInput.length]);
   return (
-    <InputGroup>
-      <InputGroup.Text id="btnGroupAddon" className="search-side"><AiOutlineSearch /></InputGroup.Text>
-      <Form.Control
-        type="text"
-        className="search-field"
-        placeholder="Search Title"
-        aria-label="Input group example"
-        aria-describedby="btnGroupAddon"
-        value={searchInput}
-        onChange={handleChange}
-        // onClick={}
-      />
-      <InputGroup.Text id="btnGroupAddon" className="search-side"><button type="button" className="search-side_button" onClick={resetInput}>X</button></InputGroup.Text>
-    </InputGroup>
+    <div className="search-container">
+      <div>
+        <AiOutlineSearch
+          type="button"
+          className="search-button"
+          aria-label="collapsed navbar"
+          onClick={() => setShowSearchBar(true)}
+        />
+        <input
+          className={`search-input ${showSearchBar ? 'active' : ''}`}
+          name="search"
+          placeholder="Search by Title"
+          value={searchInput}
+          onChange={handleChange}
+          ref={inputRef}
+        />
+        <AiOutlineClose
+          type="button"
+          className={`search-input-reset ${showSearchBar ? 'taco' : ''}`}
+          onClick={resetInput}
+        />
+      </div>
+    </div>
   );
 }
 

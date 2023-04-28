@@ -4,7 +4,8 @@
 :root {
   --font-primary: white;
   --font-secondary: rgb(198, 198, 198);
-  --background-main: #1f1f1f;
+  --background-main: #111111;
+  --container-block: #1b1b1b;
   --background-accent: #545454;
   --highlight: green;
 }
@@ -79,7 +80,7 @@ body::-webkit-scrollbar-thumb:hover {
   border-color: var(--font-primary);
 }
 body {
-  background-color: #1f1f1f;
+  background-color: var(--background-main);
   font-family: 'Open Sans';
   color: white;
 }
@@ -88,7 +89,7 @@ body {
 }
 
 .main-navbar {
-  background-color: #1f1f1f;
+  background-color: var(--background-main);
   padding: 5px;
   border-bottom: 1px solid #323232;
 }
@@ -105,8 +106,7 @@ body {
 }
 @media (min-width: 1200px) {
   .main-container {
-    margin: .5% auto;
-    max-width: 1440px;
+    margin: .5%;
     min-height: 90vh;
   }
 }
@@ -276,36 +276,54 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 }
 
 .tech-view_container {
-  grid-area: c;
+  grid-area: main;
   padding: 15px 25px;
-  background-color: var(--background-accent);
+  background-color: var(--container-block);
   border-radius: 10px;
 }
 
 .recent-sidebar-container {
+  padding: 15px;
   min-width: 270px;
   overflow-y: scroll;
-  grid-area: a;
-  background-color: var(--background-accent);
+  grid-area: sidebar;
+  background-color: var(--container-block);
   border-radius: 10px;
+}
+.grid-nav-container {
+  background-color: var(--container-block);
+  border-radius: 10px;
+}
+.quadrant-grid-nav {
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns:repeat(2, 1fr);
+  gap: 1rem;
+}
+.quadrant-grid-nav > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .sm-grid-container {
   padding: 15px 25px;
-  background-color: var(--background-accent);
+  background-color: var(--container-block);
   border-radius: 10px;
-  max-height: 150px;
-  grid-area: b;
+  grid-area: info;
 }
 .home {
   display: grid;
   height: 100%;
   width: 100%;
   gap: 10px;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 2.5fr;
+  grid-template-rows: 1fr 6fr;
+  grid-template-columns: 1.2fr 3fr;
   grid-template-areas:
-  "a b"
-  "a c";
+  "nav info"
+  "sidebar main"
+  "sidebar main";
 }
 .tech_flex-container {
   position: relative;
@@ -870,23 +888,12 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   margin: auto;
 }
 
-.show-all_header {
-  display: flex;
-  padding-right: 2%;
-  justify-content: space-between;
-  font-weight: 700;
-  color: #ffffff;
-  border: 1px solid white;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
 .show-all_header-content {
   padding-top: .5%;
   display: flex;
   column-gap: 1em;
 
 }
-
 .logo {
   margin: auto;
 }
@@ -929,17 +936,11 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 .sub-nav div a:visited {
   color: white;
 }
-.search-bar_container {
-  width: 50%;
-}
 .search-field:focus    {
-  border: 1px solid white;
   background: rgb(9,79,175);
   background: linear-gradient(90deg, #094faf 9%, rgba(136,12,157,1) 22%, rgba(235,9,28,1) 39%, rgba(243,124,56,1) 59%, rgba(252,214,5,1) 72%, rgba(9,190,36,1) 88%);
 }
 .search-field {
-  width: 100%;
-  border: 1px solid white;
   background-color: transparent;
 }
 .search-side {
@@ -1116,4 +1117,41 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 }
 .fit-content {
   width: fit-content;
+}
+.search-bar-filter-container {
+  display: flex;
+  justify-content: space-between;
+}
+/* Search Bar */
+
+.search-input {
+  position: relative;
+  border-radius: 10px;
+  width: 0px;
+  border: none;
+  padding-left: 30px;
+  background-color: transparent;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+.search-input.active {
+  background-color: #8b8b8b;
+  width: 100%;
+}
+.search-button {
+  position: absolute;
+  z-index: 99;
+  font-size: 1.5em;
+}
+.search-button:hover {
+  background-color: #8b8b8b;
+  border-radius: 50px;
+  padding: 2px;
+}
+.search-input-reset {
+  position: absolute;
+  font-size: 1.5em;
+}
+.search-input-reset.taco {
+  font-size: 1.5em;
 }
