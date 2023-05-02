@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import BookmarksList from './BookmarksList';
-import SortResourcesAndBookmarksDropdown from '../buttons/SortResourcesAndBookmarksDropdown';
+import SortResourcesAndBookmarks from '../buttons/SortResourcesAndBookmarks';
 import ResourceForm from '../forms/ResourceForm';
 import SearchBar from '../SearchBar';
 import BookmarkForm from '../forms/BookmarkForm';
@@ -50,34 +50,26 @@ export default function Bookmarks({
   return (
     <>
       <div>
-        <div>
-          <div className="search-bar-filter-container">
-            <div>
-              <SearchBar />
-            </div>
-            <div className="show-all_header-content">
-              <div>
-                <SortResourcesAndBookmarksDropdown
-                  resources={resources}
-                  setFilteredResources={setFilteredResources}
-                  lTech={lTech}
-                  setToggledFilter={setToggledFilter}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="show-all-list-container">
-            {bookmarks.length > 0
-              ? (
-                <BookmarksList
-                  bookmarks={bookmarks}
-                  resources={filteredResources}
-                  toggledFilter={toggledFilter}
-                  handleShowForm={handleShowForm}
-                />
-              )
-              : ('')}
-          </div>
+        <div className="search-bar-filter-container">
+          <SortResourcesAndBookmarks
+            resources={resources}
+            setFilteredResources={setFilteredResources}
+            lTech={lTech}
+            setToggledFilter={setToggledFilter}
+          />
+          <SearchBar />
+        </div>
+        <div className="show-all-list-container">
+          {bookmarks.length > 0
+            ? (
+              <BookmarksList
+                bookmarks={bookmarks}
+                resources={filteredResources}
+                toggledFilter={toggledFilter}
+                handleShowForm={handleShowForm}
+              />
+            )
+            : ('')}
         </div>
       </div>
       {showResourceForm

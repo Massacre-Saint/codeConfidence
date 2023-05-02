@@ -32,30 +32,31 @@ export default function SearchBar({
     return () => {
       document.removeEventListener('click', handleClickOutside, true);
     };
-  }, [inputRef, searchInput.length]);
+  }, [inputRef, searchInput]);
   return (
     <div className="search-container">
-      <div>
-        <AiOutlineSearch
-          type="button"
-          className="search-button"
-          aria-label="collapsed navbar"
-          onClick={() => setShowSearchBar(true)}
-        />
-        <input
-          className={`search-input ${showSearchBar ? 'active' : ''}`}
-          name="search"
-          placeholder="Search by Title"
-          value={searchInput}
-          onChange={handleChange}
-          ref={inputRef}
-        />
-        <AiOutlineClose
-          type="button"
-          className={`search-input-reset ${showSearchBar ? 'taco' : ''}`}
-          onClick={resetInput}
-        />
-      </div>
+      <AiOutlineSearch
+        type="button"
+        className="search-button"
+        aria-label="collapsed navbar"
+        onClick={() => setShowSearchBar(true)}
+      />
+      <input
+        className={`search-input ${showSearchBar ? 'active' : ''}`}
+        name="search"
+        placeholder="Search by Title"
+        value={searchInput}
+        onChange={handleChange}
+        ref={inputRef}
+      />
+      <AiOutlineClose
+        type="button"
+        className={`search-input-reset ${showSearchBar && searchInput.length > 0 ? 'active' : ''}`}
+        onClick={() => {
+          resetInput();
+          setShowSearchBar(false);
+        }}
+      />
     </div>
   );
 }
