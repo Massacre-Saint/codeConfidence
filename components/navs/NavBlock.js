@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import {
   BsBarChartSteps, BsBookmarkFill, BsFillSignpost2Fill, BsFillHouseDoorFill,
@@ -8,19 +9,27 @@ function NavBlock() {
     <div className="quadrant-grid-nav">
       <span>
         <BsFillHouseDoorFill />
-        <span>Home</span>
+        <Link passHref href="/">
+          Home
+        </Link>
       </span>
       <span>
         <BsBookmarkFill />
-        <span>Bookmarks</span>
+        <Link passHref href="/bookmarks">
+          Bookmarks
+        </Link>
       </span>
       <span>
         <BsBarChartSteps />
-        <span>Topics</span>
+        <Link passHref href="/topics">
+          Topics
+        </Link>
       </span>
       <span>
         <BsFillSignpost2Fill />
-        <span>Goals</span>
+        <Link passHref href="/goals">
+          Goals
+        </Link>
       </span>
     </div>
   );

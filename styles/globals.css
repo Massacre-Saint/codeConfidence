@@ -106,7 +106,7 @@ body {
   display: flex;
 }
 .main-container {
-  height: 90vh;
+  height: 100vh;
 }
 @media (min-width: 1200px) {
   .main-container {
