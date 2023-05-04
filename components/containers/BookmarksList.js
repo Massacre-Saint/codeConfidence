@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import Bookmark from './cards/Bookmark';
 
 function BookmarksList({
-  bookmarks, resources, toggledFilter, handleShowForm,
+  bookmarks, filteredBookmarks, resources, toggledFilter, handleShowForm,
 }) {
   // Find the root node
-  const rootNode = bookmarks.find((node) => node.parentId === 1);
+  const rootNode = filteredBookmarks[0];
+  const parentNodesIds = filteredBookmarks.map((i) => i.parentId);
+  const rootNodes = bookmarks.filter((i) => parentNodesIds.includes(i.id));
 
   // Traverse the tree recursively to build the tree structure
   const buildTree = (node) => {
-    const children = bookmarks.filter((child) => child.parentId === node.id);
+    const children = filteredBookmarks.filter((bookmark) => bookmark.parentId === node.id);
     if (children.length === 0) {
       return node;
     }
@@ -21,8 +23,9 @@ function BookmarksList({
   };
 
   const tree = buildTree(rootNode);
+
   useEffect(() => {
-  }, [bookmarks]);
+  }, [rootNodes, filteredBookmarks]);
   return (
     <div className="bookmark-list_container">
       {tree.children
@@ -43,7 +46,20 @@ function BookmarksList({
           </>
         )
         : (
-          ''
+          <>
+            {filteredBookmarks.map((bookmark) => (
+              <span key={bookmark.id}>
+                <Bookmark
+                  key={bookmark.id}
+                  node={bookmark}
+                  bookmarks={bookmarks}
+                  resources={resources}
+                  toggledFilter={toggledFilter}
+                  handleShowForm={handleShowForm}
+                />
+              </span>
+            ))}
+          </>
         )}
     </div>
   );
@@ -53,6 +69,13 @@ export default BookmarksList;
 
 BookmarksList.propTypes = {
   bookmarks: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.number,
+    index: PropTypes.number,
+    parentId: PropTypes.number,
+    title: PropTypes.string,
+    url: PropTypes.string,
+  }))).isRequired,
+  filteredBookmarks: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.number,
     index: PropTypes.number,
     parentId: PropTypes.number,

@@ -11,6 +11,7 @@ export default function Bookmarks({
   lTech, goals, topics, resources, onUpdate,
 }) {
   const [filteredResources, setFilteredResources] = useState([]);
+  const [filteredBookmarks, setFilteredBookmarks] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
   const [toggledFilter, setToggledFilter] = useState(false);
   const [bookmark, setBookmark] = useState({});
@@ -21,6 +22,7 @@ export default function Bookmarks({
   const getAndSetBookmarkData = async () => {
     const bookmarkData = await getBookmarks();
     setBookmarks(bookmarkData);
+    setFilteredBookmarks(bookmarkData);
   };
 
   const handleCloseFormAndResetFormStates = () => {
@@ -57,13 +59,14 @@ export default function Bookmarks({
             lTech={lTech}
             setToggledFilter={setToggledFilter}
           />
-          <SearchBar />
+          <SearchBar array={bookmarks} setArray={setFilteredBookmarks} />
         </div>
         <div className="show-all-list-container">
-          {bookmarks.length > 0
+          {filteredBookmarks.length > 0
             ? (
               <BookmarksList
                 bookmarks={bookmarks}
+                filteredBookmarks={filteredBookmarks}
                 resources={filteredResources}
                 toggledFilter={toggledFilter}
                 handleShowForm={handleShowForm}
@@ -98,52 +101,6 @@ export default function Bookmarks({
         )
         : ('')}
     </>
-  // <>
-  //   <Offcanvas show={show} onHide={handleClose} className="bookmark-offcanvas">
-  //     <Offcanvas.Header closeButton closeVariant="white">
-  //       <SearchBar />
-  //     </Offcanvas.Header>
-  //     <Offcanvas.Body>
-  //       <ToggleResourcesAndBookmarksButton
-  //         resources={resources}
-  //         setFilteredResources={setFilteredResources}
-  //         lTech={lTech}
-  //         setToggledFilter={setToggledFilter}
-  //       />
-  //       <BookmarksList
-  //         bookmarks={bookmarks}
-  //         resources={filteredResources}
-  //         toggledFilter={toggledFilter}
-  //         handleShowForm={handleShowForm}
-  //       />
-  //       {showResourceForm
-  //         ? (
-  //           <ResourceForm
-  //             obj={resource}
-  //             goals={goals}
-  //             topics={topics}
-  //             handleShowForm={handleShowForm}
-  //             onUpdate={onUpdate}
-  //           />
-  //         )
-  //         : ('')}
-  //       {showBookmarkForm
-  //         ? (
-  //           <BookmarkForm
-  //             obj={bookmark}
-  //             lTech={lTech}
-  //             goals={goals}
-  //             topics={topics}
-  //             handleShowForm={handleShowForm}
-  //             onUpdate={onUpdate}
-  //             fetchBookmarks={fetchBookmarks}
-  //             handleCloseFormAndResetFormStates={handleCloseFormAndResetFormStates}
-  //           />
-  //         )
-  //         : ('')}
-  //     </Offcanvas.Body>
-  //   </Offcanvas>
-  // </>
   );
 }
 Bookmarks.propTypes = {
