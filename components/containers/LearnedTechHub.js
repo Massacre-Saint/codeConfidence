@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { IconContext } from 'react-icons';
-import { IoMdArrowBack } from 'react-icons/io';
-import TechImage from '../icons/TechImage';
 import { LearnedTechNav } from '../navs';
-import LearnedTechHeader from '../headers/LearnedTechHeader';
 import CreateDropdown from '../buttons/CreateDropdown';
 import CreateModal from '../modals/CreateModal';
 import GoalCardPreview from './cards/GoalCardPreview';
@@ -19,7 +15,7 @@ export default function LearnedTechHub({
   const [show, setShow] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [showingGoals, setShowingGoals] = useState(false);
-  const [showingBookmarks, setShowingBookmarks] = useState(false);
+  const [showingBookmarks] = useState(false);
   const [edit, setEdit] = useState(false);
   const handleClose = () => {
     setShowGoal(false);
@@ -43,59 +39,24 @@ export default function LearnedTechHub({
   };
 
   const handleShowAll = (e) => {
-    if (e.target.id === 'topics') {
+    if (e.target.id === '4') {
       setShowingGoals(false);
-      setShowingBookmarks(false);
       setShowAll(true);
-    } else if (e.target.id === 'goals') {
+    } else if (e.target.id === '3') {
       setShowingGoals(true);
-      setShowingBookmarks(false);
       setShowAll(true);
-    } else if (e.target.id === 'bookmarks') {
-      setShowingBookmarks(true);
-      setShowAll(true);
-      setShowingGoals(false);
     } else {
       setShowAll(false);
     } setEdit(false);
   };
   if (showAll) {
     return (
-      <>
-        <div className="l-tech-nav">
-          <div className="tech-image-nav">
-            <TechImage obj={lTech.tech} />
-          </div>
-          <LearnedTechHeader obj={lTech.tech} />
-        </div>
+      <div className="tech-view_container">
         <LearnedTechNav
-          lTech={lTech}
           handleShowAll={handleShowAll}
         />
         <div className="block_section">
           <div className="flex_space_between">
-            <div className="create-form_btn">
-              {showAll ? (
-                <button
-                  type="button"
-                  className="back-btn"
-                  onClick={(e) => {
-                    handleShowAll(e);
-                    handleEdit(e);
-                    onUpdate();
-                  }}
-                >
-                  <IconContext.Provider
-                    value={{
-                      size: '1.5em',
-                      color: 'white',
-                    }}
-                  >
-                    <IoMdArrowBack />
-                  </IconContext.Provider>
-                </button>
-              ) : ('')}
-            </div>
             <ShowAll
               onUpdate={onUpdate}
               topics={topics}
@@ -121,20 +82,13 @@ export default function LearnedTechHub({
           goals={goals}
           onUpdate={onUpdate}
         />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
-      <div className="l-tech-nav">
-        <div className="tech-image-nav">
-          <TechImage obj={lTech.tech} />
-        </div>
-        <LearnedTechHeader obj={lTech.tech} />
-      </div>
+    <div className="tech-view_container">
       <LearnedTechNav
-        lTech={lTech}
         handleShowAll={handleShowAll}
       />
       <div className="block_section">
@@ -178,7 +132,7 @@ export default function LearnedTechHub({
         goals={goals}
         onUpdate={onUpdate}
       />
-    </>
+    </div>
   );
 }
 LearnedTechHub.propTypes = {

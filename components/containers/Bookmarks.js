@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import BookmarksList from './BookmarksList';
-import SortResourcesAndBookmarksDropdown from '../buttons/SortResourcesAndBookmarksDropdown';
+import SortResourcesAndBookmarks from '../buttons/SortResourcesAndBookmarks';
 import ResourceForm from '../forms/ResourceForm';
 import SearchBar from '../SearchBar';
 import BookmarkForm from '../forms/BookmarkForm';
@@ -11,6 +11,7 @@ export default function Bookmarks({
   lTech, goals, topics, resources, onUpdate,
 }) {
   const [filteredResources, setFilteredResources] = useState([]);
+  const [filteredBookmarks, setFilteredBookmarks] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
   const [toggledFilter, setToggledFilter] = useState(false);
   const [bookmark, setBookmark] = useState({});
@@ -21,6 +22,7 @@ export default function Bookmarks({
   const getAndSetBookmarkData = async () => {
     const bookmarkData = await getBookmarks();
     setBookmarks(bookmarkData);
+    setFilteredBookmarks(bookmarkData);
   };
 
   const handleCloseFormAndResetFormStates = () => {
@@ -49,36 +51,28 @@ export default function Bookmarks({
   }, [resources]);
   return (
     <>
-      <div className="view-all_container">
-        <div className="sub-nav-space-between" />
-        <div className="show-all_container">
-          <div className="show-all_header">
-            <div className="search-bar_container">
-              <SearchBar />
-            </div>
-            <div className="show-all_header-content">
-              <div>
-                <SortResourcesAndBookmarksDropdown
-                  resources={resources}
-                  setFilteredResources={setFilteredResources}
-                  lTech={lTech}
-                  setToggledFilter={setToggledFilter}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="show-all-list-container">
-            {bookmarks.length > 0
-              ? (
-                <BookmarksList
-                  bookmarks={bookmarks}
-                  resources={filteredResources}
-                  toggledFilter={toggledFilter}
-                  handleShowForm={handleShowForm}
-                />
-              )
-              : ('')}
-          </div>
+      <div>
+        <div className="search-bar-filter-container">
+          <SortResourcesAndBookmarks
+            resources={resources}
+            setFilteredResources={setFilteredResources}
+            lTech={lTech}
+            setToggledFilter={setToggledFilter}
+          />
+          <SearchBar array={bookmarks} setArray={setFilteredBookmarks} />
+        </div>
+        <div className="show-all-list-container">
+          {filteredBookmarks.length > 0
+            ? (
+              <BookmarksList
+                bookmarks={bookmarks}
+                filteredBookmarks={filteredBookmarks}
+                resources={filteredResources}
+                toggledFilter={toggledFilter}
+                handleShowForm={handleShowForm}
+              />
+            )
+            : ('')}
         </div>
       </div>
       {showResourceForm
@@ -107,52 +101,6 @@ export default function Bookmarks({
         )
         : ('')}
     </>
-  // <>
-  //   <Offcanvas show={show} onHide={handleClose} className="bookmark-offcanvas">
-  //     <Offcanvas.Header closeButton closeVariant="white">
-  //       <SearchBar />
-  //     </Offcanvas.Header>
-  //     <Offcanvas.Body>
-  //       <ToggleResourcesAndBookmarksButton
-  //         resources={resources}
-  //         setFilteredResources={setFilteredResources}
-  //         lTech={lTech}
-  //         setToggledFilter={setToggledFilter}
-  //       />
-  //       <BookmarksList
-  //         bookmarks={bookmarks}
-  //         resources={filteredResources}
-  //         toggledFilter={toggledFilter}
-  //         handleShowForm={handleShowForm}
-  //       />
-  //       {showResourceForm
-  //         ? (
-  //           <ResourceForm
-  //             obj={resource}
-  //             goals={goals}
-  //             topics={topics}
-  //             handleShowForm={handleShowForm}
-  //             onUpdate={onUpdate}
-  //           />
-  //         )
-  //         : ('')}
-  //       {showBookmarkForm
-  //         ? (
-  //           <BookmarkForm
-  //             obj={bookmark}
-  //             lTech={lTech}
-  //             goals={goals}
-  //             topics={topics}
-  //             handleShowForm={handleShowForm}
-  //             onUpdate={onUpdate}
-  //             fetchBookmarks={fetchBookmarks}
-  //             handleCloseFormAndResetFormStates={handleCloseFormAndResetFormStates}
-  //           />
-  //         )
-  //         : ('')}
-  //     </Offcanvas.Body>
-  //   </Offcanvas>
-  // </>
   );
 }
 Bookmarks.propTypes = {

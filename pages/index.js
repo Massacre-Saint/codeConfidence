@@ -37,7 +37,7 @@ function Home() {
       <div className="recent-sidebar-container">
         <RecentsSidebar />
       </div>
-      <div className="message-container">
+      <div className="sm-grid-container">
         <Message />
       </div>
       <LearnedTechView tech={learnedTech} />

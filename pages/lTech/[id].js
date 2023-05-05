@@ -2,6 +2,9 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { LearnedTechHub, Loading } from '../../components';
+import Bookmarks from '../../components/containers/Bookmarks';
+import LearnedTechHeader from '../../components/headers/LearnedTechHeader';
+import NavBlock from '../../components/navs/NavBlock';
 import { useAuth } from '../../utils/context/authContext';
 import { getSingleLearnedTech, getSingleTech } from '../../utils/data';
 import { getAllGoals, getGoals } from '../../utils/data/goals';
@@ -47,13 +50,32 @@ export default function LearnedTechViewAll() {
   }
   return (
     <>
-      <LearnedTechHub
-        lTech={lTech}
-        topics={lTechTopics}
-        goals={lTechGoals}
-        onUpdate={getDataAndSetState}
-        resources={resources}
-      />
+      <div className="home">
+        <div className="grid-nav-container">
+          <NavBlock />
+        </div>
+        <div className="recent-sidebar-container">
+          <Bookmarks
+            lTech={lTech}
+            goals={lTechGoals}
+            topics={lTechTopics}
+            resources={resources}
+            onUpdate={getDataAndSetState}
+          />
+        </div>
+        <div className="sm-grid-container">
+          <div className="l-tech-nav">
+            <LearnedTechHeader obj={lTech.tech} />
+          </div>
+        </div>
+        <LearnedTechHub
+          lTech={lTech}
+          topics={lTechTopics}
+          goals={lTechGoals}
+          onUpdate={getDataAndSetState}
+          resources={resources}
+        />
+      </div>
     </>
   );
 }
