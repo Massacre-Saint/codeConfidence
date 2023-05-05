@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { LearnedTechHub, Loading, TechImage } from '../../components';
+import { LearnedTechHub, Loading } from '../../components';
 import Bookmarks from '../../components/containers/Bookmarks';
 import LearnedTechHeader from '../../components/headers/LearnedTechHeader';
 import NavBlock from '../../components/navs/NavBlock';
@@ -65,9 +65,6 @@ export default function LearnedTechViewAll() {
         </div>
         <div className="sm-grid-container">
           <div className="l-tech-nav">
-            <div className="tech-image-nav">
-              <TechImage obj={lTech.tech} />
-            </div>
             <LearnedTechHeader obj={lTech.tech} />
           </div>
         </div>

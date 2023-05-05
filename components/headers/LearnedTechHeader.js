@@ -1,33 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { BiLinkExternal } from 'react-icons/bi';
 import MediaQuery from 'react-responsive';
-import InfoModal from '../modals/InfoModal';
 
 export default function LearnedTechHeader({ obj }) {
   return (
     <>
       <MediaQuery minWidth={647}>
-        <div className="learned-tech_header_contianer">
-          <div className="sticky">
+        <div className="learned-tech_header_container">
+          <div className="flex-row">
             <h1>{obj.name}</h1>
+            <a
+              rel="noopener noreferrer"
+              title={`${obj.name} documentation`}
+              target="_blank"
+              href={obj.docUrl}
+            >
+              <BiLinkExternal />
+            </a>
           </div>
-          <div className="overflow">
+          <p>
             {obj.description}
-          </div>
-        </div>
-      </MediaQuery>
-      <MediaQuery maxWidth={646}>
-        <div className="learned-tech_header_contianer">
-          <MediaQuery minWidth={440}>
-            <div>
-              <h1>{obj.name}</h1>
-            </div>
-          </MediaQuery>
-          <MediaQuery minWidth={319}>
-            <div className="info">
-              <InfoModal obj={obj} />
-            </div>
-          </MediaQuery>
+          </p>
         </div>
       </MediaQuery>
     </>
@@ -39,5 +33,6 @@ LearnedTechHeader.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     description: PropTypes.string,
+    docUrl: PropTypes.string,
   }).isRequired,
 };

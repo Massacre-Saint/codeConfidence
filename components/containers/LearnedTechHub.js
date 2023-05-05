@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { IconContext } from 'react-icons';
-import { IoMdArrowBack } from 'react-icons/io';
 import { LearnedTechNav } from '../navs';
 import CreateDropdown from '../buttons/CreateDropdown';
 import CreateModal from '../modals/CreateModal';
@@ -41,10 +39,10 @@ export default function LearnedTechHub({
   };
 
   const handleShowAll = (e) => {
-    if (e.target.id === 'topics') {
+    if (e.target.id === '4') {
       setShowingGoals(false);
       setShowAll(true);
-    } else if (e.target.id === 'goals') {
+    } else if (e.target.id === '3') {
       setShowingGoals(true);
       setShowAll(true);
     } else {
@@ -55,33 +53,10 @@ export default function LearnedTechHub({
     return (
       <div className="tech-view_container">
         <LearnedTechNav
-          lTech={lTech}
           handleShowAll={handleShowAll}
         />
         <div className="block_section">
           <div className="flex_space_between">
-            <div className="create-form_btn">
-              {showAll ? (
-                <button
-                  type="button"
-                  className="back-btn"
-                  onClick={(e) => {
-                    handleShowAll(e);
-                    handleEdit(e);
-                    onUpdate();
-                  }}
-                >
-                  <IconContext.Provider
-                    value={{
-                      size: '1.5em',
-                      color: 'white',
-                    }}
-                  >
-                    <IoMdArrowBack />
-                  </IconContext.Provider>
-                </button>
-              ) : ('')}
-            </div>
             <ShowAll
               onUpdate={onUpdate}
               topics={topics}
@@ -114,7 +89,6 @@ export default function LearnedTechHub({
   return (
     <div className="tech-view_container">
       <LearnedTechNav
-        lTech={lTech}
         handleShowAll={handleShowAll}
       />
       <div className="block_section">

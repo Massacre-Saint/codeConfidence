@@ -46,7 +46,7 @@ function SortResourcesAndBookmarks({
             <input
               type="radio"
               id={i.value}
-              name="1"
+              name="sidebar"
               value={i.name}
               checked={selectedValue === i.value}
               onChange={(e) => {
@@ -59,8 +59,8 @@ function SortResourcesAndBookmarks({
               htmlFor={i.value}
               type="button"
               className={
-                selectedValue === i.value
-                  ? 'border-outline-selected filter-btn'
+                selectedValue !== i.value && selectedValue !== ''
+                  ? 'border-outline-selected filter-btn hide'
                   : 'filter-btn'
               }
 

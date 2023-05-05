@@ -1,39 +1,67 @@
-import React from 'react';
-import Nav from 'react-bootstrap/Nav';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { AiOutlineClose } from 'react-icons/ai';
 
-export default function LearnedTechNav({
-  lTech, handleShowAll,
-}) {
+export default function LearnedTechNav({ handleShowAll }) {
+  const [selectedValue, setSelectedValue] = useState('');
+
+  const radios = [
+    { name: 'Goals', value: '3' },
+    { name: 'Topics', value: '4' },
+  ];
+  const resetFilter = () => {
+    setSelectedValue('');
+  };
   return (
     <>
-      <Nav variant="tabs" navbar="True" className="sub-nav">
-        <Nav.Item>
-          <Nav.Link eventKey="3" active={false} target="_blank" href={lTech.tech.docUrl}>Documentation</Nav.Link>
-        </Nav.Item>
+      <form>
+        {selectedValue !== ''
+          ? (
+            <button
+              type="button"
+              className="close-button-round"
+              onClick={(e) => {
+                resetFilter();
+                handleShowAll(e);
+              }}
+            >
+              <AiOutlineClose />
+            </button>
+          )
+          : ('')}
+        {radios.map((i) => (
+          <>
+            <input
+              type="radio"
+              id={i.value}
+              name="nav"
+              value={i.name}
+              checked={selectedValue === i.value}
+              onChange={(e) => {
+                setSelectedValue(e.target.id);
+                handleShowAll(e);
+              }}
+              className="radio-none"
+            />
+            <label
+              htmlFor={i.value}
+              type="button"
+              className={
+                selectedValue !== i.value && selectedValue !== ''
+                  ? 'border-outline-selected filter-btn hide'
+                  : 'filter-btn'
+              }
 
-        <Nav.Item>
-          <Nav.Link eventKey="4" id="goals" onClick={(e) => handleShowAll(e)}>
-            Goals
-          </Nav.Link>
-        </Nav.Item>
-
-        <Nav.Item>
-          <Nav.Link eventKey="5" id="topics" onClick={(e) => handleShowAll(e)}>
-            Topics
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
+            >{i.name}
+            </label>
+          </>
+        ))}
+      </form>
     </>
   );
 }
 
 LearnedTechNav.propTypes = {
-  lTech: PropTypes.shape({
-    tech: PropTypes.shape({
-      docUrl: PropTypes.string,
-    }),
-  }).isRequired,
   handleShowAll: PropTypes.func.isRequired,
 };
 LearnedTechNav.defaultProps = {
