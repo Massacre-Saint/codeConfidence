@@ -1,69 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { AiOutlineClose } from 'react-icons/ai';
+import SortGoalsAndTopics from '../buttons/SortGoalsAndTopics';
+import CreateDropdown from '../buttons/CreateDropdown';
 
-export default function LearnedTechNav({ handleShowAll }) {
-  const [selectedValue, setSelectedValue] = useState('');
-
-  const radios = [
-    { name: 'Goals', value: '3' },
-    { name: 'Topics', value: '4' },
-  ];
-  const resetFilter = () => {
-    setSelectedValue('');
-  };
+export default function LearnedTechNav({
+  handleShowAll, handleShow, goals, topics,
+}) {
   return (
-    <>
-      <form>
-        {selectedValue !== ''
-          ? (
-            <button
-              type="button"
-              className="close-button-round"
-              onClick={(e) => {
-                resetFilter();
-                handleShowAll(e);
-              }}
-            >
-              <AiOutlineClose />
-            </button>
-          )
-          : ('')}
-        {radios.map((i) => (
-          <>
-            <input
-              type="radio"
-              id={i.value}
-              name="nav"
-              value={i.name}
-              checked={selectedValue === i.value}
-              onChange={(e) => {
-                setSelectedValue(e.target.id);
-                handleShowAll(e);
-              }}
-              className="radio-none"
-            />
-            <label
-              htmlFor={i.value}
-              type="button"
-              className={
-                selectedValue !== i.value && selectedValue !== ''
-                  ? 'border-outline-selected filter-btn hide'
-                  : 'filter-btn'
-              }
-
-            >{i.name}
-            </label>
-          </>
-        ))}
-      </form>
-    </>
+    <div className="flex-row space-between">
+      <SortGoalsAndTopics
+        handleShowAll={handleShowAll}
+        goals={goals}
+        topics={topics}
+      />
+      <CreateDropdown
+        handleShow={handleShow}
+      />
+    </div>
   );
 }
 
 LearnedTechNav.propTypes = {
   handleShowAll: PropTypes.func.isRequired,
-};
-LearnedTechNav.defaultProps = {
-
+  handleShow: PropTypes.func.isRequired,
+  goals: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
+  topics: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
 };

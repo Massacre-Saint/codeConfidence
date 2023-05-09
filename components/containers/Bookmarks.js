@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BsBookmarkFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import BookmarksList from './BookmarksList';
 import SortResourcesAndBookmarks from '../buttons/SortResourcesAndBookmarks';
@@ -52,6 +53,12 @@ export default function Bookmarks({
   return (
     <>
       <div>
+        <div className="fnt-secondary margin-btm">
+          <BsBookmarkFill />
+          &nbsp;
+          &nbsp;
+          {toggledFilter ? `${lTech.tech.name} Resources` : 'Your Bookmarks'}
+        </div>
         <div className="search-bar-filter-container">
           <SortResourcesAndBookmarks
             resources={resources}
