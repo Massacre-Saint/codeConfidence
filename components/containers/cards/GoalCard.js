@@ -3,34 +3,34 @@ import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-bootstrap';
 import { IconContext } from 'react-icons';
 import { BiTimeFive } from 'react-icons/bi';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-import Badge from 'react-bootstrap/Badge';
 import GoalForm from '../../forms/GoalForm';
 import { deleteGoal } from '../../../utils/data/goals';
 import convertTime from '../../../utils/convertTime';
 import EditDelete from '../../buttons/EditDelete';
 import { deleteResource } from '../../../utils/data/resources';
 import TechImage from '../../icons/TechImage';
-import TopAccordian from '../../accordians/TopicAccordian';
 
 export default function GoalCard({
-  obj, onUpdate, handleClose, edit, preview, topics, resources, setAssignedTopicOrGoal, assignedTopicOrGoal, assigningBookmark,
+  obj,
+  onUpdate,
+  handleClose,
+  edit,
+  topics,
+  resources,
+  setAssignedTopicOrGoal,
+  assignedTopicOrGoal,
+  assigningBookmark,
+  preview,
 }) {
   const [showForm, setshowForm] = useState(false);
   const [resource, setResource] = useState({});
-  const [goalTopics, setGoalTopics] = useState([]);
   const [show, setShow] = useState(false);
   const handleCloseTopics = () => setShow(false);
   const handleShowTopics = () => setShow(true);
   useEffect(() => {
     if (resources && resources.length > 0) {
-      // const techResource = resources.find((i) => i.learnedTech.id === obj.learnedTech.id);
       const goalResource = resources.find((i) => i.objectId.id === obj.id);
       setResource(goalResource);
-    }
-    if (topics.length > 0) {
-      const results = topics.filter((i) => i.goal !== null && i.goal.id === obj.id);
-      setGoalTopics(results);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topics, resources, obj.id]);
@@ -70,13 +70,36 @@ export default function GoalCard({
 
   if (showForm) {
     return (
-      <div className="card_spacing topic-goal_card">
+      <div className="flex-col full-width">
         <GoalForm
           obj={obj}
           onUpdate={onUpdate}
           handleClose={handleClose}
           handleCancelShowForm={handleCancelShowForm}
         />
+      </div>
+    );
+  }
+  if (preview) {
+    return (
+      <div
+        role="button"
+        tabIndex="0"
+        id="card"
+        onKeyDown={(e) => handleKeyDown(e, obj)}
+        onClick={() => handleClick(obj)}
+        className={assignedTopicOrGoal.id === obj.id ? 'highlight' : 'card-background padding-all border-radius-15'}
+      >
+        <div className="flex-row align-center">
+          <div className="margin-r-md">
+            <TechImage obj={obj.learnedTech.tech} />
+          </div>
+          <div className="flex-col full-width">
+            <span className="fnt-large fnt-primary">
+              {obj.title}
+            </span>
+          </div>
+        </div>
       </div>
     );
   }
@@ -87,68 +110,27 @@ export default function GoalCard({
       id="card"
       onKeyDown={(e) => handleKeyDown(e, obj)}
       onClick={() => handleClick(obj)}
-      className={assignedTopicOrGoal.id === obj.id ? 'highlight' : ''}
+      className={assignedTopicOrGoal.id === obj.id ? 'highlight' : 'flex-row card-background padding-all border-radius-15'}
     >
-      <div className="card_spacing topic-goal_card_container">
-        <div className="topic-goal-image">
+      <div className="flex-row">
+        <div>
           <TechImage obj={obj.learnedTech.tech} />
         </div>
-        <div className="topic-goal_card">
+        <div className="flex-col full-width">
           <div>
-            <span className="topic-goal_card_title">
-              {preview && obj.title.length > 20
-                ? (`${obj.title.slice(0, 20)}....`)
-                : (obj.title)}
+            <span>
+              {obj.title}
             </span>
           </div>
-          <div className="topic-goal_card_footer">
+          <div className="fnt-small">
             <span>
               <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                 <BiTimeFive />
               </IconContext.Provider>
-              <span className="topic-goal_card_footer-text">
+              <span className="fnt-secondary">
                 {convertTime(obj.lastUpdated)}
               </span>
             </span>
-            {show
-              ? (
-                <button
-                  className="topic-goal-accordion_btn"
-                  type="button"
-                  tabIndex="0"
-                  onKeyDown={handleKeyDown}
-                  onClick={(e) => handleKeyDown(e)}
-                >
-                  <IconContext.Provider value={{ size: '1.2em', color: 'red' }}>
-                    <AiOutlineCloseCircle />
-                  </IconContext.Provider>
-                  Hide
-                </button>
-              )
-              : (
-                <>
-                  {goalTopics.length > 0
-                    ? (
-                      <span
-                        tabIndex="0"
-                        role="button"
-                        onKeyDown={handleKeyDown}
-                        onClick={(e) => handleKeyDown(e)}
-                      >
-                        <Badge pill bg="light" text="dark">
-                          {goalTopics.length}
-                      &nbsp;
-                          {goalTopics.length > 1
-                            ? ('Topics')
-                            : ('Topic')}
-                        </Badge>
-                      </span>
-                    )
-                    : (
-                      ''
-                    )}
-                </>
-              )}
           </div>
           {obj.progress != null ? (
             <div className="progress_container">
@@ -163,9 +145,6 @@ export default function GoalCard({
           </div>
         )
           : ('')}
-      </div>
-      <div className="accordion_container">
-        <TopAccordian show={show} topics={goalTopics} />
       </div>
     </div>
   );
@@ -187,7 +166,6 @@ GoalCard.propTypes = {
   onUpdate: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
   edit: PropTypes.bool,
-  preview: PropTypes.bool,
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))),
@@ -208,13 +186,14 @@ GoalCard.propTypes = {
     id: PropTypes.string,
   }),
   assigningBookmark: PropTypes.bool,
+  preview: PropTypes.bool,
 };
 
 GoalCard.defaultProps = {
   edit: false,
-  preview: false,
   topics: [],
   setAssignedTopicOrGoal: () => {},
   assignedTopicOrGoal: {},
   assigningBookmark: false,
+  preview: false,
 };

@@ -113,24 +113,24 @@ function BookmarkForm({
         </Row>
         {Object.values(assignedTopicOrGoal).length > 0 && showOptions
           ? (
-            <div className="card_spacing topic-goal_card_container">
-              <div className="topic-goal-image">
+            <div className="flex-row">
+              <div>
                 <TechImage obj={assignedTopicOrGoal.learnedTech.tech} />
               </div>
               <div className="topic-goal_card">
                 <div>
-                  <span className="topic-goal_card_title">
+                  <span>
                     {assignedTopicOrGoal.title.length > 20
                       ? (`${assignedTopicOrGoal.title.slice(0, 20)}....`)
                       : (assignedTopicOrGoal.title)}
                   </span>
                 </div>
-                <div className="topic-goal_card_footer">
+                <div className="">
                   <span>
                     <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                       <BiTimeFive />
                     </IconContext.Provider>
-                    <span className="topic-goal_card_footer-text">
+                    <span className="">
                       {convertTime(assignedTopicOrGoal.lastUpdated)}
                     </span>
                   </span>
@@ -158,7 +158,7 @@ function BookmarkForm({
                 id="goal"
                 onClick={(e) => handleShowAssignedResourceModal(e)}
               >
-                <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+                <IconContext.Provider value={{ size: '1.5em', color: '#c6c6c6' }}>
                   <BiWindows />
                 </IconContext.Provider>
                 Choose Goal

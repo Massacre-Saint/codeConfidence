@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { LearnedTechHub, Loading } from '../../components';
+import { Loading } from '../../components';
 import Bookmarks from '../../components/containers/Bookmarks';
+import LearnedTechDashboard from '../../components/containers/LearnedTechDashboard';
 import LearnedTechHeader from '../../components/headers/LearnedTechHeader';
 import NavBlock from '../../components/navs/NavBlock';
 import { useAuth } from '../../utils/context/authContext';
@@ -68,7 +69,7 @@ export default function LearnedTechViewAll() {
             <LearnedTechHeader obj={lTech.tech} />
           </div>
         </div>
-        <LearnedTechHub
+        <LearnedTechDashboard
           lTech={lTech}
           topics={lTechTopics}
           goals={lTechGoals}

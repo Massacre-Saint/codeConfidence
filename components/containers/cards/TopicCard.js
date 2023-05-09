@@ -12,7 +12,12 @@ import EditDelete from '../../buttons/EditDelete';
 import TechImage from '../../icons/TechImage';
 
 export default function TopicCard({
-  obj, onUpdate, handleClose, goals, edit, preview,
+  obj,
+  onUpdate,
+  handleClose,
+  goals,
+  edit,
+  preview,
 }) {
   const { user } = useAuth();
   const [showForm, setshowForm] = useState(false);
@@ -37,7 +42,7 @@ export default function TopicCard({
 
   if (showForm) {
     return (
-      <div className="card_spacing topic-goal_card">
+      <div className="flex-col full-width">
         <TopicForm
           onUpdate={onUpdate}
           handleClose={handleClose}
@@ -48,69 +53,89 @@ export default function TopicCard({
       </div>
     );
   }
-
+  if (preview) {
+    return (
+      <div
+        role="button"
+        tabIndex="0"
+        id="card"
+        className="card-background padding-all border-radius-15"
+      >
+        <div className="flex-row align-center">
+          <div className="margin-r-md">
+            <TechImage obj={obj.learnedTech.tech} />
+          </div>
+          <div className="flex-col full-width">
+            <span className="fnt-primary fnt-large">
+              {obj.title}
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="card_spacing topic-goal_card_container">
-      <div className="topic-goal-image">
+    <div className="flex-row card-background padding-all border-radius-15">
+      <div>
         <TechImage obj={obj.learnedTech.tech} />
       </div>
-      <div className="topic-goal_card">
-        <div className="topic-goal_body">
-          <span className="topic-goal_card_title">
-            {preview && obj.title.length > 20
-              ? (`${obj.title.slice(0, 20)}....`)
-              : (obj.title)}
+      <div className="flex-col full-width">
+        <div className="flex-col">
+          <span className="fnt-primary">
+            {obj.title}
           </span>
-          <span className="topic-goal_card_desc">
-            {preview && obj.description.length > 50
-              ? (`${obj.description.slice(0, 50)}....`)
-              : (obj.description)}
+          <span className="fnt-small fnt-secondary">
+            {obj.description}
           </span>
         </div>
-        <div className="topic-goal_card_footer">
+        <div className="fnt-small fnt-secondary">
           <span>
             <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
               <BiTimeFive />
             </IconContext.Provider>
-            <span className="topic-goal_card_footer-text">
+            &nbsp;
+            <span>
               {convertTime(obj.lastUpdated)}
             </span>
           </span>
           <span>
             {(obj.goal != null)
               ? (
-                <>
+                <span className="margin-l-md">
                   <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                     <BsSignpostSplit />
                   </IconContext.Provider>
-                  <span className="topic-goal_card_footer-text">
+                  &nbsp;
+                  <span className="">
                     {obj.goal.title}
                   </span>
-                </>
+                </span>
               )
               : ('')}
           </span>
           <span>
             {(obj.completed
               ? (
-                <>
+                <span className="margin-l-md">
                   <IconContext.Provider value={{ size: '1.5em', color: 'green' }}>
                     <BsCheckCircleFill />
                   </IconContext.Provider>
-                  <span className="topic-goal_card_footer-text">
+                  &nbsp;
+                  <span className="">
                     Completed
                   </span>
-                </>
+                </span>
               )
               : (
-                <>
+                <span className="margin-l-md">
                   <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
                     <BsCheckCircle />
                   </IconContext.Provider>
-                  <span className="topic-goal_card_footer-text">
+                  &nbsp;
+                  <span className="">
                     Not Complete
                   </span>
-                </>
+                </span>
               ))}
           </span>
         </div>

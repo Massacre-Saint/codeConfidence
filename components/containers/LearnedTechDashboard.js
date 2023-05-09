@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
+import { AiFillDashboard } from 'react-icons/ai';
+import { IconContext } from 'react-icons';
 import { LearnedTechNav } from '../navs';
-import CreateDropdown from '../buttons/CreateDropdown';
 import CreateModal from '../modals/CreateModal';
-import GoalCardPreview from './cards/GoalCardPreview';
 import ShowEditDelete from '../buttons/ShowEditDelete';
 import ShowAll from './ShowAll';
-import TopicCardPreview from './cards/TopicCardPreview';
+import RecentsList from './RecentsList';
 
-export default function LearnedTechHub({
+export default function LearnedTechDashboard({
   lTech, topics, goals, onUpdate, resources,
 }) {
   const [showGoal, setShowGoal] = useState(false);
@@ -27,7 +28,6 @@ export default function LearnedTechHub({
     }
     setShow(true);
   };
-
   const handleEdit = (e) => {
     if (e.target.id === 'edit') {
       setEdit(true);
@@ -49,13 +49,23 @@ export default function LearnedTechHub({
       setShowAll(false);
     } setEdit(false);
   };
-  if (showAll) {
-    return (
-      <div className="tech-view_container">
-        <LearnedTechNav
-          handleShowAll={handleShowAll}
-        />
-        <div className="block_section">
+
+  return (
+    <div className="tech-view_container">
+      <div className="fnt-secondary margin-btm">
+        <IconContext.Provider value={{ size: '1.2em' }}>
+          <AiFillDashboard className="margin-r-sm" />
+        </IconContext.Provider>
+        {`${lTech.tech.name} Dashboard`}
+      </div>
+      <LearnedTechNav
+        handleShowAll={handleShowAll}
+        goals={goals}
+        topics={topics}
+        handleShow={handleShow}
+      />
+      {showAll
+        ? (
           <div className="flex_space_between">
             <ShowAll
               onUpdate={onUpdate}
@@ -73,57 +83,30 @@ export default function LearnedTechHub({
               <ShowEditDelete handleEdit={handleEdit} edit={edit} />
             </div>
           </div>
-        </div>
-        <CreateModal
-          handleClose={handleClose}
-          showGoal={showGoal}
-          show={show}
-          lTech={lTech}
-          goals={goals}
-          onUpdate={onUpdate}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className="tech-view_container">
-      <LearnedTechNav
-        handleShowAll={handleShowAll}
-      />
-      <div className="block_section">
-        <div className="flex full-width">
-          <div className="create-form_btn">
-            <CreateDropdown handleShow={handleShow} />
-          </div>
-        </div>
-        <div className="flex two-containers">
-          <div className="box-half">
-            <div className="flex" />
-            <div className="preview_container">
-              <GoalCardPreview
-                goals={goals}
-                onUpdate={onUpdate}
-                handleClose={handleClose}
-                handleShowAll={handleShowAll}
-                resources={resources}
-              />
+        )
+        : (
+          <div className="stats">
+            <Image
+              src="/placeholder-chart.svg"
+              width={130}
+              height={130}
+            />
+            <div className="flex-col">
+              <span className="sub-heading padding">
+                Recents
+              </span>
+              <div className="flex-row margin-l-md gap-col">
+                <RecentsList list={[...goals, ...topics]} />
+              </div>
             </div>
+            {/* Feature Coming Soon */}
+            {/* <div className="flex-row space-between_shift-down">
+          <span className="sub-heading padding">
+            Projects
+          </span>
+        </div> */}
           </div>
-          <div className="box-half">
-            <div className="preview_container">
-              <TopicCardPreview
-                topics={topics}
-                onUpdate={onUpdate}
-                handleClose={handleClose}
-                goals={goals}
-                handleShowAll={handleShowAll}
-              />
-            </div>
-          </div>
-        </div>
-
-      </div>
+        )}
       <CreateModal
         handleClose={handleClose}
         showGoal={showGoal}
@@ -135,7 +118,7 @@ export default function LearnedTechHub({
     </div>
   );
 }
-LearnedTechHub.propTypes = {
+LearnedTechDashboard.propTypes = {
   lTech: PropTypes.shape({
     id: PropTypes.number,
     tech: PropTypes.shape({
@@ -154,13 +137,6 @@ LearnedTechHub.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
-  // bookmarks: PropTypes.arrayOf((PropTypes.shape({
-  //   id: PropTypes.number,
-  //   index: PropTypes.number,
-  //   parentId: PropTypes.number,
-  //   title: PropTypes.string,
-  //   url: PropTypes.string,
-  // }))).isRequired,
   resources: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.number,
     bookmark: PropTypes.shape({
