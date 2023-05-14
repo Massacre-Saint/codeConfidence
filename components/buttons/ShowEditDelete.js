@@ -1,18 +1,29 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function ShowEditDelete({ handleEdit, edit }) {
   if (edit) {
     return (
       <>
-        <Button id="exit" onClick={handleEdit} variant="outline-danger">Exit</Button>
+        <button
+          type="button"
+          id="exit"
+          onClick={handleEdit}
+        >
+          Exit
+        </button>
       </>
     );
   }
   return (
     <>
-      <Button id="edit" onClick={handleEdit} variant="outline-light">Edit</Button>
+      <button
+        type="button"
+        id="edit"
+        onClick={handleEdit}
+      >
+        Edit
+      </button>
     </>
   );
 }

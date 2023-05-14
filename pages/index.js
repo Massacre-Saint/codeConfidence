@@ -4,11 +4,13 @@ import { useAuth } from '../utils/context/authContext';
 import { getLearnedTech, getTech } from '../utils/data';
 import { Loading, Message } from '../components';
 import RecentsSidebar from '../components/containers/RecentsSidebar';
+import NavBlock from '../components/navs/NavBlock';
 
 function Home() {
   const { user } = useAuth();
   const [learnedTech, setLearnedTech] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentConditionalRoute] = useState('/');
   const loader = () => {
     getTech().then(async (array) => {
       const userTech = await getLearnedTech(user, array);
@@ -16,10 +18,13 @@ function Home() {
       setIsLoading(false);
     });
   };
+  const handleConditionalRouting = (href) => {
+    console.warn(href);
+  };
   useEffect(() => {
     loader();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user, currentConditionalRoute]);
 
   if (isLoading) {
     return <Loading />;
@@ -34,6 +39,9 @@ function Home() {
   }
   return (
     <div className="home">
+      <div className="grid-nav-container">
+        <NavBlock routeStateHandler={handleConditionalRouting} />
+      </div>
       <div className="recent-sidebar-container">
         <RecentsSidebar />
       </div>

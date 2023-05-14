@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SortGoalsAndTopics from '../buttons/SortGoalsAndTopics';
-import CreateDropdown from '../buttons/CreateDropdown';
 
 export default function LearnedTechNav({
-  handleShowAll, handleShow, goals, topics,
+  handleShowAll, goals, topics,
 }) {
   return (
     <div className="flex-row space-between">
@@ -13,16 +12,12 @@ export default function LearnedTechNav({
         goals={goals}
         topics={topics}
       />
-      <CreateDropdown
-        handleShow={handleShow}
-      />
     </div>
   );
 }
 
 LearnedTechNav.propTypes = {
   handleShowAll: PropTypes.func.isRequired,
-  handleShow: PropTypes.func.isRequired,
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
