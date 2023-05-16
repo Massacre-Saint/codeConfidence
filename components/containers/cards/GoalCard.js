@@ -163,8 +163,8 @@ GoalCard.propTypes = {
       }),
     }),
   }).isRequired,
-  onUpdate: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func,
+  handleClose: PropTypes.func,
   edit: PropTypes.bool,
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
@@ -180,7 +180,7 @@ GoalCard.propTypes = {
     tech: PropTypes.shape({
       id: PropTypes.number,
     }),
-  }))).isRequired,
+  }))),
   setAssignedTopicOrGoal: PropTypes.func,
   assignedTopicOrGoal: PropTypes.shape({
     id: PropTypes.string,
@@ -191,7 +191,10 @@ GoalCard.propTypes = {
 
 GoalCard.defaultProps = {
   edit: false,
+  onUpdate: () => {},
+  handleClose: () => {},
   topics: [],
+  resources: [],
   setAssignedTopicOrGoal: () => {},
   assignedTopicOrGoal: {},
   assigningBookmark: false,

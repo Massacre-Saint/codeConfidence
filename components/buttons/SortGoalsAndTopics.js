@@ -69,10 +69,10 @@ export default SortGoalsAndTopics;
 
 SortGoalsAndTopics.propTypes = {
   handleShowAll: PropTypes.func.isRequired,
-  goals: PropTypes.arrayOf((PropTypes.shape({
+  goals: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-  }))).isRequired,
-  topics: PropTypes.arrayOf((PropTypes.shape({
+  })).isRequired,
+  topics: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-  }))).isRequired,
+  })).isRequired,
 };

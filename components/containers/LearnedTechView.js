@@ -1,37 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import LearnedTechCard from './cards/LearnedTechCard';
-import { getAllGoals } from '../../utils/data/goals';
-import { getAllTopics } from '../../utils/data/topics';
-import { useAuth } from '../../utils/context/authContext';
 import RecentsList from './RecentsList';
-import Loading from '../Loading';
 
-export default function LearnedTechView({ tech }) {
+export default function LearnedTechView({ tech, arrays }) {
   const router = useRouter();
-  const { user } = useAuth();
-  const [goals, setGoals] = useState([]);
-  const [topics, setTopics] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+
   const handleClick = (obj) => {
     router.push({
       pathname: `/lTech/${obj.id}`,
       query: { tech: obj.tech.id },
     });
   };
-  const getDataAndSetState = () => {
-    Promise.all([getAllGoals(user), getAllTopics(user)])
-      .then(([a, b]) => {
-        setGoals(a);
-        setTopics(b);
-        setIsLoading(false);
-      });
-  };
-  useEffect(() => {
-    getDataAndSetState();
-  }, [user]);
+
   return (
     <>
       <div className="tech-view_container">
@@ -57,11 +40,7 @@ export default function LearnedTechView({ tech }) {
           </span>
         </div>
         <div className="flex-row margin-l-md gap-col">
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <RecentsList list={[...goals]} />
-          )}
+          <RecentsList list={[...arrays[0]]} />
         </div>
         <div className="flex-row space-between_shift-down">
           <span className="sub-heading padding">
@@ -72,11 +51,7 @@ export default function LearnedTechView({ tech }) {
           </span>
         </div>
         <div className="flex-row margin-l-md gap-col">
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <RecentsList list={[...topics]} />
-          )}
+          <RecentsList list={[...arrays[1]]} />
         </div>
       </div>
     </>
@@ -89,4 +64,7 @@ LearnedTechView.propTypes = {
       id: PropTypes.number,
     }),
   }))).isRequired,
+  arrays: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.shape),
+  ).isRequired,
 };

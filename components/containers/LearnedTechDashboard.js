@@ -40,10 +40,10 @@ export default function LearnedTechDashboard({
   };
 
   const handleShowAll = (e) => {
-    if (e.target.id === '4') {
+    if (e.target.id === '2') {
       setShowingGoals(false);
       setShowAll(true);
-    } else if (e.target.id === '3') {
+    } else if (e.target.id === '1') {
       setShowingGoals(true);
       setShowAll(true);
     } else {

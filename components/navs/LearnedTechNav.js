@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SortGoalsAndTopics from '../buttons/SortGoalsAndTopics';
+import SortBtnGroup from '../buttons/SortBtnGroup';
 
 export default function LearnedTechNav({
   handleShowAll, goals, topics,
 }) {
+  const radioGroup = [
+    { name: 'Goals', value: '1' },
+    { name: 'Topics', value: '2' },
+  ];
   return (
     <div className="flex-row space-between">
-      <SortGoalsAndTopics
-        handleShowAll={handleShowAll}
-        goals={goals}
-        topics={topics}
+      <SortBtnGroup
+        radioGroup={radioGroup}
+        handleFilter={handleShowAll}
+        filteredArray={[goals, topics]}
       />
     </div>
   );

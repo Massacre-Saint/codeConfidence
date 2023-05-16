@@ -169,9 +169,9 @@ TopicCard.propTypes = {
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,
-  }))).isRequired,
-  onUpdate: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  }))),
+  onUpdate: PropTypes.func,
+  handleClose: PropTypes.func,
   edit: PropTypes.bool,
   preview: PropTypes.bool,
 };
@@ -179,4 +179,7 @@ TopicCard.propTypes = {
 TopicCard.defaultProps = {
   edit: false,
   preview: false,
+  goals: [],
+  handleClose: () => {},
+  onUpdate: () => {},
 };

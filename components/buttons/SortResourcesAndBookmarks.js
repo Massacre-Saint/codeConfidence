@@ -8,8 +8,8 @@ function SortResourcesAndBookmarks({
   const [selectedValue, setSelectedValue] = useState('');
 
   const radios = [
-    { name: 'Bookmarks', value: '1' },
-    { name: 'Resources', value: '2' },
+    { name: 'Bookmarks', value: '3' },
+    { name: 'Resources', value: '4' },
   ];
   const resetFilter = () => {
     setSelectedValue('');
