@@ -35,8 +35,15 @@ TopicList.propTypes = {
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,
-  }))).isRequired,
-  onUpdate: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  edit: PropTypes.bool.isRequired,
+  }))),
+  onUpdate: PropTypes.func,
+  handleClose: PropTypes.func,
+  edit: PropTypes.bool,
+};
+
+TopicList.defaultProps = {
+  goals: [],
+  onUpdate: () => {},
+  handleClose: () => {},
+  edit: false,
 };

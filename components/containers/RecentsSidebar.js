@@ -70,7 +70,9 @@ function RecentsSidebar({ goals, topics }) {
           />
         )
         : (
-          <RecentsList list={[...goals, ...topics]} />
+          <div className="list_spacing show-all-list-container">
+            <RecentsList list={[...goals, ...topics]} />
+          </div>
         )}
     </>
   );

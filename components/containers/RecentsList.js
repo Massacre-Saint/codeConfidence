@@ -36,3 +36,7 @@ RecentsList.propTypes = {
     id: PropTypes.string.isRequired,
   }))).isRequired,
 };
+
+// RecentsList.defaultProps = {
+//   column: false,
+// };
