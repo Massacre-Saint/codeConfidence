@@ -4,7 +4,8 @@ import { GoalCard } from './cards';
 import TopicCard from './cards/TopicCard';
 
 function RecentsList({ list }) {
-  const recentList = list.sort((a, b) => a.lastUpdated - b.lastUpdated);
+  const joinedArray = [].concat(...list);
+  const recentList = joinedArray.sort((a, b) => a.lastUpdated - b.lastUpdated);
   return (
     <>
       {recentList.slice(0, 4).map((i) => {
@@ -32,11 +33,7 @@ function RecentsList({ list }) {
 export default RecentsList;
 
 RecentsList.propTypes = {
-  list: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }))).isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape,
+  ).isRequired,
 };
-
-// RecentsList.defaultProps = {
-//   column: false,
-// };

@@ -10,17 +10,40 @@ function CondionalArrayRenderer(
     showingTopics,
   },
 ) {
-  const [goals, topics] = jaggedArray;
+  const handleFilteredArray = (array) => {
+    const goals = [];
+    const topics = [];
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].progress !== undefined) {
+        goals.push(array[i]);
+      } else {
+        topics.push(array[i]);
+      }
+    }
+
+    const combinedArray = [goals, topics];
+    return combinedArray;
+  };
+
   if (showingGoals) {
     return (
-      <GoalList goals={goals} />
+      <div
+        className="show-all-list-container"
+      >
+        <GoalList goals={handleFilteredArray(jaggedArray)[0]} />
+      </div>
     );
   } if (showingTopics) {
     return (
-      <TopicList topics={topics} />
+      <div
+        className="show-all-list-container"
+      >
+        <TopicList topics={handleFilteredArray(jaggedArray)[1]} />
+      </div>
     );
-  } return (
-    <div>Hello</div>
+  }
+  return (
+    <div>SHowing Resources</div>
   );
 }
 

@@ -5,10 +5,12 @@ import { BiTimeFive } from 'react-icons/bi';
 import SortBtnGroup from '../buttons/SortBtnGroup';
 import RecentsList from './RecentsList';
 import CondionalArrayRenderer from './CondionalArrayRenderer';
+import SearchBar from '../SearchBar';
 
 function RecentsSidebar({ goals, topics }) {
   const [showGoals, setShowGoals] = useState(false);
   const [showTopics, setShowTopics] = useState(false);
+  const [filteredArray, setFilteredArray] = useState([...goals, ...topics]);
   const [showAll, setShowAll] = useState(false);
   const hanldeFilteredState = (e) => {
     const button = e.target.id;
@@ -56,22 +58,26 @@ function RecentsSidebar({ goals, topics }) {
         Your Recents
         <BiTimeFive />
       </div>
-      <SortBtnGroup
-        radioGroup={recentsRadioGroup}
-        handleFilter={hanldeFilteredState}
-        filteredArray={[goals, topics]}
-      />
+      <div className="search-bar-filter-container">
+        <SortBtnGroup
+          radioGroup={recentsRadioGroup}
+          handleFilter={hanldeFilteredState}
+          filteredArray={[goals, topics]}
+        />
+        <div className="margin-top-md" />
+        <SearchBar array={[...goals, ...topics]} setArray={setFilteredArray} />
+      </div>
       {showAll
         ? (
           <CondionalArrayRenderer
-            jaggedArray={[goals, topics]}
+            jaggedArray={[...filteredArray]}
             showingGoals={showGoals}
             showingTopics={showTopics}
           />
         )
         : (
           <div className="list_spacing show-all-list-container">
-            <RecentsList list={[...goals, ...topics]} />
+            <RecentsList list={[...filteredArray]} />
           </div>
         )}
     </>

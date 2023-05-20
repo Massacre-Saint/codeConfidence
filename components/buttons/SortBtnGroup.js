@@ -8,7 +8,6 @@ function SortBtnGroup({ radioGroup, handleFilter, filteredArray }) {
     setSelectedValue('');
   };
   const showButton = () => filteredArray.map((a, index) => {
-    console.warn('hello');
     const matchingRadio = radioGroup.find((item) => parseInt(item.value, 10) === index + 1);
     if (matchingRadio && a.length > 0) {
       return (
