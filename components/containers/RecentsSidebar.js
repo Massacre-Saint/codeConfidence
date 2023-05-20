@@ -1,20 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import 'react-icons';
 import { BiTimeFive } from 'react-icons/bi';
+import SortBtnGroup from '../buttons/SortBtnGroup';
+import RecentsList from './RecentsList';
+import CondionalArrayRenderer from './CondionalArrayRenderer';
+import SearchBar from '../SearchBar';
 
-function RecentsSidebar() {
-  const filterOptions = [
+function RecentsSidebar({ goals, topics }) {
+  const [showGoals, setShowGoals] = useState(false);
+  const [showTopics, setShowTopics] = useState(false);
+  const [filteredArray, setFilteredArray] = useState([...goals, ...topics]);
+  const [showAll, setShowAll] = useState(false);
+  const hanldeFilteredState = (e) => {
+    const button = e.target.id;
+    switch (button) {
+      case '1':
+        setShowAll(true);
+        setShowTopics(false);
+        setShowGoals(true);
+        break;
+      case '2':
+        setShowAll(true);
+        setShowGoals(false);
+        setShowTopics(true);
+        break;
+      case '3':
+        setShowGoals(false);
+        setShowTopics(false);
+        setShowAll(true);
+        break;
+      default:
+        setShowAll(false);
+    }
+  };
+
+  const recentsRadioGroup = [
     {
-      id: 1,
       name: 'Goals',
+      value: '1',
+      id: 'goals',
     },
     {
-      id: 2,
       name: 'Topics',
+      value: '2',
+      id: 'topics',
     },
     {
-      id: 3,
       name: 'Resources',
+      value: '3',
+      id: 'resources',
     },
   ];
   return (
@@ -23,22 +58,41 @@ function RecentsSidebar() {
         Your Recents
         <BiTimeFive />
       </div>
-      <div>
-        {filterOptions.map((i) => (
-          <button
-            className="
-          button-padding
-          border-radius
-          border-outline
-          background-none
-          fnt-primary"
-            type="button"
-          >{i.name}
-          </button>
-        ))}
+      <div className="search-bar-filter-container">
+        <SortBtnGroup
+          radioGroup={recentsRadioGroup}
+          handleFilter={hanldeFilteredState}
+          filteredArray={[goals, topics]}
+        />
+        <div className="margin-top-md" />
+        <SearchBar array={[...goals, ...topics]} setArray={setFilteredArray} />
       </div>
+      {showAll
+        ? (
+          <CondionalArrayRenderer
+            jaggedArray={[...filteredArray]}
+            showingGoals={showGoals}
+            showingTopics={showTopics}
+          />
+        )
+        : (
+          <div className="list_spacing show-all-list-container">
+            <RecentsList list={[...filteredArray]} />
+          </div>
+        )}
     </>
   );
 }
 
 export default RecentsSidebar;
+
+RecentsSidebar.propTypes = {
+  goals: PropTypes.arrayOf(PropTypes.shape({
+  })),
+  topics: PropTypes.arrayOf(PropTypes.shape({
+  })),
+};
+RecentsSidebar.defaultProps = {
+  goals: [],
+  topics: [],
+};

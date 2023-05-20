@@ -18,72 +18,53 @@ export default function ShowAll({
 
   if (showingGoals) {
     return (
-      <div className="view-all_container">
-        <div className="sub-nav-space-between" />
-        <div className="show-all_container">
-          <div className="show-all_header">
-            <div className="search-bar_container">
-              <SearchBar array={goals} setArray={setFilteredGoals} />
-            </div>
-            <div className="show-all_header-content">
-              <div>
-                <FilterModal
-                  goals={goals}
-                  topics={topics}
-                  setFilteredGoals={setFilteredGoals}
-                  setFilteredTopics={setFilteredTopics}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="show-all-list-container">
-            <GoalList
-              goals={filteredGoals}
-              onUpdate={onUpdate}
-              handleClose={handleClose}
-              edit={edit}
-              topics={topics}
-              resources={resources}
-            />
-          </div>
+      <div className="center">
+        <div className="space-between margin-sides">
+          <SearchBar array={goals} setArray={setFilteredGoals} />
+          <FilterModal
+            goals={goals}
+            topics={topics}
+            setFilteredGoals={setFilteredGoals}
+            setFilteredTopics={setFilteredTopics}
+          />
+        </div>
+        <div className="bottom-border-inset" />
+        <div className="show-all-list-container">
+          <GoalList
+            goals={filteredGoals}
+            onUpdate={onUpdate}
+            handleClose={handleClose}
+            edit={edit}
+            topics={topics}
+            resources={resources}
+          />
         </div>
       </div>
     );
   }
   return (
-    <>
-      <div className="view-all_container">
-        <div className="sub-nav-space-between" />
-        <div className="show-all_container">
-          <div className="show-all_header">
-            <div className="search-bar_container">
-              <SearchBar array={topics} setArray={setFilteredTopics} />
-            </div>
-            <div className="show-all_header-content">
-              <div>
-                <FilterModal
-                  goals={goals}
-                  topics={topics}
-                  setFilteredGoals={setFilteredGoals}
-                  setFilteredTopics={setFilteredTopics}
-                />
-              </div>
-
-            </div>
-          </div>
-          <div className="show-all-list-container">
-            <TopicList
-              topics={filteredTopics}
-              goals={goals}
-              onUpdate={onUpdate}
-              handleClose={handleClose}
-              edit={edit}
-              resources={resources}
-            />
-          </div>
-        </div>
+    <div className="center">
+      <div className="space-between margin-sides">
+        <SearchBar array={topics} setArray={setFilteredTopics} />
+        <FilterModal
+          goals={goals}
+          topics={topics}
+          setFilteredGoals={setFilteredGoals}
+          setFilteredTopics={setFilteredTopics}
+        />
       </div>
-    </>
+      <div className="bottom-border-inset" />
+      <div className="show-all-list-container">
+        <TopicList
+          topics={filteredTopics}
+          goals={goals}
+          onUpdate={onUpdate}
+          handleClose={handleClose}
+          edit={edit}
+          resources={resources}
+        />
+      </div>
+    </div>
   );
 }
 

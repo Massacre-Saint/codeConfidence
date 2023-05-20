@@ -66,6 +66,7 @@ export default function Bookmarks({
             lTech={lTech}
             setToggledFilter={setToggledFilter}
           />
+          <div className="margin-top-md" />
           <SearchBar array={bookmarks} setArray={setFilteredBookmarks} />
         </div>
         <div className="show-all-list-container">

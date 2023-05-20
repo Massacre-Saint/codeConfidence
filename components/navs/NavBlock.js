@@ -9,7 +9,7 @@ function NavBlock() {
     <div className="quadrant-grid-nav">
       <span>
         <BsFillHouseDoorFill />
-        <Link passHref href="/">
+        <Link href="/">
           Home
         </Link>
       </span>

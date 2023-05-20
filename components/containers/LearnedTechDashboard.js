@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
-import { AiFillDashboard } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
+import { AiFillDashboard } from 'react-icons/ai';
 import { LearnedTechNav } from '../navs';
 import CreateModal from '../modals/CreateModal';
 import ShowEditDelete from '../buttons/ShowEditDelete';
 import ShowAll from './ShowAll';
 import RecentsList from './RecentsList';
+import { CreateDropdown } from '../buttons';
 
 export default function LearnedTechDashboard({
   lTech, topics, goals, onUpdate, resources,
@@ -39,10 +40,10 @@ export default function LearnedTechDashboard({
   };
 
   const handleShowAll = (e) => {
-    if (e.target.id === '4') {
+    if (e.target.id === '2') {
       setShowingGoals(false);
       setShowAll(true);
-    } else if (e.target.id === '3') {
+    } else if (e.target.id === '1') {
       setShowingGoals(true);
       setShowAll(true);
     } else {
@@ -52,21 +53,34 @@ export default function LearnedTechDashboard({
 
   return (
     <div className="tech-view_container">
-      <div className="fnt-secondary margin-btm">
-        <IconContext.Provider value={{ size: '1.2em' }}>
-          <AiFillDashboard className="margin-r-sm" />
-        </IconContext.Provider>
-        {`${lTech.tech.name} Dashboard`}
+      <div className="flex-row space-between">
+        <div className="fnt-secondary margin-btm">
+          <IconContext.Provider value={{ size: '1.2em' }}>
+            <AiFillDashboard className="margin-r-sm" />
+          </IconContext.Provider>
+          {`${lTech.tech.name} Dashboard`}
+        </div>
+        <div className="flex-row">
+          <CreateDropdown
+            handleShow={handleShow}
+          />
+          {showAll ? (
+            <div className="create-form_btn">
+              <ShowEditDelete handleEdit={handleEdit} edit={edit} />
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
       </div>
       <LearnedTechNav
         handleShowAll={handleShowAll}
         goals={goals}
         topics={topics}
-        handleShow={handleShow}
       />
       {showAll
         ? (
-          <div className="flex_space_between">
+          <div>
             <ShowAll
               onUpdate={onUpdate}
               topics={topics}
@@ -79,9 +93,6 @@ export default function LearnedTechDashboard({
               resources={resources}
               lTech={lTech}
             />
-            <div className="create-form_btn">
-              <ShowEditDelete handleEdit={handleEdit} edit={edit} />
-            </div>
           </div>
         )
         : (
@@ -99,12 +110,6 @@ export default function LearnedTechDashboard({
                 <RecentsList list={[...goals, ...topics]} />
               </div>
             </div>
-            {/* Feature Coming Soon */}
-            {/* <div className="flex-row space-between_shift-down">
-          <span className="sub-heading padding">
-            Projects
-          </span>
-        </div> */}
           </div>
         )}
       <CreateModal

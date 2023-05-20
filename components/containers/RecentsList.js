@@ -1,16 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { GoalCard } from './cards';
 import TopicCard from './cards/TopicCard';
 
 function RecentsList({ list }) {
-  const recentList = list.sort((a, b) => a.lastUpdated - b.lastUpdated);
-  useEffect(() => {
-    console.warn(list);
-  });
+  const joinedArray = [].concat(...list);
+  const recentList = joinedArray.sort((a, b) => a.lastUpdated - b.lastUpdated);
   return (
     <>
-      {recentList.slice(0, 3).map((i) => {
+      {recentList.slice(0, 4).map((i) => {
         if (i.progress !== undefined) {
           return (
             <GoalCard
@@ -35,7 +33,7 @@ function RecentsList({ list }) {
 export default RecentsList;
 
 RecentsList.propTypes = {
-  list: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }))).isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape,
+  ).isRequired,
 };
