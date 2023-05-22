@@ -6,25 +6,37 @@ import { getSingleGoal } from '../../../utils/data/goals';
 import { Loading } from '../../../components';
 import NavBlock from '../../../components/navs/NavBlock';
 import LearnedTechHeader from '../../../components/headers/LearnedTechHeader';
+import SingleGoalContainer from '../../../components/containers/SingleGoalContainer';
+import { getSingleLearnedTech } from '../../../utils/data';
+import { getTopics } from '../../../utils/data/topics';
 
 function DynamicSingleGoalPage() {
   const { user } = useAuth();
   const [goal, setGoal] = useState({});
+  const [goalTopics, setGoalTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const goalUUID = router.query.id;
 
-  const getDataAndSetState = () => {
-    getSingleGoal(goalUUID).then((obj) => {
-      setGoal(obj);
-      setIsLoading(false);
-    });
-    console.warn(goal);
+  const getDataAndSetState = async () => {
+    const goalData = await getSingleGoal(goalUUID);
+    setGoal(goalData);
+    const techData = await getSingleLearnedTech(
+      goalData.learnedTech.id,
+      user,
+      goalData.learnedTech.tech,
+    );
+    const lTechTopics = await getTopics(user, techData);
+    if (lTechTopics.length > 0) {
+      const results = lTechTopics.filter((i) => i.goal !== null && i.goal.id === goalData.id);
+      setGoalTopics(results);
+    }
+    setIsLoading(false);
   };
 
   useEffect(() => {
     getDataAndSetState();
-  }, [user, isLoading]);
+  }, [user]);
 
   if (isLoading) {
     return (
@@ -45,6 +57,10 @@ function DynamicSingleGoalPage() {
           <LearnedTechHeader obj={goal.learnedTech.tech} />
         </div>
       </div>
+      <SingleGoalContainer
+        goal={goal}
+        topics={goalTopics}
+      />
     </div>
   );
 }

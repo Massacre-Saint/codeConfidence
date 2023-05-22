@@ -17,7 +17,9 @@ function DashboardConditionalStateContainer({ goals, topics }) {
   }
   if (goals.length === 0 && topics.length === 0) {
     return (
-      <EmptyState />
+      <div>
+        <EmptyState />
+      </div>
     );
   } return (
     <div className="stats">

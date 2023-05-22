@@ -108,7 +108,7 @@ export default function TopicCard({
                   </IconContext.Provider>
                   &nbsp;
                   <span className="">
-                    {shortenString(obj.title)}
+                    {shortenString(obj.goal.title)}
                   </span>
                 </span>
               )

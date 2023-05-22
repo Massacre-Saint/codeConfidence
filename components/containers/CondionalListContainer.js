@@ -5,7 +5,7 @@ import TopicList from './TopicList';
 import SearchBar from '../SearchBar';
 import FilterModal from '../modals/FilterModal';
 
-export default function ShowAll({
+export default function CondionalListContainer({
   showingGoals, goals, topics, onUpdate, handleClose, edit, resources,
 }) {
   const [filteredGoals, setFilteredGoals] = useState([]);
@@ -23,7 +23,6 @@ export default function ShowAll({
           <SearchBar array={goals} setArray={setFilteredGoals} />
           <FilterModal
             goals={goals}
-            topics={topics}
             setFilteredGoals={setFilteredGoals}
             setFilteredTopics={setFilteredTopics}
           />
@@ -68,7 +67,7 @@ export default function ShowAll({
   );
 }
 
-ShowAll.propTypes = {
+CondionalListContainer.propTypes = {
   showingGoals: PropTypes.bool.isRequired,
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
