@@ -56,6 +56,7 @@ function RecentsSidebar({ goals, topics }) {
     <>
       <div>
         Your Recents
+        &nbsp;
         <BiTimeFive />
       </div>
       <div className="search-bar-filter-container">

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import { IconContext } from 'react-icons';
 import { AiFillDashboard } from 'react-icons/ai';
 import { LearnedTechNav } from '../navs';
 import CreateModal from '../modals/CreateModal';
 import ShowEditDelete from '../buttons/ShowEditDelete';
 import ShowAll from './ShowAll';
-import RecentsList from './RecentsList';
 import { CreateDropdown } from '../buttons';
+import DashboardConditionalStateContainer from './DashboardConditionalStateContainer';
 
 export default function LearnedTechDashboard({
   lTech, topics, goals, onUpdate, resources,
@@ -96,20 +95,11 @@ export default function LearnedTechDashboard({
           </div>
         )
         : (
-          <div className="stats">
-            <Image
-              src="/placeholder-chart.svg"
-              width={130}
-              height={130}
+          <div className="relative full-height">
+            <DashboardConditionalStateContainer
+              goals={goals}
+              topics={topics}
             />
-            <div className="flex-col">
-              <span className="sub-heading padding">
-                Recents
-              </span>
-              <div className="flex-row margin-l-md gap-col">
-                <RecentsList list={[...goals, ...topics]} />
-              </div>
-            </div>
           </div>
         )}
       <CreateModal

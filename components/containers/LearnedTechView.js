@@ -3,11 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import LearnedTechCard from './cards/LearnedTechCard';
-import RecentsList from './RecentsList';
 
 export default function LearnedTechView({ tech, arrays }) {
   const router = useRouter();
-
+  console.warn(arrays);
   const handleClick = (obj) => {
     router.push({
       pathname: `/lTech/${obj.id}`,
@@ -30,28 +29,6 @@ export default function LearnedTechView({ tech, arrays }) {
           {tech.map((i) => (
             <LearnedTechCard handleClick={handleClick} key={i.id} obj={i} />
           ))}
-        </div>
-        <div className="flex-row space-between_shift-down">
-          <span className="sub-heading padding">
-            Goals
-          </span>
-          <span className="sub-heading-sm padding">
-            Expand
-          </span>
-        </div>
-        <div className="flex-row margin-l-md gap-col">
-          <RecentsList list={[...arrays[0]]} />
-        </div>
-        <div className="flex-row space-between_shift-down">
-          <span className="sub-heading padding">
-            Topics
-          </span>
-          <span className="sub-heading-sm padding">
-            Expand
-          </span>
-        </div>
-        <div className="flex-row margin-l-md gap-col">
-          <RecentsList list={[...arrays[1]]} />
         </div>
       </div>
     </>

@@ -10,6 +10,7 @@ import convertTime from '../../../utils/convertTime';
 import { useAuth } from '../../../utils/context/authContext';
 import EditDelete from '../../buttons/EditDelete';
 import TechImage from '../../icons/TechImage';
+import shortenString from '../../../utils/shortenString';
 
 export default function TopicCard({
   obj,
@@ -67,7 +68,7 @@ export default function TopicCard({
           </div>
           <div className="flex-col full-width">
             <span className="fnt-primary fnt-large">
-              {obj.title}
+              {shortenString(obj.title)}
             </span>
           </div>
         </div>
@@ -107,7 +108,7 @@ export default function TopicCard({
                   </IconContext.Provider>
                   &nbsp;
                   <span className="">
-                    {obj.goal.title}
+                    {shortenString(obj.title)}
                   </span>
                 </span>
               )

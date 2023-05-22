@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GoalList from './GoalList';
-import TopicList from './TopicList';
+import RecentsList from './RecentsList';
 
 function CondionalArrayRenderer(
   {
@@ -28,17 +27,17 @@ function CondionalArrayRenderer(
   if (showingGoals) {
     return (
       <div
-        className="show-all-list-container"
+        className="list_spacing show-all-list-container"
       >
-        <GoalList goals={handleFilteredArray(jaggedArray)[0]} />
+        <RecentsList list={handleFilteredArray(jaggedArray)[0]} />
       </div>
     );
   } if (showingTopics) {
     return (
       <div
-        className="show-all-list-container"
+        className="list_spacing show-all-list-container"
       >
-        <TopicList topics={handleFilteredArray(jaggedArray)[1]} />
+        <RecentsList list={handleFilteredArray(jaggedArray)[1]} />
       </div>
     );
   }

@@ -8,7 +8,7 @@ function RecentsList({ list }) {
   const recentList = joinedArray.sort((a, b) => a.lastUpdated - b.lastUpdated);
   return (
     <>
-      {recentList.slice(0, 4).map((i) => {
+      {recentList.slice(0, 3).map((i) => {
         if (i.progress !== undefined) {
           return (
             <GoalCard
