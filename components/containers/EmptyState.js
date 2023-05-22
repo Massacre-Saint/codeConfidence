@@ -5,15 +5,14 @@ function EmptyState() {
   return (
     <div>
       <Image
-        src="/sign-post.svg"
-        width={300}
-        height={300}
+        src="/emptyGoalsAndTopics.svg"
+        alt="sign-post in space"
+        layout="fill"
+        width={500}
+        height={500}
+        objectFit="fill"
+        objectPosition="top"
       />
-      <div>
-        <p>
-          Oops, nothing here.
-        </p>
-      </div>
     </div>
   );
 }

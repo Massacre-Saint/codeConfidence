@@ -78,13 +78,21 @@ ul {
   padding-left: 10px;
 }
 
+#card:hover {
+  border-style: inset;
+  border: 1px solid white;
+}
+
 /********************* Utils ********************/
   
   /**** Position ****/
     .relative {
       position: relative;
     }
-    
+
+    .block {
+      display: block;
+    }
   /**** Flex ****/
 
     .flex-col {
@@ -107,6 +115,11 @@ ul {
 
     .align-center {
       align-items: center;
+    }
+  /**** Height ****/
+
+    .full-height {
+      height: 100%;
     }
   /**** Width ****/
 
@@ -1228,4 +1241,40 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 
 .stats {
   margin: 20px;
+}
+
+#card {
+  position: relative;
+}
+#card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.progress-25::after {
+  border-radius: 15px;
+  width: 25%;
+  background-color: rgba(76, 175, 80, 0.4);
+}
+.progress-50::after {
+  border-radius: 15px;
+  width: 50%;
+  background-color: rgba(76, 175, 80, 0.4);
+}
+.progress-75::after {
+  border-radius: 15px;
+  width: 75%;
+  background-color: rgba(76, 175, 80, 0.4);
+}
+.progress-100::after {
+  border-radius: 15px;
+  width: 100%;
+  background-color: rgba(76, 175, 80, 0.4);
+}
+
+.translate-arrow {
+  object-position: 350px -100px;
 }
