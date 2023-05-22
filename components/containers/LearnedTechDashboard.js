@@ -5,9 +5,9 @@ import { AiFillDashboard } from 'react-icons/ai';
 import { LearnedTechNav } from '../navs';
 import CreateModal from '../modals/CreateModal';
 import ShowEditDelete from '../buttons/ShowEditDelete';
-import ShowAll from './ShowAll';
 import { CreateDropdown } from '../buttons';
 import DashboardConditionalStateContainer from './DashboardConditionalStateContainer';
+import CondionalListContainer from './CondionalListContainer';
 
 export default function LearnedTechDashboard({
   lTech, topics, goals, onUpdate, resources,
@@ -80,7 +80,7 @@ export default function LearnedTechDashboard({
       {showAll
         ? (
           <div>
-            <ShowAll
+            <CondionalListContainer
               onUpdate={onUpdate}
               topics={topics}
               goals={goals}

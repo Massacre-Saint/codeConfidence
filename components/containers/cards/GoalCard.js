@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-bootstrap';
 import { IconContext } from 'react-icons';
 import { BiTimeFive } from 'react-icons/bi';
-import { BsBarChartSteps } from 'react-icons/bs';
+import { TbChecklist } from 'react-icons/tb';
+import Link from 'next/link';
 import GoalForm from '../../forms/GoalForm';
 import { deleteGoal } from '../../../utils/data/goals';
 import convertTime from '../../../utils/convertTime';
@@ -26,12 +27,13 @@ export default function GoalCard({
   preview,
 }) {
   const [showForm, setshowForm] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleShowTopics = () => setShow(true);
+  const handleCloseTopics = () => setShow(false);
   const [resource, setResource] = useState({});
   const [goalTopics, setGoalTopics] = useState([]);
-  const [show, setShow] = useState(false);
-  const handleCloseTopics = () => setShow(false);
-  const handleShowTopics = () => setShow(true);
   const progressClass = progressStyleHanlder(obj.progress);
+
   useEffect(() => {
     if (resources && resources.length > 0) {
       const goalResource = resources.find((i) => i.objectId.id === obj.id);
@@ -43,6 +45,7 @@ export default function GoalCard({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topics, resources, obj.id]);
+
   const handleClick = (assignedGoal) => {
     if (assigningBookmark) {
       setAssignedTopicOrGoal(assignedGoal);
@@ -91,34 +94,44 @@ export default function GoalCard({
   }
   if (preview) {
     return (
-      <div
-        role="button"
-        tabIndex="0"
-        id="card"
-        onKeyDown={(e) => handleKeyDown(e, obj)}
-        onClick={() => handleClick(obj)}
-        className={[progressClass, assignedTopicOrGoal.id === obj.id ? 'highlight' : 'card-background padding-all border-radius-15'].join(' ')}
+      <Link
+        href={`/lTech/goals/${obj.id}`}
+        passHref
       >
-        <div className="flex-row align-center">
-          <div className="margin-r-md">
-            <TechImage obj={obj.learnedTech.tech} />
-          </div>
-          <div className="flex-col full-width">
-            <span className="fnt-large fnt-primary">
-              {shortenString(obj.title)}
-            </span>
-            <span className="fnt-small">
-              <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
-                <BiTimeFive />
-              </IconContext.Provider>
-              <span className="margin-r-sm" />
-              <span className="fnt-secondary">
-                {convertTime(obj.lastUpdated)}
+        <div
+          role="button"
+          tabIndex="0"
+          id="card"
+          onKeyDown={(e) => handleKeyDown(e, obj)}
+          onClick={() => handleClick(obj)}
+          className={[progressClass,
+            assignedTopicOrGoal.id === obj.id
+              ? 'highlight'
+              : 'card-background padding-all border-radius-15'].join(' ')}
+        >
+          <div className="flex-row align-center">
+            <div className="margin-r-md">
+              <TechImage obj={obj.learnedTech.tech} />
+            </div>
+            <div className="flex-col full-width">
+              <span className="fnt-large fnt-primary">
+                {shortenString(obj.title)}
               </span>
-            </span>
+              <span className="fnt-small">
+                <IconContext.Provider
+                  value={{ size: '1.5em', color: 'white' }}
+                >
+                  <BiTimeFive />
+                </IconContext.Provider>
+                <span className="margin-r-sm" />
+                <span className="fnt-secondary">
+                  {convertTime(obj.lastUpdated)}
+                </span>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
   return (
@@ -128,7 +141,9 @@ export default function GoalCard({
       id="card"
       onKeyDown={(e) => handleKeyDown(e, obj)}
       onClick={() => handleClick(obj)}
-      className={assignedTopicOrGoal.id === obj.id ? 'highlight' : 'flex-row card-background padding-all border-radius-15'}
+      className={assignedTopicOrGoal.id === obj.id
+        ? 'highlight'
+        : 'flex-row card-background padding-all border-radius-15'}
     >
       <div className="flex-row">
         <div className="margin-r-md">
@@ -142,7 +157,9 @@ export default function GoalCard({
           </div>
           <div className="fnt-small">
             <span>
-              <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
+              <IconContext.Provider
+                value={{ size: '1.5em', color: 'white' }}
+              >
                 <BiTimeFive />
               </IconContext.Provider>
               <span className="margin-r-sm" />
@@ -154,8 +171,10 @@ export default function GoalCard({
             {obj.progress != null ? (
               <>
                 <span>
-                  <IconContext.Provider value={{ size: '1.5em', color: 'white' }}>
-                    <BsBarChartSteps />
+                  <IconContext.Provider
+                    value={{ size: '1.5em', color: 'white' }}
+                  >
+                    <TbChecklist />
                   </IconContext.Provider>
                   <span className="fnt-secondary">
                     {goalTopics.length}
@@ -163,7 +182,11 @@ export default function GoalCard({
                   <span className="margin-r-sm" />
                 </span>
                 <div className="progress_container">
-                  <ProgressBar bsPrefix="progress" now={obj.progress} label={`${obj.progress}%`} />
+                  <ProgressBar
+                    bsPrefix="progress"
+                    now={obj.progress}
+                    label={`${obj.progress}%`}
+                  />
                 </div>
               </>
             )
@@ -172,7 +195,10 @@ export default function GoalCard({
         </div>
         {edit ? (
           <div className="edit-delete_container">
-            <EditDelete handleShowForm={handleShowForm} handleDelete={handleDelete} />
+            <EditDelete
+              handleShowForm={handleShowForm}
+              handleDelete={handleDelete}
+            />
           </div>
         )
           : ('')}
