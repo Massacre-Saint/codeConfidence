@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import GoalList from './GoalList';
-import TopicList from './TopicList';
-import SearchBar from '../SearchBar';
-import FilterModal from '../modals/FilterModal';
+import TopicListContainer from './TopicListContainer';
+import GoalListContainer from './GoalListContainer';
 
 export default function CondionalListContainer({
   showingGoals, goals, topics, onUpdate, handleClose, edit, resources,
@@ -18,52 +16,32 @@ export default function CondionalListContainer({
 
   if (showingGoals) {
     return (
-      <div className="center">
-        <div className="space-between margin-sides">
-          <SearchBar array={goals} setArray={setFilteredGoals} />
-          <FilterModal
-            goals={goals}
-            setFilteredGoals={setFilteredGoals}
-            setFilteredTopics={setFilteredTopics}
-          />
-        </div>
-        <div className="bottom-border-inset" />
-        <div className="show-all-list-container">
-          <GoalList
-            goals={filteredGoals}
-            onUpdate={onUpdate}
-            handleClose={handleClose}
-            edit={edit}
-            topics={topics}
-            resources={resources}
-          />
-        </div>
-      </div>
+      <GoalListContainer
+        topics={topics}
+        goals={goals}
+        resources={resources}
+        setFilteredGoals={setFilteredGoals}
+        setFilteredTopics={setFilteredTopics}
+        filteredGoals={filteredGoals}
+        onUpdate={onUpdate}
+        handleClose={handleClose}
+        edit={edit}
+      />
     );
   }
   return (
-    <div className="center">
-      <div className="space-between margin-sides">
-        <SearchBar array={topics} setArray={setFilteredTopics} />
-        <FilterModal
-          goals={goals}
-          topics={topics}
-          setFilteredGoals={setFilteredGoals}
-          setFilteredTopics={setFilteredTopics}
-        />
-      </div>
-      <div className="bottom-border-inset" />
-      <div className="show-all-list-container">
-        <TopicList
-          topics={filteredTopics}
-          goals={goals}
-          onUpdate={onUpdate}
-          handleClose={handleClose}
-          edit={edit}
-          resources={resources}
-        />
-      </div>
-    </div>
+    <TopicListContainer
+      topics={topics}
+      goals={goals}
+      resources={resources}
+      setFilteredGoals={setFilteredGoals}
+      setFilteredTopics={setFilteredTopics}
+      filteredTopics={filteredTopics}
+      onUpdate={onUpdate}
+      handleClose={handleClose}
+      edit={edit}
+
+    />
   );
 }
 

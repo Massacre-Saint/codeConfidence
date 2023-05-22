@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from '../SearchBar';
+import GoalList from './GoalList';
 import FilterModal from '../modals/FilterModal';
-import TopicList from './TopicList';
 
-function TopicListContainer({
+function GoalListContainer({
   topics,
   goals,
   resources,
   setFilteredGoals,
   setFilteredTopics,
-  filteredTopics,
+  filteredGoals,
   onUpdate,
   handleClose,
   edit,
@@ -18,7 +18,7 @@ function TopicListContainer({
   return (
     <div className="center">
       <div className="space-between margin-sides">
-        <SearchBar array={topics} setArray={setFilteredTopics} />
+        <SearchBar array={goals} setArray={setFilteredGoals} />
         <FilterModal
           goals={goals}
           setFilteredGoals={setFilteredGoals}
@@ -27,12 +27,12 @@ function TopicListContainer({
       </div>
       <div className="bottom-border-inset" />
       <div className="show-all-list-container">
-        <TopicList
-          topics={filteredTopics}
-          goals={goals}
+        <GoalList
+          goals={filteredGoals}
           onUpdate={onUpdate}
           handleClose={handleClose}
           edit={edit}
+          topics={topics}
           resources={resources}
         />
       </div>
@@ -40,9 +40,9 @@ function TopicListContainer({
   );
 }
 
-export default TopicListContainer;
+export default GoalListContainer;
 
-TopicListContainer.propTypes = {
+GoalListContainer.propTypes = {
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
@@ -66,7 +66,7 @@ TopicListContainer.propTypes = {
   }))).isRequired,
   setFilteredGoals: PropTypes.func.isRequired,
   setFilteredTopics: PropTypes.func.isRequired,
-  filteredTopics: PropTypes.arrayOf((
+  filteredGoals: PropTypes.arrayOf((
     PropTypes.shape({
     })
   )).isRequired,
