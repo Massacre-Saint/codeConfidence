@@ -28,7 +28,7 @@ function DashboardConditionalStateContainer({ goals, topics }) {
         width={130}
         height={130}
       />
-      <h2>CLose this goal or topic?</h2>
+      <h2>Close this goal or topic?</h2>
       <div className="flex-row space-between_shift-down">
         <span className="sub-heading padding">
           Recent
@@ -43,7 +43,7 @@ function DashboardConditionalStateContainer({ goals, topics }) {
         </span>
       </div>
       <div className="flex-row margin-l-md gap-col">
-        <h2>Coming Soon</h2>
+        Coming Soon
       </div>
     </div>
   );

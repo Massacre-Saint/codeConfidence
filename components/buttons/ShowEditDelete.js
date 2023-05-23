@@ -8,6 +8,11 @@ export default function ShowEditDelete({ handleEdit, edit }) {
         <button
           type="button"
           id="exit"
+          className="button-padding
+          background-none
+          border-outline-danger
+          fnt-danger
+          border-radius-15"
           onClick={handleEdit}
         >
           Exit
@@ -20,6 +25,11 @@ export default function ShowEditDelete({ handleEdit, edit }) {
       <button
         type="button"
         id="edit"
+        className="button-padding
+        background-none
+        border-outline
+        fnt-primary
+        toggle-button"
         onClick={handleEdit}
       >
         Edit

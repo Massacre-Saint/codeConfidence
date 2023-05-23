@@ -6,6 +6,8 @@ import { ProgressBar } from 'react-bootstrap';
 import TechImage from '../icons/TechImage';
 import convertTime from '../../utils/convertTime';
 import TopicListContainer from './TopicListContainer';
+import CreateButton from '../buttons/CreateButton';
+import CreateModal from '../modals/CreateModal';
 
 function SingleGoalContainer({
   goal,
@@ -15,6 +17,20 @@ function SingleGoalContainer({
   lTech,
 }) {
   const [filteredTopics, setFilteredTopics] = useState([]);
+  const [creatingTopic, setCreatingTopic] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+
+  const handleClose = () => {
+    setCreatingTopic(false);
+    setShowCreateModal(false);
+  };
+
+  const handleCreate = (e) => {
+    if (e.target.id === 'create') {
+      setCreatingTopic(true);
+    }
+    setShowCreateModal(true);
+  };
 
   useEffect(() => {
     setFilteredTopics(topics);
@@ -30,7 +46,9 @@ function SingleGoalContainer({
           Viewing Goal:
         </div>
         <div className="flex-row">
-          Edit and New
+          <CreateButton
+            handleCreate={handleCreate}
+          />
         </div>
       </div>
       <div className="flex-row">
@@ -50,7 +68,6 @@ function SingleGoalContainer({
         <ProgressBar
           bsPrefix="progress"
           now={goal.progress}
-          label={`${goal.progress}%`}
         />
       </div>
       <div className="fnt-secondary">
@@ -58,16 +75,31 @@ function SingleGoalContainer({
           {convertTime(goal.lastUpdated)}
         </span>
         <span>
-          {`${goal.progress} % complete`}
+          {`${goal.progress}% complete`}
         </span>
       </div>
-      <TopicListContainer
-        topics={topics}
-        goals={goals}
-        setFilteredTopics={setFilteredTopics}
-        filteredTopics={filteredTopics}
-        onUpdate={onUpdate}
+      <div className="flex-row space-between_shift-down">
+        <span className="sub-heading padding">
+          Assigned Topics:
+        </span>
+      </div>
+      <div className="flex-row margin-l-md gap-col">
+        <TopicListContainer
+          topics={topics}
+          goals={goals}
+          setFilteredTopics={setFilteredTopics}
+          filteredTopics={filteredTopics}
+          onUpdate={onUpdate}
+          lTech={lTech}
+        />
+      </div>
+      <CreateModal
+        handleClose={handleClose}
+        creatingTopic={creatingTopic}
+        showCreateModal={showCreateModal}
         lTech={lTech}
+        goals={goals}
+        onUpdate={onUpdate}
       />
     </div>
   );

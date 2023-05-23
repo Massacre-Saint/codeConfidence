@@ -7,18 +7,23 @@ import GoalForm from '../forms/GoalForm';
 import TopicForm from '../forms/TopicForm';
 
 export default function CreateModal({
-  handleClose, show, lTech, onUpdate, showGoal, goals,
+  handleClose,
+  showCreateModal,
+  lTech,
+  onUpdate,
+  creatingGoal,
+  goals,
 }) {
-  if (showGoal) {
+  if (creatingGoal) {
     return (
       <>
         <MediaQuery maxWidth={769}>
-          <Offcanvas show={show} onHide={handleClose} placement="bottom">
+          <Offcanvas show={showCreateModal} onHide={handleClose} placement="bottom">
             <GoalForm lTech={lTech} onUpdate={onUpdate} handleClose={handleClose} />
           </Offcanvas>
         </MediaQuery>
         <MediaQuery minWidth={770}>
-          <Modal show={show} onHide={handleClose} centered>
+          <Modal show={showCreateModal} onHide={handleClose} centered>
             <GoalForm lTech={lTech} onUpdate={onUpdate} handleClose={handleClose} />
           </Modal>
         </MediaQuery>
@@ -28,12 +33,12 @@ export default function CreateModal({
   return (
     <>
       <MediaQuery maxWidth={769}>
-        <Offcanvas show={show} onHide={handleClose} placement="bottom">
+        <Offcanvas show={showCreateModal} onHide={handleClose} placement="bottom">
           <TopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
         </Offcanvas>
       </MediaQuery>
       <MediaQuery minWidth={770}>
-        <Modal show={show} onHide={handleClose} centered>
+        <Modal show={showCreateModal} onHide={handleClose} centered>
           <TopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
         </Modal>
       </MediaQuery>
@@ -43,7 +48,7 @@ export default function CreateModal({
 
 CreateModal.propTypes = {
   handleClose: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired,
+  showCreateModal: PropTypes.bool.isRequired,
   lTech: PropTypes.shape({
     id: PropTypes.number,
     tech: PropTypes.shape({
@@ -57,8 +62,12 @@ CreateModal.propTypes = {
     }),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
-  showGoal: PropTypes.bool.isRequired,
+  creatingGoal: PropTypes.bool,
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
+};
+
+CreateModal.defaultProps = {
+  creatingGoal: false,
 };

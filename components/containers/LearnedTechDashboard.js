@@ -12,21 +12,21 @@ import CondionalListContainer from './CondionalListContainer';
 export default function LearnedTechDashboard({
   lTech, topics, goals, onUpdate, resources,
 }) {
-  const [showGoal, setShowGoal] = useState(false);
-  const [show, setShow] = useState(false);
+  const [creatingGoal, setCreatingGoal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [showingGoals, setShowingGoals] = useState(false);
   const [showingBookmarks] = useState(false);
   const [edit, setEdit] = useState(false);
   const handleClose = () => {
-    setShowGoal(false);
-    setShow(false);
+    setCreatingGoal(false);
+    setShowCreateModal(false);
   };
   const handleShow = (e) => {
     if (e.target.id === 'goal') {
-      setShowGoal(true);
+      setCreatingGoal(true);
     }
-    setShow(true);
+    setShowCreateModal(true);
   };
   const handleEdit = (e) => {
     if (e.target.id === 'edit') {
@@ -104,8 +104,8 @@ export default function LearnedTechDashboard({
         )}
       <CreateModal
         handleClose={handleClose}
-        showGoal={showGoal}
-        show={show}
+        creatingGoal={creatingGoal}
+        showCreateModal={showCreateModal}
         lTech={lTech}
         goals={goals}
         onUpdate={onUpdate}
