@@ -8,6 +8,8 @@ import convertTime from '../../utils/convertTime';
 import TopicListContainer from './TopicListContainer';
 import CreateButton from '../buttons/CreateButton';
 import CreateModal from '../modals/CreateModal';
+import ExpandButton from '../buttons/ExpandButton';
+import RecentsList from './RecentsList';
 
 function SingleGoalContainer({
   goal,
@@ -19,6 +21,7 @@ function SingleGoalContainer({
   const [filteredTopics, setFilteredTopics] = useState([]);
   const [creatingTopic, setCreatingTopic] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [isExpandToggled, setIsExpandToggled] = useState(false);
 
   const handleClose = () => {
     setCreatingTopic(false);
@@ -56,7 +59,7 @@ function SingleGoalContainer({
           <TechImage obj={goal.learnedTech.tech} />
         </div>
         <div className="flex-col">
-          <h2>
+          <h2 className="block">
             {goal.title}
           </h2>
           <div>
@@ -82,16 +85,26 @@ function SingleGoalContainer({
         <span className="sub-heading padding">
           Assigned Topics:
         </span>
+        <span className="sub-heading-sm padding">
+          <ExpandButton
+            isExpandToggled={isExpandToggled}
+            setIsExpandToggled={setIsExpandToggled}
+          />
+        </span>
       </div>
       <div className="flex-row margin-l-md gap-col">
-        <TopicListContainer
-          topics={topics}
-          goals={goals}
-          setFilteredTopics={setFilteredTopics}
-          filteredTopics={filteredTopics}
-          onUpdate={onUpdate}
-          lTech={lTech}
-        />
+        {isExpandToggled ? (
+          <TopicListContainer
+            topics={topics}
+            goals={goals}
+            setFilteredTopics={setFilteredTopics}
+            filteredTopics={filteredTopics}
+            onUpdate={onUpdate}
+            lTech={lTech}
+          />
+        ) : (
+          <RecentsList list={[topics]} />
+        )}
       </div>
       <CreateModal
         handleClose={handleClose}
