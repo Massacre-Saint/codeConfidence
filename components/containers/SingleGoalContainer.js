@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { BsFillSignpost2Fill } from 'react-icons/bs';
+import { ProgressBar } from 'react-bootstrap';
 import TechImage from '../icons/TechImage';
 import convertTime from '../../utils/convertTime';
+import TopicListContainer from './TopicListContainer';
 
-function SingleGoalContainer({ goal }) {
+function SingleGoalContainer({
+  goal,
+  topics,
+  goals,
+  onUpdate,
+  lTech,
+}) {
+  const [filteredTopics, setFilteredTopics] = useState([]);
+
+  useEffect(() => {
+    setFilteredTopics(topics);
+  }, [topics]);
+
   return (
     <div className="tech-view_container">
       <div className="flex-row space-between">
@@ -28,18 +42,33 @@ function SingleGoalContainer({ goal }) {
             {goal.title}
           </h2>
           <div>
-            <span>
-              {convertTime(goal.lastUpdated)}
-            </span>
-            <span>
-              {`${goal.progress} % complete`}
-            </span>
-          </div>
-          <div>
             {goal.description}
           </div>
         </div>
       </div>
+      <div className="progress_container">
+        <ProgressBar
+          bsPrefix="progress"
+          now={goal.progress}
+          label={`${goal.progress}%`}
+        />
+      </div>
+      <div className="fnt-secondary">
+        <span className="margin-r-md">
+          {convertTime(goal.lastUpdated)}
+        </span>
+        <span>
+          {`${goal.progress} % complete`}
+        </span>
+      </div>
+      <TopicListContainer
+        topics={topics}
+        goals={goals}
+        setFilteredTopics={setFilteredTopics}
+        filteredTopics={filteredTopics}
+        onUpdate={onUpdate}
+        lTech={lTech}
+      />
     </div>
   );
 }
@@ -58,5 +87,18 @@ SingleGoalContainer.propTypes = {
     }),
     lastUpdated: PropTypes.string,
     progress: PropTypes.number,
+  }).isRequired,
+  topics: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
+  goals: PropTypes.arrayOf((PropTypes.shape({
+    id: PropTypes.string,
+  }))).isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  lTech: PropTypes.shape({
+    tech: PropTypes.shape({
+      docUrl: PropTypes.string,
+      name: PropTypes.string,
+    }),
   }).isRequired,
 };

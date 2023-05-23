@@ -14,6 +14,7 @@ function GoalListContainer({
   onUpdate,
   handleClose,
   edit,
+  lTech,
 }) {
   return (
     <div className="center">
@@ -23,6 +24,7 @@ function GoalListContainer({
           goals={goals}
           setFilteredGoals={setFilteredGoals}
           setFilteredTopics={setFilteredTopics}
+          lTech={lTech}
         />
       </div>
       <div className="bottom-border-inset" />
@@ -70,4 +72,10 @@ GoalListContainer.propTypes = {
     PropTypes.shape({
     })
   )).isRequired,
+  lTech: PropTypes.shape({
+    tech: PropTypes.shape({
+      docUrl: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
 };

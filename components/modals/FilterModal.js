@@ -89,7 +89,11 @@ const initialFilteOptionsState = [
 
 ];
 export default function FilterModal({
-  goals, topics, setFilteredGoals, setFilteredTopics,
+  goals,
+  topics,
+  setFilteredGoals,
+  setFilteredTopics,
+  lTech,
 }) {
   const [show, setShow] = useState(false);
   const { user } = useAuth();
@@ -153,7 +157,7 @@ export default function FilterModal({
 
   const handleSubmit = () => {
     const querySet = isSelected.map((i) => i.param || i.query);
-    const lTech = router.query.id;
+    // const lTech = router.query.id;
     if (router.pathname === '/topics' || router.pathname === '/goals') {
       if (topics.length > 0) {
         getAllFilteredTopics(user, querySet).then((filteredTopics) => setFilteredTopics(filteredTopics));
@@ -161,9 +165,9 @@ export default function FilterModal({
         getAllFilteredGoals(user, querySet).then((filteredGoals) => setFilteredGoals(filteredGoals));
       }
     } else if (topics.length > 0) {
-      getFilteredTopicsByTech(user, querySet, lTech).then((filteredTopics) => setFilteredTopics(filteredTopics));
+      getFilteredTopicsByTech(user, querySet, lTech.id).then((filteredTopics) => setFilteredTopics(filteredTopics));
     } else {
-      getFilteredGoalsByTech(user, querySet, lTech).then((filteredGoals) => setFilteredGoals(filteredGoals));
+      getFilteredGoalsByTech(user, querySet, lTech.id).then((filteredGoals) => setFilteredGoals(filteredGoals));
     }
     handleClose();
   };
@@ -280,11 +284,19 @@ FilterModal.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))),
-  setFilteredGoals: PropTypes.func.isRequired,
+  setFilteredGoals: PropTypes.func,
   setFilteredTopics: PropTypes.func,
+  lTech: PropTypes.shape({
+    id: PropTypes.number,
+    tech: PropTypes.shape({
+      docUrl: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 FilterModal.defaultProps = {
   topics: [],
+  setFilteredGoals: () => {},
   setFilteredTopics: () => {},
 };

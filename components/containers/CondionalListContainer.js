@@ -4,7 +4,14 @@ import TopicListContainer from './TopicListContainer';
 import GoalListContainer from './GoalListContainer';
 
 export default function CondionalListContainer({
-  showingGoals, goals, topics, onUpdate, handleClose, edit, resources,
+  showingGoals,
+  goals,
+  topics,
+  onUpdate,
+  handleClose,
+  edit,
+  resources,
+  lTech,
 }) {
   const [filteredGoals, setFilteredGoals] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
@@ -26,6 +33,7 @@ export default function CondionalListContainer({
         onUpdate={onUpdate}
         handleClose={handleClose}
         edit={edit}
+        lTech={lTech}
       />
     );
   }
@@ -34,13 +42,12 @@ export default function CondionalListContainer({
       topics={topics}
       goals={goals}
       resources={resources}
-      setFilteredGoals={setFilteredGoals}
       setFilteredTopics={setFilteredTopics}
       filteredTopics={filteredTopics}
       onUpdate={onUpdate}
       handleClose={handleClose}
       edit={edit}
-
+      lTech={lTech}
     />
   );
 }

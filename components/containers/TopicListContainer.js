@@ -8,12 +8,12 @@ function TopicListContainer({
   topics,
   goals,
   resources,
-  setFilteredGoals,
   setFilteredTopics,
   filteredTopics,
   onUpdate,
   handleClose,
   edit,
+  lTech,
 }) {
   return (
     <div className="center">
@@ -21,8 +21,9 @@ function TopicListContainer({
         <SearchBar array={topics} setArray={setFilteredTopics} />
         <FilterModal
           goals={goals}
-          setFilteredGoals={setFilteredGoals}
+          topics={topics}
           setFilteredTopics={setFilteredTopics}
+          lTech={lTech}
         />
       </div>
       <div className="bottom-border-inset" />
@@ -64,10 +65,15 @@ TopicListContainer.propTypes = {
       id: PropTypes.number,
     }),
   }))).isRequired,
-  setFilteredGoals: PropTypes.func.isRequired,
   setFilteredTopics: PropTypes.func.isRequired,
   filteredTopics: PropTypes.arrayOf((
     PropTypes.shape({
     })
   )).isRequired,
+  lTech: PropTypes.shape({
+    tech: PropTypes.shape({
+      docUrl: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  }).isRequired,
 };
