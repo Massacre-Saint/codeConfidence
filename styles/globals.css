@@ -170,6 +170,11 @@ ul {
       border-color: var(--background-main);
     }
     
+    .border-outline-danger {
+      border-width: 1;
+      border-style: solid;
+      border-color: rgb(173, 27, 27);
+    }
     .border-none {
       border: none;
     }
@@ -198,6 +203,9 @@ ul {
       color: var(--font-primary);
     }
 
+    .fnt-danger {
+      color: rgb(173, 27, 27);
+    }
     .fnt-secondary {
       color: var(--font-secondary);
     }
@@ -214,9 +222,11 @@ ul {
   .card-background {
     background-color: var(--background-accent);
   }
-.button-padding {
-  padding: 2px 10px;
-}
+
+  /**** Buttons ****/
+  .button-padding {
+    padding: 2px 10px;
+  }
 
 .border-outline-selected {
   border-style: solid;
@@ -747,18 +757,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   color: white;
 }
 
-.info,
-.modal-content {
-  background-color: var(--background-accent);
-  color: white;
-}
-
-.info button {
-  background-color: transparent;
-  border: none;
-  color: white;
-}
-
 .edit-form {
   display: flex;
   flex-direction: column;
@@ -955,11 +953,12 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 }
 
 .progress {
-  max-width: 80%;
-  background-color: #888;
+  max-width: 50%;
+  height: 10px;
+  background-color: var(--background-accent);
 }
 .progress-bar {
-  background: linear-gradient(90deg, #094faf 30%, rgba(136,12,157,1) 40%, rgba(235,9,28,1) 50%, rgba(243,124,56,1) 60%, rgba(252,214,5,1) 70%, rgba(9,190,36,1) 80%);
+  background: linear-gradient(90deg, #094faf 20%, rgba(136,12,157,1) 45%, rgba(235,9,28,1) 60%, rgba(243,124,56,1) 75%, rgba(252,214,5,1) 90%, rgba(9,190,36,1) 100%);
 }
 
 .show-all-list-container {
@@ -1047,7 +1046,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   display: flex;
   color: #ffffff;
   border-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 .background-none {

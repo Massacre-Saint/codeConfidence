@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../../utils/context/authContext';
-import { getSingleGoal } from '../../../utils/data/goals';
+import { getGoals, getSingleGoal } from '../../../utils/data/goals';
 import { Loading } from '../../../components';
 import NavBlock from '../../../components/navs/NavBlock';
 import LearnedTechHeader from '../../../components/headers/LearnedTechHeader';
@@ -13,6 +13,8 @@ import { getTopics } from '../../../utils/data/topics';
 function DynamicSingleGoalPage() {
   const { user } = useAuth();
   const [goal, setGoal] = useState({});
+  const [lTech, setLTech] = useState({});
+  const [goals, setGoals] = useState([]);
   const [goalTopics, setGoalTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -26,7 +28,10 @@ function DynamicSingleGoalPage() {
       user,
       goalData.learnedTech.tech,
     );
+    setLTech(techData);
     const lTechTopics = await getTopics(user, techData);
+    const lTechGoals = await getGoals(user, techData);
+    setGoals(lTechGoals);
     if (lTechTopics.length > 0) {
       const results = lTechTopics.filter((i) => i.goal !== null && i.goal.id === goalData.id);
       setGoalTopics(results);
@@ -60,6 +65,9 @@ function DynamicSingleGoalPage() {
       <SingleGoalContainer
         goal={goal}
         topics={goalTopics}
+        goals={goals}
+        onUpdate={getDataAndSetState}
+        lTech={lTech}
       />
     </div>
   );
