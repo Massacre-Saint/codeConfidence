@@ -70,6 +70,17 @@ export default function TopicCard({
             <span className="fnt-primary fnt-large">
               {shortenString(obj.title)}
             </span>
+            <span className="fnt-small">
+              <IconContext.Provider
+                value={{ size: '1.5em', color: 'white' }}
+              >
+                <BiTimeFive />
+              </IconContext.Provider>
+              <span className="margin-r-sm" />
+              <span className="fnt-secondary">
+                {convertTime(obj.lastUpdated)}
+              </span>
+            </span>
           </div>
         </div>
       </div>
