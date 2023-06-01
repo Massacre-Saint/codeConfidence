@@ -163,6 +163,9 @@ ul {
     .padding-all {
       padding: 15px;
     }
+    .no-right-padding {
+      padding-right: 0px;
+    }
   /**** Border ****/
     .border-outline {
       border-width: 1;
@@ -199,6 +202,18 @@ ul {
     }
     
   /**** Fonts ****/
+    .txt-vertical {
+      transform: rotate(-90deg);
+      -webkit-transform: rotate(-90deg);
+      /* Firefox */
+      -moz-transform: rotate(-90deg);
+
+      /* IE */
+      -ms-transform: rotate(-90deg);
+
+      /* Opera */
+      -o-transform: rotate(-90deg);
+    }
     .fnt-primary {
       color: var(--font-primary);
     }
@@ -251,13 +266,6 @@ ul {
 
 .main-container {
   height: 100vh;
-}
-
-@media (min-width: 1200px) {
-  .main-container {
-    margin: .5%;
-    min-height: 90vh;
-  }
 }
 
 .space-between_shift-down {
@@ -750,6 +758,12 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
     color: white;
     padding: 2em;
   }
+}
+
+.info,
+.modal-content {
+  background-color: var(--background-accent);
+  color: white;
 }
 
 .modal-content {

@@ -29,7 +29,7 @@ export default function TopicForm({
   const updateProgress = (data) => {
     if (data.goal !== null) {
       getSingleGoal(data.goal).then((goal) => {
-        updateGoal(goal, user).then(() => onUpdate());
+        updateGoal(goal, user);
       });
     }
   };

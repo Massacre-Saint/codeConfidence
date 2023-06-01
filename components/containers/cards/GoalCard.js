@@ -107,7 +107,8 @@ export default function GoalCard({
           className={[progressClass,
             assignedTopicOrGoal.id === obj.id
               ? 'highlight'
-              : 'card-background padding-all border-radius-15'].join(' ')}
+              : 'card-background padding-all border-radius-15 no-right-padding',
+          ].join(' ')}
         >
           <div className="flex-row align-center">
             <div className="margin-r-md">
@@ -129,81 +130,91 @@ export default function GoalCard({
                 </span>
               </span>
             </div>
+            <div className="txt-vertical">
+              <span>
+                Goal
+              </span>
+            </div>
           </div>
         </div>
       </Link>
     );
   }
   return (
-    <div
-      role="button"
-      tabIndex="0"
-      id="card"
-      onKeyDown={(e) => handleKeyDown(e, obj)}
-      onClick={() => handleClick(obj)}
-      className={assignedTopicOrGoal.id === obj.id
-        ? 'highlight'
-        : 'flex-row card-background padding-all border-radius-15'}
+    <Link
+      href={`/lTech/goals/${obj.id}`}
+      passHref
     >
-      <div className="flex-row">
-        <div className="margin-r-md">
-          <TechImage obj={obj.learnedTech.tech} />
-        </div>
-        <div className="flex-col full-width">
-          <div>
-            <span>
-              {shortenString(obj.title)}
-            </span>
+      <div
+        role="button"
+        tabIndex="0"
+        id="card"
+        onKeyDown={(e) => handleKeyDown(e, obj)}
+        onClick={() => handleClick(obj)}
+        className={assignedTopicOrGoal.id === obj.id
+          ? 'highlight'
+          : 'flex-row card-background padding-all border-radius-15'}
+      >
+        <div className="flex-row">
+          <div className="margin-r-md">
+            <TechImage obj={obj.learnedTech.tech} />
           </div>
-          <div className="fnt-small">
-            <span>
-              <IconContext.Provider
-                value={{ size: '1.5em', color: 'white' }}
-              >
-                <BiTimeFive />
-              </IconContext.Provider>
-              <span className="margin-r-sm" />
-              <span className="fnt-secondary">
-                {convertTime(obj.lastUpdated)}
+          <div className="flex-col full-width">
+            <div>
+              <span>
+                {shortenString(obj.title)}
               </span>
-            </span>
-            <span className="margin-r-md" />
-            {obj.progress != null ? (
-              <>
-                <span>
-                  <IconContext.Provider
-                    value={{ size: '1.5em', color: 'white' }}
-                  >
-                    <TbChecklist />
-                  </IconContext.Provider>
-                  <span className="fnt-secondary">
-                    {goalTopics.length}
-                  </span>
-                  <span className="margin-r-sm" />
+            </div>
+            <div className="fnt-small">
+              <span>
+                <IconContext.Provider
+                  value={{ size: '1.5em', color: 'white' }}
+                >
+                  <BiTimeFive />
+                </IconContext.Provider>
+                <span className="margin-r-sm" />
+                <span className="fnt-secondary">
+                  {convertTime(obj.lastUpdated)}
                 </span>
-                <div className="progress_container">
-                  <ProgressBar
-                    bsPrefix="progress"
-                    now={obj.progress}
-                    label={`${obj.progress}%`}
-                  />
-                </div>
-              </>
-            )
-              : ('')}
+              </span>
+              <span className="margin-r-md" />
+              {obj.progress != null ? (
+                <>
+                  <span>
+                    <IconContext.Provider
+                      value={{ size: '1.5em', color: 'white' }}
+                    >
+                      <TbChecklist />
+                    </IconContext.Provider>
+                    <span className="fnt-secondary">
+                      {goalTopics.length}
+                    </span>
+                    <span className="margin-r-sm" />
+                  </span>
+                  <div className="progress_container">
+                    <ProgressBar
+                      bsPrefix="progress"
+                      now={obj.progress}
+                      label={`${obj.progress}%`}
+                    />
+                  </div>
+                </>
+              )
+                : ('')}
+            </div>
           </div>
+          {edit ? (
+            <div className="edit-delete_container">
+              <EditDelete
+                handleShowForm={handleShowForm}
+                handleDelete={handleDelete}
+              />
+            </div>
+          )
+            : ('')}
         </div>
-        {edit ? (
-          <div className="edit-delete_container">
-            <EditDelete
-              handleShowForm={handleShowForm}
-              handleDelete={handleDelete}
-            />
-          </div>
-        )
-          : ('')}
       </div>
-    </div>
+    </Link>
   );
 }
 
