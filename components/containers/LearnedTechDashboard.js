@@ -79,28 +79,24 @@ export default function LearnedTechDashboard({
       />
       {showAll
         ? (
-          <div>
-            <CondionalListContainer
-              onUpdate={onUpdate}
-              topics={topics}
-              goals={goals}
-              showingGoals={showingGoals}
-              showingBookmarks={showingBookmarks}
-              handleShowAll={handleShowAll}
-              edit={edit}
-              handleClose={handleClose}
-              resources={resources}
-              lTech={lTech}
-            />
-          </div>
+          <CondionalListContainer
+            onUpdate={onUpdate}
+            topics={topics}
+            goals={goals}
+            showingGoals={showingGoals}
+            showingBookmarks={showingBookmarks}
+            handleShowAll={handleShowAll}
+            edit={edit}
+            handleClose={handleClose}
+            resources={resources}
+            lTech={lTech}
+          />
         )
         : (
-          <div className="relative full-height">
-            <DashboardConditionalStateContainer
-              goals={goals}
-              topics={topics}
-            />
-          </div>
+          <DashboardConditionalStateContainer
+            goals={goals}
+            topics={topics}
+          />
         )}
       <CreateModal
         handleClose={handleClose}

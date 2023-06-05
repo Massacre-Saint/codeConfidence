@@ -52,36 +52,34 @@ export default function Bookmarks({
   }, [resources]);
   return (
     <>
-      <div>
-        <div className="fnt-secondary margin-btm">
-          <BsBookmarkFill />
+      <div className="fnt-secondary margin-btm">
+        <BsBookmarkFill />
           &nbsp;
           &nbsp;
-          {toggledFilter ? `${lTech.tech.name} Resources` : 'Your Bookmarks'}
-        </div>
-        <div className="search-bar-filter-container">
-          <SortResourcesAndBookmarks
-            resources={resources}
-            setFilteredResources={setFilteredResources}
-            lTech={lTech}
-            setToggledFilter={setToggledFilter}
-          />
-          <div className="margin-top-md" />
-          <SearchBar array={bookmarks} setArray={setFilteredBookmarks} />
-        </div>
-        <div className="show-all-list-container">
-          {filteredBookmarks.length > 0
-            ? (
-              <BookmarksList
-                bookmarks={bookmarks}
-                filteredBookmarks={filteredBookmarks}
-                resources={filteredResources}
-                toggledFilter={toggledFilter}
-                handleShowForm={handleShowForm}
-              />
-            )
-            : ('')}
-        </div>
+        {toggledFilter ? `${lTech.tech.name} Resources` : 'Your Bookmarks'}
+      </div>
+      <div className="search-bar-filter-container">
+        <SortResourcesAndBookmarks
+          resources={resources}
+          setFilteredResources={setFilteredResources}
+          lTech={lTech}
+          setToggledFilter={setToggledFilter}
+        />
+        <div className="margin-top-md" />
+        <SearchBar array={bookmarks} setArray={setFilteredBookmarks} />
+      </div>
+      <div className="show-all-list-container">
+        {filteredBookmarks.length > 0
+          ? (
+            <BookmarksList
+              bookmarks={bookmarks}
+              filteredBookmarks={filteredBookmarks}
+              resources={filteredResources}
+              toggledFilter={toggledFilter}
+              handleShowForm={handleShowForm}
+            />
+          )
+          : ('')}
       </div>
       {showResourceForm
         ? (

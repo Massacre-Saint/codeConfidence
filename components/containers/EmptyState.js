@@ -3,13 +3,11 @@ import React from 'react';
 
 function EmptyState() {
   return (
-    <div>
-      <Image
-        src="/emptySignPost.svg"
-        alt="sign-post in space"
-        layout="fill"
-      />
-    </div>
+    <Image
+      src="/emptySignPost.svg"
+      alt="sign-post in space"
+      layout="fill"
+    />
   );
 }
 
