@@ -60,7 +60,7 @@ export default function TopicCard({
         role="button"
         tabIndex="0"
         id="card"
-        className="card-background padding-all border-radius-15"
+        className="card-background padding-all border-radius-15 no-right-padding"
       >
         <div className="flex-row align-center">
           <div className="margin-r-md">
@@ -82,13 +82,18 @@ export default function TopicCard({
               </span>
             </span>
           </div>
+          <div className="txt-vertical">
+            <span>
+              Topic
+            </span>
+          </div>
         </div>
       </div>
     );
   }
   return (
     <div className="flex-row card-background padding-all border-radius-15">
-      <div>
+      <div className="margin-r-md">
         <TechImage obj={obj.learnedTech.tech} />
       </div>
       <div className="flex-col full-width">

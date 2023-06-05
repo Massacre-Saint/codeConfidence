@@ -17,7 +17,7 @@ function DashboardConditionalStateContainer({ goals, topics }) {
   }
   if (goals.length === 0 && topics.length === 0) {
     return (
-      <div>
+      <div className="relative full-height">
         <EmptyState />
       </div>
     );

@@ -119,7 +119,7 @@ ul {
   /**** Height ****/
 
     .full-height {
-      height: 98%;
+      min-height: 97%;
     }
   /**** Width ****/
 
@@ -760,14 +760,8 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   }
 }
 
-.info,
 .modal-content {
   background-color: var(--background-accent);
-  color: white;
-}
-
-.modal-content {
-  background-color: transparent;
   color: white;
 }
 

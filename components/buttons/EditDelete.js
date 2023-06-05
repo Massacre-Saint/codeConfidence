@@ -5,7 +5,14 @@ import PropTypes from 'prop-types';
 export default function EditDelete({ handleShowForm, handleDelete }) {
   return (
     <div className="edit-delte-btn">
-      <button type="button" id="showForm" onClick={handleShowForm}>
+      <button
+        type="button"
+        id="showForm"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleShowForm();
+        }}
+      >
         <AiFillEdit />
       </button>
       <button type="button" onClick={handleDelete}>
