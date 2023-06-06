@@ -10,18 +10,20 @@ function CondionalArrayRenderer(
   },
 ) {
   const handleFilteredArray = (array) => {
-    console.warn(array);
     const goals = [];
     const topics = [];
+    const resources = [];
     for (let i = 0; i < array.length; i++) {
       if (array[i].progress !== undefined) {
         goals.push(array[i]);
-      } else {
+      } if (array[i].bookmark) {
+        resources.push(array[i]);
+      } if (Object.keys(array[i]).includes('goal')) {
         topics.push(array[i]);
       }
     }
 
-    const combinedArray = [goals, topics];
+    const combinedArray = [goals, topics, resources];
     return combinedArray;
   };
 
@@ -43,7 +45,11 @@ function CondionalArrayRenderer(
     );
   }
   return (
-    <div>SHowing Resources</div>
+    <div
+      className="list_spacing show-all-list-container"
+    >
+      <RecentsList list={handleFilteredArray(jaggedArray)[2]} />
+    </div>
   );
 }
 

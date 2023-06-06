@@ -66,7 +66,7 @@ function RecentsSidebar({ goals, topics, resources }) {
           filteredArray={[goals, topics, resources]}
         />
         <div className="margin-top-md" />
-        <SearchBar array={[...goals, ...topics]} setArray={setFilteredArray} />
+        <SearchBar array={[...goals, ...topics, ...resources]} setArray={setFilteredArray} />
       </div>
       {showAll
         ? (
