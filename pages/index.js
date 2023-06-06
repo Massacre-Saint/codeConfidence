@@ -7,27 +7,30 @@ import RecentsSidebar from '../components/containers/RecentsSidebar';
 import NavBlock from '../components/navs/NavBlock';
 import { getAllGoals } from '../utils/data/goals';
 import { getAllTopics } from '../utils/data/topics';
+import { getResources } from '../utils/data/resources';
 
 function Home() {
   const { user } = useAuth();
   const [learnedTech, setLearnedTech] = useState([]);
   const [goals, setGoals] = useState([]);
   const [topics, setTopics] = useState([]);
+  const [resources, setResources] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentConditionalRoute] = useState('/');
 
   const getDataAndSetState = async () => {
     const array = await getTech();
     const userTech = await getLearnedTech(user, array);
-    const [a, b] = await Promise.all([getAllGoals(user), getAllTopics(user)]);
+    const [a, b, c] = await Promise.all([getAllGoals(user),
+      getAllTopics(user),
+      getResources(learnedTech)]);
     setLearnedTech(userTech);
     setGoals(a);
     setTopics(b);
+    setResources(c);
     setIsLoading(false);
   };
-  const handleConditionalRouting = (href) => {
-    console.warn(href);
-  };
+
   useEffect(() => {
     getDataAndSetState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,12 +50,13 @@ function Home() {
   return (
     <div className="home">
       <div className="grid-nav-container">
-        <NavBlock routeStateHandler={handleConditionalRouting} />
+        <NavBlock />
       </div>
       <div className="recent-sidebar-container">
         <RecentsSidebar
           goals={goals}
           topics={topics}
+          resources={resources}
         />
       </div>
       <div className="sm-grid-container">

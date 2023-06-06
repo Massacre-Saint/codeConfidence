@@ -9,12 +9,16 @@ import LearnedTechHeader from '../../../components/headers/LearnedTechHeader';
 import SingleGoalContainer from '../../../components/containers/SingleGoalContainer';
 import { getSingleLearnedTech } from '../../../utils/data';
 import { getTopics } from '../../../utils/data/topics';
+import Bookmarks from '../../../components/containers/Bookmarks';
+import { getResources } from '../../../utils/data/resources';
 
 function DynamicSingleGoalPage() {
   const { user } = useAuth();
   const [goal, setGoal] = useState({});
   const [lTech, setLTech] = useState({});
   const [goals, setGoals] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const [resources, setResources] = useState([]);
   const [goalTopics, setGoalTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -32,6 +36,8 @@ function DynamicSingleGoalPage() {
     const lTechTopics = await getTopics(user, techData);
     const lTechGoals = await getGoals(user, techData);
     setGoals(lTechGoals);
+    setTopics(lTechTopics);
+    getResources(goals).then(setResources);
     if (lTechTopics.length > 0) {
       const results = lTechTopics.filter((i) => i.goal !== null && i.goal.id === goalData.id);
       setGoalTopics(results);
@@ -56,7 +62,15 @@ function DynamicSingleGoalPage() {
       <div className="grid-nav-container">
         <NavBlock />
       </div>
-      <div className="recent-sidebar-container" />
+      <div className="recent-sidebar-container">
+        <Bookmarks
+          lTech={lTech}
+          goals={goals}
+          topics={topics}
+          resources={resources}
+          onUpdate={getDataAndSetState}
+        />
+      </div>
       <div className="sm-grid-container">
         <div className="l-tech-nav">
           <LearnedTechHeader obj={lTech.tech} />

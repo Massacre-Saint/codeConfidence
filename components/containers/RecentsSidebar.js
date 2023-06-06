@@ -7,10 +7,10 @@ import RecentsList from './RecentsList';
 import CondionalArrayRenderer from './CondionalArrayRenderer';
 import SearchBar from '../SearchBar';
 
-function RecentsSidebar({ goals, topics }) {
+function RecentsSidebar({ goals, topics, resources }) {
   const [showGoals, setShowGoals] = useState(false);
   const [showTopics, setShowTopics] = useState(false);
-  const [filteredArray, setFilteredArray] = useState([...goals, ...topics]);
+  const [filteredArray, setFilteredArray] = useState([...goals, ...topics, ...resources]);
   const [showAll, setShowAll] = useState(false);
   const hanldeFilteredState = (e) => {
     const button = e.target.id;
@@ -63,7 +63,7 @@ function RecentsSidebar({ goals, topics }) {
         <SortBtnGroup
           radioGroup={recentsRadioGroup}
           handleFilter={hanldeFilteredState}
-          filteredArray={[goals, topics]}
+          filteredArray={[goals, topics, resources]}
         />
         <div className="margin-top-md" />
         <SearchBar array={[...goals, ...topics]} setArray={setFilteredArray} />
@@ -92,8 +92,11 @@ RecentsSidebar.propTypes = {
   })),
   topics: PropTypes.arrayOf(PropTypes.shape({
   })),
+  resources: PropTypes.arrayOf(PropTypes.shape({
+  })),
 };
 RecentsSidebar.defaultProps = {
   goals: [],
   topics: [],
+  resources: [],
 };

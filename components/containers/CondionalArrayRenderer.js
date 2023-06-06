@@ -10,6 +10,7 @@ function CondionalArrayRenderer(
   },
 ) {
   const handleFilteredArray = (array) => {
+    console.warn(array);
     const goals = [];
     const topics = [];
     for (let i = 0; i < array.length; i++) {
