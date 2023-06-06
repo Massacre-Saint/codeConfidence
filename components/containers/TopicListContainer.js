@@ -10,9 +10,6 @@ function TopicListContainer({
   resources,
   setFilteredTopics,
   filteredTopics,
-  onUpdate,
-  handleClose,
-  edit,
   lTech,
 }) {
   return (
@@ -31,9 +28,6 @@ function TopicListContainer({
         <TopicList
           topics={filteredTopics}
           goals={goals}
-          onUpdate={onUpdate}
-          handleClose={handleClose}
-          edit={edit}
           resources={resources}
         />
       </div>
@@ -50,9 +44,6 @@ TopicListContainer.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
-  onUpdate: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  edit: PropTypes.bool.isRequired,
   resources: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.number,
     bookmark: PropTypes.shape({

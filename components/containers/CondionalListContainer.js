@@ -7,9 +7,6 @@ export default function CondionalListContainer({
   showingGoals,
   goals,
   topics,
-  onUpdate,
-  handleClose,
-  edit,
   resources,
   lTech,
 }) {
@@ -30,9 +27,6 @@ export default function CondionalListContainer({
         setFilteredGoals={setFilteredGoals}
         setFilteredTopics={setFilteredTopics}
         filteredGoals={filteredGoals}
-        onUpdate={onUpdate}
-        handleClose={handleClose}
-        edit={edit}
         lTech={lTech}
       />
     );
@@ -44,9 +38,6 @@ export default function CondionalListContainer({
       resources={resources}
       setFilteredTopics={setFilteredTopics}
       filteredTopics={filteredTopics}
-      onUpdate={onUpdate}
-      handleClose={handleClose}
-      edit={edit}
       lTech={lTech}
     />
   );
@@ -60,9 +51,6 @@ CondionalListContainer.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
-  onUpdate: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  edit: PropTypes.bool.isRequired,
   resources: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.number,
     bookmark: PropTypes.shape({

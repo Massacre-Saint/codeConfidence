@@ -59,11 +59,12 @@ function DynamicSingleGoalPage() {
       <div className="recent-sidebar-container" />
       <div className="sm-grid-container">
         <div className="l-tech-nav">
-          <LearnedTechHeader obj={goal.learnedTech.tech} />
+          <LearnedTechHeader obj={lTech.tech} />
         </div>
       </div>
       <SingleGoalContainer
         goal={goal}
+        setGoal={setGoal}
         topics={goalTopics}
         goals={goals}
         onUpdate={getDataAndSetState}

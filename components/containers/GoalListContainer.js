@@ -11,9 +11,6 @@ function GoalListContainer({
   setFilteredGoals,
   setFilteredTopics,
   filteredGoals,
-  onUpdate,
-  handleClose,
-  edit,
   lTech,
 }) {
   return (
@@ -31,9 +28,6 @@ function GoalListContainer({
       <div className="show-all-list-container">
         <GoalList
           goals={filteredGoals}
-          onUpdate={onUpdate}
-          handleClose={handleClose}
-          edit={edit}
           topics={topics}
           resources={resources}
         />
@@ -51,9 +45,6 @@ GoalListContainer.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
-  onUpdate: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  edit: PropTypes.bool.isRequired,
   resources: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.number,
     bookmark: PropTypes.shape({
