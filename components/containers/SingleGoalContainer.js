@@ -6,19 +6,26 @@ import { ProgressBar } from 'react-bootstrap';
 import TechImage from '../icons/TechImage';
 import convertTime from '../../utils/convertTime';
 import TopicListContainer from './TopicListContainer';
+import EditButton from '../buttons/EditButton';
 import CreateButton from '../buttons/CreateButton';
 import CreateModal from '../modals/CreateModal';
 import ExpandButton from '../buttons/ExpandButton';
 import RecentsList from './RecentsList';
+import { getSingleGoal, updateGoal } from '../../utils/data/goals';
+import { useAuth } from '../../utils/context/authContext';
 
 function SingleGoalContainer({
   goal,
+  setGoal,
   topics,
   goals,
   onUpdate,
   lTech,
 }) {
   const [filteredTopics, setFilteredTopics] = useState([]);
+  const { user } = useAuth();
+  const [isEditing, setIsEditing] = useState(false);
+  const [formInput, setFormInput] = useState(goal);
   const [creatingTopic, setCreatingTopic] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [isExpandToggled, setIsExpandToggled] = useState(false);
@@ -27,7 +34,14 @@ function SingleGoalContainer({
     setCreatingTopic(false);
     setShowCreateModal(false);
   };
-
+  const handleEdit = () => {
+    if (isEditing) {
+      updateGoal(formInput, user).then(() => {
+        getSingleGoal(goal.id).then(setGoal);
+      });
+      setIsEditing(false);
+    } else setIsEditing(true);
+  };
   const handleCreate = (e) => {
     if (e.target.id === 'create') {
       setCreatingTopic(true);
@@ -37,7 +51,7 @@ function SingleGoalContainer({
 
   useEffect(() => {
     setFilteredTopics(topics);
-  }, [topics]);
+  }, [topics, formInput, goal]);
 
   return (
     <div className="tech-view_container">
@@ -49,6 +63,10 @@ function SingleGoalContainer({
           Viewing Goal:
         </div>
         <div className="flex-row">
+          <EditButton
+            handleEdit={handleEdit}
+            isEditing={isEditing}
+          />
           <CreateButton
             handleCreate={handleCreate}
           />
@@ -60,7 +78,21 @@ function SingleGoalContainer({
         </div>
         <div className="flex-col">
           <h2 className="block">
-            {goal.title}
+            {isEditing ? (
+              <form>
+                <textarea
+                  cols={43}
+                  className="strip-form"
+                  name="title"
+                  onChange={({ target }) => setFormInput((prev) => ({ ...prev, [target.name]: target.value }))}
+                  value={formInput.title}
+                  spellCheck="true"
+                >
+                  {formInput.title}
+                </textarea>
+              </form>
+            )
+              : (goal.title)}
           </h2>
           <div>
             {goal.description}
@@ -132,6 +164,7 @@ SingleGoalContainer.propTypes = {
     lastUpdated: PropTypes.string,
     progress: PropTypes.number,
   }).isRequired,
+  setGoal: PropTypes.func.isRequired,
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,

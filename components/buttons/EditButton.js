@@ -9,7 +9,8 @@ function EditButton({ handleEdit, isEditing }) {
       background-none
       border-outline
       fnt-primary
-      toggle-button"
+      toggle-button
+      margin-r-md"
       id="create"
       onClick={(e) => handleEdit(e)}
     >
