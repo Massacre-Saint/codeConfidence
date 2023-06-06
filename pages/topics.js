@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ShowEditDelete from '../components/buttons/ShowEditDelete';
 import TopicList from '../components/containers/TopicList';
 import FilterModal from '../components/modals/FilterModal';
 import SearchBar from '../components/SearchBar';
@@ -15,22 +14,7 @@ export default function Topics() {
   const [lTechTopics, setLTechTopics] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
   const [, setFilteredGoals] = useState([]);
-  const [edit, setEdit] = useState(false);
-  const [, setShow] = useState(false);
 
-  const handleClose = () => {
-    setShow(false);
-  };
-
-  const handleEdit = (e) => {
-    if (e.target.id === 'edit') {
-      setEdit(true);
-    } else if (e.target.id === 'exit') {
-      setEdit(false);
-    } else {
-      setEdit(false);
-    }
-  };
   const loader = async () => {
     const techData = await getTech();
     const learnedTech = await getLearnedTech(user, techData);
@@ -53,11 +37,7 @@ export default function Topics() {
       <div className="hero-font-container">
         <div className="hero-font">Topics</div>
       </div>
-      <div className="sub-nav-space-between">
-        <div>
-          <ShowEditDelete handleEdit={handleEdit} edit={edit} />
-        </div>
-      </div>
+      <div className="sub-nav-space-between" />
       <div className="show-all_container">
         <div className="show-all_header">
           <div className="search-bar_container">
@@ -78,9 +58,6 @@ export default function Topics() {
           <TopicList
             topics={filteredTopics}
             goals={lTechGoals}
-            onUpdate={loader}
-            handleClose={handleClose}
-            edit={edit}
           />
         </div>
       </div>

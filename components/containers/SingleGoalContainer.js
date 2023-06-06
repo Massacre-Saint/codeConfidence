@@ -99,7 +99,6 @@ function SingleGoalContainer({
             goals={goals}
             setFilteredTopics={setFilteredTopics}
             filteredTopics={filteredTopics}
-            onUpdate={onUpdate}
             lTech={lTech}
           />
         ) : (

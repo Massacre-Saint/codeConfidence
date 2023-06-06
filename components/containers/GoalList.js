@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import GoalCard from './cards/GoalCard';
 
 export default function GoalList({
-  goals, onUpdate, handleClose, edit, resources, topics, setAssignedTopicOrGoal, assignedTopicOrGoal, assigningBookmark,
+  goals,
+  resources,
+  topics,
+  setAssignedTopicOrGoal,
+  assignedTopicOrGoal,
+  assigningBookmark,
 }) {
   if (goals.length === 0) {
     return (
@@ -18,9 +23,6 @@ export default function GoalList({
         <GoalCard
           key={i.id}
           obj={i}
-          handleClose={handleClose}
-          onUpdate={onUpdate}
-          edit={edit}
           topics={topics}
           resources={resources}
           setAssignedTopicOrGoal={setAssignedTopicOrGoal}
@@ -37,9 +39,6 @@ GoalList.propTypes = {
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
-  onUpdate: PropTypes.func,
-  handleClose: PropTypes.func,
-  edit: PropTypes.bool,
   resources: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.number,
     bookmark: PropTypes.shape({
@@ -63,9 +62,6 @@ GoalList.propTypes = {
 };
 
 GoalList.defaultProps = {
-  onUpdate: () => {},
-  handleClose: () => {},
-  edit: false,
   topics: [],
   resources: [],
   setAssignedTopicOrGoal: () => {},

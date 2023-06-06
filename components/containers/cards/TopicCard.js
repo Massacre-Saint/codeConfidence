@@ -1,59 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { BsSignpostSplit, BsCheckCircleFill, BsCheckCircle } from 'react-icons/bs';
 import { BiTimeFive } from 'react-icons/bi';
 import { IconContext } from 'react-icons';
-import TopicForm from '../../forms/TopicForm';
-import { deleteTopic } from '../../../utils/data/topics';
-import { getSingleGoal, updateGoal } from '../../../utils/data/goals';
 import convertTime from '../../../utils/convertTime';
-import { useAuth } from '../../../utils/context/authContext';
-import EditDelete from '../../buttons/EditDelete';
 import TechImage from '../../icons/TechImage';
 import shortenString from '../../../utils/shortenString';
 
 export default function TopicCard({
   obj,
-  onUpdate,
-  handleClose,
-  goals,
-  edit,
   preview,
 }) {
-  const { user } = useAuth();
-  const [showForm, setshowForm] = useState(false);
-
-  const handleShowForm = () => {
-    setshowForm(true);
-  };
-  const handleCancelShowForm = () => {
-    setshowForm(false);
-  };
-
-  const handleDelete = () => {
-    if (obj.goal != null) {
-      getSingleGoal(obj.goal.id).then((goalObj) => {
-        deleteTopic(obj.id).then(() => updateGoal(goalObj, user));
-      });
-    } else {
-      deleteTopic(obj.id);
-    }
-    onUpdate();
-  };
-
-  if (showForm) {
-    return (
-      <div className="flex-col full-width">
-        <TopicForm
-          onUpdate={onUpdate}
-          handleClose={handleClose}
-          goals={goals}
-          obj={obj}
-          handleCancelShowForm={handleCancelShowForm}
-        />
-      </div>
-    );
-  }
   if (preview) {
     return (
       <div
@@ -157,12 +114,6 @@ export default function TopicCard({
           </span>
         </div>
       </div>
-      {edit ? (
-        <div className="edit-delete_container">
-          <EditDelete handleShowForm={handleShowForm} handleDelete={handleDelete} />
-        </div>
-      )
-        : ('')}
     </div>
   );
 }
@@ -183,20 +134,9 @@ TopicCard.propTypes = {
     }),
     lastUpdated: PropTypes.string,
   }).isRequired,
-  goals: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-  }))),
-  onUpdate: PropTypes.func,
-  handleClose: PropTypes.func,
-  edit: PropTypes.bool,
   preview: PropTypes.bool,
 };
 
 TopicCard.defaultProps = {
-  edit: false,
   preview: false,
-  goals: [],
-  handleClose: () => {},
-  onUpdate: () => {},
 };

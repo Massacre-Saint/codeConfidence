@@ -5,20 +5,13 @@ import { IconContext } from 'react-icons';
 import { BiTimeFive } from 'react-icons/bi';
 import { TbChecklist } from 'react-icons/tb';
 import Link from 'next/link';
-import GoalForm from '../../forms/GoalForm';
-import { deleteGoal } from '../../../utils/data/goals';
 import convertTime from '../../../utils/convertTime';
-import EditDelete from '../../buttons/EditDelete';
-import { deleteResource } from '../../../utils/data/resources';
 import TechImage from '../../icons/TechImage';
 import progressStyleHanlder from '../../../utils/progressStyleHandler';
 import shortenString from '../../../utils/shortenString';
 
 export default function GoalCard({
   obj,
-  onUpdate,
-  handleClose,
-  edit,
   topics,
   resources,
   setAssignedTopicOrGoal,
@@ -26,11 +19,10 @@ export default function GoalCard({
   assigningBookmark,
   preview,
 }) {
-  const [showForm, setshowForm] = useState(false);
   const [show, setShow] = useState(false);
   const handleShowTopics = () => setShow(true);
   const handleCloseTopics = () => setShow(false);
-  const [resource, setResource] = useState({});
+  const [, setResource] = useState({});
   const [goalTopics, setGoalTopics] = useState([]);
   const progressClass = progressStyleHanlder(obj.progress);
 
@@ -63,36 +55,6 @@ export default function GoalCard({
     }
   };
 
-  const handleShowForm = () => {
-    setshowForm(true);
-  };
-
-  const handleCancelShowForm = () => {
-    setshowForm(false);
-  };
-
-  const handleDelete = (e) => {
-    e.stopPropagation();
-    if (Object.values(resource).length > 0) {
-      deleteResource(resource);
-      deleteGoal(obj.id).then(() => onUpdate());
-    } else {
-      deleteGoal(obj.id).then(() => onUpdate());
-    }
-  };
-
-  if (showForm) {
-    return (
-      <div className="flex-col full-width">
-        <GoalForm
-          obj={obj}
-          onUpdate={onUpdate}
-          handleClose={handleClose}
-          handleCancelShowForm={handleCancelShowForm}
-        />
-      </div>
-    );
-  }
   if (preview) {
     return (
       <Link
@@ -204,15 +166,6 @@ export default function GoalCard({
                 : ('')}
             </div>
           </div>
-          {edit ? (
-            <div className="edit-delete_container">
-              <EditDelete
-                handleShowForm={handleShowForm}
-                handleDelete={handleDelete}
-              />
-            </div>
-          )
-            : ('')}
         </div>
       </div>
     </Link>
@@ -232,9 +185,6 @@ GoalCard.propTypes = {
       }),
     }),
   }).isRequired,
-  onUpdate: PropTypes.func,
-  handleClose: PropTypes.func,
-  edit: PropTypes.bool,
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))),
@@ -259,9 +209,6 @@ GoalCard.propTypes = {
 };
 
 GoalCard.defaultProps = {
-  edit: false,
-  onUpdate: () => {},
-  handleClose: () => {},
   topics: [],
   resources: [],
   setAssignedTopicOrGoal: () => {},

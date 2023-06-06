@@ -4,7 +4,6 @@ import { IconContext } from 'react-icons';
 import { AiFillDashboard } from 'react-icons/ai';
 import { LearnedTechNav } from '../navs';
 import CreateModal from '../modals/CreateModal';
-import ShowEditDelete from '../buttons/ShowEditDelete';
 import { CreateDropdown } from '../buttons';
 import DashboardConditionalStateContainer from './DashboardConditionalStateContainer';
 import CondionalListContainer from './CondionalListContainer';
@@ -17,7 +16,6 @@ export default function LearnedTechDashboard({
   const [showAll, setShowAll] = useState(false);
   const [showingGoals, setShowingGoals] = useState(false);
   const [showingBookmarks] = useState(false);
-  const [edit, setEdit] = useState(false);
   const handleClose = () => {
     setCreatingGoal(false);
     setShowCreateModal(false);
@@ -27,15 +25,6 @@ export default function LearnedTechDashboard({
       setCreatingGoal(true);
     }
     setShowCreateModal(true);
-  };
-  const handleEdit = (e) => {
-    if (e.target.id === 'edit') {
-      setEdit(true);
-    } else if (e.target.id === 'exit') {
-      setEdit(false);
-    } else {
-      setEdit(false);
-    }
   };
 
   const handleShowAll = (e) => {
@@ -47,7 +36,7 @@ export default function LearnedTechDashboard({
       setShowAll(true);
     } else {
       setShowAll(false);
-    } setEdit(false);
+    }
   };
 
   return (
@@ -63,13 +52,6 @@ export default function LearnedTechDashboard({
           <CreateDropdown
             handleShow={handleShow}
           />
-          {showAll ? (
-            <div className="create-form_btn">
-              <ShowEditDelete handleEdit={handleEdit} edit={edit} />
-            </div>
-          ) : (
-            ''
-          )}
         </div>
       </div>
       <LearnedTechNav
@@ -80,14 +62,11 @@ export default function LearnedTechDashboard({
       {showAll
         ? (
           <CondionalListContainer
-            onUpdate={onUpdate}
             topics={topics}
             goals={goals}
             showingGoals={showingGoals}
             showingBookmarks={showingBookmarks}
             handleShowAll={handleShowAll}
-            edit={edit}
-            handleClose={handleClose}
             resources={resources}
             lTech={lTech}
           />
