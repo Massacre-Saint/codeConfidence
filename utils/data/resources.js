@@ -9,16 +9,20 @@ const getResources = (assignedTo) => new Promise((resolve, reject) => {
       const transformedData = data.map((obj) => {
         const {
           id,
+          title,
           bookmark,
           object_id: objectId,
           learned_tech: learnedTech,
+          last_updated: lastUpdated,
         } = obj;
         const assignedEntity = assignedTo.find((object) => object.id === objectId);
         return {
           id,
+          title,
           bookmark,
           objectId: assignedEntity,
           learnedTech,
+          lastUpdated,
         };
       });
       resolve(transformedData);
@@ -28,6 +32,7 @@ const getResources = (assignedTo) => new Promise((resolve, reject) => {
 const createResource = (data) => new Promise((resolve, reject) => {
   const requestBody = {
     bookmark: data.bookmark,
+    title: data.title,
     learned_tech: data.learnedTech,
   };
   if (data.assignedTo) {
@@ -47,6 +52,7 @@ const createResource = (data) => new Promise((resolve, reject) => {
 const updateResource = (data) => new Promise((resolve, reject) => {
   const requestBody = {
     bookmark: data.bookmark.id,
+    title: data.title,
     tech: data.tech.id,
   };
 

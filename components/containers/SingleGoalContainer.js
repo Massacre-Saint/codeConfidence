@@ -8,6 +8,7 @@ import convertTime from '../../utils/convertTime';
 import TopicListContainer from './TopicListContainer';
 import EditButton from '../buttons/EditButton';
 import CreateButton from '../buttons/CreateButton';
+import CancelButton from '../buttons/CancelButton';
 import CreateModal from '../modals/CreateModal';
 import ExpandButton from '../buttons/ExpandButton';
 import RecentsList from './RecentsList';
@@ -34,13 +35,15 @@ function SingleGoalContainer({
     setCreatingTopic(false);
     setShowCreateModal(false);
   };
-  const handleEdit = () => {
-    if (isEditing) {
+  const handleEdit = (e) => {
+    if (e.target.id === 'create') {
       updateGoal(formInput, user).then(() => {
         getSingleGoal(goal.id).then(setGoal);
       });
       setIsEditing(false);
-    } else setIsEditing(true);
+    } if (e.target.id === 'edit') {
+      setIsEditing(true);
+    } else setIsEditing(false);
   };
   const handleCreate = (e) => {
     if (e.target.id === 'create') {
@@ -67,9 +70,17 @@ function SingleGoalContainer({
             handleEdit={handleEdit}
             isEditing={isEditing}
           />
-          <CreateButton
-            handleCreate={handleCreate}
-          />
+          {isEditing
+            ? (
+              <CancelButton
+                handleClick={handleEdit}
+              />
+            )
+            : (
+              <CreateButton
+                handleCreate={handleCreate}
+              />
+            )}
         </div>
       </div>
       <div className="flex-row">

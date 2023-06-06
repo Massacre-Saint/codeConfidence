@@ -1292,4 +1292,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   border: .5px solid var(--font-secondary);
   padding: 5px;
   border-radius: 10px;
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 500;
 }
