@@ -6,15 +6,16 @@ import { ProgressBar } from 'react-bootstrap';
 import TechImage from '../icons/TechImage';
 import convertTime from '../../utils/convertTime';
 import TopicListContainer from './TopicListContainer';
-import EditButton from '../buttons/EditButton';
 import CreateButton from '../buttons/CreateButton';
 import CancelButton from '../buttons/CancelButton';
 import CreateModal from '../modals/CreateModal';
 import ExpandButton from '../buttons/ExpandButton';
+import SaveButton from '../buttons/SaveButton';
 import RecentsList from './RecentsList';
 import { getSingleGoal, updateGoal } from '../../utils/data/goals';
 import { useAuth } from '../../utils/context/authContext';
 import EmptyState from './EmptyState';
+import KebabButton from '../buttons/KebabButton';
 
 function SingleGoalContainer({
   goal,
@@ -37,15 +38,28 @@ function SingleGoalContainer({
     setShowCreateModal(false);
   };
   const handleEdit = (e) => {
-    if (e.target.id === 'create') {
+    if (e.target.id === 'save') {
       updateGoal(formInput, user).then(() => {
         getSingleGoal(goal.id).then(setGoal);
       });
       setIsEditing(false);
     } if (e.target.id === 'edit') {
       setIsEditing(true);
+    } if (e.target.id === 'delete') {
+      // handleDelete();
     } else setIsEditing(false);
   };
+
+  // const handleDelete = (e) => {
+  //   e.stopPropagation();
+  //   if (Object.values(resource).length > 0) {
+  //     deleteResource(resource);
+  //     deleteGoal(goal.id).then(() => onUpdate());
+  //   } else {
+  //     deleteGoal(goal.id).then(() => onUpdate());
+  //   }
+  // };
+
   const handleCreate = (e) => {
     if (e.target.id === 'create') {
       setCreatingTopic(true);
@@ -67,20 +81,26 @@ function SingleGoalContainer({
           Viewing Goal:
         </div>
         <div className="flex-row">
-          <EditButton
-            handleEdit={handleEdit}
-            isEditing={isEditing}
-          />
           {isEditing
             ? (
-              <CancelButton
-                handleClick={handleEdit}
-              />
+              <>
+                <SaveButton
+                  handleClick={handleEdit}
+                />
+                <CancelButton
+                  handleClick={handleEdit}
+                />
+              </>
             )
             : (
-              <CreateButton
-                handleCreate={handleCreate}
-              />
+              <>
+                <CreateButton
+                  handleCreate={handleCreate}
+                />
+                <KebabButton
+                  handleClick={handleEdit}
+                />
+              </>
             )}
         </div>
       </div>

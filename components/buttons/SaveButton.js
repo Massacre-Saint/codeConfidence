@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function EditButton({ handleEdit, isEditing }) {
+function SaveButton({ handleClick }) {
   return (
     <button
       type="button"
@@ -11,17 +11,16 @@ function EditButton({ handleEdit, isEditing }) {
       fnt-primary
       toggle-button
       margin-r-md"
-      id="edit"
-      onClick={(e) => handleEdit(e)}
+      id="save"
+      onClick={(e) => handleClick(e)}
     >
-      {isEditing ? 'Save' : 'Edit'}
+      Save
     </button>
   );
 }
 
-export default EditButton;
+export default SaveButton;
 
-EditButton.propTypes = {
-  handleEdit: PropTypes.func.isRequired,
-  isEditing: PropTypes.bool.isRequired,
+SaveButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
 };
