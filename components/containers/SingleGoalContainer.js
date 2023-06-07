@@ -14,6 +14,7 @@ import ExpandButton from '../buttons/ExpandButton';
 import RecentsList from './RecentsList';
 import { getSingleGoal, updateGoal } from '../../utils/data/goals';
 import { useAuth } from '../../utils/context/authContext';
+import EmptyState from './EmptyState';
 
 function SingleGoalContainer({
   goal,
@@ -88,7 +89,7 @@ function SingleGoalContainer({
           <TechImage obj={goal.learnedTech.tech} />
         </div>
         <div className="flex-col">
-          <h2 className="block">
+          <h2>
             {isEditing ? (
               <form>
                 <textarea
@@ -121,33 +122,45 @@ function SingleGoalContainer({
           {convertTime(goal.lastUpdated)}
         </span>
         <span>
-          {`${goal.progress}% complete`}
+          {goal.progress ? `${goal.progress}% complete` : ''}
         </span>
       </div>
       <div className="flex-row space-between_shift-down">
         <span className="sub-heading padding">
           Assigned Topics:
         </span>
-        <span className="sub-heading-sm padding">
-          <ExpandButton
-            isExpandToggled={isExpandToggled}
-            setIsExpandToggled={setIsExpandToggled}
-          />
-        </span>
+        {topics.length > 0
+          ? (
+            <span className="sub-heading-sm padding">
+              <ExpandButton
+                isExpandToggled={isExpandToggled}
+                setIsExpandToggled={setIsExpandToggled}
+              />
+            </span>
+          )
+          : ('')}
       </div>
-      <div className="flex-row margin-l-md gap-col">
-        {isExpandToggled ? (
-          <TopicListContainer
-            topics={topics}
-            goals={goals}
-            setFilteredTopics={setFilteredTopics}
-            filteredTopics={filteredTopics}
-            lTech={lTech}
-          />
+      {topics.length > 0
+        ? (
+          <div className="flex-row margin-l-md gap-col">
+            {isExpandToggled ? (
+              <TopicListContainer
+                topics={topics}
+                goals={goals}
+                setFilteredTopics={setFilteredTopics}
+                filteredTopics={filteredTopics}
+                lTech={lTech}
+              />
+            ) : (
+              <RecentsList list={[topics]} />
+            )}
+          </div>
+
         ) : (
-          <RecentsList list={[topics]} />
+          <div className="relative half-height">
+            <EmptyState />
+          </div>
         )}
-      </div>
       <CreateModal
         handleClose={handleClose}
         creatingTopic={creatingTopic}
