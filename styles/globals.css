@@ -119,7 +119,10 @@ ul {
   /**** Height ****/
 
     .full-height {
-      min-height: 97%;
+      height: 97%;
+    }
+    .half-height {
+      height: 60%;
     }
   /**** Width ****/
 
