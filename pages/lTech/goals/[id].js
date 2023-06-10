@@ -83,6 +83,7 @@ function DynamicSingleGoalPage() {
         goals={goals}
         onUpdate={getDataAndSetState}
         lTech={lTech}
+        resources={resources}
       />
     </div>
   );

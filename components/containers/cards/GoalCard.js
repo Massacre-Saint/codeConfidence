@@ -13,7 +13,6 @@ import shortenString from '../../../utils/shortenString';
 export default function GoalCard({
   obj,
   topics,
-  resources,
   setAssignedTopicOrGoal,
   assignedTopicOrGoal,
   assigningBookmark,
@@ -22,22 +21,16 @@ export default function GoalCard({
   const [show, setShow] = useState(false);
   const handleShowTopics = () => setShow(true);
   const handleCloseTopics = () => setShow(false);
-  // const [, setResource] = useState({});
   const [goalTopics, setGoalTopics] = useState([]);
   const progressClass = progressStyleHanlder(obj.progress);
 
   useEffect(() => {
-    console.warn(resources);
-    // if (resources.length > 0) {
-    //   const goalResource = resources.find((i) => i.objectId.id === obj.id);
-    //   setResource(goalResource);
-    // }
     if (topics.length > 0) {
       const results = topics.filter((i) => i.goal !== null && i.goal.id === obj.id);
       setGoalTopics(results);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topics, resources, obj.id]);
+  }, [topics, obj.id]);
 
   const handleClick = (assignedGoal) => {
     if (assigningBookmark) {
@@ -189,18 +182,6 @@ GoalCard.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))),
-  resources: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.number,
-    bookmark: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-    objectId: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-    tech: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-  }))),
   setAssignedTopicOrGoal: PropTypes.func,
   assignedTopicOrGoal: PropTypes.shape({
     id: PropTypes.string,
@@ -211,7 +192,6 @@ GoalCard.propTypes = {
 
 GoalCard.defaultProps = {
   topics: [],
-  resources: [],
   setAssignedTopicOrGoal: () => {},
   assignedTopicOrGoal: {},
   assigningBookmark: false,
