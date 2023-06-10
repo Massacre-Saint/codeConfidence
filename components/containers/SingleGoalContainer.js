@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { BsFillSignpost2Fill } from 'react-icons/bs';
 import { ProgressBar } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import TechImage from '../icons/TechImage';
 import convertTime from '../../utils/convertTime';
 import TopicListContainer from './TopicListContainer';
-import EditButton from '../buttons/EditButton';
 import CreateButton from '../buttons/CreateButton';
 import CancelButton from '../buttons/CancelButton';
 import CreateModal from '../modals/CreateModal';
 import ExpandButton from '../buttons/ExpandButton';
+import SaveButton from '../buttons/SaveButton';
 import RecentsList from './RecentsList';
-import { getSingleGoal, updateGoal } from '../../utils/data/goals';
+import { deleteGoal, getSingleGoal, updateGoal } from '../../utils/data/goals';
 import { useAuth } from '../../utils/context/authContext';
 import EmptyState from './EmptyState';
+import KebabButton from '../buttons/KebabButton';
+import { deleteResource } from '../../utils/data/resources';
+import DeleteWarningModal from '../modals/DeleteWarningModal';
 
 function SingleGoalContainer({
   goal,
@@ -23,29 +27,44 @@ function SingleGoalContainer({
   goals,
   onUpdate,
   lTech,
+  resources,
 }) {
   const [filteredTopics, setFilteredTopics] = useState([]);
+  const router = useRouter();
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [formInput, setFormInput] = useState(goal);
   const [creatingTopic, setCreatingTopic] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [isExpandToggled, setIsExpandToggled] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleClose = () => {
     setCreatingTopic(false);
     setShowCreateModal(false);
+    setShowDeleteModal(false);
   };
+
+  const handleDelete = () => {
+    if (resources.length > 0) {
+      resources.map((i) => deleteResource(i));
+    }
+    deleteGoal(goal.id).then(() => router.back());
+  };
+
   const handleEdit = (e) => {
-    if (e.target.id === 'create') {
+    if (e.target.id === 'save') {
       updateGoal(formInput, user).then(() => {
         getSingleGoal(goal.id).then(setGoal);
       });
       setIsEditing(false);
     } if (e.target.id === 'edit') {
       setIsEditing(true);
+    } if (e.target.id === 'delete') {
+      setShowDeleteModal(true);
     } else setIsEditing(false);
   };
+
   const handleCreate = (e) => {
     if (e.target.id === 'create') {
       setCreatingTopic(true);
@@ -67,20 +86,26 @@ function SingleGoalContainer({
           Viewing Goal:
         </div>
         <div className="flex-row">
-          <EditButton
-            handleEdit={handleEdit}
-            isEditing={isEditing}
-          />
           {isEditing
             ? (
-              <CancelButton
-                handleClick={handleEdit}
-              />
+              <>
+                <SaveButton
+                  handleClick={handleEdit}
+                />
+                <CancelButton
+                  handleClick={handleEdit}
+                />
+              </>
             )
             : (
-              <CreateButton
-                handleCreate={handleCreate}
-              />
+              <>
+                <CreateButton
+                  handleCreate={handleCreate}
+                />
+                <KebabButton
+                  handleClick={handleEdit}
+                />
+              </>
             )}
         </div>
       </div>
@@ -169,6 +194,14 @@ function SingleGoalContainer({
         goals={goals}
         onUpdate={onUpdate}
       />
+      {showDeleteModal ? (
+        <DeleteWarningModal
+          show={setShowDeleteModal}
+          handleClose={handleClose}
+          handleDelete={handleDelete}
+          relatedData={[topics, resources]}
+        />
+      ) : ('')}
     </div>
   );
 }
@@ -202,4 +235,6 @@ SingleGoalContainer.propTypes = {
       name: PropTypes.string,
     }),
   }).isRequired,
+  resources: PropTypes.arrayOf((PropTypes.shape({
+  }))).isRequired,
 };
