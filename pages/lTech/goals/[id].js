@@ -9,15 +9,15 @@ import LearnedTechHeader from '../../../components/headers/LearnedTechHeader';
 import SingleGoalContainer from '../../../components/containers/SingleGoalContainer';
 import { getSingleLearnedTech } from '../../../utils/data';
 import { getTopics } from '../../../utils/data/topics';
-import Bookmarks from '../../../components/containers/Bookmarks';
 import { getResources } from '../../../utils/data/resources';
+import EmptyState from '../../../components/containers/EmptyState';
 
 function DynamicSingleGoalPage() {
   const { user } = useAuth();
   const [goal, setGoal] = useState({});
   const [lTech, setLTech] = useState({});
   const [goals, setGoals] = useState([]);
-  const [topics, setTopics] = useState([]);
+  const [, setTopics] = useState([]);
   const [resources, setResources] = useState([]);
   const [goalTopics, setGoalTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -62,14 +62,8 @@ function DynamicSingleGoalPage() {
       <div className="grid-nav-container">
         <NavBlock />
       </div>
-      <div className="recent-sidebar-container">
-        <Bookmarks
-          lTech={lTech}
-          goals={goals}
-          topics={topics}
-          resources={resources}
-          onUpdate={getDataAndSetState}
-        />
+      <div className="recent-sidebar-container relative">
+        <EmptyState noBookmarksOrResources />
       </div>
       <div className="sm-grid-container">
         <div className="l-tech-nav">
