@@ -8,6 +8,7 @@ import NavBlock from '../components/navs/NavBlock';
 import { getAllGoals } from '../utils/data/goals';
 import { getAllTopics } from '../utils/data/topics';
 import { getResources } from '../utils/data/resources';
+import UserSettingButton from '../components/buttons/UserSettingButton';
 
 function Home() {
   const { user } = useAuth();
@@ -59,8 +60,9 @@ function Home() {
           resources={resources}
         />
       </div>
-      <div className="sm-grid-container">
+      <div className="sm-grid-container flex-row space-between">
         <Message />
+        <UserSettingButton />
       </div>
       <LearnedTechView tech={learnedTech} arrays={[goals, topics]} />
     </div>
