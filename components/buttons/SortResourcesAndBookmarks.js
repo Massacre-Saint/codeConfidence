@@ -3,7 +3,10 @@ import { AiOutlineClose } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 
 function SortResourcesAndBookmarks({
-  resources, setFilteredResources, lTech, setToggledFilter,
+  resources,
+  setFilteredResources,
+  lTech,
+  setToggledFilter,
 }) {
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -18,7 +21,7 @@ function SortResourcesAndBookmarks({
   };
 
   const handleChange = (e) => {
-    if (e.target.id === '1') {
+    if (e.target.id === '3') {
       setFilteredResources(resources);
       setToggledFilter(false);
     } else {
@@ -42,7 +45,7 @@ function SortResourcesAndBookmarks({
           )
           : ('')}
         {radios.map((i) => (
-          <>
+          <span key={i.value}>
             <input
               type="radio"
               id={i.value}
@@ -66,7 +69,7 @@ function SortResourcesAndBookmarks({
 
             >{i.name}
             </label>
-          </>
+          </span>
         ))}
       </form>
     </>

@@ -53,9 +53,7 @@ export default function Bookmarks({
   return (
     <>
       <div className="fnt-secondary margin-btm">
-        <BsBookmarkFill />
-          &nbsp;
-          &nbsp;
+        <BsBookmarkFill className="margin-r-md" />
         {toggledFilter ? `${lTech.tech.name} Resources` : 'Your Bookmarks'}
       </div>
       <div className="search-bar-filter-container">
