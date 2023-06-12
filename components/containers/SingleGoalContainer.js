@@ -58,11 +58,14 @@ function SingleGoalContainer({
         getSingleGoal(goal.id).then(setGoal);
       });
       setIsEditing(false);
-    } if (e.target.id === 'edit') {
+    } else if (e.target.id === 'edit') {
       setIsEditing(true);
-    } if (e.target.id === 'delete') {
+    } else if (e.target.id === 'delete') {
       setShowDeleteModal(true);
-    } else setIsEditing(false);
+    } else {
+      setIsEditing(false);
+      setShowDeleteModal(false);
+    }
   };
 
   const handleCreate = (e) => {

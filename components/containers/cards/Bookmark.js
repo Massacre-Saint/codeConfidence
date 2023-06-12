@@ -2,10 +2,14 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { FcFolder, FcOpenedFolder } from 'react-icons/fc';
 import Image from 'next/image';
-import MoreOptionsButton from '../../buttons/MoreOptionsButton';
+import KebabButton from '../../buttons/KebabButton';
 
 function Bookmark({
-  node, bookmarks, resources, toggledFilter, handleShowForm,
+  node,
+  bookmarks,
+  resources,
+  toggledFilter,
+  handleShowForm,
 }) {
   const [showChildren, setShowChildren] = useState(true);
   const hasChildren = node.children && node.children.length > 0;
@@ -19,7 +23,7 @@ function Bookmark({
   };
   const shortenedString = (string) => {
     if (string.length > 40) {
-      const shorten = string.slice(0, 17);
+      const shorten = string.slice(0, 35);
       return `${shorten}...`;
     }
     return string;
@@ -52,10 +56,11 @@ function Bookmark({
                         {shortenedString(node.title)}
                       </span>
                       <span>
-                        <MoreOptionsButton
+                        <KebabButton
                           node={node}
                           isResource={isResource}
-                          handleShowForm={handleShowForm}
+                          handleClick={handleShowForm}
+                          forBookmarkSidebar
                         />
                       </span>
                     </>
@@ -74,10 +79,11 @@ function Bookmark({
                         {shortenedString(node.title)}
                       </span>
                       <span>
-                        <MoreOptionsButton
+                        <KebabButton
                           node={node}
                           isResource={isResource}
-                          handleShowForm={handleShowForm}
+                          handleClick={handleShowForm}
+                          forBookmarkSidebar
                         />
                       </span>
                     </>

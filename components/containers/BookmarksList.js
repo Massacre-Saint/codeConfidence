@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import Bookmark from './cards/Bookmark';
 
 function BookmarksList({
-  bookmarks, filteredBookmarks, resources, toggledFilter, handleShowForm,
+  bookmarks,
+  filteredBookmarks,
+  resources, toggledFilter,
+  handleShowForm,
 }) {
   // Find the root node
   const rootNode = filteredBookmarks[0];
