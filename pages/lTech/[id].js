@@ -2,7 +2,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Loading } from '../../components';
-import Bookmarks from '../../components/containers/Bookmarks';
 import LearnedTechDashboard from '../../components/containers/LearnedTechDashboard';
 import LearnedTechHeader from '../../components/headers/LearnedTechHeader';
 import NavBlock from '../../components/navs/NavBlock';
@@ -11,6 +10,7 @@ import { getSingleLearnedTech, getSingleTech } from '../../utils/data';
 import { getAllGoals, getGoals } from '../../utils/data/goals';
 import { getResources } from '../../utils/data/resources';
 import { getAllTopics, getTopics } from '../../utils/data/topics';
+import EmptyState from '../../components/containers/EmptyState';
 
 export default function LearnedTechViewAll() {
   const router = useRouter();
@@ -55,14 +55,8 @@ export default function LearnedTechViewAll() {
         <div className="grid-nav-container">
           <NavBlock />
         </div>
-        <div className="recent-sidebar-container">
-          <Bookmarks
-            lTech={lTech}
-            goals={lTechGoals}
-            topics={lTechTopics}
-            resources={resources}
-            onUpdate={getDataAndSetState}
-          />
+        <div className="recent-sidebar-container relative">
+          <EmptyState noBookmarksOrResources />
         </div>
         <div className="sm-grid-container">
           <div className="l-tech-nav">

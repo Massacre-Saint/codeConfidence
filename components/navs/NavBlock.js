@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import {
-  BsBookmarkFill, BsFillSignpost2Fill, BsFillHouseDoorFill,
+  BsFillSignpost2Fill, BsFillHouseDoorFill,
 } from 'react-icons/bs';
 import { TbChecklist } from 'react-icons/tb';
 
@@ -12,12 +12,6 @@ function NavBlock() {
         <BsFillHouseDoorFill />
         <Link href="/">
           Home
-        </Link>
-      </span>
-      <span>
-        <BsBookmarkFill />
-        <Link passHref href="/bookmarks">
-          Bookmarks
         </Link>
       </span>
       <span>
