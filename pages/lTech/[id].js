@@ -11,6 +11,7 @@ import { getAllGoals, getGoals } from '../../utils/data/goals';
 import { getResources } from '../../utils/data/resources';
 import { getAllTopics, getTopics } from '../../utils/data/topics';
 import EmptyState from '../../components/containers/EmptyState';
+import UserSettingButton from '../../components/buttons/UserSettingButton';
 
 export default function LearnedTechViewAll() {
   const router = useRouter();
@@ -58,10 +59,11 @@ export default function LearnedTechViewAll() {
         <div className="recent-sidebar-container relative">
           <EmptyState noBookmarksOrResources />
         </div>
-        <div className="sm-grid-container">
+        <div className="sm-grid-container flex-row space-between">
           <div className="l-tech-nav">
             <LearnedTechHeader obj={lTech.tech} />
           </div>
+          <UserSettingButton />
         </div>
         <LearnedTechDashboard
           lTech={lTech}
