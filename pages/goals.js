@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IconContext } from 'react-icons';
 import { BsFillSignpost2Fill } from 'react-icons/bs';
-import { GoalList } from '../components/containers';
 import { useAuth } from '../utils/context/authContext';
 import { Loading, Message } from '../components';
 import NavBlock from '../components/navs/NavBlock';
@@ -10,19 +9,24 @@ import { getAllTopics } from '../utils/data/topics';
 import { getResources } from '../utils/data/resources';
 import UserSettingButton from '../components/buttons/UserSettingButton';
 import EmptyState from '../components/containers/EmptyState';
+import GoalListContainer from '../components/containers/GoalListContainer';
 
 function Home() {
   const { user } = useAuth();
   const [goals, setGoals] = useState([]);
-  const [, setTopics] = useState([]);
-  const [, setResources] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const [resources, setResources] = useState([]);
+  const [filteredGoals, setFilteredGoals] = useState([]);
+  const [, setFilteredTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getDataAndSetState = async () => {
     const [a, b, c] = await Promise.all([getAllGoals(user),
       getAllTopics(user)]);
     setGoals(a);
+    setFilteredGoals(a);
     setTopics(b);
+    setFilteredTopics(b);
     getResources(c).then(setResources);
     setIsLoading(false);
   };
@@ -57,8 +61,13 @@ function Home() {
             Viewing All Goals:
           </div>
         </div>
-        <GoalList
+        <GoalListContainer
+          topics={topics}
           goals={goals}
+          resources={resources}
+          setFilteredGoals={setFilteredGoals}
+          setFilteredTopics={setFilteredTopics}
+          filteredGoals={filteredGoals}
         />
       </div>
     </div>

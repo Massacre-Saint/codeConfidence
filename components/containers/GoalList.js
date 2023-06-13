@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GoalCard from './cards/GoalCard';
+import EmptyState from './EmptyState';
 
 export default function GoalList({
   goals,
@@ -11,8 +12,8 @@ export default function GoalList({
 }) {
   if (goals.length === 0) {
     return (
-      <div className="list_spacing empty-list">
-        <div>Nothing here</div>
+      <div>
+        <EmptyState searchEmpty />
       </div>
     );
   }

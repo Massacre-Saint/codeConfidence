@@ -85,6 +85,11 @@ ul {
 
 /********************* Utils ********************/
   
+  /**** Text ****/
+    .uppercase {
+      text-transform: uppercase;
+    }
+
   /**** Position ****/
     .relative {
       position: relative;
@@ -1118,17 +1123,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 @keyframes blink-caret {
   from, to { border-color: transparent }
   50% { border-color: orange; }
-}
-
-.empty-list {
-  border: 1px solid white;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  color: #F2F1FA;
-  color: #888;
-  font-size: 3vw;
-  text-align: center;
-  padding: 10px 0;
 }
 
 .bookmark-page {
