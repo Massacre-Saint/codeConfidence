@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GoalCard from './cards/GoalCard';
+import EmptyState from './EmptyState';
 
 export default function GoalList({
   goals,
-  resources,
   topics,
   setAssignedTopicOrGoal,
   assignedTopicOrGoal,
@@ -12,8 +12,8 @@ export default function GoalList({
 }) {
   if (goals.length === 0) {
     return (
-      <div className="list_spacing empty-list">
-        <div>Nothing here</div>
+      <div>
+        <EmptyState searchEmpty />
       </div>
     );
   }
@@ -24,7 +24,6 @@ export default function GoalList({
           key={i.id}
           obj={i}
           topics={topics}
-          resources={resources}
           setAssignedTopicOrGoal={setAssignedTopicOrGoal}
           assignedTopicOrGoal={assignedTopicOrGoal}
           assigningBookmark={assigningBookmark}
@@ -39,18 +38,6 @@ GoalList.propTypes = {
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))).isRequired,
-  resources: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.number,
-    bookmark: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-    objectId: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-    tech: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-  }))),
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,
   }))),
@@ -63,7 +50,6 @@ GoalList.propTypes = {
 
 GoalList.defaultProps = {
   topics: [],
-  resources: [],
   setAssignedTopicOrGoal: () => {},
   assignedTopicOrGoal: {},
   assigningBookmark: false,
