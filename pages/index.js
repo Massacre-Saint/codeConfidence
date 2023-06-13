@@ -17,7 +17,6 @@ function Home() {
   const [topics, setTopics] = useState([]);
   const [resources, setResources] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentConditionalRoute] = useState('/');
 
   const getDataAndSetState = async () => {
     const array = await getTech();
@@ -35,7 +34,7 @@ function Home() {
   useEffect(() => {
     getDataAndSetState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, currentConditionalRoute]);
+  }, [user]);
 
   if (isLoading) {
     return <Loading />;

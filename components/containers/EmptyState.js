@@ -6,8 +6,8 @@ function EmptyState({ noGoalsOrTopics, noBookmarksOrResources }) {
   if (noBookmarksOrResources) {
     return (
       <>
-        <h3>Such Empty,
-          <br /> Bookmarks Coming Soon!
+        <h3>In Progress,
+          <br />Bookmarks Coming Soon!
         </h3>
         <Image
           src="/wip.svg"

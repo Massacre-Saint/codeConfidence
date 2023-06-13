@@ -22,7 +22,7 @@ function NavBlock() {
       </span>
       <span>
         <BsFillSignpost2Fill />
-        <Link passHref href="/goals">
+        <Link passHref href="/goals/">
           Goals
         </Link>
       </span>
