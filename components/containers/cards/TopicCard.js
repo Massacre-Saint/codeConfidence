@@ -17,7 +17,7 @@ export default function TopicCard({
         role="button"
         tabIndex="0"
         id="card"
-        className="card-background padding-all border-radius-15 no-right-padding"
+        className="card-background padding-all border-radius-15 no-right-padding card-ratio-fixed"
       >
         <div className="flex-row align-center">
           <div className="margin-r-md">

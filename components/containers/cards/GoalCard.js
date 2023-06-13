@@ -64,7 +64,7 @@ export default function GoalCard({
           className={[progressClass,
             assignedTopicOrGoal.id === obj.id
               ? 'highlight'
-              : 'card-background padding-all border-radius-15 no-right-padding',
+              : 'card-background padding-all border-radius-15 no-right-padding card-ratio-fixed',
           ].join(' ')}
         >
           <div className="flex-row align-center">

@@ -36,8 +36,8 @@ function DashboardConditionalStateContainer({ goals, topics }) {
           Recent
         </span>
       </div>
-      <div className="flex-row margin-l-md gap-col">
-        <RecentsList list={[...goals, ...topics]} />
+      <div className="flex-row margin-l-md gap-col overflow-hidden right-fade">
+        <RecentsList horizontal list={[...goals, ...topics]} />
       </div>
       <div className="flex-row space-between_shift-down">
         <span className="sub-heading padding">
