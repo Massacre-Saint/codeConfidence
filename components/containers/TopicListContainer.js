@@ -66,5 +66,9 @@ TopicListContainer.propTypes = {
       docUrl: PropTypes.string,
       name: PropTypes.string,
     }),
-  }).isRequired,
+  }),
+};
+
+TopicListContainer.defaultProps = {
+  lTech: {},
 };
