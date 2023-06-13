@@ -11,6 +11,7 @@ import { getSingleLearnedTech, getSingleTech } from '../../utils/data';
 import { getAllGoals, getGoals } from '../../utils/data/goals';
 import { getResources } from '../../utils/data/resources';
 import { getAllTopics, getTopics } from '../../utils/data/topics';
+import UserSettingButton from '../../components/buttons/UserSettingButton';
 
 export default function LearnedTechViewAll() {
   const router = useRouter();
@@ -64,10 +65,11 @@ export default function LearnedTechViewAll() {
             onUpdate={getDataAndSetState}
           />
         </div>
-        <div className="sm-grid-container">
+        <div className="sm-grid-container  flex-row space-between">
           <div className="l-tech-nav">
             <LearnedTechHeader obj={lTech.tech} />
           </div>
+          <UserSettingButton />
         </div>
         <LearnedTechDashboard
           lTech={lTech}
