@@ -292,11 +292,12 @@ FilterModal.propTypes = {
       docUrl: PropTypes.string,
       name: PropTypes.string,
     }),
-  }).isRequired,
+  }),
 };
 
 FilterModal.defaultProps = {
   topics: [],
   setFilteredGoals: () => {},
   setFilteredTopics: () => {},
+  lTech: {},
 };

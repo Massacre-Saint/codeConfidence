@@ -68,5 +68,9 @@ GoalListContainer.propTypes = {
       docUrl: PropTypes.string,
       name: PropTypes.string,
     }),
-  }).isRequired,
+  }),
+};
+
+GoalListContainer.defaultProps = {
+  lTech: {},
 };
