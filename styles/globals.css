@@ -84,11 +84,6 @@ ul {
 }
 
 /********************* Utils ********************/
-  
-  /**** Text ****/
-    .uppercase {
-      text-transform: uppercase;
-    }
 
   /**** Position ****/
     .relative {
@@ -210,6 +205,11 @@ ul {
     }
     
   /**** Fonts ****/
+    
+    .uppercase {
+      text-transform: uppercase;
+    }
+
     .txt-vertical {
       transform: rotate(-90deg);
       -webkit-transform: rotate(-90deg);
@@ -246,6 +246,9 @@ ul {
     background-color: var(--background-accent);
   }
 
+  .card-ratio-fixed {
+    min-width:280.578px;
+  }
   /**** Buttons ****/
   .button-padding {
     padding: 2px 10px;
@@ -1292,4 +1295,18 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   font-size: 2rem;
   line-height: 1.2;
   font-weight: 500;
+}
+
+.right-fade {
+  position: relative;
+}
+
+.right-fade::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, #1b1b1b );
 }
