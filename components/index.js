@@ -1,6 +1,6 @@
 export {
   LearnedTechCreate, LearnedTechStart,
-  LearnedTechView, Signin, LearnedTechCard, TechCard, LearnedTechHub, GoalList, TopicList,
+  LearnedTechView, Signin, LearnedTechCard, TechCard, LearnedTechDashboard, GoalList, TopicList,
 } from './containers';
 export { LearnedTechNav, NavBar } from './navs';
 export { ChooseAll, Message } from './headers';

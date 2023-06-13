@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { FcFolder } from 'react-icons/fc';
-import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
-import { BiBookAdd } from 'react-icons/bi';
+import { FcFolder, FcOpenedFolder } from 'react-icons/fc';
 import Image from 'next/image';
+import KebabButton from '../../buttons/KebabButton';
 
 function Bookmark({
-  node, bookmarks, resources, toggledFilter, handleShowForm,
+  node,
+  bookmarks,
+  resources,
+  toggledFilter,
+  handleShowForm,
 }) {
   const [showChildren, setShowChildren] = useState(true);
   const hasChildren = node.children && node.children.length > 0;
@@ -20,8 +23,8 @@ function Bookmark({
   };
   const shortenedString = (string) => {
     if (string.length > 40) {
-      const shorten = string.slice(0, 40);
-      return `${shorten}`;
+      const shorten = string.slice(0, 35);
+      return `${shorten}...`;
     }
     return string;
   };
@@ -37,98 +40,70 @@ function Bookmark({
           <>
             <div className="list">
               <li>
-                {node.url === null ? (
-                  <>
-                    <span
-                      style={{ paddingLeft: hasChildren ? 8 : 10 }}
-                      tabIndex="0"
-                      role="button"
-                      onKeyDown={handleKeyDown}
-                      onClick={() => setShowChildren(!showChildren)}
-                    >
-                      <FcFolder />
-                      {shortenedString(node.title)}
-                    </span>
-                    <span>
-                      {isResource
-                        ? (
-                          <>
-                            <button
-                              type="button"
-                              id="showForm"
-                              onClick={() => handleShowForm(node, isResource)}
-                            >
-                              <AiFillEdit />
-                            </button>
-                            <button type="button">
-                              <AiFillDelete />
-                            </button>
-                          </>
-                        )
-                        : (
-                          <button
-                            type="button"
-                            id="showForm"
-                            onClick={() => handleShowForm(node, isResource)}
-                          >
-                            <BiBookAdd />
-                          </button>
-                        )}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <span style={{ paddingLeft: hasChildren ? 8 : 10 }}>
-                      <Image
-                        width={15}
-                        height={15}
-                        src={
+                {node.url === null
+                  // Folder Logic
+                  ? (
+                    <>
+                      <span
+                        tabIndex="0"
+                        role="button"
+                        onKeyDown={handleKeyDown}
+                        onClick={() => setShowChildren(!showChildren)}
+                        className="bookmark"
+                      >
+                        {showChildren ? (<FcOpenedFolder size={17} />) : (<FcFolder size={17} />)}
+                        &nbsp;
+                        {shortenedString(node.title)}
+                      </span>
+                      <span>
+                        <KebabButton
+                          node={node}
+                          isResource={isResource}
+                          handleClick={handleShowForm}
+                          forBookmarkSidebar
+                        />
+                      </span>
+                    </>
+                  // Linked Logic
+                  ) : (
+                    <>
+                      <span>
+                        <Image
+                          width={17}
+                          height={17}
+                          src={
                             `https://www.google.com/s2/favicons?domain=${node.url}`
                           }
+                        />
+                        &nbsp;
+                        {shortenedString(node.title)}
+                      </span>
+                      <span>
+                        <KebabButton
+                          node={node}
+                          isResource={isResource}
+                          handleClick={handleShowForm}
+                          forBookmarkSidebar
+                        />
+                      </span>
+                    </>
+                  )}
+                {hasChildren && showChildren && (
+                <div className="flex-row">
+                  <div className="indent-line" />
+                  <ul>
+                    {node.children.map((child) => (
+                      <Bookmark
+                        key={child.id}
+                        node={child}
+                        bookmarks={bookmarks}
+                        resources={resources}
+                        toggledFilter={toggledFilter}
+                        handleShowForm={handleShowForm}
                       />
-                      {shortenedString(node.title)}
-                    </span>
-                    <span>
-                      {isResource
-                        ? (
-                          <>
-                            <button
-                              type="button"
-                              id="showForm"
-                              onClick={() => handleShowForm(node, isResource)}
-                            >
-                              <AiFillEdit />
-                            </button>
-                            <button type="button">
-                              <AiFillDelete />
-                            </button>
-                          </>
-                        )
-                        : (
-                          <button
-                            type="button"
-                            id="showForm"
-                            onClick={() => handleShowForm(node, isResource)}
-                          >
-                            <BiBookAdd />
-                          </button>
-                        )}
-                    </span>
-                  </>
-                )}
-                {hasChildren && !showChildren && (
-                <ul>
-                  {node.children.map((child) => (
-                    <Bookmark
-                      key={child.id}
-                      node={child}
-                      bookmarks={bookmarks}
-                      resources={resources}
-                      toggledFilter={toggledFilter}
-                      handleShowForm={handleShowForm}
-                    />
-                  ))}
-                </ul>
+                    ))}
+                  </ul>
+                </div>
                 )}
               </li>
             </div>

@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import PropTypes from 'prop-types';
 import TechImage from '../../icons/TechImage';
 
-export default function LearnedTechCard({ obj, handleClick }) {
+export default function LearnedTechCard({ handleClick, obj }) {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       handleClick(obj);

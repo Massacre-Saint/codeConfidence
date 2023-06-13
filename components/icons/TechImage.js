@@ -5,29 +5,26 @@ import PropTypes from 'prop-types';
 export default function TechImage({ obj }) {
   if (obj.image_url) {
     return (
-      <div>
-        <Image
-          loading="lazy"
-          src={obj.image_url}
-          className="tech-image"
-          layout="intrinsic"
-          height={75}
-          width={75}
-        />
-      </div>
-    );
-  }
-  return (
-    <div>
       <Image
         loading="lazy"
-        src={obj.imageUrl}
+        src={obj.image_url}
         className="tech-image"
-        layout="responsive"
+        layout="intrinsic"
         height={75}
         width={75}
       />
-    </div>
+
+    );
+  }
+  return (
+    <Image
+      loading="lazy"
+      src={obj.imageUrl}
+      className="tech-image"
+      layout="responsive"
+      height={75}
+      width={75}
+    />
   );
 }
 

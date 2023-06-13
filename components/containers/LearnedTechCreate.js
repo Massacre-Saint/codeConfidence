@@ -9,7 +9,6 @@ import Loading from '../Loading';
 export default function LearnedTechCreate({ tech, onUpdate }) {
   const { user } = useAuth();
   const [techState, setTechState] = useState(tech);
-  const [selectedTechId, setSelectedTechId] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const handleClick = (id) => {
@@ -23,11 +22,6 @@ export default function LearnedTechCreate({ tech, onUpdate }) {
       return item;
     });
     setTechState(updatedTech);
-    if (selectedTechId === id) {
-      setSelectedTechId(null);
-    } else {
-      setSelectedTechId(id);
-    }
   };
 
   const handleSubmit = () => {

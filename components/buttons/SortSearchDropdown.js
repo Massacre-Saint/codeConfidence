@@ -1,24 +1,16 @@
-import React, { useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
 import PropTypes from 'prop-types';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Form from 'react-bootstrap/Form';
+import React, { useState } from 'react';
 import { InputGroup } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
 
-export default function SortSearchDropdown({ lTechGoals, setFilteredTopics, lTechTopics }) {
+export default function SortSearchDropdown({
+  lTechGoals, handleToggledQuery, filterOptions,
+}) {
   const [searchInput, setSearchInput] = useState('');
   const [filteredGoals, setFilteredGoals] = useState([]);
-
-  const handleSortGoal = (goalPk) => {
-    if (goalPk) {
-      const topicsWithGoal = lTechTopics.filter((obj) => obj.goal !== null);
-      const results = topicsWithGoal.filter((obj) => obj.goal.id === goalPk);
-      setFilteredTopics(results);
-    } else {
-      const results = lTechTopics.filter((obj) => obj.goal === null);
-      setFilteredTopics(results);
-    }
-  };
+  const [recentGoals] = useState(
+    lTechGoals.sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()),
+  );
   const resetInput = () => {
     setSearchInput('');
     setFilteredGoals([]);
@@ -32,55 +24,58 @@ export default function SortSearchDropdown({ lTechGoals, setFilteredTopics, lTec
 
   return (
     <>
-      <DropdownButton
-        id="dropdown-button-dark-example2"
-        variant="secondary"
-        menuVariant="dark"
-        title="Goals"
-        align="end"
-        bsPrefix="sort-goal-btn"
-        size="300"
-      >
-        <InputGroup>
-          <Form.Control
-            autoFocus
-            placeholder="Search Goals"
-            value={searchInput}
-            onChange={handleChange}
-            bsPrefix="search-field-inner-nav"
-          />
-          <InputGroup.Text id="btnGroupAddon" bsPrefix="search-field-inner-reset"><button type="button" onClick={resetInput}>X</button></InputGroup.Text>
-        </InputGroup>
-        {searchInput ? ('')
-          : (
-            <>
-              <Dropdown.Item onClick={() => handleSortGoal()}>
-                Unassigned Topics
-              </Dropdown.Item>
-              <Dropdown.Divider />
-            </>
-          )}
-        {filteredGoals.length > 0
-          ? (
-            filteredGoals.map((i) => (
-              <>
-                <Dropdown.Item key={i.id} onClick={() => handleSortGoal(i.id)}>
-                  {i.title}
-                </Dropdown.Item>
-                <Dropdown.Divider />
-              </>
+      <InputGroup>
+        <Form.Control
+          autoFocus
+          placeholder="Search Goals"
+          value={searchInput}
+          onChange={handleChange}
+          bsPrefix="search-field-inner-nav"
+        />
+        <InputGroup.Text id="btnGroupAddon" bsPrefix="search-field-inner-reset"><button type="button" onClick={resetInput}>X</button></InputGroup.Text>
+      </InputGroup>
+
+      {filteredGoals.length > 0
+        ? (
+          filteredGoals.map((i) => (
+            filterOptions.slice(6, 7).map((s) => (
+              <button
+                type="button"
+                className={
+                    i.id === s.param
+                      ? 'background-none fit-content border-outline-selected fnt-primary'
+                      : 'background-none fit-content border-outline fnt-primary'
+                  }
+                key={i.id}
+                id="8"
+                name="goal"
+                onChange={(e) => handleToggledQuery(i, e)}
+              >
+                {i.title}
+              </button>
             ))
-          ) : (
-            lTechGoals.slice(0, 3).map((i) => (
-              <>
-                <Dropdown.Item key={i.id} onClick={() => handleSortGoal(i.id)}>
-                  {i.title}
-                </Dropdown.Item>
-                <Dropdown.Divider />
-              </>
+          )))
+        : (
+          recentGoals.slice(0, 3).map((i) => (
+            filterOptions.slice(6, 7).map((s) => (
+              <button
+                type="button"
+                className={
+                    i.id === s.param
+                      ? 'background-none fit-content border-outline-selected fnt-primary'
+                      : 'background-none fit-content border-outline fnt-primary'
+                  }
+                key={i.id}
+                id="8"
+                name="goal"
+                onClick={(e) => handleToggledQuery(i, e)}
+              >
+                {i.title}
+              </button>
+
             ))
-          )}
-      </DropdownButton>
+          ))
+        )}
     </>
   );
 }
@@ -90,8 +85,14 @@ SortSearchDropdown.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
   }))).isRequired,
-  setFilteredTopics: PropTypes.func.isRequired,
-  lTechTopics: PropTypes.arrayOf((PropTypes.shape({
-    title: PropTypes.string,
-  }))).isRequired,
+  handleToggledQuery: PropTypes.func.isRequired,
+  filterOptions: PropTypes.arrayOf((PropTypes.shape({
+    param: PropTypes.string,
+  }))),
+};
+
+SortSearchDropdown.defaultProps = {
+  filterOptions: PropTypes.arrayOf((PropTypes.shape({
+    param: '',
+  }))),
 };

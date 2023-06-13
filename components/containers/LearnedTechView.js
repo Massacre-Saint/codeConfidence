@@ -1,22 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import LearnedTechCard from './cards/LearnedTechCard';
-import { Message } from '../headers';
 
-export default function LearnedTechView({ tech }) {
+export default function LearnedTechView({ tech, arrays }) {
   const router = useRouter();
+  console.warn(arrays);
   const handleClick = (obj) => {
     router.push({
       pathname: `/lTech/${obj.id}`,
       query: { tech: obj.tech.id },
     });
   };
+
   return (
     <>
       <div className="tech-view_container">
-        <div>
-          <Message />
+        <div className="flex-row space-between_shift-down">
+          <span className="sub-heading">
+            Your Skillset
+          </span>
+          {/* <span className="sub-heading-sm">
+            Expand
+          </span> */}
         </div>
         <div className="tech_flex-container">
           {tech.map((i) => (
@@ -34,4 +41,7 @@ LearnedTechView.propTypes = {
       id: PropTypes.number,
     }),
   }))).isRequired,
+  arrays: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.shape),
+  ).isRequired,
 };

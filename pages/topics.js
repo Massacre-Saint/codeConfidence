@@ -1,107 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import { Loading } from '../components';
-import ShowEditDelete from '../components/buttons/ShowEditDelete';
-import SortDropdown from '../components/buttons/SortDropdown';
-import SortSearchDropdown from '../components/buttons/SortSearchDropdown';
-import TopicList from '../components/containers/TopicList';
-import ToggleButtons from '../components/navs/ToggleButtons';
-import SearchBar from '../components/SearchBar';
+import { useEffect, useState } from 'react';
+import { IconContext } from 'react-icons';
+import { BsFillSignpost2Fill } from 'react-icons/bs';
 import { useAuth } from '../utils/context/authContext';
-import { getLearnedTech, getTech } from '../utils/data';
+import { Loading, Message } from '../components';
+import NavBlock from '../components/navs/NavBlock';
 import { getAllGoals } from '../utils/data/goals';
 import { getAllTopics } from '../utils/data/topics';
+import { getResources } from '../utils/data/resources';
+import UserSettingButton from '../components/buttons/UserSettingButton';
+import EmptyState from '../components/containers/EmptyState';
+import TopicListContainer from '../components/containers/TopicListContainer';
 
-export default function Topics() {
+function Home() {
   const { user } = useAuth();
-  const [, setLTech] = useState({});
-  const [lTechGoals, setLTechGoals] = useState([]);
-  const [lTechTopics, setLTechTopics] = useState([]);
+  const [goals, setGoals] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const [resources, setResources] = useState([]);
+  const [, setFilteredGoals] = useState([]);
   const [filteredTopics, setFilteredTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [edit, setEdit] = useState(false);
-  const [, setShow] = useState(false);
 
-  const handleClose = () => {
-    setShow(false);
-  };
-
-  const handleEdit = (e) => {
-    if (e.target.id === 'edit') {
-      setEdit(true);
-    } else if (e.target.id === 'exit') {
-      setEdit(false);
-    } else {
-      setEdit(false);
-    }
-  };
-  const loader = async () => {
-    const techData = await getTech();
-    const learnedTech = await getLearnedTech(user, techData);
-    setLTech(learnedTech);
-    const goalData = await getAllGoals(user, learnedTech);
-    setLTechGoals(goalData);
-    const topicData = await getAllTopics(user, learnedTech);
-    setLTechTopics(topicData);
-    setFilteredTopics(topicData);
+  const getDataAndSetState = async () => {
+    const [a, b, c] = await Promise.all([getAllGoals(user),
+      getAllTopics(user)]);
+    setGoals(a);
+    setFilteredGoals(a);
+    setTopics(b);
+    setFilteredTopics(b);
+    getResources(c).then(setResources);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    loader();
+    getDataAndSetState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
   if (isLoading) {
-    <>
-      <div className="hero-font-container">
-        <div className="hero-font">Topics</div>
-        <div className="line" />
-      </div>
-      <div className="show-all_container">
-        <div>
-          <div className="show-all_header" />
-          <Loading />
-        </div>
-      </div>
-    </>;
+    return <Loading />;
   }
+
   return (
-    <div className="view-all_container">
-      <div className="hero-font-container">
-        <div className="hero-font">Topics</div>
-        {/* <div className="line" /> */}
+    <div className="home">
+      <div className="grid-nav-container">
+        <NavBlock />
       </div>
-      <div className="sub-nav-space-between">
-        <div className="search-bar_container">
-          <SearchBar array={lTechTopics} setArray={setFilteredTopics} />
-        </div>
-        <div>
-          <ShowEditDelete handleEdit={handleEdit} edit={edit} />
-        </div>
+      <div className="recent-sidebar-container relative">
+        <EmptyState noBookmarksOrResources />
       </div>
-      <div className="show-all_container">
-        <div className="show-all_header">
-          <div className="show-all_header-content">
-            <ToggleButtons lTechTopics={lTechTopics} setFilteredTopics={setFilteredTopics} />
-          </div>
-          <div className="show-all_header-content">
-            <div>
-              <SortDropdown array={lTechTopics} setArray={setFilteredTopics} />
-            </div>
-            <div>
-              <SortSearchDropdown lTechGoals={lTechGoals} setFilteredTopics={setFilteredTopics} lTechTopics={lTechTopics} />
-            </div>
+      <div className="sm-grid-container flex-row space-between">
+        <Message />
+        <UserSettingButton />
+      </div>
+      <div className="tech-view_container">
+        <div className="flex-row space-between">
+          <div className="fnt-secondary margin-btm">
+            <IconContext.Provider value={{ size: '1.2em' }}>
+              <BsFillSignpost2Fill className="margin-r-sm" />
+            </IconContext.Provider>
+            Viewing All Topics:
           </div>
         </div>
-        <div className="show-all-list-container">
-          <TopicList
-            topics={filteredTopics}
-            goals={lTechGoals}
-            onUpdate={loader}
-            handleClose={handleClose}
-            edit={edit}
-          />
-        </div>
+        <TopicListContainer
+          topics={topics}
+          goals={goals}
+          resources={resources}
+          setFilteredGoals={setFilteredGoals}
+          setFilteredTopics={setFilteredTopics}
+          filteredTopics={filteredTopics}
+        />
       </div>
     </div>
   );
 }
+export default Home;
