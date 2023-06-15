@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Image from 'next/image';
 import EmptyState from './EmptyState';
 import RecentsList from './RecentsList';
 import Loading from '../Loading';
+import DoughnutChart from '../DoughnutChart';
 
 function DashboardConditionalStateContainer({ goals, topics }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,12 +25,7 @@ function DashboardConditionalStateContainer({ goals, topics }) {
     );
   } return (
     <div className="stats">
-      <Image
-        src="/placeholder-chart.svg"
-        width={130}
-        height={130}
-      />
-      <h2>Close this goal or topic?</h2>
+      <DoughnutChart goals={goals} topics={topics} />
       <div className="flex-row space-between_shift-down">
         <span className="sub-heading padding">
           Recent
