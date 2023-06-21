@@ -9,7 +9,6 @@ function DoughnutChart({ goals, topics }) {
   ChartJS.register(ArcElement, Tooltip, Legend);
   const completedGoals = goals.filter((i) => i.progress === 100);
   const completedTopics = topics.filter((i) => i.completed === true);
-  console.warn(completedGoals);
   const cfg = {
     labels: ['All Topics', 'All Goals', 'Completed Topics', 'Completed Goals'],
     datasets: [
@@ -33,18 +32,20 @@ function DoughnutChart({ goals, topics }) {
     ],
   };
   return (
-    <div className="full-width" style={{ width: '300px' }}>
+    <div className="chart-container">
       <Doughnut
         data={cfg}
+        width={null}
+        height={null}
         options={{
           cutout: '60%',
           responsive: true,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               position: 'right',
               labels: {
-                boxWidth: 10,
+                boxWidth: 20,
               },
             },
           },

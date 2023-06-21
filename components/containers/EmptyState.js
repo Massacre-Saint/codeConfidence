@@ -29,7 +29,9 @@ function EmptyState({ noGoalsOrTopics, noBookmarksOrResources, searchEmpty }) {
         <Image
           src="/wip.svg"
           alt="work in progress"
-          layout="fill"
+          layout="intrinsic"
+          width={500}
+          height={500}
         />
       </>
     );

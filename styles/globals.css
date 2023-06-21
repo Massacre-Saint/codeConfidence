@@ -464,6 +464,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 
 .tech-view_container {
   grid-area: main;
+  overflow-y: auto;
   padding: 15px 25px;
   background-color: var(--container-block);
   border-radius: 10px;
@@ -1306,4 +1307,10 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   bottom: 0;
   width: 40px;
   background: linear-gradient(to right, transparent, #1b1b1b );
+}
+
+.chart-container {
+  position: relative;
+  max-width: 20vw;
+  max-height: 20vh;
 }

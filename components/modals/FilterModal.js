@@ -229,23 +229,25 @@ export default function FilterModal({
                   handleToggledQuery={handleToggledQuery}
                 />
               </Col>
-              <Col className="flex-col" sm={3}>
-                By Status:
-                <StatusDropdown
-                  handleToggledQuery={handleToggledQuery}
-                  filterOptions={filterOptions}
-                />
-              </Col>
               {topics.length > 0
                 ? (
-                  <Col className="flex-col">
-                    By Goal:
-                    <SortSearchDropdown
-                      lTechGoals={goals}
-                      handleToggledQuery={handleToggledQuery}
-                      filterOptions={filterOptions}
-                    />
-                  </Col>
+                  <>
+                    <Col className="flex-col" sm={3}>
+                      By Status:
+                      <StatusDropdown
+                        handleToggledQuery={handleToggledQuery}
+                        filterOptions={filterOptions}
+                      />
+                    </Col>
+                    <Col className="flex-col">
+                      By Goal:
+                      <SortSearchDropdown
+                        lTechGoals={goals}
+                        handleToggledQuery={handleToggledQuery}
+                        filterOptions={filterOptions}
+                      />
+                    </Col>
+                  </>
                 )
                 : (
                   <Col className="flex-col">
