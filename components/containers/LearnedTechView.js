@@ -20,9 +20,6 @@ export default function LearnedTechView({ tech }) {
           <span className="sub-heading">
             Your Skillset
           </span>
-          {/* <span className="sub-heading-sm">
-            Expand
-          </span> */}
         </div>
         <div className="tech_flex-container">
           {tech.map((i) => (

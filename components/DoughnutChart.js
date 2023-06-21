@@ -32,20 +32,12 @@ function DoughnutChart({ goals, topics }) {
     ],
   };
   return (
-    <div style={{ height: '20%', width: '40%' }}>
+    <div className="chart-container">
       <Doughnut
         data={cfg}
         width={null}
         height={null}
         options={{
-          layout: {
-            padding: {
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-            },
-          },
           responsive: true,
           maintainAspectRatio: false,
           cutout: '60%',
@@ -53,7 +45,7 @@ function DoughnutChart({ goals, topics }) {
             legend: {
               position: 'right',
               labels: {
-                boxWidth: 10,
+                boxWidth: 20,
               },
             },
           },
