@@ -1,5 +1,4 @@
 @import 'bootstrap/dist/css/bootstrap.css';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
 /********************* Vars ********************/
 :root {
@@ -465,6 +464,7 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
 
 .tech-view_container {
   grid-area: main;
+  overflow-y: auto;
   padding: 15px 25px;
   background-color: var(--container-block);
   border-radius: 10px;
@@ -946,7 +946,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   position: relative;
   bottom: 1.2em;
  }
-
 .card_short-width {
   width: 80%;
   float: right;
@@ -1009,7 +1008,6 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
     width: 70%;
     margin: auto;
   }
-
 }
 .hero-font {
   font-size: 6vw;
@@ -1309,4 +1307,10 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   bottom: 0;
   width: 40px;
   background: linear-gradient(to right, transparent, #1b1b1b );
+}
+
+.chart-container {
+  position: relative;
+  max-width: 20vw;
+  max-height: 20vh;
 }

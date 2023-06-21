@@ -56,7 +56,7 @@ export default function LearnedTechViewAll() {
         <div className="grid-nav-container">
           <NavBlock />
         </div>
-        <div className="recent-sidebar-container relative">
+        <div className="recent-sidebar-container">
           <EmptyState noBookmarksOrResources />
         </div>
         <div className="sm-grid-container flex-row space-between">
