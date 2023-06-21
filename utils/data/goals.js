@@ -46,7 +46,7 @@ const getFilteredGoalsByTech = (user, querySet, lTech) => new Promise((resolve, 
   }
   const genericFilters = querySet.filter((i) => i != progressPercentage);
   queryString += `${genericFilters.join('&')}`;
-
+  console.warn(queryString);
   fetch(`${dbUrl}/goals/filter?l_tech=${lTech}&${queryString}`, {
     headers: {
       Authorization: user.uid,

@@ -26,7 +26,6 @@ function DashboardConditionalStateContainer({ goals, topics }) {
   } return (
     <div className="stats">
       <DoughnutChart goals={goals} topics={topics} />
-      <h2>Close this goal or topic?</h2>
       <div className="flex-row space-between_shift-down">
         <span className="sub-heading padding">
           Recent

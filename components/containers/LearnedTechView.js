@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import LearnedTechCard from './cards/LearnedTechCard';
 
-export default function LearnedTechView({ tech, arrays }) {
+export default function LearnedTechView({ tech }) {
   const router = useRouter();
-  console.warn(arrays);
   const handleClick = (obj) => {
     router.push({
       pathname: `/lTech/${obj.id}`,
@@ -41,7 +40,4 @@ LearnedTechView.propTypes = {
       id: PropTypes.number,
     }),
   }))).isRequired,
-  arrays: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.shape),
-  ).isRequired,
 };

@@ -36,13 +36,7 @@ function UserSettingButton() {
       >
 
         <Dropdown.Item
-          eventKey="1"
-        >
-          User Settings
-        </Dropdown.Item>
-        <Dropdown.Item
           eventKey="2"
-          id="delete"
         >
           <Authentication />
         </Dropdown.Item>
