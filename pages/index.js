@@ -48,17 +48,21 @@ function Home() {
     );
   }
   return (
-    <div className="home">
+    <div className={(goals.length || topics.length) === 0 ? 'home1' : 'home'}>
       <div className="grid-nav-container">
         <NavBlock />
       </div>
-      <div className="recent-sidebar-container">
-        <RecentsSidebar
-          goals={goals}
-          topics={topics}
-          resources={resources}
-        />
-      </div>
+      {(goals.length || topics.length) === 0
+        ? ('')
+        : (
+          <div className="recent-sidebar-container">
+            <RecentsSidebar
+              goals={goals}
+              topics={topics}
+              resources={resources}
+            />
+          </div>
+        )}
       <div className="sm-grid-container flex-row space-between">
         <Message />
         <UserSettingButton />

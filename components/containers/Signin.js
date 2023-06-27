@@ -10,7 +10,8 @@ export default function Signin() {
       <div className="sign_in-content">
         <div>
           <h1>Welcome to Code Confidence</h1>
-          <p>Code Confidence was designed for users who are learning new technologies! With this app you&apos;ll be able to:</p>
+          <p className="fnt-danger">This application is currently only developed for desktop.</p>
+          <p className="fnt-secondary margin-btm">Code Confidence was designed for users who are learning new technologies! With this app you&apos;ll be able to:</p>
         </div>
         <div className="grid-checklist">
           <span className="checklist-content">
@@ -35,7 +36,7 @@ export default function Signin() {
                 <IoCheckmarkCircleSharp />
               </IconContext.Provider>
             </span>
-            <div className="checklist-text">Track the progress of your learning goals</div>
+            <div className="checklist-text">Track the progress of your learning goals.</div>
           </span>
           <span className="checklist-content">
             <span>
@@ -51,7 +52,7 @@ export default function Signin() {
                 <IoCheckmarkCircleSharp />
               </IconContext.Provider>
             </span>
-            <div className="checklist-text"> Explore many programming languages, frameworks, and libraries</div>
+            <div className="checklist-text"> Track the many programming languages, frameworks, and libraries.</div>
           </span>
           <span className="checklist-content">
             <span>
