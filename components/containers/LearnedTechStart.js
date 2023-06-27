@@ -10,6 +10,7 @@ import TechCard from './cards/TechCard';
 import LearnedTechCreate from './LearnedTechCreate';
 
 export default function LearnedTechStart({ onUpdate }) {
+  const { user } = useAuth();
   const [tech, setTech] = useState([]);
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
@@ -17,24 +18,15 @@ export default function LearnedTechStart({ onUpdate }) {
   const handleShow = (() => {
     setShow(true);
   });
-  const { user } = useAuth();
 
-  const getTechData = () => {
-    let isMounted = true;
-    getTech().then((data) => {
-      if (isMounted) {
-        setLoading(false);
-        setTech(data);
-      }
-    });
-    return () => {
-      isMounted = false;
-    };
+  const getTechData = async () => {
+    const techData = await getTech();
+    setTech(techData);
+    setLoading(false);
   };
 
   useEffect(() => {
-    const cleanUp = getTechData();
-    return cleanUp;
+    getTechData();
   }, [user, show]);
 
   if (loading) {
