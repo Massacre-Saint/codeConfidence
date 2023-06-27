@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import LearnedTechCard from './cards/LearnedTechCard';
 
-export default function LearnedTechView({ tech }) {
+export default function LearnedTechView({ tech, arrays }) {
   const router = useRouter();
   const handleClick = (obj) => {
     router.push({
@@ -12,10 +12,12 @@ export default function LearnedTechView({ tech }) {
       query: { tech: obj.tech.id },
     });
   };
-
+  const [goals, topics] = arrays;
   return (
     <>
-      <div className="tech-view_container">
+      <div
+        className={(topics.length && goals.length) === 0 ? 'tech-view_container' : 'tech-view_container'}
+      >
         <div className="flex-row space-between_shift-down">
           <span className="sub-heading">
             Your Skillset
@@ -37,4 +39,9 @@ LearnedTechView.propTypes = {
       id: PropTypes.number,
     }),
   }))).isRequired,
+  arrays: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+      PropTypes.shape,
+    ),
+  ).isRequired,
 };

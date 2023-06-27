@@ -420,7 +420,13 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   background-color: var(--container-block);
   border-radius: 10px;
 }
-
+.no-sidebar {
+  grid-area: sidebar/main;
+  overflow-y: auto;
+  padding: 15px 25px;
+  background-color: var(--container-block);
+  border-radius: 10px;
+}
 .recent-sidebar-container {
   padding: 15px;
   min-width: 270px;
@@ -469,6 +475,18 @@ background: linear-gradient(90deg, rgba(9,79,175,1) 9%, rgba(136,12,157,1) 22%, 
   "nav info"
   "sidebar main"
   "sidebar main";
+}
+.home1 {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  gap: 10px;
+  grid-template-rows: 1fr 6fr;
+  grid-template-columns: 1.2fr 3fr;
+  grid-template-areas:
+  "nav info"
+  "main main"
+  "main main";
 }
 
 .tech_flex-container {
