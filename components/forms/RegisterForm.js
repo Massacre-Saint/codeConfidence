@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Image from 'next/image';
 import MediaQuery from 'react-responsive';
 import { registerUser } from '../../utils/data';
+import AuthenticationButton from '../buttons/Authentication';
 
 function RegisterForm({ user, updateUser }) {
   const [formData, setFormData] = useState({
@@ -31,8 +32,9 @@ function RegisterForm({ user, updateUser }) {
       <MediaQuery maxWidth={1024}>
         <div className="register-container">
           <div className="form-container">
+            <AuthenticationButton />
             <h1>Create An Account</h1>
-            <p>By creating an account, you will be allowed to begin your journey.</p>
+            <p className="fnt-secondary margin-btm">By creating an account, you will be allowed to begin your journey.</p>
             <Form onSubmit={handleSubmit}>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -77,9 +79,10 @@ function RegisterForm({ user, updateUser }) {
       </MediaQuery>
       <MediaQuery minWidth={1025}>
         <div className="register-container">
-          <div className="form-container">
+          <div className="fnt-secondary form-container">
+            <AuthenticationButton />
             <h1>Create An Account</h1>
-            <p>By creating an account, you will be allowed to begin your journey.</p>
+            <p className="margin-btm">By creating an account, you will be allowed to begin your journey.</p>
             <Form onSubmit={handleSubmit}>
               <Row>
                 <Col>
@@ -114,7 +117,7 @@ function RegisterForm({ user, updateUser }) {
                 <Form.Control as="textarea" value={formData.bio} name="bio" required placeholder="Enter your Bio" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
               </Form.Group>
 
-              <Button bsPrefix="sign-in-btn" variant="primary" type="submit">
+              <Button bsPrefix="sign-in-btn" type="submit">
                 Submit
               </Button>
             </Form>

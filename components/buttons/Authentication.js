@@ -8,14 +8,23 @@ function AuthenticationButton() {
 
   if (!user) {
     return (
-      <Button type="button" size="lg" bsPrefix="sign-in-btn" className="sign-in-btn" onClick={signIn}>Sign In</Button>
+      <Button
+        type="button"
+        size="lg"
+        className="sign-in-btn"
+        onClick={signIn}
+      >Sign In
+      </Button>
     );
   }
   return (
-    <Button variant="danger" type="button" size="sm" className="copy-btn" onClick={signOut}>
+    <button
+      type="button"
+      className="border-none background-none fnt-danger"
+      onClick={signOut}
+    >
       Sign Out
-    </Button>
+    </button>
   );
 }
-
 export default AuthenticationButton;
