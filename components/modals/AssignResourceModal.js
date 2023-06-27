@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Goals from '../containers/Goals';
 
 function AssignResourceModal({
   handleShowAssignedResourceModal,
@@ -10,7 +9,6 @@ function AssignResourceModal({
   setAssignedTopicOrGoal,
   assignedTopicOrGoal,
   showingGoals,
-  goals,
   // topics,
   handleSubmit,
 }) {
@@ -26,12 +24,6 @@ function AssignResourceModal({
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Goals
-          goals={goals}
-          setAssignedTopicOrGoal={setAssignedTopicOrGoal}
-          assignedTopicOrGoal={assignedTopicOrGoal}
-          assigningBookmark={showAssignedResourceModal}
-        />
         <Modal.Footer>
           <Button
             onClick={(e) => {
@@ -75,11 +67,5 @@ AssignResourceModal.propTypes = {
     id: PropTypes.string,
   }).isRequired,
   showingGoals: PropTypes.bool.isRequired,
-  goals: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string,
-  }))).isRequired,
-  // topics: PropTypes.arrayOf((PropTypes.shape({
-  //   id: PropTypes.string,
-  // }))).isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
