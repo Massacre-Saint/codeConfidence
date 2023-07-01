@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CreateButton({ handleCreate }) {
+function CreateButton({ handleCreate, creatingGoal }) {
   return (
     <button
       type="button"
@@ -13,7 +13,7 @@ function CreateButton({ handleCreate }) {
       id="create"
       onClick={(e) => handleCreate(e)}
     >
-      Add Topic
+      {creatingGoal ? 'Add Goal' : 'Add Topic'}
     </button>
   );
 }
@@ -22,4 +22,8 @@ export default CreateButton;
 
 CreateButton.propTypes = {
   handleCreate: PropTypes.func.isRequired,
+  creatingGoal: PropTypes.bool,
+};
+CreateButton.defaultProps = {
+  creatingGoal: false,
 };

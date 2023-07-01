@@ -27,7 +27,7 @@ export default function GoalList({
           setAssignedTopicOrGoal={setAssignedTopicOrGoal}
           assignedTopicOrGoal={assignedTopicOrGoal}
           assigningBookmark={assigningBookmark}
-
+          formSelect
         />
       ))}
     </div>
