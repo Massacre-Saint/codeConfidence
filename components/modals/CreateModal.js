@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import MediaQuery from 'react-responsive';
 import { Offcanvas } from 'react-bootstrap';
 import GoalForm from '../forms/GoalForm';
-import TopicForm from '../forms/TopicForm';
+import CreateTopicForm from '../forms/CreateTopicForm';
 
 export default function CreateModal({
   handleClose,
@@ -34,12 +34,12 @@ export default function CreateModal({
     <>
       <MediaQuery maxWidth={769}>
         <Offcanvas show={showCreateModal} onHide={handleClose} placement="bottom">
-          <TopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
+          <CreateTopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
         </Offcanvas>
       </MediaQuery>
       <MediaQuery minWidth={770}>
         <Modal show={showCreateModal} onHide={handleClose} centered>
-          <TopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
+          <CreateTopicForm lTech={lTech} goals={goals} onUpdate={onUpdate} handleClose={handleClose} />
         </Modal>
       </MediaQuery>
     </>

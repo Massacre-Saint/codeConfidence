@@ -30,7 +30,7 @@ export default function GoalCard({
       setGoalTopics(results);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topics, obj.id]);
+  }, [topics, obj.progress]);
 
   const handleClick = (assignedGoal) => {
     if (assigningBookmark) {

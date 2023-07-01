@@ -2,43 +2,45 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../../../utils/context/authContext';
-import { getGoals, getSingleGoal } from '../../../utils/data/goals';
 import { Loading, Message } from '../../../components';
 import NavBlock from '../../../components/navs/NavBlock';
-import SingleGoalContainer from '../../../components/containers/SingleGoalContainer';
-import { getSingleLearnedTech } from '../../../utils/data';
-import { getTopics } from '../../../utils/data/topics';
-import { getResources } from '../../../utils/data/resources';
 import EmptyState from '../../../components/containers/EmptyState';
+import { getSingleTopic, getTopics } from '../../../utils/data/topics';
+import { getSingleLearnedTech } from '../../../utils/data';
+import SingleTopicContanier from '../../../components/containers/SingleTopicContainer';
+import { getGoals, getSingleGoal } from '../../../utils/data/goals';
+import { getResources } from '../../../utils/data/resources';
 
-function DynamicSingleGoalPage() {
+function DynamicSingleTopicPage() {
   const { user } = useAuth();
-  const [goal, setGoal] = useState({});
+  const [topic, setTopic] = useState({});
+  const [topics, setTopics] = useState([]);
   const [lTech, setLTech] = useState({});
+  const [goal, setGoal] = useState(null);
   const [goals, setGoals] = useState([]);
   const [resources, setResources] = useState([]);
-  const [goalTopics, setGoalTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const goalUUID = router.query.id;
+  const topicUUID = router.query.id;
 
   const getDataAndSetState = async () => {
-    const goalData = await getSingleGoal(goalUUID);
-    setGoal(goalData);
+    const topicData = await getSingleTopic(topicUUID);
+    setTopic(topicData);
+    if (topicData.goal) {
+      const goalData = await getSingleGoal(topicData.goal.id);
+      setGoal(goalData);
+    } else setGoal(null);
     const techData = await getSingleLearnedTech(
-      goalData.learnedTech.id,
+      topicData.learnedTech.id,
       user,
-      goalData.learnedTech.tech,
+      topicData.learnedTech.tech,
     );
     setLTech(techData);
     const lTechTopics = await getTopics(user, techData);
     const lTechGoals = await getGoals(user, techData);
-    setGoals(lTechGoals);
     getResources(goals).then(setResources);
-    if (lTechTopics.length > 0) {
-      const results = lTechTopics.filter((i) => i.goal !== null && i.goal.id === goalData.id);
-      setGoalTopics(results);
-    }
+    setGoals(lTechGoals);
+    setTopics(lTechTopics);
     setIsLoading(false);
   };
 
@@ -53,7 +55,6 @@ function DynamicSingleGoalPage() {
       </>
     );
   }
-
   return (
     <div className="home">
       <div className="grid-nav-container">
@@ -67,17 +68,19 @@ function DynamicSingleGoalPage() {
           <Message />
         </div>
       </div>
-      <SingleGoalContainer
+      <SingleTopicContanier
+        topic={topic}
+        topics={topics}
         goal={goal}
-        setGoal={setGoal}
-        topics={goalTopics}
         goals={goals}
-        onUpdate={getDataAndSetState}
+        setTopic={setTopic}
+        setGoal={setGoal}
         lTech={lTech}
         resources={resources}
+        onUpdate={getDataAndSetState}
       />
     </div>
   );
 }
 
-export default DynamicSingleGoalPage;
+export default DynamicSingleTopicPage;

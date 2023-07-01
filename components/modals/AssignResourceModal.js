@@ -9,7 +9,6 @@ function AssignResourceModal({
   setAssignedTopicOrGoal,
   assignedTopicOrGoal,
   showingGoals,
-  // topics,
   handleSubmit,
 }) {
   if (showingGoals) {

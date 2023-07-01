@@ -34,13 +34,11 @@ function SingleGoalContainer({
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [formInput, setFormInput] = useState(goal);
-  const [creatingTopic, setCreatingTopic] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [isExpandToggled, setIsExpandToggled] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleClose = () => {
-    setCreatingTopic(false);
     setShowCreateModal(false);
     setShowDeleteModal(false);
   };
@@ -49,7 +47,7 @@ function SingleGoalContainer({
     if (resources.length > 0) {
       resources.map((i) => deleteResource(i));
     }
-    deleteGoal(goal.id).then(() => router.back());
+    deleteGoal(goal.id).then(() => router.push(`/lTech/${lTech.id}?tech=${lTech.tech.id}`));
   };
 
   const handleEdit = (e) => {
@@ -68,10 +66,7 @@ function SingleGoalContainer({
     }
   };
 
-  const handleCreate = (e) => {
-    if (e.target.id === 'create') {
-      setCreatingTopic(true);
-    }
+  const handleCreate = () => {
     setShowCreateModal(true);
   };
 
@@ -174,6 +169,7 @@ function SingleGoalContainer({
             {isExpandToggled ? (
               <TopicListContainer
                 topics={topics}
+                resources={resources}
                 goals={goals}
                 setFilteredTopics={setFilteredTopics}
                 filteredTopics={filteredTopics}
@@ -191,7 +187,6 @@ function SingleGoalContainer({
         )}
       <CreateModal
         handleClose={handleClose}
-        creatingTopic={creatingTopic}
         showCreateModal={showCreateModal}
         lTech={lTech}
         goals={goals}
@@ -233,7 +228,9 @@ SingleGoalContainer.propTypes = {
   }))).isRequired,
   onUpdate: PropTypes.func.isRequired,
   lTech: PropTypes.shape({
+    id: PropTypes.number,
     tech: PropTypes.shape({
+      id: PropTypes.number,
       docUrl: PropTypes.string,
       name: PropTypes.string,
     }),

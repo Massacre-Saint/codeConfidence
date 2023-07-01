@@ -82,7 +82,7 @@ function RegisterForm({ user, updateUser }) {
           <div className="fnt-secondary form-container">
             <AuthenticationButton />
             <h1>Create An Account</h1>
-            <p className="margin-btm">By creating an account, you will be allowed to begin your journey.</p>
+            <p className="fnt-secondary margin-btm">By creating an account, you will be allowed to begin your journey.</p>
             <Form onSubmit={handleSubmit}>
               <Row>
                 <Col>

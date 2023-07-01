@@ -86,7 +86,6 @@ const initialFilteOptionsState = [
     group: 3,
     isSelected: false,
   },
-
 ];
 export default function FilterModal({
   goals,
@@ -102,7 +101,6 @@ export default function FilterModal({
   const [isSelected, setIsSelected] = useState([]);
   const router = useRouter();
   const [filterOptions, setFilterOptions] = useState(initialFilteOptionsState);
-
   const handleToggledQuery = (query, e) => {
     const selected = filterOptions.map((item) => {
       // handles goal
@@ -154,7 +152,6 @@ export default function FilterModal({
     });
     setFilterOptions(selected);
   };
-
   const handleSubmit = () => {
     const querySet = isSelected.map((i) => i.param || i.query);
     // const lTech = router.query.id;
@@ -171,14 +168,12 @@ export default function FilterModal({
     }
     handleClose();
   };
-
   const handleReset = () => {
     setFilteredTopics(topics);
     setFilterOptions(initialFilteOptionsState);
     setIsSelected([]);
     handleClose();
   };
-
   useEffect(() => {
     const selectedFilters = filterOptions.filter((i) => i.isSelected);
     setIsSelected(selectedFilters);
@@ -198,7 +193,6 @@ export default function FilterModal({
         </IconContext.Provider>
         Filter
       </button>
-
       <Modal
         size="lg"
         show={show}
@@ -296,7 +290,6 @@ FilterModal.propTypes = {
     }),
   }),
 };
-
 FilterModal.defaultProps = {
   topics: [],
   setFilteredGoals: () => {},
