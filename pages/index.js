@@ -67,7 +67,7 @@ function Home() {
         <Message />
         <UserSettingButton />
       </div>
-      <LearnedTechView tech={learnedTech} arrays={[goals, topics]} />
+      <LearnedTechView tech={learnedTech} />
     </div>
   );
 }

@@ -165,6 +165,24 @@ const getAllTopics = (user) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSingleTopic = (pk) => new Promise((resolve, reject) => {
+  fetch(`${dbUrl}/topics/${pk}`)
+    .then((response) => response.json())
+    .then((data) => {
+      resolve({
+        id: data.id,
+        title: data.title,
+        description: data.description,
+        lastUpdated: data.last_updated,
+        learnedTech: data.learned_tech,
+        uid: data.uid,
+        goal: data.goal,
+        completed: data.completed,
+      });
+    })
+    .catch((error) => reject(error));
+});
+
 const createTopic = (data, user) => new Promise((resolve, reject) => {
   const requestBody = {
     title: data.title,
@@ -194,14 +212,13 @@ const updateTopic = (data, user) => new Promise((resolve, reject) => {
   const requestBody = {
     title: data.title,
     description: data.description,
-    learned_tech: data.learnedTech,
+    learned_tech: data.learnedTech.id,
     completed: data.completed,
   };
 
   if (data.goal) {
     requestBody.goal = data.goal;
   }
-
   fetch(`${dbUrl}/topics/${data.id}`, {
     method: 'PUT',
     headers: {
@@ -220,5 +237,5 @@ const deleteTopic = (id) => new Promise((resolve, reject) => {
   }).then(resolve).catch(reject);
 });
 export {
-  getTopics, createTopic, updateTopic, deleteTopic, getAllTopics, getFilteredTopicsByTech, getAllFilteredTopics,
+  getTopics, createTopic, updateTopic, deleteTopic, getAllTopics, getSingleTopic, getFilteredTopicsByTech, getAllFilteredTopics,
 };
