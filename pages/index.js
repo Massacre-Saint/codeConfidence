@@ -17,7 +17,6 @@ function Home() {
   const [topics, setTopics] = useState([]);
   const [resources, setResources] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentConditionalRoute] = useState('/');
 
   const getDataAndSetState = async () => {
     const array = await getTech();
@@ -31,16 +30,14 @@ function Home() {
     setResources(c);
     setIsLoading(false);
   };
-
   useEffect(() => {
     getDataAndSetState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, currentConditionalRoute]);
+  }, [user]);
 
   if (isLoading) {
     return <Loading />;
   }
-
   if (learnedTech.length === 0) {
     return (
       <>
@@ -49,22 +46,26 @@ function Home() {
     );
   }
   return (
-    <div className="home">
+    <div className={(goals.length || topics.length) === 0 ? 'home1' : 'home'}>
       <div className="grid-nav-container">
         <NavBlock />
       </div>
-      <div className="recent-sidebar-container">
-        <RecentsSidebar
-          goals={goals}
-          topics={topics}
-          resources={resources}
-        />
-      </div>
+      {(goals.length || topics.length) === 0
+        ? ('')
+        : (
+          <div className="recent-sidebar-container">
+            <RecentsSidebar
+              goals={goals}
+              topics={topics}
+              resources={resources}
+            />
+          </div>
+        )}
       <div className="sm-grid-container flex-row space-between">
         <Message />
         <UserSettingButton />
       </div>
-      <LearnedTechView tech={learnedTech} arrays={[goals, topics]} />
+      <LearnedTechView tech={learnedTech} />
     </div>
   );
 }

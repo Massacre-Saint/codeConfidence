@@ -24,7 +24,6 @@ export default function TopicList({
     </div>
   );
 }
-
 TopicList.propTypes = {
   topics: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,

@@ -2,7 +2,23 @@ import Image from 'next/image';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function EmptyState({ noGoalsOrTopics, noBookmarksOrResources, searchEmpty }) {
+function EmptyState({
+  noGoalsOrTopics,
+  noBookmarksOrResources,
+  searchEmpty,
+  noGoal,
+}) {
+  if (noGoal) {
+    return (
+      <div>
+        <Image
+          src="/noGoal.svg"
+          alt="sign-post in space"
+          layout="fill"
+        />
+      </div>
+    );
+  }
   if (searchEmpty) {
     return (
       <div className="center">
@@ -16,7 +32,6 @@ function EmptyState({ noGoalsOrTopics, noBookmarksOrResources, searchEmpty }) {
           height={400}
         />
       </div>
-
     );
   }
 
@@ -29,7 +44,9 @@ function EmptyState({ noGoalsOrTopics, noBookmarksOrResources, searchEmpty }) {
         <Image
           src="/wip.svg"
           alt="work in progress"
-          layout="fill"
+          layout="intrinsic"
+          width={500}
+          height={500}
         />
       </>
     );
@@ -54,14 +71,17 @@ function EmptyState({ noGoalsOrTopics, noBookmarksOrResources, searchEmpty }) {
   );
 }
 export default EmptyState;
+
 EmptyState.propTypes = {
   noGoalsOrTopics: PropTypes.bool,
   noBookmarksOrResources: PropTypes.bool,
   searchEmpty: PropTypes.bool,
+  noGoal: PropTypes.bool,
 };
 
 EmptyState.defaultProps = {
   noGoalsOrTopics: false,
   noBookmarksOrResources: false,
   searchEmpty: false,
+  noGoal: false,
 };

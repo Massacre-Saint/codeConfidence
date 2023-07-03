@@ -34,22 +34,19 @@ function SingleGoalContainer({
   const { user } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [formInput, setFormInput] = useState(goal);
-  const [creatingTopic, setCreatingTopic] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [isExpandToggled, setIsExpandToggled] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleClose = () => {
-    setCreatingTopic(false);
     setShowCreateModal(false);
     setShowDeleteModal(false);
   };
-
   const handleDelete = () => {
     if (resources.length > 0) {
       resources.map((i) => deleteResource(i));
     }
-    deleteGoal(goal.id).then(() => router.back());
+    deleteGoal(goal.id).then(() => router.push(`/lTech/${lTech.id}?tech=${lTech.tech.id}`));
   };
 
   const handleEdit = (e) => {
@@ -68,17 +65,13 @@ function SingleGoalContainer({
     }
   };
 
-  const handleCreate = (e) => {
-    if (e.target.id === 'create') {
-      setCreatingTopic(true);
-    }
+  const handleCreate = () => {
     setShowCreateModal(true);
   };
 
   useEffect(() => {
     setFilteredTopics(topics);
   }, [topics, formInput, goal]);
-
   return (
     <div className="tech-view_container">
       <div className="flex-row space-between">
@@ -174,6 +167,7 @@ function SingleGoalContainer({
             {isExpandToggled ? (
               <TopicListContainer
                 topics={topics}
+                resources={resources}
                 goals={goals}
                 setFilteredTopics={setFilteredTopics}
                 filteredTopics={filteredTopics}
@@ -183,7 +177,6 @@ function SingleGoalContainer({
               <RecentsList list={[topics]} />
             )}
           </div>
-
         ) : (
           <div className="relative half-height">
             <EmptyState />
@@ -191,7 +184,6 @@ function SingleGoalContainer({
         )}
       <CreateModal
         handleClose={handleClose}
-        creatingTopic={creatingTopic}
         showCreateModal={showCreateModal}
         lTech={lTech}
         goals={goals}
@@ -208,9 +200,7 @@ function SingleGoalContainer({
     </div>
   );
 }
-
 export default SingleGoalContainer;
-
 SingleGoalContainer.propTypes = {
   goal: PropTypes.shape({
     id: PropTypes.string,
@@ -233,7 +223,9 @@ SingleGoalContainer.propTypes = {
   }))).isRequired,
   onUpdate: PropTypes.func.isRequired,
   lTech: PropTypes.shape({
+    id: PropTypes.number,
     tech: PropTypes.shape({
+      id: PropTypes.number,
       docUrl: PropTypes.string,
       name: PropTypes.string,
     }),

@@ -26,7 +26,7 @@ function NavBlock() {
   return (
     <div className="quadrant-grid-nav">
       {btnGroup.map((btn) => (
-        <span>
+        <span key={btn.title}>
           <Link href={btn.route} passHref>
             <button
               type="button"
@@ -47,5 +47,4 @@ function NavBlock() {
     </div>
   );
 }
-
 export default NavBlock;

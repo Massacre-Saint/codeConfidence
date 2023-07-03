@@ -65,7 +65,7 @@ export default function LearnedTechViewAll() {
             onUpdate={getDataAndSetState}
           />
         </div>
-        <div className="sm-grid-container  flex-row space-between">
+        <div className="sm-grid-container flex-row space-between">
           <div className="l-tech-nav">
             <LearnedTechHeader obj={lTech.tech} />
           </div>

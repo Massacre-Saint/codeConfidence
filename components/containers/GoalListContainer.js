@@ -25,7 +25,7 @@ function GoalListContainer({
         />
       </div>
       <div className="bottom-border-inset" />
-      <div className="show-all-list-container">
+      <div className="margin-top-md">
         <GoalList
           goals={filteredGoals}
           topics={topics}
@@ -35,9 +35,7 @@ function GoalListContainer({
     </div>
   );
 }
-
 export default GoalListContainer;
-
 GoalListContainer.propTypes = {
   goals: PropTypes.arrayOf((PropTypes.shape({
     id: PropTypes.string,

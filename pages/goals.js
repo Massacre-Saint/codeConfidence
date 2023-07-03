@@ -11,7 +11,7 @@ import UserSettingButton from '../components/buttons/UserSettingButton';
 import EmptyState from '../components/containers/EmptyState';
 import GoalListContainer from '../components/containers/GoalListContainer';
 
-function Home() {
+function Goals() {
   const { user } = useAuth();
   const [goals, setGoals] = useState([]);
   const [topics, setTopics] = useState([]);
@@ -30,13 +30,16 @@ function Home() {
     getResources(c).then(setResources);
     setIsLoading(false);
   };
+
   useEffect(() => {
     getDataAndSetState();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <div className="home">
       <div className="grid-nav-container">
@@ -70,4 +73,4 @@ function Home() {
     </div>
   );
 }
-export default Home;
+export default Goals;

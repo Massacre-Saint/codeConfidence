@@ -11,7 +11,6 @@ function RecentsList({ horizontal, list }) {
     const dateB = new Date(b.lastUpdated);
     return dateB - dateA;
   });
-
   if (horizontal) {
     return (
       <>
@@ -45,7 +44,6 @@ function RecentsList({ horizontal, list }) {
       </>
     );
   }
-
   return (
     <>
       {recentList.slice(0, 5).map((i) => {
@@ -78,9 +76,7 @@ function RecentsList({ horizontal, list }) {
     </>
   );
 }
-
 export default RecentsList;
-
 RecentsList.propTypes = {
   list: PropTypes.arrayOf(
     PropTypes.shape,
