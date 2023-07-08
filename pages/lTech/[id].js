@@ -12,6 +12,7 @@ import { getAllGoals, getGoals } from '../../utils/data/goals';
 import { getResources } from '../../utils/data/resources';
 import { getAllTopics, getTopics } from '../../utils/data/topics';
 import UserSettingButton from '../../components/buttons/UserSettingButton';
+import BookmarkDashboard from '../../components/containers/BookmarkDashboard';
 
 export default function LearnedTechViewAll() {
   const router = useRouter();
@@ -21,6 +22,8 @@ export default function LearnedTechViewAll() {
   const [lTechTopics, setLTechTopics] = useState([]);
   const [resources, setResources] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [renderBookmarkContainer, setRenderBookmarkContainer] = useState(false);
+  const [bookmark, setBookmark] = useState(null);
 
   const getDataAndSetState = () => {
     getSingleTech(router.query.tech).then((obj) => {
@@ -39,6 +42,17 @@ export default function LearnedTechViewAll() {
       });
     });
   };
+
+  const testFunction = (node) => {
+    if (bookmark && node === bookmark) {
+      setRenderBookmarkContainer(false);
+      setBookmark(null);
+    } else {
+      setRenderBookmarkContainer(true);
+      setBookmark(node);
+    }
+  };
+
   useEffect(() => {
     getDataAndSetState();
   }, [user]);
@@ -63,6 +77,7 @@ export default function LearnedTechViewAll() {
             topics={lTechTopics}
             resources={resources}
             onUpdate={getDataAndSetState}
+            testFunction={testFunction}
           />
         </div>
         <div className="sm-grid-container flex-row space-between">
@@ -71,13 +86,24 @@ export default function LearnedTechViewAll() {
           </div>
           <UserSettingButton />
         </div>
-        <LearnedTechDashboard
-          lTech={lTech}
-          topics={lTechTopics}
-          goals={lTechGoals}
-          onUpdate={getDataAndSetState}
-          resources={resources}
-        />
+        {renderBookmarkContainer
+          ? (
+            <BookmarkDashboard
+              bookmark={bookmark}
+              lTech={lTech}
+              testFunction={testFunction}
+            />
+          )
+          : (
+            <LearnedTechDashboard
+              lTech={lTech}
+              topics={lTechTopics}
+              goals={lTechGoals}
+              onUpdate={getDataAndSetState}
+              resources={resources}
+            />
+
+          )}
       </div>
     </>
   );

@@ -5,8 +5,10 @@ import Bookmark from './cards/Bookmark';
 function BookmarksList({
   bookmarks,
   filteredBookmarks,
-  resources, toggledFilter,
+  resources,
+  toggledFilter,
   handleShowForm,
+  testFunction,
 }) {
   // Find the root node
   const rootNode = filteredBookmarks[0];
@@ -35,32 +37,30 @@ function BookmarksList({
         ? (
           <>
             {tree.children.map((child) => (
-              <span key={child.id}>
-                <Bookmark
-                  key={child.id}
-                  node={child}
-                  bookmarks={bookmarks}
-                  resources={resources}
-                  toggledFilter={toggledFilter}
-                  handleShowForm={handleShowForm}
-                />
-              </span>
+              <Bookmark
+                key={child.id}
+                node={child}
+                bookmarks={bookmarks}
+                resources={resources}
+                toggledFilter={toggledFilter}
+                handleShowForm={handleShowForm}
+                testFunction={testFunction}
+              />
             ))}
           </>
         )
         : (
           <>
             {filteredBookmarks.map((bookmark) => (
-              <span key={bookmark.id}>
-                <Bookmark
-                  key={bookmark.id}
-                  node={bookmark}
-                  bookmarks={bookmarks}
-                  resources={resources}
-                  toggledFilter={toggledFilter}
-                  handleShowForm={handleShowForm}
-                />
-              </span>
+              <Bookmark
+                key={bookmark.id}
+                node={bookmark}
+                bookmarks={bookmarks}
+                resources={resources}
+                toggledFilter={toggledFilter}
+                handleShowForm={handleShowForm}
+                testFunction={testFunction}
+              />
             ))}
           </>
         )}
@@ -99,4 +99,5 @@ BookmarksList.propTypes = {
   }))).isRequired,
   toggledFilter: PropTypes.bool.isRequired,
   handleShowForm: PropTypes.func.isRequired,
+  testFunction: PropTypes.func.isRequired,
 };

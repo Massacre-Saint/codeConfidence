@@ -9,7 +9,12 @@ import BookmarkForm from '../forms/BookmarkForm';
 import { getBookmarks } from '../../utils/data/bookmarks';
 
 export default function Bookmarks({
-  lTech, goals, topics, resources, onUpdate,
+  lTech,
+  goals,
+  topics,
+  resources,
+  onUpdate,
+  testFunction,
 }) {
   const [filteredResources, setFilteredResources] = useState([]);
   const [filteredBookmarks, setFilteredBookmarks] = useState([]);
@@ -46,6 +51,7 @@ export default function Bookmarks({
       handleCloseFormAndResetFormStates();
     }
   };
+
   useEffect(() => {
     getAndSetBookmarkData();
     setFilteredResources(resources);
@@ -75,6 +81,7 @@ export default function Bookmarks({
               resources={filteredResources}
               toggledFilter={toggledFilter}
               handleShowForm={handleShowForm}
+              testFunction={testFunction}
             />
           )
           : ('')}
@@ -114,23 +121,12 @@ Bookmarks.propTypes = {
       name: PropTypes.string,
     }),
   }).isRequired,
-  goals: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string,
-  }))).isRequired,
-  topics: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.string,
-  }))).isRequired,
-  resources: PropTypes.arrayOf((PropTypes.shape({
-    id: PropTypes.number,
-    bookmark: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-    objectId: PropTypes.shape({
-      id: PropTypes.string,
-    }),
-    tech: PropTypes.shape({
-      id: PropTypes.number,
-    }),
-  }))).isRequired,
+  goals: PropTypes.arrayOf(PropTypes.shape({
+  })).isRequired,
+  topics: PropTypes.arrayOf(PropTypes.shape({
+  })).isRequired,
+  resources: PropTypes.arrayOf(PropTypes.shape({
+  })).isRequired,
   onUpdate: PropTypes.func.isRequired,
+  testFunction: PropTypes.func.isRequired,
 };
